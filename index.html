@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DST Mod 双角色介绍站与资料库">
+  <title>我们饥佬是这样的</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;600;900&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/modal.css">
+  <link rel="stylesheet" href="assets/css/motion.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="topbar" id="top">
+    <div class="topbar__left">
+      <a class="site-mark" href="#intro" aria-label="返回序章顶部">
+        <span class="site-mark__line" aria-hidden="true"></span>
+        <span class="site-mark__label" aria-hidden="true">序</span>
+      </a>
+      <button class="nav-toggle icon-button" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav">
+        <span class="sr-only">展开导航</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="topbar__nav" aria-label="章节导航">
+      <a href="#intro">序</a>
+    </nav>
+    <div class="topbar__right">
+      <button class="icon-button" type="button" data-search-open aria-label="打开全局搜索">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6"></circle>
+          <path d="M16 16l4 4"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="移动导航" hidden>
+      <a href="#intro">序</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="intro" data-section="intro">
+      <div id="hero-root"></div>
+    </section>
+
+    <div id="sections-root"></div>
+  </main>
+
+  <footer class="site-footer section--ink">
+    <div class="shell" id="footer-root"></div>
+  </footer>
+
+  <aside class="search-panel" data-search-panel hidden>
+    <div class="search-panel__mask" data-search-close></div>
+    <div class="search-panel__body" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-panel__head">
+        <h2 id="search-title">全站搜索</h2>
+        <button class="icon-button" type="button" data-search-close aria-label="关闭搜索">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+      <label class="search-field">
+        <span class="sr-only">输入关键词</span>
+        <input type="search" placeholder="检索角色、物品、机制、地形、更新" data-global-search-input>
+      </label>
+      <div class="search-panel__results" id="search-results-root"></div>
+    </div>
+  </aside>
+
+  <aside class="filter-drawer" data-filter-drawer hidden>
+    <div class="filter-drawer__mask" data-filter-drawer-close></div>
+    <div class="filter-drawer__body" role="dialog" aria-modal="true" aria-labelledby="filter-drawer-title">
+      <div class="filter-drawer__head">
+        <h2 id="filter-drawer-title">筛选</h2>
+        <button class="icon-button" type="button" data-filter-drawer-close aria-label="关闭筛选">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="filter-drawer-root"></div>
+    </div>
+  </aside>
+
+  <div class="modal-layer" id="modal-root" hidden></div>
+  <aside class="editor-panel" id="editor-panel" hidden></aside>
+  <div class="sr-only" aria-live="polite" id="aria-live"></div>
+
+  <script id="tpl-hero" type="x-tmpl-mustache">
+    <div class="hero__head reveal in">
+      <p class="hero__tag"></p>
+      <h1 class="hero__title">{{site_title}}</h1>
+      <p class="hero__subtitle">{{subtitle_latin}}</p>
+      <p class="hero__meta">{{version}} · {{author}} · <a href="{{workshop_url}}" target="_blank" rel="noreferrer">创意工坊 ↗</a></p>
+    </div>
+    <div class="duo reveal in" data-entry-target="hero-duo">
+      <article class="duo__char duo__char--left" data-char="{{character_a.id}}" data-entry-target="{{character_a.id}}">
+        <div class="duo__name duo__name--left">
+          <img src="assets/img/ui/pangtouyu.png" alt="胖头鱼" loading="eager" onerror="window.App.onImageError(this)">
+        </div>
+        <figure class="duo__portrait">
+          <img src="{{character_a.portrait}}" alt="{{character_a.name}} 立绘" loading="eager" fetchpriority="high" onerror="window.App.onImageError(this)">
+        </figure>
+        <nav class="duo__fields duo__fields--bottom" aria-label="胖头鱼字段">
+          <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="setting">
+            <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
+          </button>
+          <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="exclusive">
+            <img class="duo-field__img" src="assets/img/ui/zhuanshu.png" alt="专属" loading="lazy" onerror="window.App.onImageError(this)">
+          </button>
+        </nav>
+      </article>
+
+      <article class="duo__char duo__char--right" data-char="{{character_b.id}}" data-entry-target="{{character_b.id}}">
+        <nav class="duo__fields duo__fields--top" aria-label="高脚鸟字段">
+          <button class="duo-field" type="button" data-char="{{character_b.id}}" data-panel="setting">
+            <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
+          </button>
+          <button class="duo-field" type="button" data-char="{{character_b.id}}" data-panel="exclusive">
+            <img class="duo-field__img" src="assets/img/ui/zhuanshu.png" alt="专属" loading="lazy" onerror="window.App.onImageError(this)">
+          </button>
+        </nav>
+        <figure class="duo__portrait">
+          <img src="{{character_b.portrait}}" alt="{{character_b.name}} 立绘" loading="eager" fetchpriority="high" onerror="window.App.onImageError(this)">
+        </figure>
+        <div class="duo__name duo__name--right">
+          <img src="assets/img/ui/gaojiaoniao.png" alt="高脚鸟" loading="eager" onerror="window.App.onImageError(this)">
+        </div>
+      </article>
+
+      <aside class="duo-popup" aria-hidden="true">
+        <svg class="duo-popup__line" aria-hidden="true">
+          <path class="duo-popup__line-seg" d=""></path>
+        </svg>
+        <div class="duo-popup__card" role="dialog" aria-modal="false">
+          <header class="duo-popup__head">
+            <h3 class="duo-popup__title"></h3>
+            <button class="duo-popup__close" aria-label="关闭">×</button>
+          </header>
+          <div class="duo-popup__body"></div>
+        </div>
+      </aside>
+    </div>
+    <section class="poster-band" aria-label="模组海报"></section>
+  </script>
+
+  <script id="tpl-items" type="x-tmpl-mustache">
+    <div class="filters-panel card reveal">
+      <div class="filters-panel__block">
+        <span class="filters-panel__label">分类</span>
+        <div class="chip-row" data-filter-group="category">
+          {{#category_options}}
+          <button class="chip {{active_class}}" type="button" data-cat="{{value}}">{{label}}</button>
+          {{/category_options}}
+        </div>
+      </div>
+      <label class="search-field search-field--inline">
+        <span class="sr-only">筛选物品</span>
+        <input type="search" placeholder="检索物品与条目" value="{{query}}" data-item-search-input>
+      </label>
+      <button class="button item-search-submit" type="button" data-search-submit>搜</button>
+      <button class="button button--ghost" type="button" data-clear-filters>清空</button>
+      <p class="filters-summary" id="items-summary-root">{{summary}}</p>
+    </div>
+    <div class="items-grid reveal" id="items-grid-root">
+      {{#items}}
+      <article class="item-card card" data-entry-target="{{id}}">
+        <button class="card-link" type="button" data-open-entry="{{id}}">
+          <span class="item-card__image">
+            <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
+          </span>
+          <span class="item-card__meta">
+            <span class="item-card__topline">{{category_label}}</span>
+            <strong>{{{name_html}}}</strong>
+            <span>{{{summary_html}}}</span>
+          </span>
+          <span class="item-card__owner">{{owner_label}}</span>
+        </button>
+      </article>
+      {{/items}}
+    </div>
+  </script>
+
+  <!-- 通用分区卡片模板，mechanics / terrains / 新增分区共用 -->
+  <script id="tpl-section-cards" type="x-tmpl-mustache">
+    <div class="items-grid reveal">
+      {{#entries}}
+      <article class="item-card card" data-entry-target="{{id}}">
+        <button class="card-link" type="button" data-open-entry="{{id}}">
+          <span class="item-card__image">
+            <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
+          </span>
+          <span class="item-card__meta">
+            <span class="item-card__topline">{{category_label}}</span>
+            <strong>{{name}}</strong>
+            <span>{{summary}}</span>
+          </span>
+          <span class="item-card__owner">{{owner_label}}</span>
+        </button>
+      </article>
+      {{/entries}}
+    </div>
+  </script>
+
+  <script id="tpl-search-results" type="x-tmpl-mustache">
+    <div class="search-results">
+      <p class="filters-summary">{{summary}}</p>
+      {{#results_present}}
+      <div class="stack">
+        {{#results}}
+        <article class="search-result card">
+          <button class="search-result__button" type="button" data-open-entry="{{id}}">
+            <span class="search-result__type">{{type_label}}</span>
+            <strong>{{{title_html}}}</strong>
+            <span>{{{excerpt_html}}}</span>
+          </button>
+        </article>
+        {{/results}}
+      </div>
+      {{/results_present}}
+      {{^results_present}}
+      <div class="empty-state card">
+        <p>空处尚多，暂未找到相符条目。</p>
+      </div>
+      {{/results_present}}
+    </div>
+  </script>
+
+  <script id="tpl-mechanics" type="x-tmpl-mustache">
+    <div class="items-grid reveal">
+      {{#mechanics}}
+      <article class="item-card card" data-entry-target="{{id}}">
+        <button class="card-link" type="button" data-open-entry="{{id}}">
+          <span class="item-card__image">
+            <img src="{{illustration}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
+          </span>
+          <span class="item-card__meta">
+            <span class="item-card__topline">机制</span>
+            <strong>{{title}}</strong>
+            <span>{{subtitle}}</span>
+          </span>
+          <span class="item-card__owner">机制</span>
+        </button>
+      </article>
+      {{/mechanics}}
+    </div>
+  </script>
+
+  <script id="tpl-terrains" type="x-tmpl-mustache">
+    <div class="items-grid reveal">
+      {{#terrains}}
+      <article class="item-card card" data-entry-target="{{id}}">
+        <button class="card-link" type="button" data-open-entry="{{id}}">
+          <span class="item-card__image">
+            <img src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
+          </span>
+          <span class="item-card__meta">
+            <span class="item-card__topline">地形</span>
+            <strong>{{title}}</strong>
+            <span>{{summary}}</span>
+          </span>
+          <span class="item-card__owner">地形</span>
+        </button>
+      </article>
+      {{/terrains}}
+    </div>
+  </script>
+
+  <script id="tpl-changelog" type="x-tmpl-mustache">
+    <div class="timeline reveal">
+      {{#entries}}
+      <article class="timeline-entry card" data-entry-target="{{id}}">
+        <div class="timeline-entry__version">
+          <span>{{version}}</span>
+          {{#is_latest}}<span class="seal-mark seal-mark--new">新</span>{{/is_latest}}
+        </div>
+        <div class="timeline-entry__body">
+          <button class="timeline-entry__header" type="button" data-open-entry="{{id}}">
+            <h3>{{title}}</h3>
+            <p>{{date}}</p>
+          </button>
+          <ul class="dash-list">
+            {{#changes}}
+            <li>{{text}}</li>
+            {{/changes}}
+          </ul>
+        </div>
+      </article>
+      {{/entries}}
+    </div>
+  </script>
+
+  <script id="tpl-footer" type="x-tmpl-mustache">
+    <div class="footer-grid">
+      <div>
+        <div class="site-mark site-mark--footer" aria-hidden="true">
+          <span class="site-mark__line"></span>
+          <span class="site-mark__label">序</span>
+        </div>
+        <p>{{manifesto}}</p>
+      </div>
+      <div>
+        <h2>外链</h2>
+        <ul class="plain-list">
+          {{#links}}
+          <li><a href="{{url}}" target="_blank" rel="noreferrer">{{label}}</a></li>
+          {{/links}}
+        </ul>
+      </div>
+      <div>
+        <h2>落款</h2>
+        <p>{{author}}</p>
+        <p>{{year}}</p>
+      </div>
+    </div>
+    <p class="site-footer__note">{{copyright}}</p>
+  </script>
+
+  <script id="tpl-modal-generic" type="x-tmpl-mustache">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-shell" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        <button class="icon-button modal-close" type="button" data-modal-close aria-label="关闭详情">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+        <div class="modal-card__head">
+          <div>
+            <p class="modal-card__eyebrow">{{eyebrow}}</p>
+            <h2 id="modal-title">{{title}}</h2>
+            <p>{{subtitle}}</p>
+          </div>
+          <button class="button button--ghost" type="button" data-copy-link="{{id}}">复制链接</button>
+        </div>
+        {{#image}}
+        <img class="modal-card__hero" src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
+        {{/image}}
+        <div class="modal-card__content prose">
+          {{#paragraphs}}
+          <p>{{{html}}}</p>
+          {{/paragraphs}}
+        </div>
+        {{#has_detail_blocks}}
+        <div class="detail-blocks">
+          {{#detail_blocks}}
+          <section class="detail-block">
+            {{#is_text}}<p>{{{content_html}}}</p>{{/is_text}}
+            {{#is_image}}
+            <figure>
+              <img src="{{src}}" alt="{{caption}}" loading="lazy" onerror="window.App.onImageError(this)">
+              <figcaption>{{caption}}</figcaption>
+            </figure>
+            {{/is_image}}
+          </section>
+          {{/detail_blocks}}
+        </div>
+        {{/has_detail_blocks}}
+        {{#recipe_html}}
+        <div class="recipe-row">
+          <h3>配方</h3>
+          <div>{{{recipe_html}}}</div>
+        </div>
+        {{/recipe_html}}
+        {{#has_related}}
+        <div class="related-row">
+          <h3>关联</h3>
+          <div class="chip-row">
+            {{#related}}
+            <button class="chip" type="button" data-open-entry="{{id}}">{{name}}</button>
+            {{/related}}
+          </div>
+        </div>
+        {{/has_related}}
+      </div>
+    </div>
+  </script>
+
+  <script id="tpl-editor-panel" type="x-tmpl-mustache">
+    <div class="editor-panel__head">
+      <h2>校阅</h2>
+      <span>{{count}}</span>
+    </div>
+    <div class="stack">
+      {{#issues}}
+      <button class="editor-issue" type="button" data-editor-target="{{target}}">
+        <strong>[{{type}}]</strong>
+        <span>{{location}} — {{summary}}</span>
+      </button>
+      {{/issues}}
+    </div>
+  </script>
+
+  <script src="assets/js/vendor/mustache.min.js" defer></script>
+  <script src="data/site-data.js" defer></script>
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/render.js" defer></script>
+  <script src="assets/js/recipe.js" defer></script>
+  <script src="assets/js/linkify.js" defer></script>
+  <script src="assets/js/filter.js" defer></script>
+  <script src="assets/js/carousel.js" defer></script>
+  <script src="assets/js/modal.js" defer></script>
+  <script src="assets/js/char-popup.js" defer></script>
+  <script src="assets/js/poster.js" defer></script>
+  <script src="assets/js/editor.js" defer></script>
+  <script src="assets/js/motion.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

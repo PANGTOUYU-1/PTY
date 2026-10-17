@@ -1,0 +1,55 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 480ms var(--ease), transform 480ms var(--ease);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-indicator {
+  animation: float-loop 3s var(--ease) infinite;
+}
+
+.brush-line path,
+.brush-line use {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  transition: stroke-dashoffset 1200ms var(--ease);
+}
+
+.brush-line.in path,
+.brush-line.in use {
+  stroke-dashoffset: 0;
+}
+
+@keyframes float-loop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+  }
+
+  .reveal {
+    transform: none;
+  }
+}

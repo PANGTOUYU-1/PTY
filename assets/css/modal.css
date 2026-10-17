@@ -1,0 +1,251 @@
+.modal-layer[hidden],
+.search-panel[hidden],
+.filter-drawer[hidden],
+.editor-panel[hidden] {
+  display: none;
+}
+
+.editor-panel {
+  display: none;
+}
+
+[data-editor="1"] .editor-panel {
+  display: block;
+}
+
+.modal-layer,
+.search-panel,
+.filter-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.modal-backdrop,
+.search-panel__mask,
+.filter-drawer__mask {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+  opacity: 0;
+  animation: fade-in 200ms var(--ease) forwards;
+}
+
+.modal-shell,
+.search-panel__body,
+.filter-drawer__body {
+  position: relative;
+  z-index: 1;
+}
+
+.modal-shell {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-5);
+}
+
+.modal-card {
+  width: min(960px, 100%);
+  max-height: min(88vh, 920px);
+  overflow: auto;
+  padding: var(--sp-5);
+  border: var(--bd);
+  background: var(--paper);
+  position: relative;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: panel-in 320ms var(--ease) forwards;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+}
+
+.modal-card__head,
+.character-modal__hero,
+.modal-carousel__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+.modal-card__head {
+  padding-right: var(--sp-7);
+}
+
+.modal-card__hero,
+.character-modal__hero img {
+  width: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  border: var(--bd);
+  margin-block: var(--sp-4);
+}
+
+.modal-card__content,
+.detail-blocks,
+.related-row,
+.recipe-row {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+
+.character-modal__hero {
+  grid-template-columns: minmax(0, 320px) 1fr auto;
+}
+
+.character-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4);
+  margin-block: var(--sp-5);
+}
+
+.character-modal__wide {
+  grid-column: 1 / -1;
+}
+
+.modal-carousel {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.modal-carousel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  overflow: hidden;
+  transition: transform var(--dur) var(--ease);
+}
+
+.modal-carousel__slide img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border: var(--bd);
+}
+
+.carousel-controls,
+.carousel-dots {
+  display: flex;
+  gap: var(--sp-2);
+  justify-content: flex-end;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: var(--bd);
+}
+
+.carousel-dot.is-active {
+  background: var(--ink);
+}
+
+.search-panel__body {
+  width: min(880px, calc(100% - var(--sp-6)));
+  margin: 10vh auto 0;
+  padding: var(--sp-5);
+  border: var(--bd);
+  background: var(--paper);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: panel-in 320ms var(--ease) forwards;
+}
+
+.search-panel__head,
+.filter-drawer__head,
+.editor-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.search-panel__results {
+  margin-top: var(--sp-4);
+}
+
+.filter-drawer__body {
+  margin-left: auto;
+  width: min(360px, 100%);
+  min-height: 100%;
+  padding: var(--sp-5);
+  border-left: var(--bd);
+  background: var(--paper);
+  transform: translateX(100%);
+  animation: drawer-in 320ms var(--ease) forwards;
+}
+
+.editor-panel {
+  position: fixed;
+  right: var(--sp-4);
+  bottom: var(--sp-4);
+  z-index: 25;
+  width: min(280px, calc(100% - var(--sp-4)));
+  max-height: 50vh;
+  overflow: auto;
+  padding: var(--sp-4);
+  border: var(--bd);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.editor-issue {
+  display: grid;
+  gap: var(--sp-1);
+  text-align: left;
+  padding: var(--sp-2);
+  border: var(--bd);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .filters-panel {
+    display: none;
+  }
+
+  .character-modal__hero,
+  .character-modal__grid,
+  .modal-card__head {
+    grid-template-columns: 1fr;
+  }
+}

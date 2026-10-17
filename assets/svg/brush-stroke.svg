@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 32" fill="none">
+  <defs>
+    <path id="brush-stroke" d="M6 18C54 4 88 4 132 16c32 9 60 12 96 8 28-3 54-10 86-5"/>
+  </defs>
+  <use href="#brush-stroke" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+</svg>
