@@ -86,6 +86,16 @@
   margin-block: var(--sp-4);
 }
 
+/* 物品详情大图：包内图标原生只有 64×64，撑满整幅会糊，这里限制尺寸并保持像素硬边 */
+.modal-card__hero {
+  width: 100%;
+  max-width: 200px;
+  max-height: 200px;
+  min-height: 0;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
 .modal-card__content,
 .detail-blocks,
 .related-row,

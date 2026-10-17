@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const App = window.App;
 
   function template(id) {
@@ -122,7 +122,7 @@
       name: entry.name || entry.title || entry.version || "条目占位",
       summary: entry.summary || entry.subtitle || "",
       category_label: label,
-      owner_label: label
+      owner_label: ""
     };
   }
 
@@ -216,7 +216,7 @@
             ...entry,
             is_latest: index === 0,
             changes: (entry.changes || []).map(function (line) {
-              return { text: line };
+              return { text: App.Linkify.textToHtml(line) };
             })
           };
         })

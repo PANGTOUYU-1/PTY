@@ -20,6 +20,7 @@ desktop.ini
 # === 本地预览与临时产物 ===
 _scratch/
 _tmp/
+.scratch/
 *.log
 
 # === 依赖（本项目无构建依赖，预留） ===

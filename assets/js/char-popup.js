@@ -38,7 +38,7 @@
         : [];
       return (setting.length ? setting : ["未着墨"])
         .map(function (line) {
-          return "<p>" + line + "</p>";
+          return "<p>" + App.Linkify.textToHtml(line) + "</p>";
         })
         .join("");
     }
@@ -46,7 +46,7 @@
     if (panelKey === "exclusive") {
       const introArr = Array.isArray(character.exclusive_intro) ? character.exclusive_intro : [];
       const intro = introArr.length
-        ? introArr.map(function (line) { return '<p class="popup-quote">"' + line + '"</p>'; }).join("")
+        ? introArr.map(function (line) { return '<p class="popup-quote">"' + App.Linkify.textToHtml(line) + '"</p>'; }).join("")
         : "";
       const items = (App.STATE.items || []).filter(function (item) {
         return item.owner === charId;
@@ -59,7 +59,7 @@
         "<ul>" +
         items
           .map(function (item) {
-            return '<li><strong>' + item.name + '</strong><br><span class="popup-meta">' + (item.summary || "") + "</span></li>";
+            return '<li><strong>' + item.name + '</strong><br><span class="popup-meta">' + App.Linkify.textToHtml(item.summary || "") + "</span></li>";
           })
           .join("") +
         "</ul>"
