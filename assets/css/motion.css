@@ -1,3 +1,20 @@
+.cursor-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cursor-trail__petal {
+  position: absolute;
+  pointer-events: none;
+  background-image: url("../img/ui/buran-petals.png");
+  background-size: 800% 100%;
+  background-repeat: no-repeat;
+  will-change: transform, opacity;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(12px);
