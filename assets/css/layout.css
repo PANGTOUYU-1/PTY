@@ -32,7 +32,7 @@
 .hero[data-character-page] { padding-top: calc(var(--header-h) + 16px); }
 
 .section--paper {
-  background: var(--paper);
+  background: transparent;
   color: var(--ink);
 }
 
@@ -186,7 +186,7 @@
 .mobile-nav .nav-ink-ring { color: var(--paper); }
 
 .hero {
-  background: var(--paper);
+  background: transparent;
   padding: clamp(8px, 1.4svh, 16px) 32px 12px;
   display: flex;
   flex-direction: column;

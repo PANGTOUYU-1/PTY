@@ -1,0 +1,5 @@
+Use case: stylized-concept
+Asset type: subtle background texture for a Chinese ink-inspired game wiki website.
+Primary request: Create a pale, elegant Chinese ink wash and dry-brush texture on warm ivory xuan paper, a flat scanned texture, no objects or scenery.
+Composition: wide landscape texture, very large nearly empty clean central area (70 percent of image) for readable website content. Three or four asymmetric, restrained brush traces at the outer edges and corners only: a sweeping dry brush at lower left, a faint broken stroke near upper right, a soft diluted wash near lower right. Natural bristle grain, soft ink bleeding, tiny paper fibers, generous unpainted space. Strokes should fade smoothly into the paper, never create a border or frame.
+Palette: ivory paper approximately #f3ecdf, very pale warm gray and gray-green ink, overall extremely low contrast, at most 8 percent darkness. Artful but understated and barely visible. No black patches, no symbols, no calligraphy, no text, no red seals, no people, no illustration, no mountain landscape, no gradients that look digital, no repeating geometric pattern.
