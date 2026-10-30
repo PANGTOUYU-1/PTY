@@ -337,7 +337,8 @@ check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、�
   const scenes = Array.from(state.terrains, room => ({
     dataset: { entryTarget: room.id }, hidden: room.id !== 'loc_qingxuan',
     querySelector: selector => selector === '.building-entry__title'
-      ? { focus() { focused = room.id; } } : { scrollIntoView() {} },
+      ? { focus(options) { assert.equal(options.preventScroll, true); focused = room.id; } }
+      : { scrollIntoView() { assert.fail('切换建筑不应滚动页面'); } },
   }));
   const tabs = Array.from(state.terrains, room => ({
     dataset: { buildingRoom: room.id },
@@ -356,6 +357,9 @@ check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、�
       assert.equal(node('aria-live').textContent, '当前所在：' + state.entries[id].title);
       previous = id;
     }
+    App.Render.selectBuilding('loc_hall', { focus: false });
+    assert.equal(focused, 'loc_qingxuan', '导览按钮切换时不应把焦点移出按钮');
+    App.Render.selectBuilding('loc_qingxuan', { focus: false });
     App.Render.selectBuilding('bighead_spear');
     assert.equal(App.ui.buildingId, 'loc_qingxuan');
     assert.equal(scenes.filter(scene => !scene.hidden).length, 1);

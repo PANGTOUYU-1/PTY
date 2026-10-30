@@ -101,7 +101,9 @@
       }
 
       if (buildingRoom) {
-        App.Render.selectBuilding(buildingRoom.dataset.buildingRoom, { focus: true });
+        App.Render.selectBuilding(buildingRoom.dataset.buildingRoom, {
+          focus: !buildingRoom.hasAttribute("data-building-tab")
+        });
         return;
       }
 

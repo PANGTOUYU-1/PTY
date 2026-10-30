@@ -283,7 +283,6 @@
       const current = root.querySelector('.building-entry[data-entry-target="' + id + '"]');
       if (current && options && options.focus) {
         current.querySelector(".building-entry__title").focus({ preventScroll: true });
-        current.querySelector(".building-entry__visual").scrollIntoView({ behavior: "instant", block: "start" });
       }
       const live = document.getElementById("aria-live");
       if (live) live.textContent = "当前所在：" + App.STATE.entries[id].title;
