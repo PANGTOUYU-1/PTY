@@ -4,7 +4,7 @@
   let openedFromHash = false;
 
   function sectionForEntry(entry) {
-    return entry.type === "skins" ? "items" : entry.type;
+    return App.Data.entrySection(entry);
   }
 
   function live(message) {
@@ -77,7 +77,7 @@
       title_note: entry.title_note || "",
       availability: entry.availability || "",
       subtitle: entry.summary || entry.subtitle || entry.date || "",
-      eyebrow: {
+      eyebrow: entry.category === "structure" ? "建筑" : entry.category === "food" ? "食物" : {
         items: "物品",
         mechanics: "机制",
         terrains: "建筑",
@@ -205,7 +205,8 @@
       openedFromHash = !!(options && options.fromHash);
       renderModal(entryId);
       if (!(options && options.skipHash)) {
-        App.route.sync({ section: sectionForEntry(entry), detailId: entryId });
+        const section = sectionForEntry(entry);
+        App.route.sync({ section: section, detailId: entryId, ...(section === "terrains" ? { cats: [] } : {}) });
       }
     },
 

@@ -54,8 +54,13 @@
     const path = parts[0] || "intro";
     const search = new URLSearchParams(parts[1] || "");
     const pathParts = path.split("/").filter(Boolean);
-    const section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
-    const cats = (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1);
+    let section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
+    let cats = (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1);
+    const entry = App.STATE && App.STATE.entries[pathParts[1]];
+    if (section === "items" && (cats[0] === "structure" || (entry && entrySection(entry) === "terrains"))) {
+      section = "terrains";
+      cats = [];
+    }
     const foodKind = search.get("kind") || "";
     return {
       section: section || "intro",
@@ -80,6 +85,11 @@
     const path = ui.detailId ? ui.section + "/" + ui.detailId : ui.section;
     const query = params.toString();
     return "#" + path + (query ? "?" + query : "");
+  }
+
+  function entrySection(entry) {
+    const item = entry.type === "skins" ? App.STATE.entries[entry.item_id] : entry;
+    return item && item.category === "structure" ? "terrains" : entry.type === "skins" ? "items" : entry.type;
   }
 
   function ensureArray(value) {
@@ -281,6 +291,7 @@
   };
 
   App.Data = {
+    entrySection: entrySection,
     ownerView: function (entry) {
       const parent = entry.item_id && App.STATE.entries[entry.item_id];
       const owner = entry.owner || (parent && parent.owner);

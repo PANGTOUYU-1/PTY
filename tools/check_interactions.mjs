@@ -46,6 +46,22 @@ for (const file of ['assets/js/vendor/mustache.min.js', 'data/site-data.js', 'da
 const App = sandbox.window.App;
 await App.Data.load();
 const state = App.STATE;
+const standaloneItems = state.items.filter(item => !['food', 'structure'].includes(item.category));
+function allItemCards() {
+  const previous = { ...App.ui };
+  const output = [];
+  try {
+    for (const cats of [[], ['food']]) {
+      App.ui = { ...previous, cats, foodKind: '', q: '' };
+      App.Render.renderItems();
+      output.push(node('items-root').innerHTML);
+    }
+    const buildings = App.sections.find(section => section.id === 'terrains');
+    App.Render.renderGenericSection(buildings);
+    output.push(node(buildings.rootId).innerHTML);
+  } finally { App.ui = previous; App.Render.renderItems(); }
+  return output.join('');
+}
 App.Modal.bind();
 let passed = 0;
 const check = (label, fn) => { fn(); passed++; console.log(`  ✓ ${label}`); };
@@ -197,10 +213,21 @@ check('人物皮肤使用9款已启用外观的原生待机动画，默认形象
   }
   delete App.ui.characterSkins;
 });
-check('真实物品渲染保留全部条目，分类筛选有效且不显示角色筛选', () => {
+check('物品列表与分类不再重复收录食物和建筑，所有内容仍有对应入口', () => {
   App.Render.renderItems();
-  assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, state.items.length);
+  assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, standaloneItems.length);
   assert.ok(!node('items-root').innerHTML.includes('data-owner='));
+  assert.ok(App.Filter.categoryOptions().every(option => !['food', 'structure'].includes(option.value)));
+  const cards = allItemCards();
+  for (const item of state.items) assert.equal(cards.split(`data-entry-target="${item.id}"`).length - 1, 1, item.id);
+  const previous = { ...App.ui };
+  for (const item of state.items.filter(item => item.category === 'structure')) {
+    App.Modal.open(item.id);
+    assert.equal(App.ui.section, 'terrains');
+    assert.equal(App.route.read(`#items/${item.id}`).section, 'terrains');
+  }
+  App.ui = previous;
+  assert.equal(App.route.read('#items?cat=structure').section, 'terrains');
   App.ui.cats = ['food'];
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
@@ -268,7 +295,7 @@ check('127张原生展示PNG与清单尺寸相符，物品、节气和外观全�
 });
 check('实际卡片和详情使用落地图，名称前和配方仍使用原始小图标', () => {
   App.Render.renderItems();
-  const cards = [node('items-root').innerHTML];
+  const cards = [allItemCards()];
   for (const id of ['seasons', 'mechanics']) {
     const config = App.sections.find(section => section.id === id);
     App.Render.renderGenericSection(config);
@@ -301,7 +328,7 @@ check('各分区、详情与外观统一显示专属印章，通用内容不误�
     const config = App.sections.find(section => section.id === group);
     if (group === 'items') App.Render.renderItems();
     else App.Render.renderGenericSection(config);
-    const cards = node(config.rootId).innerHTML;
+    const cards = group === 'items' ? allItemCards() : node(config.rootId).innerHTML;
     for (const entry of state[group]) {
       const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${entry.id}"[\\s\\S]*?<\\/article>`))?.[0];
       assert.ok(card, entry.id);
@@ -338,7 +365,8 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   App.Render.renderGenericSection(config);
   const cards = node(config.rootId).innerHTML;
   assert.ok(cards.includes('class="building-list"'));
-  assert.ok(!cards.includes('class="items-grid"'));
+  assert.ok(!cards.split('class="building-structures"')[0].includes('class="items-grid"'));
+  assert.ok(cards.includes('id="building-structures-title">功能建筑</h2>'));
   assert.ok(cards.includes('室内有什么用'));
   assert.ok(cards.includes('房间中心'));
   assert.ok(cards.includes('怎么进去、怎么回来'));
@@ -546,18 +574,18 @@ check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、�
     delete App.ui.buildingId;
   }
 });
-check('切换分类再回到全部时，69项卡片直接显示且不依赖整张网格淡入', () => {
+check('切换分类再回到全部时，物品卡片直接显示且不混入食物和建筑', () => {
   for (const cats of [['weapon'], []]) {
     App.ui.cats = cats;
     App.Render.renderItems();
     const output = node('items-root').innerHTML;
-    const expected = cats.length ? state.items.filter(item => item.category === 'weapon').length : state.items.length;
+    const expected = cats.length ? state.items.filter(item => item.category === 'weapon').length : standaloneItems.length;
     assert.equal((output.match(/data-open-entry=/g) || []).length, expected);
     const gridClass = output.match(/<div class="([^"]*)" id="items-grid-root">/)?.[1];
     assert.ok(gridClass);
     assert.ok(!gridClass.split(/\s+/).includes('reveal'));
   }
-  assert.ok(node('items-root').innerHTML.includes(`共 ${state.items.length} 项 · 全部分类`));
+  assert.ok(node('items-root').innerHTML.includes(`共 ${standaloneItems.length} 项 · 全部分类`));
   for (const config of App.sections.filter(section => !['items', 'changelog'].includes(section.id))) {
     App.Render.renderGenericSection(config);
     assert.ok(!/class="[^"]*items-grid[^\"]*\breveal\b/.test(node(config.rootId).innerHTML));
@@ -699,13 +727,14 @@ check('27款外观全部在对应物品中横向展示，支持查看、返回�
   }
   for (const skin of state.skins) {
     App.Modal.open(skin.id);
-    assert.equal(App.ui.section, 'items');
+    const section = state.entries[skin.item_id].category === 'structure' ? 'terrains' : 'items';
+    assert.equal(App.ui.section, section);
     const output = node('modal-root').innerHTML;
     assert.ok(output.includes(`class="modal-card__hero" src="${skin.display_image}"`), skin.id);
     assert.ok(output.includes(`data-open-entry="${skin.item_id}">← 返回`), skin.id);
     assert.ok(state.entries[skin.item_id].searchText.includes(skin.name), skin.id);
     assert.equal(App.route.read(`#skins/${skin.id}`).detailId, skin.id);
-    assert.equal(App.route.read(`#skins/${skin.id}`).section, 'items');
+    assert.equal(App.route.read(`#skins/${skin.id}`).section, section);
   }
   assert.equal(App.route.read('#skins').section, 'items');
   App.ui.q = '万籁华光';

@@ -359,7 +359,12 @@
           })
         };
       });
-      renderTo(sec.rootId, sec.id === "terrains" ? "tpl-buildings" : "tpl-section-cards", { entries: entries });
+      renderTo(sec.rootId, sec.id === "terrains" ? "tpl-buildings" : "tpl-section-cards", {
+        entries: entries,
+        structures: sec.id === "terrains" ? App.STATE.items.filter(function (entry) {
+          return entry.category === "structure";
+        }).map(function (entry) { return baseItemView(entry, ""); }) : []
+      });
     },
 
     selectBuilding: function (id, options) {

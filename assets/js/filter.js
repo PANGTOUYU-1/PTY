@@ -49,7 +49,9 @@
 
     categoryOptions: function () {
       const foodView = App.Filter.isFoodView();
-      var list = foodView ? App.config.foodCategories : App.config.categoryList || [];
+      var list = foodView ? App.config.foodCategories : (App.config.categoryList || []).filter(function (item) {
+        return item.id !== "food" && item.id !== "structure";
+      });
       var cats = [{ label: "全部", value: "all" }].concat(list.map(function (c) {
         return { label: c.name, value: c.id };
       }));
@@ -66,10 +68,11 @@
     getFilteredItems: function () {
       const query = normalizeText(App.ui.q);
       return App.STATE.items.filter(function (item) {
+        const collectionPass = App.Filter.isFoodView() ? item.category === "food" : item.category !== "food" && item.category !== "structure";
         const categoryPass = App.ui.cats.length === 0 || App.ui.cats[0] === item.category;
         const foodPass = !App.Filter.isFoodView() || !App.ui.foodKind || item.food_category === App.ui.foodKind;
         const queryPass = !query || normalizeText(App.STATE.entries[item.id].searchText).indexOf(query) > -1;
-        return categoryPass && foodPass && queryPass;
+        return collectionPass && categoryPass && foodPass && queryPass;
       });
     },
 
@@ -90,7 +93,7 @@
           const excerpt = entry.summary || entry.subtitle || entry.epithet || entry.searchText.slice(0, 72);
           return {
             id: entry.id,
-            type_label: {
+            type_label: entry.category === "structure" ? "建筑" : entry.category === "food" ? "食物" : {
               characters: "角色",
               items: "物品",
               mechanics: "机制",

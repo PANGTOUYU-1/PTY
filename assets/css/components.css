@@ -1399,6 +1399,9 @@
   gap: 24px;
 }
 
+.building-structures { margin-top: 40px; }
+.building-structures .section-head { margin-bottom: 16px; }
+
 .building-rooms { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .building-rooms button { padding: 8px 0; color: var(--ink-3); font: 14px / 1.7 var(--ff-serif); border-bottom: 2px solid transparent; }
 .building-rooms button[aria-pressed="true"] { color: var(--cinnabar); border-bottom-color: currentColor; }

@@ -170,17 +170,18 @@ check(!/\{\{/.test(hero), 'hero：无 Mustache 残留占位符');
 
 // items —— 按 render.js renderItems 组装
 const itemsTpl = tpl('tpl-items');
+const standaloneItems = S.items.filter(item => !['food', 'structure'].includes(item.category));
 const itemsHtml = Mustache.render(itemsTpl, {
   category_options: [{ label: '全部', value: 'all', active_class: 'is-active' }],
-  items: S.items.map((i) => ({ ...i, image: i.display_image || '', icon: i.image || '', name_html: i.name, summary_html: i.summary || '' })),
+  items: standaloneItems.map((i) => ({ ...i, image: i.display_image || '', icon: i.image || '', name_html: i.name, summary_html: i.summary || '' })),
   query: '',
-  summary: `共 ${S.items.length} 项`,
+  summary: `共 ${standaloneItems.length} 项`,
 });
 check(S.items.length === 0 || itemsHtml.includes(S.items[0].name), 'items：物品卡片已渲染');
 check(
-  (itemsHtml.match(/<article class="item-card/g) || []).length === S.items.length,
+  (itemsHtml.match(/<article class="item-card/g) || []).length === standaloneItems.length,
   'items：卡片数量与数据一致',
-  `${S.items.length} 张`
+  `${standaloneItems.length} 张`
 );
 check(!/\{\{/.test(itemsHtml), 'items：无 Mustache 残留占位符');
 
