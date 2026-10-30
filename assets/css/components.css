@@ -1614,8 +1614,6 @@
 .building-detail thead th { color: var(--ink-3); font-weight: 400; }
 .building-detail th:first-child { width: 24%; padding-left: 0; }
 .building-detail td { padding-right: 0; }
-.building-entry__more { display: inline-flex; align-items: center; gap: 32px; margin-top: 28px; padding-block: 10px; border-bottom: 1px solid var(--cinnabar); color: var(--cinnabar); font-size: 14px; }
-.building-entry__more:hover { gap: 40px; }
 
 .building-overview { margin-top: 22px; }
 .building-overview > h4 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 10px; font-size: 17px; }
@@ -1634,7 +1632,6 @@
 .building-entry__rules > summary:hover { color: var(--cinnabar); }
 .building-entry__rules > summary:focus-visible { outline: 2px solid var(--cinnabar); outline-offset: 4px; }
 .building-entry__rules .building-entry__sections { margin-top: 8px; gap: 20px; }
-.building-entry__rules .building-entry__more { margin-top: 16px; margin-bottom: 16px; }
 
 @media (min-width: 901px) and (max-height: 950px) {
   #terrains {

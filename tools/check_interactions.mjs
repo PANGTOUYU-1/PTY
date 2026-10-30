@@ -503,7 +503,7 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
     assert.ok(card.includes(`src="${image}"`), entry.id);
     assert.ok(!card.includes('card-link--text'), entry.id);
     assert.ok(card.includes('class="building-entry__body"'), entry.id);
-    assert.ok(card.includes('完整规则与路线'), entry.id);
+    assert.ok(!card.includes('building-entry__more'), entry.id);
     App.Modal.open(entry.id);
     assert.ok(node('modal-root').innerHTML.includes('>小房子</p>'));
     assert.ok(node('modal-root').innerHTML.includes(`class="modal-card__hero" src="${image}"`));
