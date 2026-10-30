@@ -241,8 +241,19 @@
     },
 
     renderItems: function () {
+      const foodView = App.Filter.isFoodView();
+      const title = foodView ? "食物" : "物品";
+      const heading = document.querySelector("#items h2");
+      if (heading) heading.textContent = title;
+      const controls = {
+        food_view: foodView,
+        category_aria_label: title + "分类（单选）",
+        search_label: "筛选" + title,
+        search_placeholder: foodView ? "检索食物名称与效果" : "检索物品与条目"
+      };
       if (App.STATE.loadFailures.indexOf("items") > -1) {
         renderTo("items-root", "tpl-items", {
+          ...controls,
           category_options: App.Filter.categoryOptions(),
           items: [],
           query: App.ui.q,
@@ -254,6 +265,7 @@
       }
       const filtered = App.Filter.getFilteredItems();
       renderTo("items-root", "tpl-items", {
+        ...controls,
         category_options: App.Filter.categoryOptions(),
         items: filtered.map(function (item) {
           return baseItemView(item, App.ui.q);

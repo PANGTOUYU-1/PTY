@@ -205,6 +205,41 @@ check('真实物品渲染保留全部条目，分类筛选有效且不显示角�
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
 });
+check('食物使用独立的单选分类，清空和详情返回不会混入物品分类', () => {
+  const previous = { ...App.ui };
+  const hash = sandbox.window.location.hash;
+  try {
+    App.route.sync({ section: 'items', cats: ['food'], foodKind: '', q: '' });
+    App.Render.renderItems();
+    const output = node('items-root').innerHTML;
+    assert.ok(output.includes('aria-label="食物分类（单选）"'));
+    assert.ok(output.includes('检索食物名称与效果'));
+    assert.ok(!output.includes('data-cat='));
+    assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.label), ['全部', '食材', '料理', '月饼']);
+    const foods = state.items.filter(item => item.category === 'food');
+    assert.equal(App.Filter.getFilteredItems().length, foods.length);
+    const seen = new Set();
+    for (const kind of App.config.foodCategories) {
+      App.route.sync({ foodKind: kind.id });
+      const filtered = App.Filter.getFilteredItems();
+      assert.ok(filtered.length > 0, kind.id);
+      assert.ok(filtered.every(item => item.category === 'food' && item.food_category === kind.id));
+      for (const item of filtered) { assert.ok(!seen.has(item.id)); seen.add(item.id); }
+      assert.equal(App.Filter.categoryOptions().filter(option => option.active).length, 1);
+      assert.equal(App.route.read(App.route.build(App.ui)).foodKind, kind.id);
+      App.Modal.open(filtered[0].id);
+      assert.equal(App.ui.foodKind, kind.id);
+      App.Modal.close();
+      assert.equal(App.ui.cats[0], 'food');
+      assert.equal(App.ui.foodKind, kind.id);
+    }
+    assert.equal(seen.size, foods.length);
+    App.route.sync({ cats: ['weapon'] });
+    assert.equal(App.ui.foodKind, '');
+    assert.equal(App.route.read('#items?cat=food&kind=unknown').foodKind, '');
+    assert.ok(App.Filter.getFilteredItems().every(item => item.category === 'weapon'));
+  } finally { App.ui = previous; sandbox.window.location.hash = hash; }
+});
 check('127张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/display-assets.json'), 'utf8'));
   const assets = new Map(manifest.assets.map(asset => [asset.source, asset]));

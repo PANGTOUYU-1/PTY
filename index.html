@@ -254,15 +254,15 @@
     <div class="filters-panel card reveal">
       <div class="filters-panel__block">
         <span class="filters-panel__label">分类</span>
-        <div class="chip-row" data-filter-group="category" role="group" aria-label="物品分类（单选）">
+        <div class="chip-row" data-filter-group="category" role="group" aria-label="{{category_aria_label}}">
           {{#category_options}}
-          <button class="chip {{active_class}}" type="button" data-cat="{{value}}" aria-pressed="{{active}}">{{label}}</button>
+          <button class="chip {{active_class}}" type="button" {{#food_view}}data-food-kind="{{value}}"{{/food_view}}{{^food_view}}data-cat="{{value}}"{{/food_view}} aria-pressed="{{active}}">{{label}}</button>
           {{/category_options}}
         </div>
       </div>
       <label class="search-field search-field--inline">
-        <span class="sr-only">筛选物品</span>
-        <input type="search" placeholder="检索物品与条目" value="{{query}}" data-item-search-input>
+        <span class="sr-only">{{search_label}}</span>
+        <input type="search" placeholder="{{search_placeholder}}" value="{{query}}" data-item-search-input>
       </label>
       <button class="button item-search-submit" type="button" data-search-submit>搜</button>
       <button class="button button--ghost" type="button" data-clear-filters>清空</button>

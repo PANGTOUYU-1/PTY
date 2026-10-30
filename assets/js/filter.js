@@ -35,6 +35,10 @@
   }
 
   App.Filter = {
+    isFoodView: function () {
+      return App.ui.cats[0] === "food";
+    },
+
     highlight: function (text, query) {
       if (!query) {
         return text;
@@ -44,12 +48,13 @@
     },
 
     categoryOptions: function () {
-      var list = App.config.categoryList || [];
+      const foodView = App.Filter.isFoodView();
+      var list = foodView ? App.config.foodCategories : App.config.categoryList || [];
       var cats = [{ label: "全部", value: "all" }].concat(list.map(function (c) {
         return { label: c.name, value: c.id };
       }));
       return cats.map(function (item) {
-        const active = item.value === (App.ui.cats[0] || "all");
+        const active = item.value === ((foodView ? App.ui.foodKind : App.ui.cats[0]) || "all");
         return {
           ...item,
           active: active,
@@ -62,8 +67,9 @@
       const query = normalizeText(App.ui.q);
       return App.STATE.items.filter(function (item) {
         const categoryPass = App.ui.cats.length === 0 || App.ui.cats[0] === item.category;
+        const foodPass = !App.Filter.isFoodView() || !App.ui.foodKind || item.food_category === App.ui.foodKind;
         const queryPass = !query || normalizeText(App.STATE.entries[item.id].searchText).indexOf(query) > -1;
-        return categoryPass && queryPass;
+        return categoryPass && foodPass && queryPass;
       });
     },
 
@@ -101,7 +107,9 @@
     },
 
     summary: function (count) {
-      const catText = App.ui.cats.length ? App.config.categoryLabels[App.ui.cats[0]] : "全部分类";
+      const foodCategory = App.config.foodCategories.find(function (item) { return item.id === App.ui.foodKind; });
+      const catText = App.Filter.isFoodView() ? (foodCategory ? foodCategory.name : "全部食物")
+        : App.ui.cats.length ? App.config.categoryLabels[App.ui.cats[0]] : "全部分类";
       const queryText = App.ui.q ? " · 关键词 “" + App.ui.q + "”" : "";
       return "共 " + count + " 项 · " + catText + queryText;
     },
@@ -131,6 +139,7 @@
     bind: function () {
       document.addEventListener("click", function (event) {
         const catButton = event.target.closest("[data-cat]");
+        const foodButton = event.target.closest("[data-food-kind]");
         const clearButton = event.target.closest("[data-clear-filters]");
         const searchSubmit = event.target.closest("[data-search-submit]");
         const searchClear = event.target.closest("[data-search-clear]");
@@ -143,8 +152,14 @@
           App.bindInteractive();
         }
 
+        if (foodButton) {
+          App.route.sync({ section: "items", cats: ["food"], foodKind: foodButton.dataset.foodKind === "all" ? "" : foodButton.dataset.foodKind, detailId: App.ui.detailId }, { replace: true });
+          App.Render.renderItems();
+          App.bindInteractive();
+        }
+
         if (clearButton) {
-          App.route.sync({ section: "items", cats: [], q: "", detailId: App.ui.detailId }, { replace: true });
+          App.route.sync({ section: "items", cats: App.Filter.isFoodView() ? ["food"] : [], foodKind: "", q: "", detailId: App.ui.detailId }, { replace: true });
           updateSearchControls("");
           App.Render.renderItems();
           App.Render.renderSearchResults();

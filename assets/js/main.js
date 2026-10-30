@@ -127,7 +127,7 @@
           const itemNav = id === "items" && anchor.closest(".topbar__nav, .mobile-nav");
           App.route.sync({
             section: id, detailId: "",
-            ...(itemNav ? { cats: route.cats, q: "" } : {})
+            ...(itemNav ? { cats: route.cats, foodKind: "", q: "" } : {})
           });
           if (itemNav) {
             App.Render.renderItems();

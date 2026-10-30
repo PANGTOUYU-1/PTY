@@ -13,6 +13,11 @@
     // categoryLabels 和 categoryList 由 normalizeData 从 site-data.js 的 categories 动态构建
     categoryLabels: {},
     categoryList: [],
+    foodCategories: [
+      { id: "ingredient", name: "食材" },
+      { id: "cooked", name: "料理" },
+      { id: "mooncake", name: "月饼" }
+    ],
     ownerLabels: {
       all: "全部",
       pangtouyu: "属胖头鱼",
@@ -27,6 +32,7 @@
     section: "intro",
     detailId: "",
     cats: [],
+    foodKind: "",
     q: ""
   };
 
@@ -49,10 +55,13 @@
     const search = new URLSearchParams(parts[1] || "");
     const pathParts = path.split("/").filter(Boolean);
     const section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
+    const cats = (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1);
+    const foodKind = search.get("kind") || "";
     return {
       section: section || "intro",
       detailId: pathParts[1] || "",
-      cats: (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1),
+      cats: cats,
+      foodKind: cats[0] === "food" && App.config.foodCategories.some(function (item) { return item.id === foodKind; }) ? foodKind : "",
       q: search.get("q") || ""
     };
   }
@@ -61,6 +70,9 @@
     const params = new URLSearchParams();
     if (ui.cats && ui.cats.length) {
       params.set("cat", ui.cats[0]);
+    }
+    if (ui.cats && ui.cats[0] === "food" && ui.foodKind) {
+      params.set("kind", ui.foodKind);
     }
     if (ui.q) {
       params.set("q", ui.q);
@@ -254,6 +266,7 @@
         ...patch
       };
       next.cats = (next.cats || []).slice(0, 1);
+      if (next.cats[0] !== "food" || !App.config.foodCategories.some(function (item) { return item.id === next.foodKind; })) next.foodKind = "";
       App.ui = next;
       const hash = buildHash(next);
       if ((options && options.replace) || window.location.hash === hash) {
