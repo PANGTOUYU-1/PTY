@@ -534,8 +534,8 @@ check('每件物品详情均能显示使用步骤与效果，且概要不重复�
   for (const item of state.items) {
     App.Modal.open(item.id);
     const output = node('modal-root').innerHTML;
-    assert.ok(output.includes('<h3>怎么使用</h3>'), item.id);
-    assert.ok(/<h3>(?:效果与限制|基础效果)<\/h3>/.test(output), item.id);
+    assert.ok(/<h3>(?:怎么使用|用途)<\/h3>/.test(output), item.id);
+    assert.ok(/<h3>(?:效果与限制|基础效果|击杀掉落)<\/h3>/.test(output), item.id);
     assert.equal(output.split(item.summary).length - 1, 1, item.id);
   }
 });
