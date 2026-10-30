@@ -260,6 +260,29 @@
 
     renderGenericSection: function (sec) {
       var data = App.STATE[sec.id] || [];
+      if (sec.id === "seasons") {
+        const mainIds = ["jq_chun", "jq_xia", "jq_qiu", "jq_dong"];
+        const groups = mainIds.map(function (id, index) {
+          const main = data.find(function (entry) { return entry.id === id; });
+          if (!main) return null;
+          return {
+            id: id,
+            season: ["spring", "summer", "autumn", "winter"][index],
+            symbol: ["春", "夏", "秋", "冬"][index],
+            main: compactEntryCardView(main, "四季主物品 · 可升至10级"),
+            terms: data.filter(function (entry) {
+              return !mainIds.includes(entry.id) && entry.id !== "jq_dong10" && (entry.related || []).includes(id);
+            }).map(function (entry, termIndex) {
+              return { ...compactEntryCardView(entry, "节气"), number: String(termIndex + 1).padStart(2, "0") };
+            }),
+            special: id === "jq_dong" ? data.filter(function (entry) {
+              return entry.id === "jq_dong10";
+            }).map(function (entry) { return compactEntryCardView(entry, "直接获得10级冬季"); }) : []
+          };
+        }).filter(Boolean);
+        renderTo(sec.rootId, "tpl-seasons", { groups: groups });
+        return;
+      }
       var entries = data.map(function (entry, index) {
         const view = compactEntryCardView(entry, sec.title);
         if (sec.id !== "terrains") return view;

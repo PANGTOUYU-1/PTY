@@ -72,6 +72,24 @@ check('真实渲染模块生成设置与节气卡片', () => {
     assert.ok(output.includes(state[id][0].name || state[id][0].title));
   }
 });
+check('节气按四季分组，主物品与六节气分层且每件仅出现一次', () => {
+  const config = App.sections.find(s => s.id === 'seasons');
+  App.Render.renderGenericSection(config);
+  const output = node(config.rootId).innerHTML;
+  const groups = [...output.matchAll(/data-season-group="([^"]+)"([\s\S]*?)(?=<section class="season-group|<\/script>|$)/g)];
+  assert.deepEqual(groups.map(group => group[1]), ['jq_chun', 'jq_xia', 'jq_qiu', 'jq_dong']);
+  for (const [, id, content] of groups) {
+    const terms = state.seasons.filter(entry => (entry.related || []).includes(id) && entry.id !== 'jq_dong10');
+    assert.equal(terms.length, 6);
+    assert.equal((content.match(/class="season-term"/g) || []).length, 6);
+    assert.ok(content.includes(`data-open-entry="${id}"`));
+    for (const term of terms) assert.ok(content.includes(`data-open-entry="${term.id}"`));
+  }
+  for (const entry of state.seasons) {
+    assert.equal(output.split(`data-open-entry="${entry.id}"`).length - 1, 1, entry.id);
+  }
+  assert.ok(groups[3][2].includes('class="season-special"'));
+});
 check('首页立绘完整展示角色专属，专属制作的共用物品使用小图标单列', () => {
   const getElementById = sandbox.document.getElementById;
   sandbox.document.getElementById = id => id === 'sections-root' ? null : getElementById(id);

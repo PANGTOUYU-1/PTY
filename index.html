@@ -287,6 +287,53 @@
     </div>
   </script>
 
+  <script id="tpl-seasons" type="x-tmpl-mustache">
+    <p class="seasons-intro">胖头鱼装备琦玉器后，将物品放入对应季节槽位即可生效，无需等待世界进入该季节。</p>
+    <div class="seasons-list">
+      {{#groups}}
+      <section class="season-group season-group--{{season}}" aria-label="{{symbol}}季物品" data-season-group="{{id}}">
+        <div class="season-group__main">
+          {{#main}}
+          <article data-entry-target="{{id}}">
+            <button class="season-main" type="button" data-open-entry="{{id}}">
+              <span class="season-main__art">
+                <span class="season-main__symbol" aria-hidden="true">{{symbol}}</span>
+                <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
+                {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+              </span>
+              <span class="season-main__body">
+                <span class="season-main__label">{{category_label}}</span>
+                <strong class="season-main__name entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}{{name}}</strong>
+                <span class="season-main__summary">{{summary}}</span>
+                <span class="season-main__more">查看效果与升级 <span aria-hidden="true">↗</span></span>
+              </span>
+            </button>
+          </article>
+          {{/main}}
+          {{#special}}
+          <article class="season-special" data-entry-target="{{id}}">
+            <button type="button" data-open-entry="{{id}}"><span class="season-special__art"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<strong>{{name}}</strong><span class="season-special__label">{{category_label}} ↗</span></button>
+          </article>
+          {{/special}}
+        </div>
+        <div class="season-group__terms">
+          <div class="season-group__heading"><h3>{{symbol}}之六节气</h3><p>各备1件，用于合成{{main.name}}；其他材料见配方</p></div>
+          <div class="season-terms">
+            {{#terms}}
+            <article class="season-term" data-entry-target="{{id}}">
+              <button type="button" data-open-entry="{{id}}">
+                <span class="season-term__art"><span class="season-term__number" aria-hidden="true">{{number}}</span><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>
+                <strong class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}{{name}}<span class="season-term__arrow" aria-hidden="true">↗</span></strong>
+              </button>
+            </article>
+            {{/terms}}
+          </div>
+        </div>
+      </section>
+      {{/groups}}
+    </div>
+  </script>
+
   <script id="tpl-buildings" type="x-tmpl-mustache">
     <div class="building-list" data-building-explorer>
       <div class="building-rooms" role="group" aria-label="青玄阁房间导览">
