@@ -338,6 +338,10 @@ check('食物使用独立的单选分类，清空和详情返回不会混入物�
     assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.label), ['全部', '食材', '料理', '月饼']);
     const foods = state.items.filter(item => item.category === 'food');
     assert.equal(App.Filter.getFilteredItems().length, foods.length);
+    const orderedFoods = App.Filter.getFilteredItems();
+    assert.deepEqual(Array.from(orderedFoods.slice(0, 3), item => item.name), ['草莓', '牛肉', '羊肉']);
+    assert.deepEqual(Array.from(orderedFoods, item => item.id), Array.from(App.config.foodCategories).flatMap(kind =>
+      foods.filter(item => item.food_category === kind.id).map(item => item.id)));
     const seen = new Set();
     for (const kind of App.config.foodCategories) {
       App.route.sync({ foodKind: kind.id });
