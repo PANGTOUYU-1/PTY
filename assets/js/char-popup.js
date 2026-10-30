@@ -171,25 +171,24 @@
     const width = panel.offsetWidth;
     if (!width) return 0;
     const columns = width >= 320 ? 3 : 2;
-    const itemWidth = Math.min(90, (width - 32) / columns);
-    const step = (width - itemWidth - 20) / (columns - 1);
     const mirror = character.classList.contains("duo__char--right");
     const items = panel.querySelectorAll(".duo-gear__item");
     const scattered = [[0, 72], [.5, 40], [1, 100], [.02, 206], [.5, 190],
       [1, 300], [0, 350], [.5, 360], [1, 442], [.04, 486], [.5, 506]];
     let bottom = 0;
-    panel.style.setProperty("--gear-item-width", itemWidth + "px");
+    panel.style.setProperty("--gear-columns", columns);
     items.forEach(function (item, index) {
       const column = index % columns;
       const row = Math.floor(index / columns);
       const point = columns === 3 && scattered[index];
-      const x = itemWidth / 2 + 10 + (point ? point[0] * (width - itemWidth - 20) : step * column + (row % 2 ? -3 : 3));
+      const position = point ? point[0] : column / (columns - 1);
       // Extra entries continue below the freeform cluster instead of wrapping
       // onto an occupied position. Narrow panels use a staggered pair of lanes.
       const y = point ? point[1] : columns === 3
         ? 680 + Math.floor((index - scattered.length) / columns) * 128 + [24, 0, 16][column]
         : 50 + row * 128 + [24, 0][column];
-      item.style.setProperty("--gear-x", (mirror ? width - x : x) + "px");
+      // Resolve against the panel's current width, including during layout changes.
+      item.style.setProperty("--gear-position", mirror ? 1 - position : position);
       item.style.setProperty("--gear-y", (y + Math.random() * 8 - 4) + "px");
       bottom = Math.max(bottom, y + item.offsetHeight + 8);
     });

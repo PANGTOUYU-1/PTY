@@ -544,6 +544,7 @@
 }
 
 .duo-gear {
+  --gear-item-width: min(90px, calc((100% - 32px) / var(--gear-columns, 2)));
   position: absolute;
   top: 54px;
   width: 224px;
@@ -575,7 +576,7 @@
 
 .duo-gear__item {
   position: absolute;
-  left: var(--gear-x, 25%);
+  left: calc(var(--gear-item-width) / 2 + 10px + (100% - var(--gear-item-width) - 20px) * var(--gear-position, .25));
   top: var(--gear-y, 52px);
   width: var(--gear-item-width, 90px);
   translate: -50% 0;
