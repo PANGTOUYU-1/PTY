@@ -117,7 +117,7 @@
           return item.id === id && item.owner === character.id && item.display_image;
         });
       }).filter(Boolean).map(function (item, index) {
-        return { id: item.id, name: item.name, display_image: item.display_image, order: index };
+        return { id: item.id, name: item.name, display_image: item.display_image, order: index, ...App.Data.ownerView(item) };
       })
     };
   }
@@ -127,7 +127,7 @@
       ...item,
       image: item.display_image || "",
       icon: item.image || "",
-      owner_stamp: { pangtouyu: "鱼", gaojiaoniao: "鸟" }[item.owner] || "",
+      ...App.Data.ownerView(item),
       skin_count: (App.STATE.skins || []).filter(function (skin) { return skin.item_id === item.id; }).length,
       name_html: App.Filter.highlight(item.name, query),
       summary_html: App.Filter.highlight(item.summary, query)
@@ -144,7 +144,7 @@
       summary: entry.summary || entry.subtitle || "",
       preview_caption: entry.preview_caption || "",
       category_label: label,
-      owner_label: ""
+      ...App.Data.ownerView(entry)
     };
   }
 

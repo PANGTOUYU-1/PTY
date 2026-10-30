@@ -6,7 +6,7 @@
    *
    * - placeholderImage: 图片加载失败时的占位图路径。
    * - categoryLabels: 物品分类 id → 中文名映射，用于分类筛选和展示。
-   * - ownerLabels: 角色归属 id → 中文标签映射，用于物品卡片。
+   * - ownerLabels: 角色归属 id → 中文标签映射，用于所有展示图。
    */
   App.config = {
     placeholderImage: "assets/img/placeholders/missing.svg",  // 缺图占位资源
@@ -264,6 +264,14 @@
   };
 
   App.Data = {
+    ownerView: function (entry) {
+      const parent = entry.item_id && App.STATE.entries[entry.item_id];
+      const owner = entry.owner || (parent && parent.owner);
+      return {
+        owner_stamp: { pangtouyu: "鱼", gaojiaoniao: "鸟" }[owner] || "",
+        owner_label: App.config.ownerLabels[owner] || ""
+      };
+    },
     load: function () {
       return Promise.resolve(window.SITE_DATA || { loadFailures: ["site-data"] }).then(function (raw) {
         App.STATE = normalizeData(raw);

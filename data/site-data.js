@@ -2946,6 +2946,7 @@ window.SITE_DATA = {
   "mechanics": [
     {
       "id": "mech_gold_penguin",
+      "owner": "common",
       "title": "金企鹅兑换",
       "aliases": ["金企鹅", "金企鹅商店"],
       "summary": "冬天给同一只普通企鹅10金块，在原地召出限时商人；再用Q币兑换随机库存商品。",
@@ -2999,6 +3000,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_lingqi",
+      "owner": "pangtouyu",
       "title": "灵气",
       "summary": "胖头鱼的技能资源：储量决定照明、踏水与减伤，也影响避尘、不染的伤害，并用于施法和园艺。",
       "image": "assets/img/mechanics/lingqi.png",
@@ -3123,6 +3125,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_jieqi",
+      "owner": "pangtouyu",
       "title": "节气",
       "summary": "胖头鱼的四季饰品系统：通过琦玉器装配，获得移速、攻击、减伤和冰冻等加成。",
       "image": "assets/img/mechanics/jieqi_tab.png",
@@ -3193,6 +3196,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_spirits",
+      "owner": "common",
       "title": "四季之灵",
       "summary": "制作节气、升级四季主物品，以及为胖头鱼补充灵气的四种材料。",
       "image": "assets/img/items/bighead_spring_spirit.png",
@@ -3239,6 +3243,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_parasite",
+      "owner": "common",
       "title": "寄生灵",
       "summary": "获取四季之灵的来源：先找到并处理寄生灵，再用缚灵网捕捉释放的灵体。",
       "image": "assets/img/mechanics/jisheng_taoling.png",
@@ -3283,6 +3288,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_buran",
+      "owner": "pangtouyu",
       "title": "不染与月台",
       "summary": "月台附近每个世界生成一次，可通过设置关闭。",
       "image": "assets/img/items/bighead_buran.png",
@@ -3307,6 +3313,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_shixin",
+      "owner": "gaojiaoniao",
       "title": "噬心",
       "summary": "高脚鸟的成长与风险机制：天数、理智、死亡及战斗都会改变体验。",
       "image": "assets/img/items/bb_gaojiaoniao_gjsh.png",
@@ -3407,6 +3414,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_wudao",
+      "owner": "gaojiaoniao",
       "title": "五道",
       "summary": "神道、人道、畜生道、恶鬼道、地狱道，解锁后提升角色能力。",
       "image": "assets/img/items/bb_gaojiaoniao_lh.png",
@@ -3507,6 +3515,7 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_gardening",
+      "owner": "pangtouyu",
       "title": "繁花园艺",
       "summary": "以繁花施肥、采集、催熟，并把同类植物嫁接到一起。",
       "image": "assets/img/mechanics/fanhua_graft.png",
@@ -3592,6 +3601,7 @@ window.SITE_DATA = {
   "terrains": [
     {
       "id": "loc_qingxuan",
+      "owner": "common",
       "title": "太极青玄阁",
       "summary": "可进入的避难屋：室内阻止猎犬波次生成，环境温度保持32℃，并有避雨、防蛙雨与夜间照明。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
@@ -3668,6 +3678,7 @@ window.SITE_DATA = {
     },
     {
       "id": "loc_foyer",
+      "owner": "common",
       "title": "入阁前室",
       "aliases": ["第一间房", "青玄阁前室"],
       "illustration": "assets/img/terrains/loc_foyer.png",
@@ -3703,6 +3714,7 @@ window.SITE_DATA = {
     },
     {
       "id": "loc_hall",
+      "owner": "common",
       "title": "阁中厅堂",
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
@@ -3738,6 +3750,7 @@ window.SITE_DATA = {
     },
     {
       "id": "loc_bedroom",
+      "owner": "common",
       "title": "阁主卧房（左侧）",
       "aliases": ["阁主卧房", "左侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom.png",
@@ -3773,6 +3786,7 @@ window.SITE_DATA = {
     },
     {
       "id": "loc_bedroom_right",
+      "owner": "common",
       "title": "阁主卧房（右侧）",
       "aliases": ["右侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom_right.png",
@@ -3802,6 +3816,7 @@ window.SITE_DATA = {
   "seasons": [
     {
       "id": "jq_lc",
+      "owner": "pangtouyu",
       "name": "立春",
       "title_note": "东风解冻 蛰虫始振 鱼陟负冰",
       "image": "assets/img/seasons/jq_lc.png",
@@ -3834,6 +3849,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_ys",
+      "owner": "pangtouyu",
       "name": "雨水",
       "title_note": "獺祭鱼 鸿雁来 草木萌动",
       "image": "assets/img/seasons/jq_ys.png",
@@ -3866,6 +3882,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_jz",
+      "owner": "pangtouyu",
       "name": "惊蛰",
       "title_note": "桃始华 仓庚鸣 鹰化为鸠",
       "image": "assets/img/seasons/jq_jz.png",
@@ -3898,6 +3915,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_cf",
+      "owner": "pangtouyu",
       "name": "春分",
       "title_note": "玄鸟至 雷乃发声 始电",
       "image": "assets/img/seasons/jq_cf.png",
@@ -3930,6 +3948,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_qm",
+      "owner": "pangtouyu",
       "name": "清明",
       "title_note": "桐始华 田鼠化为驾 虹始见",
       "image": "assets/img/seasons/jq_qm.png",
@@ -3962,6 +3981,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_gy",
+      "owner": "pangtouyu",
       "name": "谷雨",
       "title_note": "萍始生 鸣鸠拂其羽 戴胜降于桑",
       "image": "assets/img/seasons/jq_gy.png",
@@ -3994,6 +4014,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_lx",
+      "owner": "pangtouyu",
       "name": "立夏",
       "title_note": "蝼蟈鸣 蚯蚓岀 王瓜生",
       "image": "assets/img/seasons/jq_lx.png",
@@ -4026,6 +4047,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xm",
+      "owner": "pangtouyu",
       "name": "小满",
       "title_note": "苦菜秀 靡草死 麦秋生",
       "image": "assets/img/seasons/jq_xm.png",
@@ -4058,6 +4080,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_mz",
+      "owner": "pangtouyu",
       "name": "芒种",
       "title_note": "螳螂生 贍始鸣 反舌无声",
       "image": "assets/img/seasons/jq_mz.png",
@@ -4090,6 +4113,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xz",
+      "owner": "pangtouyu",
       "name": "夏至",
       "title_note": "鹿角解 蝉始鸣 半夏生",
       "image": "assets/img/seasons/jq_xz.png",
@@ -4122,6 +4146,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xs",
+      "owner": "pangtouyu",
       "name": "小暑",
       "title_note": "温风至 蟋蟀居辟 鷹始鸷",
       "image": "assets/img/seasons/jq_xs.png",
@@ -4154,6 +4179,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_ds",
+      "owner": "pangtouyu",
       "name": "大暑",
       "title_note": "腐草为萤 土润溽暑 大雨时行",
       "image": "assets/img/seasons/jq_ds.png",
@@ -4186,6 +4212,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_lq",
+      "owner": "pangtouyu",
       "name": "立秋",
       "title_note": "凉风至 白露降 寒蝉鸣",
       "image": "assets/img/seasons/jq_lq.png",
@@ -4218,6 +4245,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_cs",
+      "owner": "pangtouyu",
       "name": "处暑",
       "title_note": "鹰乃祭鸟 天地始肃 禾乃登",
       "image": "assets/img/seasons/jq_cs.png",
@@ -4250,6 +4278,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_bl",
+      "owner": "pangtouyu",
       "name": "白露",
       "title_note": "鸿雁来 玄鸟归 群鸟养羞",
       "image": "assets/img/seasons/jq_bl.png",
@@ -4282,6 +4311,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_qf",
+      "owner": "pangtouyu",
       "name": "秋分",
       "title_note": "雷始收声 蛰虫培户 水始涸",
       "image": "assets/img/seasons/jq_qf.png",
@@ -4314,6 +4344,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_hl",
+      "owner": "pangtouyu",
       "name": "寒露",
       "title_note": "鸿雁来宾 雀入大水为蛤 菊有黄华",
       "image": "assets/img/seasons/jq_hl.png",
@@ -4346,6 +4377,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_sj",
+      "owner": "pangtouyu",
       "name": "霜降",
       "title_note": "豺乃祭兽 草木黄落 蛰虫咸伏",
       "image": "assets/img/seasons/jq_sj.png",
@@ -4378,6 +4410,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_ld",
+      "owner": "pangtouyu",
       "name": "立冬",
       "title_note": "水始冰 地始冻 雉入大水为蜃",
       "image": "assets/img/seasons/jq_ld.png",
@@ -4410,6 +4443,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xx",
+      "owner": "pangtouyu",
       "name": "小雪",
       "title_note": "虹藏不见 天气腾地气降 闭塞成冬",
       "image": "assets/img/seasons/jq_xx.png",
@@ -4442,6 +4476,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dx",
+      "owner": "pangtouyu",
       "name": "大雪",
       "title_note": "鹃鸥不鸣 虎始交 茘挺生",
       "image": "assets/img/seasons/jq_dx.png",
@@ -4474,6 +4509,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dz",
+      "owner": "pangtouyu",
       "name": "冬至",
       "title_note": "蚯蚓结 麇角解 水泉动",
       "image": "assets/img/seasons/jq_dz.png",
@@ -4506,6 +4542,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xh",
+      "owner": "pangtouyu",
       "name": "小寒",
       "title_note": "雁北乡 鹋始巣 雉始鸲",
       "image": "assets/img/seasons/jq_xh.png",
@@ -4538,6 +4575,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dh",
+      "owner": "pangtouyu",
       "name": "大寒",
       "title_note": "鸡始乳 征鸟厉疾 水泽腹坚",
       "image": "assets/img/seasons/jq_dh.png",
@@ -4570,6 +4608,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_chun",
+      "owner": "pangtouyu",
       "name": "春季",
       "title_note": "春风又绿江南岸，明月何时照我还。",
       "image": "assets/img/seasons/jq_chun.png",
@@ -4612,6 +4651,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xia",
+      "owner": "pangtouyu",
       "name": "夏季",
       "title_note": "绿树阴浓夏日长，楼台倒影入池塘。",
       "image": "assets/img/seasons/jq_xia.png",
@@ -4654,6 +4694,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_qiu",
+      "owner": "pangtouyu",
       "name": "秋季",
       "title_note": "停车坐爱枫林晚，霜叶红于二月花。",
       "image": "assets/img/seasons/jq_qiu.png",
@@ -4696,6 +4737,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dong",
+      "owner": "pangtouyu",
       "name": "冬季",
       "title_note": "晚来天欲雪，能饮一杯无？",
       "image": "assets/img/seasons/jq_dong.png",
@@ -4738,6 +4780,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dong10",
+      "owner": "pangtouyu",
       "name": "冬季(10级)",
       "title_note": "晚来天欲雪，能饮一杯无？",
       "image": "assets/img/seasons/jq_dong10.png",

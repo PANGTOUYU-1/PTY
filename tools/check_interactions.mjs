@@ -158,6 +158,43 @@ check('实际卡片和详情使用落地图，名称前和配方仍使用原始�
   App.Modal.open('config_bighead_speed_bonus');
   assert.ok(!node('modal-root').innerHTML.includes('class="modal-card__hero"'));
 });
+check('各分区、详情与外观统一显示专属印章，通用内容不误标角色', () => {
+  const stampFor = owner => ({ pangtouyu: '鱼', gaojiaoniao: '鸟' }[owner] || '');
+  for (const group of ['items', 'mechanics', 'seasons', 'terrains']) {
+    const config = App.sections.find(section => section.id === group);
+    if (group === 'items') App.Render.renderItems();
+    else App.Render.renderGenericSection(config);
+    const cards = node(config.rootId).innerHTML;
+    for (const entry of state[group]) {
+      const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${entry.id}"[\\s\\S]*?<\\/article>`))?.[0];
+      assert.ok(card, entry.id);
+      const stamp = stampFor(entry.owner);
+      assert.equal(card.includes('owner-stamp'), !!stamp, entry.id);
+      if (stamp) assert.ok(card.includes(`>${stamp}</span>`), entry.id);
+      App.Modal.open(entry.id);
+      const visual = node('modal-root').innerHTML.match(/<div class="modal-card__visual[^>]*>[\s\S]*?<\/div>/)?.[0] || '';
+      assert.equal(visual.includes('owner-stamp'), !!stamp, entry.id);
+      if (stamp) assert.ok(visual.includes(`>${stamp}</span>`), entry.id);
+    }
+  }
+  for (const skin of state.skins) {
+    const item = state.entries[skin.item_id];
+    App.Modal.open(item.id);
+    const preview = node('modal-root').innerHTML.match(new RegExp(`<button class="item-appearance"[^>]*data-open-entry="${skin.id}"[\\s\\S]*?<\\/button>`))?.[0];
+    assert.ok(preview?.includes(`>${stampFor(item.owner)}</span>`), skin.id);
+    App.Modal.open(skin.id);
+    assert.ok(node('modal-root').innerHTML.includes(`>${stampFor(item.owner)}</span>`), skin.id);
+  }
+  App.Modal.open('mech_gardening');
+  assert.equal((node('modal-root').innerHTML.match(/class="detail-image"/g) || []).length, 4);
+  assert.equal((node('modal-root').innerHTML.match(/>鱼<\/span>/g) || []).length, 5);
+  for (const id of ['mech_gold_penguin', 'mech_spirits', 'mech_parasite', 'loc_foyer']) {
+    assert.equal(state.entries[id].owner, 'common', id);
+  }
+  assert.ok(state.seasons.every(entry => entry.owner === 'pangtouyu'));
+  assert.equal(state.entries.mech_shixin.owner, 'gaojiaoniao');
+  assert.equal(state.entries.mech_wudao.owner, 'gaojiaoniao');
+});
 check('屋外入口和四间独立房间均可查看，内景匹配各自墙面、地板与门的连接', () => {
   const config = App.sections.find(section => section.id === 'terrains');
   App.Render.renderGenericSection(config);
@@ -204,7 +241,7 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.match(node('modal-root').innerHTML, /鎏金太极铃/);
   assert.match(node('modal-root').innerHTML, /青石楼梯/);
   const foyerHtml = node('modal-root').innerHTML;
-  assert.match(foyerHtml, /class="scene-preview"/);
+  assert.match(foyerHtml, /class="[^"]*\bscene-preview\b[^"]*"/);
   assert.match(foyerHtml, /class="scene-hotspot"[^>]+data-open-entry="loc_hall"[^>]+aria-label="鎏金太极铃：进入厅堂"/);
   const bell = manifest.assets.find(asset => asset.id === 'loc_foyer').furnishings[0];
   assert.equal(bell.prefab, 'bighead_men1');

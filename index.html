@@ -126,7 +126,7 @@
           <p class="duo-gear__heading">随身专属 <span>点击查看</span></p>
           {{#character_a.featured_items}}
           <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
-            <img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)"><span>{{name}}</span>
+            <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span><span>{{name}}</span>
           </button>
           {{/character_a.featured_items}}
         </div>
@@ -159,7 +159,7 @@
           <p class="duo-gear__heading">随身专属 <span>点击查看</span></p>
           {{#character_b.featured_items}}
           <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
-            <img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)"><span>{{name}}</span>
+            <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span><span>{{name}}</span>
           </button>
           {{/character_b.featured_items}}
         </div>
@@ -207,7 +207,7 @@
         <button class="card-link{{#owner_stamp}} card-link--owned{{/owner_stamp}}" type="button" data-open-entry="{{id}}">
           <span class="item-card__image">
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
-            {{#owner_stamp}}<span class="item-card__owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+            {{#owner_stamp}}<span class="item-card__owner-stamp owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
           </span>
           <span class="item-card__meta">
             <span class="item-card__topline">{{category_label}}{{#skin_count}} · {{skin_count}} 款外观{{/skin_count}}</span>
@@ -227,13 +227,14 @@
     <div class="items-grid">
       {{#entries}}
       <article class="item-card card" data-entry-target="{{id}}">
-        <button class="card-link{{^image}} card-link--text{{/image}}" type="button" data-open-entry="{{id}}">
+        <button class="card-link{{^image}} card-link--text{{/image}}{{#owner_stamp}} card-link--owned{{/owner_stamp}}" type="button" data-open-entry="{{id}}">
           {{#image}}
           <span class="item-card__image{{#preview_caption}} item-card__image--scene{{/preview_caption}}">
             <picture class="display-picture">
             {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
             </picture>
+            {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
           </span>
           {{/image}}
           <span class="item-card__meta">
@@ -241,7 +242,7 @@
             <strong class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<span>{{name}}</span></strong>
             <span>{{summary}}</span>
           </span>
-          <span class="item-card__owner">{{owner_label}}</span>
+          {{^owner_stamp}}{{#owner_label}}<span class="item-card__owner">{{owner_label}}</span>{{/owner_label}}{{/owner_stamp}}
         </button>
       </article>
       {{/entries}}
@@ -383,17 +384,18 @@
           <button class="button button--ghost" type="button" data-copy-link="{{id}}">复制链接</button>
         </div>
         {{#image}}
-        {{#has_scene_hotspots}}<div class="scene-preview">{{/has_scene_hotspots}}
+        <div class="modal-card__visual{{#has_scene_hotspots}} scene-preview{{/has_scene_hotspots}}">
         <picture class="display-picture">
         {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
         <img class="modal-card__hero" src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
         </picture>
+        {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
         {{#scene_hotspots}}
         <button class="scene-hotspot" type="button" style="{{position}}" data-open-entry="{{target}}" aria-label="{{label}}：{{hint}}">
           <span class="scene-hotspot__hint">{{label}} · {{hint}} →</span>
         </button>
         {{/scene_hotspots}}
-        {{#has_scene_hotspots}}</div>{{/has_scene_hotspots}}
+        </div>
         {{/image}}
         {{#preview_caption}}<p class="scene-preview-caption">{{preview_caption}}</p>{{/preview_caption}}
         {{#scene_hint}}<p class="scene-preview-hint">{{scene_hint}}</p>{{/scene_hint}}
@@ -429,7 +431,10 @@
             {{/is_table}}
             {{#is_image}}
             <figure>
+              <span class="detail-image">
               <img src="{{src}}" alt="{{caption}}" loading="lazy" onerror="window.App.onImageError(this)">
+              {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+              </span>
               <figcaption>{{caption}}</figcaption>
             </figure>
             {{/is_image}}
@@ -450,7 +455,7 @@
           <div class="item-appearances__grid">
             {{#skins}}
             <button class="item-appearance" type="button" data-open-entry="{{id}}" aria-label="查看{{name}}外观">
-              <span class="item-appearance__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)"></span>
+              <span class="item-appearance__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>
               <span>{{name}}</span>
             </button>
             {{/skins}}

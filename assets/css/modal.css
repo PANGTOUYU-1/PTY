@@ -328,6 +328,15 @@
   margin-block: 0;
 }
 
+.modal-card__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  min-width: 0;
+  min-height: 64px;
+}
+
 .modal-card__overview--scene {
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
@@ -565,9 +574,25 @@
 }
 
 .item-appearance__image {
+  position: relative;
   display: grid;
   place-items: center;
   height: 140px;
+}
+
+.detail-image {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+}
+
+.detail-image .owner-stamp,
+.item-appearance__image .owner-stamp {
+  top: 4px;
+  right: 4px;
+  width: 26px;
+  font-size: 18px;
 }
 
 .item-appearance__image img {

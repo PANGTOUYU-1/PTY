@@ -65,7 +65,7 @@
     const skins = (App.STATE.skins || []).filter(function (skin) {
       return skin.item_id === entry.id;
     }).map(function (skin) {
-      return { id: skin.id, name: skin.name.split(" · ")[0], image: skin.display_image };
+      return { id: skin.id, name: skin.name.split(" · ")[0], image: skin.display_image, ...App.Data.ownerView(skin) };
     });
     const related = relatedList((entry.related || []).filter(function (id) {
       return !skins.some(function (skin) { return skin.id === id; });
@@ -87,6 +87,7 @@
         changelog: entry.version || "更新"
       }[entry.type],
       image: entry.display_image || entry.illustration || "",
+      ...App.Data.ownerView(entry),
       display_poster: entry.display_poster || "",
       icon: entry.image || "",
       preview_caption: entry.preview_caption || "",
