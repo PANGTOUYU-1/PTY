@@ -37,38 +37,45 @@ FLOOR_QUADS = {
 # World positions are (x, z) relative to each house centre. Preview offsets
 # bring the vines onto the visible inner edge of the cutaway wall; they are
 # image-space calibration, not changes to the mod's world coordinates.
+# preview_scale also calibrates the cutaway composition: foreground doors and
+# steps must remain readable beside the separately projected floor and walls.
+# It scales both axes together and is not a prefab Transform:SetScale value.
 FURNISHINGS = {
     'loc_foyer': [
         {'prefab': 'bighead_men1', 'animation': 'men1', 'center': (808, 395),
          'world_position': (-14, 0), 'target': 'loc_hall',
          'label': '鎏金太极铃', 'hint': '进入厅堂'},
         {'prefab': 'bighead_door_exit', 'source': 'bighead_door_exit',
-         'animation': 'idle', 'world_position': (14, -.15),
+         'animation': 'idle', 'world_position': (14, -.15), 'preview_scale': 2.6,
          'target': 'loc_qingxuan', 'label': '青石楼梯', 'hint': '回到屋外'},
     ],
     'loc_hall': [
         {'prefab': 'bighead_yizi', 'animation': 'yizi',
          'world_position': (-15.3, 0)},
         {'prefab': 'bighead_men2', 'animation': 'men2',
+         'preview_scale': 1.5,
          'world_position': (1.65, -15), 'preview_offset': (110, 115),
          'target': 'loc_bedroom', 'label': '引霄灵藤（左侧）',
          'hint': '进入左侧卧房', 'hint_align': 'start'},
         {'prefab': 'bighead_men2', 'animation': 'men2',
+         'preview_scale': 1.5,
          'world_position': (1.65, 15), 'mirror_x': True,
          'preview_offset': (-110, 115),
          'target': 'loc_bedroom_right', 'label': '引霄灵藤（右侧）',
          'hint': '进入右侧卧房', 'hint_align': 'end'},
         {'prefab': 'bighead_door_exit', 'source': 'bighead_door_exit',
-         'animation': 'idle', 'world_position': (14, -.15),
+         'animation': 'idle', 'world_position': (14, -.15), 'preview_scale': 2.6,
          'target': 'loc_foyer', 'label': '青石楼梯', 'hint': '返回前室'},
     ],
     'loc_bedroom': [
         {'prefab': 'bighead_men3', 'animation': 'men3',
+         'preview_scale': 1.6,
          'world_position': (14, 14), 'target': 'loc_hall',
          'label': '鎏角青玄门', 'hint': '返回厅堂', 'hint_align': 'end'},
     ],
     'loc_bedroom_right': [
         {'prefab': 'bighead_men4', 'animation': 'men4',
+         'preview_scale': 1.6,
          'world_position': (14, -14), 'target': 'loc_hall',
          'label': '银翘古木门', 'hint': '返回厅堂', 'hint_align': 'start'},
     ],
@@ -136,7 +143,8 @@ def composite_furnishings(scene, entry_id, ratio, scratch, frames):
                   sprite.height / 2 - frame['y'] - bounds[1])
         sprite = sprite.crop(bounds)
         width, height = sprite.size
-        sprite = sprite.resize((round(width * ratio), round(height * ratio)),
+        scale = ratio * furnishing.get('preview_scale', 1)
+        sprite = sprite.resize((round(width * scale), round(height * scale)),
                                Image.Resampling.LANCZOS)
         anchor = (anchor[0] * sprite.width / width,
                   anchor[1] * sprite.height / height)
@@ -156,7 +164,7 @@ def composite_furnishings(scene, entry_id, ratio, scratch, frames):
                   'source': furnishing.get('source', 'bighead_men'),
                   'animation': animation, 'frame': 1,
                   'bounds': [*position, *sprite.size]}
-        for key in ('target', 'world_position', 'mirror_x', 'preview_offset',
+        for key in ('target', 'world_position', 'mirror_x', 'preview_offset', 'preview_scale',
                     'label', 'hint', 'hint_align'):
             if key in furnishing:
                 record[key] = furnishing[key]

@@ -14,6 +14,30 @@
     root.innerHTML = window.Mustache.render(template(tplId), view || {});
   }
 
+  function buildingRoute(entries, id) {
+    const entrance = entries.find(function (entry) { return entry.building_entry; });
+    if (!entrance) return [];
+    const byId = new Map(entries.map(function (entry) { return [entry.id, entry]; }));
+    const queue = [[entrance.id]];
+    const seen = new Set([entrance.id]);
+    for (let index = 0; index < queue.length; index++) {
+      const path = queue[index];
+      const current = byId.get(path[path.length - 1]);
+      if (current.id === id) {
+        return path.map(function (step, position) {
+          const entry = byId.get(step);
+          return { id: step, name: entry.title || entry.name, current: step === id, first: position === 0 };
+        });
+      }
+      (current.building_exits || []).forEach(function (exit) {
+        if (!byId.has(exit.target) || seen.has(exit.target)) return;
+        seen.add(exit.target);
+        queue.push(path.concat(exit.target));
+      });
+    }
+    return [];
+  }
+
   App.sections = (window.SITE_DATA && window.SITE_DATA.sections) || [
     {
       id: "items",
@@ -239,6 +263,7 @@
             return { title: highlight.title, html: App.Linkify.textToHtml(highlight.text, { emphasizeNumbers: true }) };
           }),
           building_entry: entry.building_entry || null,
+          building_route: buildingRoute(data, entry.id),
           building_exits: entry.building_exits || [],
           scene_hotspots: (entry.scene_hotspots || []).map(function (hotspot) {
             return { ...hotspot, position: 'left:' + Number(hotspot.x) + '%;top:' + Number(hotspot.y) + '%;width:' + Number(hotspot.width) + '%;height:' + Number(hotspot.height) + '%' };

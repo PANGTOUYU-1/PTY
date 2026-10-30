@@ -295,6 +295,13 @@
             {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}"><span class="scene-hotspot__hint">{{label}} · {{hint}} →</span></button>{{/scene_hotspots}}
           </div>
           <p class="building-entry__caption"><span>{{number}}</span> {{#preview_caption}}{{preview_caption}}{{/preview_caption}}{{^preview_caption}}屋外入口{{/preview_caption}}</p>
+          <nav class="building-route" aria-label="入阁路线">
+            <ol>
+              {{#building_route}}
+              <li>{{^first}}<span class="building-route__arrow" aria-hidden="true">›</span>{{/first}}{{#current}}<span aria-current="step">{{name}}</span>{{/current}}{{^current}}<button type="button" data-building-room="{{id}}">{{name}}</button>{{/current}}</li>
+              {{/building_route}}
+            </ol>
+          </nav>
           <div class="building-entry__exits" role="group" aria-label="从{{name}}出发">
             {{#building_exits}}<button type="button" data-building-room="{{target}}">{{label}} <span aria-hidden="true">→</span></button>{{/building_exits}}
           </div>

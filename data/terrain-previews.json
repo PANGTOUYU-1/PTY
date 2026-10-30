@@ -49,16 +49,17 @@
           "animation": "idle",
           "frame": 1,
           "bounds": [
-            730,
-            1180,
-            143,
-            38
+            616,
+            1149,
+            371,
+            100
           ],
           "target": "loc_qingxuan",
           "world_position": [
             14,
             -0.15
           ],
+          "preview_scale": 2.6,
           "label": "青石楼梯",
           "hint": "回到屋外"
         }
@@ -135,10 +136,10 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            332,
-            455,
-            156,
-            325
+            291,
+            294,
+            234,
+            488
           ],
           "target": "loc_bedroom",
           "world_position": [
@@ -149,6 +150,7 @@
             110,
             115
           ],
+          "preview_scale": 1.5,
           "label": "引霄灵藤（左侧）",
           "hint": "进入左侧卧房",
           "hint_align": "start"
@@ -159,10 +161,10 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            1128,
-            455,
-            156,
-            325
+            1091,
+            294,
+            234,
+            488
           ],
           "target": "loc_bedroom_right",
           "world_position": [
@@ -174,6 +176,7 @@
             -110,
             115
           ],
+          "preview_scale": 1.5,
           "label": "引霄灵藤（右侧）",
           "hint": "进入右侧卧房",
           "hint_align": "end"
@@ -184,16 +187,17 @@
           "animation": "idle",
           "frame": 1,
           "bounds": [
-            736,
-            951,
-            131,
-            35
+            632,
+            922,
+            340,
+            92
           ],
           "target": "loc_foyer",
           "world_position": [
             14,
             -0.15
           ],
+          "preview_scale": 2.6,
           "label": "青石楼梯",
           "hint": "返回前室"
         }
@@ -254,16 +258,17 @@
           "animation": "men3",
           "frame": 1,
           "bounds": [
-            1332,
-            890,
-            200,
-            290
+            1271,
+            716,
+            320,
+            464
           ],
           "target": "loc_hall",
           "world_position": [
             14,
             14
           ],
+          "preview_scale": 1.6,
           "label": "鎏角青玄门",
           "hint": "返回厅堂",
           "hint_align": "end"
@@ -325,16 +330,17 @@
           "animation": "men4",
           "frame": 1,
           "bounds": [
-            83,
-            888,
-            200,
-            290
+            23,
+            713,
+            320,
+            464
           ],
           "target": "loc_hall",
           "world_position": [
             14,
             -14
           ],
+          "preview_scale": 1.6,
           "label": "银翘古木门",
           "hint": "返回厅堂",
           "hint_align": "start"

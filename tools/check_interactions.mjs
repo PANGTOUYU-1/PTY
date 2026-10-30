@@ -332,6 +332,29 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.match(node('modal-root').innerHTML, /银翘古木门/);
   assert.match(node('modal-root').innerHTML, /class="scene-hotspot"[^>]+data-open-entry="loc_hall"/);
 });
+check('卧房保留屋外、前室和厅堂的完整入阁路线，先前节点可返回且不混入另一侧卧房', () => {
+  const config = App.sections.find(section => section.id === 'terrains');
+  App.Render.renderGenericSection(config);
+  const cards = node(config.rootId).innerHTML;
+  const paths = {
+    loc_qingxuan: ['loc_qingxuan'],
+    loc_foyer: ['loc_qingxuan', 'loc_foyer'],
+    loc_hall: ['loc_qingxuan', 'loc_foyer', 'loc_hall'],
+    loc_bedroom: ['loc_qingxuan', 'loc_foyer', 'loc_hall', 'loc_bedroom'],
+    loc_bedroom_right: ['loc_qingxuan', 'loc_foyer', 'loc_hall', 'loc_bedroom_right'],
+  };
+  for (const [id, path] of Object.entries(paths)) {
+    const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${id}"[\\s\\S]*?<\\/article>`))[0];
+    const route = card.match(/<nav class="building-route"[\s\S]*?<\/nav>/)[0];
+    const targets = [...route.matchAll(/data-building-room="([^"]+)"/g)].map(match => match[1]);
+    assert.deepEqual(targets, path.slice(0, -1), id);
+    assert.equal((route.match(/aria-current="step"/g) || []).length, 1, id);
+    assert.ok(route.includes(`<span aria-current="step">${state.entries[id].title}</span>`), id);
+    for (let step = 1; step < path.length; step++) {
+      assert.ok(state.entries[path[step - 1]].building_exits.some(exit => exit.target === path[step]));
+    }
+  }
+});
 check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、导览与焦点', () => {
   const config = App.sections.find(section => section.id === 'terrains');
   App.Render.renderGenericSection(config);

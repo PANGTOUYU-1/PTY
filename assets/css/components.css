@@ -1257,7 +1257,15 @@
   .building-entry__enter-label { display: none; }
 }
 
-.building-entry__exits { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.building-route { margin-top: 12px; }
+.building-route ol { display: flex; flex-wrap: wrap; gap: 2px 10px; margin: 0; padding: 0; list-style: none; }
+.building-route li { display: inline-flex; align-items: baseline; gap: 10px; font-size: 12px; line-height: 1.8; }
+.building-route button { padding-block: 4px; color: var(--ink-3); border-bottom: 1px solid transparent; }
+.building-route button:hover { color: var(--cinnabar); border-bottom-color: currentColor; }
+.building-route [aria-current] { padding-block: 4px; color: var(--cinnabar); }
+.building-route__arrow { color: var(--ink-3); }
+
+.building-entry__exits { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .building-entry__exits button { display: inline-flex; align-items: center; gap: 12px; padding: 8px 12px; border: var(--bd); color: var(--ink-2); font-size: 13px; }
 .building-entry__exits button:hover { color: var(--cinnabar); border-color: currentColor; }
 
