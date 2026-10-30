@@ -2767,7 +2767,7 @@ window.SITE_DATA = {
     },
     {
       "id": "bb_gaojiaoniao_px_builder",
-      "name": "莲令",
+      "name": "貔貅（莲令）",
       "category": "misc",
       "owner": "gaojiaoniao",
       "image": "assets/img/items/bb_gaojiaoniao_px_builder.png",
@@ -2804,7 +2804,8 @@ window.SITE_DATA = {
       "source": "v4.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_px.png",
       "aliases": [
-        "貔貅"
+        "貔貅",
+        "莲令"
       ]
     },
     {
