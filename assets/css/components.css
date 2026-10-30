@@ -159,10 +159,15 @@
   color: var(--ink-3);
 }
 
+.hero__tag:empty,
+.hero__subtitle:empty {
+  display: none;
+}
+
 .hero__title {
   margin: 0;
   font-family: var(--ff-serif);
-  font-size: clamp(48px, 6vw, 84px);
+  font-size: clamp(32px, min(6vw, 9svh), 84px);
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--ink);
@@ -177,7 +182,7 @@
 }
 
 .hero__meta {
-  margin: var(--sp-4) 0 0;
+  margin: clamp(12px, 2svh, 20px) 0 0;
   font-family: var(--ff-mono);
   font-size: 13px;
   letter-spacing: 0.1em;
@@ -644,7 +649,9 @@
 
 @media (min-width: 901px) {
   /* Mirror exclusive items along the outer edge of each portrait. */
-  .duo__char { position: static; align-self: start; margin-top: 80px; }
+  .duo__char { position: static; align-self: start; margin-top: clamp(16px, 3svh, 32px); }
+  .duo__portrait { width: clamp(200px, calc(50svh - 140px), 280px); }
+  .duo__name img { max-height: clamp(180px, 28svh, 280px); }
   .duo__char .duo-gear {
     top: 16px;
     width: min(390px, calc(50% - 252px));
@@ -1567,7 +1574,11 @@
   }
 
   .duo__portrait {
-    width: min(72vw, 280px);
+    width: min(72vw, 40svh, 280px);
+  }
+
+  .duo__name img {
+    max-height: clamp(112px, 20svh, 180px);
   }
 
   .duo__fields {
