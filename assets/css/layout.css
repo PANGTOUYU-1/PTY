@@ -58,9 +58,10 @@ html[data-active-section="intro"] #main-content { min-height: 0; }
   justify-content: space-between;
   gap: var(--sp-4);
   padding-inline: var(--sp-4);
-  background: rgba(243, 236, 223, 0.82);
-  backdrop-filter: blur(12px);
-  border-bottom: var(--bd);
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: var(--bd-ink);
+  --focus-ring: 2px solid var(--paper);
 }
 
 .topbar__left,
@@ -86,7 +87,7 @@ html[data-active-section="intro"] #main-content { min-height: 0; }
 .topbar__nav a {
   position: relative;
   padding: 4px 0;
-  color: var(--ink-2);
+  color: var(--paper-2);
   font-family: var(--ff-serif);
   font-size: 16px;
   letter-spacing: 0.2em;
@@ -94,9 +95,13 @@ html[data-active-section="intro"] #main-content { min-height: 0; }
   white-space: nowrap;
 }
 
-.topbar__nav a.is-active {
-  color: var(--ink);
+.topbar__nav a.is-active,
+.topbar__nav a:hover,
+.topbar__nav a:focus-visible {
+  color: var(--paper);
 }
+
+.topbar__nav .nav-ink-ring { color: currentColor; }
 
 .nav-ink-ring {
   position: absolute;

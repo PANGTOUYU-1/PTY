@@ -89,6 +89,12 @@
   stroke-linejoin: round;
 }
 
+.topbar .site-mark,
+.topbar .site-mark__label { color: var(--paper); }
+.topbar .icon-button { color: var(--paper); border: var(--bd-ink); }
+.topbar .icon-button:hover,
+.topbar .icon-button:focus-visible { background: rgba(243, 236, 223, .1); }
+
 .nav-toggle,
 .filter-toggle {
   display: none;
