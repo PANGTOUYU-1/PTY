@@ -53,10 +53,7 @@
 
     categoryOptions: function () {
       const foodView = App.Filter.isFoodView();
-      var list = foodView ? App.config.foodCategories : (App.config.categoryList || []).filter(function (item) {
-        return item.id !== "food" && item.id !== "structure";
-      });
-      if (!foodView) list = exclusiveCategories.concat(list);
+      const list = foodView ? App.config.foodCategories : exclusiveCategories;
       var cats = [{ label: "全部", value: "all" }].concat(list.map(function (c) {
         return { label: c.name, value: c.id };
       }));

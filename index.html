@@ -134,7 +134,7 @@
           <p class="duo-gear__heading">角色专属 <span>{{character_a.exclusive_count}} 件 · 点击查看</span></p>
           {{#character_a.featured_items}}
           <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
-            <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span><span>{{name}}</span>
+            <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}</span><span>{{name}}</span>
           </button>
           {{/character_a.featured_items}}
           {{#character_a.has_shared_crafts}}
@@ -170,7 +170,7 @@
           <p class="duo-gear__heading">角色专属 <span>{{character_b.exclusive_count}} 件 · 点击查看</span></p>
           {{#character_b.featured_items}}
           <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
-            <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span><span>{{name}}</span>
+            <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}</span><span>{{name}}</span>
           </button>
           {{/character_b.featured_items}}
           {{#character_b.has_shared_crafts}}
@@ -256,7 +256,7 @@
         <button class="card-link{{#owner_stamp}} card-link--owned{{/owner_stamp}}" type="button" data-open-entry="{{id}}">
           <span class="item-card__image">
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
-            {{#owner_stamp}}<span class="item-card__owner-stamp owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+            {{#owner_stamp}}<span class="item-card__owner-stamp owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}
           </span>
           <span class="item-card__meta">
             <span class="item-card__topline">{{category_label}}{{#skin_count}} · {{skin_count}} 款外观{{/skin_count}}</span>
@@ -283,7 +283,7 @@
             {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
             </picture>
-            {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+            {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}
           </span>
           {{/image}}
           <span class="item-card__meta">
@@ -568,7 +568,7 @@
         {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
         <img class="modal-card__hero" src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
         </picture>
-        {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+        {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}
         {{#scene_hotspots}}
         <button class="scene-hotspot" type="button" style="{{position}}" data-open-entry="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}">
           <span class="building-action-hint scene-hotspot__hint" aria-hidden="true">点击{{hint}} <span>→</span></span>
@@ -634,7 +634,7 @@
           <div class="item-appearances__grid">
             {{#skins}}
             <button class="item-appearance" type="button" data-open-entry="{{id}}" aria-label="查看{{name}}外观">
-              <span class="item-appearance__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>
+              <span class="item-appearance__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}</span>
               <span>{{name}}</span>
             </button>
             {{/skins}}

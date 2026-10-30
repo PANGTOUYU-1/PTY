@@ -48,6 +48,11 @@
     }
   };
 
+  function selectedCategories(cats) {
+    const first = (cats || [])[0];
+    return ["food", "structure", "pangtouyu", "gaojiaoniao"].includes(first) ? [first] : [];
+  }
+
   function readHash(hash) {
     const raw = (hash || window.location.hash || "").replace(/^#/, "");
     const parts = raw.split("?");
@@ -55,7 +60,7 @@
     const search = new URLSearchParams(parts[1] || "");
     const pathParts = path.split("/").filter(Boolean);
     let section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
-    let cats = (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1);
+    let cats = selectedCategories((search.get("cat") || "").split(",").filter(Boolean));
     const entry = App.STATE && App.STATE.entries[pathParts[1]];
     if (entry && ["buildings", "terrains"].includes(section) && entrySection(entry) === "items") {
       section = "items";
@@ -280,7 +285,7 @@
         ...App.ui,
         ...patch
       };
-      next.cats = (next.cats || []).slice(0, 1);
+      next.cats = selectedCategories(next.cats);
       if (next.cats[0] !== "food" || !App.config.foodCategories.some(function (item) { return item.id === next.foodKind; })) next.foodKind = "";
       App.ui = next;
       const hash = buildHash(next);
@@ -300,9 +305,14 @@
     ownerView: function (entry) {
       const parent = entry.item_id && App.STATE.entries[entry.item_id];
       const owner = entry.owner || (parent && parent.owner);
+      const item = parent || entry;
+      const pet = ["bighead_sanbao_builder", "bb_gaojiaoniao_px_builder"].includes(item.id);
+      const type = pet ? "pet" : item.category;
       return {
         owner_stamp: { pangtouyu: "鱼", gaojiaoniao: "鸟" }[owner] || "",
-        owner_label: App.config.ownerLabels[owner] || ""
+        owner_label: App.config.ownerLabels[owner] || "",
+        type_stamp: { weapon: "武", armor: "护", tool: "工", crop: "作", material: "材", pet: "宠", misc: "生" }[type] || "",
+        type_label: pet ? "宠物" : App.config.categoryLabels[type] || ""
       };
     },
     load: function () {

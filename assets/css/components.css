@@ -1240,7 +1240,8 @@
   object-fit: scale-down;
 }
 
-.owner-stamp {
+.owner-stamp,
+.type-stamp {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -1259,12 +1260,24 @@
   pointer-events: none;
 }
 
+.type-stamp {
+  width: 26px;
+  font-size: 18px;
+  background: var(--paper-2);
+  color: var(--cinnabar);
+  box-shadow: inset 0 0 0 1px var(--cinnabar);
+  transform: rotate(4deg);
+  pointer-events: auto;
+}
+.owner-stamp + .type-stamp { top: calc(16px + clamp(28px, 3vw, 34px)); }
+
 .duo-gear__image .owner-stamp {
   top: 0;
   right: 0;
   width: 22px;
   font-size: 16px;
 }
+.duo-gear__image .type-stamp { top: 26px; right: 0; width: 18px; font-size: 12px; }
 
 .item-card__meta {
   display: grid;

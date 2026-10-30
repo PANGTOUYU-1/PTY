@@ -227,7 +227,7 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   App.Render.renderItems();
   assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, standaloneItems.length);
   assert.ok(!node('items-root').innerHTML.includes('data-owner='));
-  assert.ok(App.Filter.categoryOptions().every(option => !['food', 'structure'].includes(option.value)));
+  assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.value), ['all', 'pangtouyu', 'gaojiaoniao']);
   const cards = allItemCards();
   for (const item of state.items) assert.equal(cards.split(`data-entry-target="${item.id}"`).length - 1, 1, item.id);
   const previous = { ...App.ui };
@@ -243,8 +243,11 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
 });
-check('鱼专属与鸟专属按实际使用归属单选筛选，通用物品不混入', () => {
+check('物品仅按鱼鸟归属单选筛选，旧类型筛选链接回到全部', () => {
   const previous = { ...App.ui };
+  for (const category of ['weapon', 'armor', 'tool', 'crop', 'material', 'misc']) {
+    assert.equal(App.route.read(`#items?cat=${category}`).cats.length, 0);
+  }
   for (const [owner, label] of [['pangtouyu', '鱼专属'], ['gaojiaoniao', '鸟专属']]) {
     App.route.sync({ section: 'items', cats: [owner], q: '' });
     const options = App.Filter.categoryOptions();
@@ -259,6 +262,27 @@ check('鱼专属与鸟专属按实际使用归属单选筛选，通用物品不�
     assert.ok(node('items-root').innerHTML.includes(`共 ${expected.length} 项 · ${label}`));
     assert.equal(App.route.read(App.route.build(App.ui)).cats[0], owner);
   }
+  App.ui = previous;
+});
+check('物品图片以类型印章区分武护工材与宠，外观继承原物品类型', () => {
+  const previous = { ...App.ui };
+  App.ui = { ...previous, cats: [], q: '' };
+  App.Render.renderItems();
+  const cards = node('items-root').innerHTML;
+  for (const [id, stamp, label] of [
+    ['bighead_spear', '武', '武器'], ['bighead_armor', '护', '护具'],
+    ['bighead_ybhz', '工', '工具'], ['bighead_mwgt', '材', '材料'],
+    ['bighead_sanbao_builder', '宠', '宠物'], ['bb_gaojiaoniao_px_builder', '宠', '宠物']
+  ]) {
+    const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${id}"[\\s\\S]*?<\\/article>`))?.[0];
+    assert.ok(card?.includes(`class="type-stamp" role="img" aria-label="${label}" title="${label}">${stamp}</span>`), id);
+    App.Modal.open(id);
+    assert.ok(node('modal-root').innerHTML.includes(`>${stamp}</span>`), id);
+    for (const skin of state.skins.filter(skin => skin.item_id === id)) {
+      assert.equal(App.Data.ownerView(skin).type_stamp, stamp, skin.id);
+    }
+  }
+  assert.equal(App.Data.ownerView(state.items.find(item => item.category === 'food')).type_stamp, '');
   App.ui = previous;
 });
 check('月饼盒子作为随身工具收录，旧建筑链接也回到物品栏目', () => {
@@ -313,10 +337,10 @@ check('食物使用独立的单选分类，清空和详情返回不会混入物�
       assert.equal(App.ui.foodKind, kind.id);
     }
     assert.equal(seen.size, foods.length);
-    App.route.sync({ cats: ['weapon'] });
+    App.route.sync({ cats: ['pangtouyu'] });
     assert.equal(App.ui.foodKind, '');
     assert.equal(App.route.read('#items?cat=food&kind=unknown').foodKind, '');
-    assert.ok(App.Filter.getFilteredItems().every(item => item.category === 'weapon'));
+    assert.ok(App.Filter.getFilteredItems().every(item => item.owner === 'pangtouyu'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
 check('127张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
@@ -652,11 +676,11 @@ check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、�
   }
 });
 check('切换分类再回到全部时，物品卡片直接显示且不混入食物和建筑', () => {
-  for (const cats of [['weapon'], []]) {
+  for (const cats of [['pangtouyu'], []]) {
     App.ui.cats = cats;
     App.Render.renderItems();
     const output = node('items-root').innerHTML;
-    const expected = cats.length ? state.items.filter(item => item.category === 'weapon').length : standaloneItems.length;
+    const expected = cats.length ? standaloneItems.filter(item => item.owner === 'pangtouyu').length : standaloneItems.length;
     assert.equal((output.match(/data-open-entry=/g) || []).length, expected);
     const gridClass = output.match(/<div class="([^"]*)" id="items-grid-root">/)?.[1];
     assert.ok(gridClass);
