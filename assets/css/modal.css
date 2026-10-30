@@ -380,44 +380,27 @@
 
 .scene-hotspot:hover,
 .scene-hotspot:focus-visible {
+  z-index: 2;
   outline: none;
   background: transparent;
 }
 
 .scene-hotspot__hint {
-  position: absolute;
-  bottom: calc(100% + 10px);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   width: max-content;
-  padding: 5px 9px;
-  border: var(--bd);
-  background: var(--paper);
-  color: var(--ink);
-  font-size: var(--fs-small);
-  pointer-events: none;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 160ms var(--ease);
 }
-
-.scene-hotspot:hover .scene-hotspot__hint,
-.scene-hotspot:focus-visible .scene-hotspot__hint {
-  visibility: visible;
-  opacity: 1;
-}
-
-.scene-hotspot:focus-visible .scene-hotspot__hint { outline: 1px solid var(--ink-3); outline-offset: 3px; }
 
 .scene-hotspot[data-hint-align="start"] .scene-hotspot__hint {
   left: 0;
-  transform: none;
+  transform: translateY(-50%);
 }
 
 .scene-hotspot[data-hint-align="end"] .scene-hotspot__hint {
   left: auto;
   right: 0;
-  transform: none;
+  transform: translateY(-50%);
 }
 
 .scene-preview-hint {

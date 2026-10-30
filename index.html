@@ -290,10 +290,10 @@
             {{#building_entry}}
             <button class="building-entry__enter" type="button" data-building-room="{{target}}" aria-label="{{label}}">
               <span class="building-entry__enter-label" aria-hidden="true">{{label}} →</span>
-              <span class="building-entry__enter-hint" aria-hidden="true">点击{{label}} <span>→</span></span>
+              <span class="building-action-hint building-entry__enter-hint" aria-hidden="true">点击{{label}} <span>→</span></span>
             </button>
             {{/building_entry}}
-            {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}"><span class="scene-hotspot__hint">{{label}} · {{hint}} →</span></button>{{/scene_hotspots}}
+            {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}"><span class="building-action-hint scene-hotspot__hint" aria-hidden="true">点击{{hint}} <span>→</span></span></button>{{/scene_hotspots}}
             </div>
           </div>
           <p class="building-entry__caption"><span>{{number}}</span> {{#preview_caption}}{{preview_caption}}{{/preview_caption}}{{^preview_caption}}屋外入口{{/preview_caption}}</p>
@@ -495,7 +495,7 @@
         {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
         {{#scene_hotspots}}
         <button class="scene-hotspot" type="button" style="{{position}}" data-open-entry="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}">
-          <span class="scene-hotspot__hint">{{label}} · {{hint}} →</span>
+          <span class="building-action-hint scene-hotspot__hint" aria-hidden="true">点击{{hint}} <span>→</span></span>
         </button>
         {{/scene_hotspots}}
         </div>
