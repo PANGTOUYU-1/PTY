@@ -57,6 +57,10 @@
     let section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
     let cats = (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1);
     const entry = App.STATE && App.STATE.entries[pathParts[1]];
+    if (entry && ["buildings", "terrains"].includes(section) && entrySection(entry) === "items") {
+      section = "items";
+      cats = [];
+    }
     if ((section === "items" && cats[0] === "structure") ||
         (entry && entrySection(entry) === "buildings" && ["items", "terrains"].includes(section))) {
       section = "buildings";

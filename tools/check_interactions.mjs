@@ -243,6 +243,29 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
 });
+check('月饼盒子作为随身工具收录，旧建筑链接也回到物品栏目', () => {
+  const previous = { ...App.ui };
+  const box = state.entries.bighead_ybhz;
+  assert.equal(box.category, 'tool');
+  assert.equal(App.Data.entrySection(box), 'items');
+  const buildings = App.sections.find(section => section.id === 'buildings');
+  App.Render.renderGenericSection(buildings);
+  assert.ok(!node(buildings.rootId).innerHTML.includes('data-entry-target="bighead_ybhz"'));
+  App.ui = { ...previous, cats: ['tool'], q: '' };
+  App.Render.renderItems();
+  assert.ok(node('items-root').innerHTML.includes('data-entry-target="bighead_ybhz"'));
+  for (const section of ['items', 'buildings', 'terrains']) {
+    const route = App.route.read(`#${section}/bighead_ybhz`);
+    assert.equal(route.section, 'items');
+    assert.equal(route.detailId, box.id);
+  }
+  App.ui.q = '月饼盒子';
+  assert.equal(App.Filter.getSearchResults().find(item => item.id === box.id).type_label, '物品');
+  App.Modal.open(box.id);
+  assert.equal(App.ui.section, 'items');
+  assert.ok(node('modal-root').innerHTML.includes('>物品</p>'));
+  App.ui = previous;
+});
 check('食物使用独立的单选分类，清空和详情返回不会混入物品分类', () => {
   const previous = { ...App.ui };
   const hash = sandbox.window.location.hash;

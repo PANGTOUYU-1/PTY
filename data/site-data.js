@@ -955,7 +955,7 @@ window.SITE_DATA = {
     {
       "id": "bighead_ybhz",
       "name": "月饼盒子",
-      "category": "structure",
+      "category": "tool",
       "owner": "common",
       "image": "assets/img/items/bighead_ybhz.png",
       "summary": "随身月饼保鲜盒：满月状态到来时自动产出八款基础月饼和一款随机隐藏月饼。",
@@ -1021,8 +1021,8 @@ window.SITE_DATA = {
         "bighead_qbi"
       ],
       "tags": [
-        "建筑",
-        "容器",
+        "工具",
+        "随身容器",
         "月饼"
       ],
       "tech": "炼金引擎；高脚鸟制作 / 金企鹅兑换",
