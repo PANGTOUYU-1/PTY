@@ -990,6 +990,21 @@
   gap: var(--sp-2);
 }
 
+@media (min-width: 768px) {
+  #items-root > .filters-panel {
+    grid-template-columns: minmax(0, 1fr) clamp(140px, 18vw, 240px) auto auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  #items-root .filters-panel__block { grid-column: auto; display: flex; align-items: center; gap: 12px; min-width: 0; }
+  #items-root .filters-panel__label,
+  #items-root .filters-summary { white-space: nowrap; }
+  #items-root .filters-summary { max-width: 170px; overflow: hidden; text-overflow: ellipsis; }
+  #items-root .chip-row { flex-wrap: nowrap; overflow-x: auto; min-width: 0; }
+  #items-root .chip { flex-shrink: 0; }
+}
+
 .chip-row {
   display: flex;
   flex-wrap: wrap;
