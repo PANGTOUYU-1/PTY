@@ -59,7 +59,7 @@ window.SITE_DATA = {
     },
     {
       "id": "misc",
-      "name": "其他"
+      "name": "生物"
     }
   ],
   "characters": [
@@ -2796,7 +2796,7 @@ window.SITE_DATA = {
         "bb_gaojiaoniao_px_skin1"
       ],
       "tags": [
-        "其他",
+        "生物",
         "貔貅",
         "莲"
       ],
@@ -2840,7 +2840,7 @@ window.SITE_DATA = {
         "mech_parasite"
       ],
       "tags": [
-        "其他",
+        "生物",
         "猫",
         "三宝"
       ],
@@ -2880,7 +2880,7 @@ window.SITE_DATA = {
         "bb_cct"
       ],
       "tags": [
-        "其他",
+        "生物",
         "蝴蝶",
         "春望"
       ],
