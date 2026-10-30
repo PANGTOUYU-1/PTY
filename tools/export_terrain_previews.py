@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 from zipfile import ZipFile
 
-from PIL import Image
+from PIL import Image, ImageOps
 from export_mod_displays import lua_string, request
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -30,6 +30,25 @@ FLOOR_QUADS = {
     'loc_hall': [(380, 375), (1236, 375), (1507, 1039), (109, 1039)],
     'loc_bedroom': [(345, 540), (1271, 540), (1561, 1255), (55, 1255)],
     'loc_bedroom_right': [(345, 540), (1271, 540), (1561, 1255), (55, 1255)],
+}
+
+# Separate prefabs spawned by bighead_door_exit.lua, not baked into the walls.
+# Ground positions are (x, z) relative to the hall's house centre. The east-side
+# vine is mirrored by AnimState:SetScale(-scale, scale, scale) in the mod.
+FURNISHINGS = {
+    'loc_foyer': [
+        {'prefab': 'bighead_men1', 'animation': 'men1', 'center': (808, 395),
+         'target': 'loc_hall'},
+    ],
+    'loc_hall': [
+        {'prefab': 'bighead_yizi', 'animation': 'yizi',
+         'world_position': (-15.3, 0)},
+        {'prefab': 'bighead_men2', 'animation': 'men2',
+         'world_position': (1.65, -15), 'target': 'loc_bedroom'},
+        {'prefab': 'bighead_men2', 'animation': 'men2',
+         'world_position': (1.65, 15), 'mirror_x': True,
+         'target': 'loc_bedroom_right'},
+    ],
 }
 
 
@@ -68,6 +87,56 @@ def composite_floor(wall, floor, quad):
     return Image.alpha_composite(projected, wall)
 
 
+def ground_position(quad, position):
+    """Project the prefab's ground anchor onto the same plane as the floor."""
+    coefficients = perspective_coefficients([(0, 0), (1, 0), (1, 1), (0, 1)], quad)
+    a, b, c, d, e, f, g, h = coefficients
+    x, z = position
+    u, v = (z + 16.2) / 32.4, (x + 16.2) / 32.4
+    divisor = g * u + h * v + 1
+    return ((a * u + b * v + c) / divisor,
+            (d * u + e * v + f) / divisor)
+
+
+def composite_furnishings(scene, entry_id, ratio, scratch, frames):
+    records = []
+    for furnishing in FURNISHINGS.get(entry_id, []):
+        animation = furnishing['animation']
+        with Image.open(scratch / f'furnishing-{animation}.png') as source:
+            sprite = source.convert('RGBA')
+        bounds = sprite.getchannel('A').getbbox()
+        if bounds is None:
+            raise ValueError(f'Empty furnishing: {animation}')
+        # The explicit export canvas preserves the animation's original origin.
+        frame = frames[animation]
+        anchor = (sprite.width / 2 - frame['x'] - bounds[0],
+                  sprite.height / 2 - frame['y'] - bounds[1])
+        sprite = sprite.crop(bounds)
+        width, height = sprite.size
+        sprite = sprite.resize((round(width * ratio), round(height * ratio)),
+                               Image.Resampling.LANCZOS)
+        anchor = (anchor[0] * sprite.width / width,
+                  anchor[1] * sprite.height / height)
+        if furnishing.get('mirror_x'):
+            sprite = ImageOps.mirror(sprite)
+            anchor = (sprite.width - anchor[0], anchor[1])
+        if 'center' in furnishing:
+            center = furnishing['center']
+            position = (center[0] - sprite.width // 2, center[1] - sprite.height // 2)
+        else:
+            ground = ground_position(FLOOR_QUADS[entry_id], furnishing['world_position'])
+            position = (round(ground[0] - anchor[0]), round(ground[1] - anchor[1]))
+        scene.alpha_composite(sprite, position)
+        record = {'prefab': furnishing['prefab'], 'source': 'bighead_men',
+                  'animation': animation, 'frame': 1,
+                  'bounds': [*position, *sprite.size]}
+        for key in ('target', 'world_position', 'mirror_x'):
+            if key in furnishing:
+                record[key] = furnishing[key]
+        records.append(record)
+    return records
+
+
 def export(tool, mod):
     records = []
     with tempfile.TemporaryDirectory(prefix="pty-room-previews-") as temporary:
@@ -98,24 +167,36 @@ def export(tool, mod):
                 f'{lua_string(scratch / (entry_id + "-floor.png"))}, {{',
                 f'builds={{doc.builds:find("{floor_source}")}}, hide_layers={{}}, override_symbols={{}}, scale=1}})',
             ])
-        code.extend([
-            f'doc:import_resources({{{lua_string(scratch / "bighead_men.zip")}}})',
-            'doc.banks:find("bighead_men").animations:find("men1").frames[1]:export_png('
-            + lua_string(scratch / 'foyer-bell.png') + ', {'
-            + 'builds={doc.builds:find("bighead_men")}, hide_layers={}, override_symbols={}, scale=1})',
-        ])
+        code.append(f'doc:import_resources({{{lua_string(scratch / "bighead_men.zip")}}})')
+        animations = sorted({item['animation'] for items in FURNISHINGS.values() for item in items})
+        for animation in animations:
+            code.extend([
+                f'local f=doc.banks:find("bighead_men").animations:find("{animation}").frames[1]',
+                f'print("FURNISHING","{animation}",f.x,f.y)',
+                'f:export_png(' + lua_string(scratch / f'furnishing-{animation}.png') + ', {'
+                + 'builds={doc.builds:find("bighead_men")}, hide_layers={}, override_symbols={}, scale=1,'
+                + 'canvas={center_x=f.x,center_y=f.y,width=math.ceil(f.width)+16,height=math.ceil(f.height)+16}})',
+            ])
         before = request(code='assert(tool.document_is_empty, "Room export requires an empty document"); print(tool.document_revision)', tool=tool, scratch=scratch)
         # A failed deferred export can still commit an import. Check revision
         # separately and undo only this transaction, preserving the user's state.
         try:
             report = request(tool=tool, code="\n".join(code), scratch=scratch)
-            if len(report['tool_results']) != len(ROOMS) * 5 + 1:
+            if len(report['tool_results']) != len(ROOMS) * 5 + len(animations):
                 raise RuntimeError("Incomplete room export")
         finally:
             after = request(code='print(tool.document_revision)', tool=tool, scratch=scratch)
             if after['output'] != before['output']:
                 request(tool=tool, code='tool:undo()', scratch=scratch)
+        frames = {}
+        room_reports = []
         for line in report['output']:
+            if line.startswith('FURNISHING\t'):
+                _, animation, x, y = line.split('\t')
+                frames[animation] = {'x': float(x), 'y': float(y)}
+            elif line.startswith('ROOM\t'):
+                room_reports.append(line)
+        for line in room_reports:
             _, entry_id, width, height, tile_width, tile_height = line.split('\t')
             tw, th = int(tile_width), int(tile_height)
             native = Image.new('RGBA', (tw * 2, th * 2))
@@ -136,21 +217,8 @@ def export(tool, mod):
             floor_size = floor.size
             floor = floor.crop(floor.getchannel('A').getbbox())
             padded = composite_floor(padded, floor, FLOOR_QUADS[entry_id])
-            furnishings = []
-            if entry_id == 'loc_foyer':
-                with Image.open(scratch / 'foyer-bell.png') as source_bell:
-                    bell = source_bell.convert('RGBA')
-                bell = bell.crop(bell.getchannel('A').getbbox())
-                # Use the wall's reduction ratio, keeping the original men1 art.
-                ratio = image.width / native_size[0]
-                bell = bell.resize((round(bell.width * ratio), round(bell.height * ratio)),
-                                   Image.Resampling.LANCZOS)
-                center = (808, 395)
-                position = (center[0] - bell.width // 2, center[1] - bell.height // 2)
-                padded.alpha_composite(bell, position)
-                furnishings.append({'prefab': 'bighead_men1', 'source': 'bighead_men',
-                                    'animation': 'men1', 'frame': 1, 'target': 'loc_hall',
-                                    'bounds': [*position, *bell.size]})
+            furnishings = composite_furnishings(padded, entry_id, image.width / native_size[0],
+                                                scratch, frames)
             target = ROOT / 'assets/img/terrains' / f'{entry_id}.png'
             padded.save(target, optimize=True)
             source = next(source for room_id, source, _ in ROOMS if room_id == entry_id)

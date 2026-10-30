@@ -29,13 +29,13 @@
           "source": "bighead_men",
           "animation": "men1",
           "frame": 1,
-          "target": "loc_hall",
           "bounds": [
             688,
             312,
             241,
             166
-          ]
+          ],
+          "target": "loc_hall"
         }
       ],
       "floor": {
@@ -87,7 +87,59 @@
         1616,
         1047
       ],
-      "furnishings": [],
+      "furnishings": [
+        {
+          "prefab": "bighead_yizi",
+          "source": "bighead_men",
+          "animation": "yizi",
+          "frame": 1,
+          "bounds": [
+            522,
+            34,
+            571,
+            354
+          ],
+          "world_position": [
+            -15.3,
+            0
+          ]
+        },
+        {
+          "prefab": "bighead_men2",
+          "source": "bighead_men",
+          "animation": "men2",
+          "frame": 1,
+          "bounds": [
+            222,
+            340,
+            156,
+            325
+          ],
+          "target": "loc_bedroom",
+          "world_position": [
+            1.65,
+            -15
+          ]
+        },
+        {
+          "prefab": "bighead_men2",
+          "source": "bighead_men",
+          "animation": "men2",
+          "frame": 1,
+          "bounds": [
+            1238,
+            340,
+            156,
+            325
+          ],
+          "target": "loc_bedroom_right",
+          "world_position": [
+            1.65,
+            15
+          ],
+          "mirror_x": true
+        }
+      ],
       "floor": {
         "source": "bighead_floor1",
         "animation": "idle",

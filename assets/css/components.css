@@ -1155,7 +1155,8 @@
   transition: transform var(--dur) var(--ease);
 }
 
-.building-entry__image--interior { aspect-ratio: 1616 / 1285; }
+.building-entry__image--interior { aspect-ratio: auto; }
+.building-entry__image--interior > img { height: auto; }
 
 .building-entry__enter { position: absolute; inset: 0; width: 100%; height: 100%; }
 .building-entry__enter > span {

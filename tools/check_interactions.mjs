@@ -261,6 +261,25 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   const [x, y, width, height] = bell.bounds;
   assert.ok(Math.abs((x + width / 2) / 1616 * 100 - hotspot.x) < 0.1);
   assert.ok(Math.abs((y + height / 2) / 1285 * 100 - hotspot.y) < 0.1);
+  const hall = manifest.assets.find(asset => asset.id === 'loc_hall');
+  assert.equal(hall.furnishings.length, 3);
+  assert.ok(hall.furnishings.some(part => part.prefab === 'bighead_yizi' && part.animation === 'yizi'));
+  const vines = hall.furnishings.filter(part => part.prefab === 'bighead_men2');
+  assert.deepEqual(vines.map(part => part.target), ['loc_bedroom', 'loc_bedroom_right']);
+  assert.ok(!vines[0].mirror_x && vines[1].mirror_x);
+  for (const vine of vines) {
+    const hit = state.entries.loc_hall.scene_hotspots.find(part => part.target === vine.target);
+    assert.ok(hit, vine.target);
+    const [left, top, width, height] = vine.bounds;
+    const [sceneWidth, sceneHeight] = hall.display_size;
+    assert.ok(Math.abs((left + width / 2) / sceneWidth * 100 - hit.x) < .01);
+    assert.ok(Math.abs((top + height / 2) / sceneHeight * 100 - hit.y) < .01);
+    assert.ok(Math.abs(width / sceneWidth * 100 - hit.width) < .01);
+    assert.ok(Math.abs(height / sceneHeight * 100 - hit.height) < .01);
+    assert.match(cards, new RegExp('class="scene-hotspot"[^>]+data-building-room="' + vine.target + '"'));
+  }
+  App.Modal.open('loc_hall');
+  for (const vine of vines) assert.ok(node('modal-root').innerHTML.includes(`data-open-entry="${vine.target}"`));
   App.Modal.open('loc_bedroom_right');
   assert.match(node('modal-root').innerHTML, /银翘古木门/);
   assert.ok(!node('modal-root').innerHTML.includes('class="scene-hotspot"'));

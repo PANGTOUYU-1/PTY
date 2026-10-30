@@ -404,6 +404,17 @@
   visibility: visible;
 }
 
+.scene-hotspot[data-hint-align="start"] .scene-hotspot__hint {
+  left: 0;
+  transform: none;
+}
+
+.scene-hotspot[data-hint-align="end"] .scene-hotspot__hint {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
 .scene-preview-hint {
   margin: 0;
   color: var(--ink-2);

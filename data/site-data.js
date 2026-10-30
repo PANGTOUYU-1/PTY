@@ -3703,6 +3703,11 @@ window.SITE_DATA = {
       "title": "阁中厅堂",
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
+      "scene_hotspots": [
+        { "label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 18.5644, "y": 47.9943, "width": 9.6535, "height": 31.0411, "hint": "进入左侧卧房", "hint_align": "start" },
+        { "label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 81.4356, "y": 47.9943, "width": 9.6535, "height": 31.0411, "hint": "进入右侧卧房", "hint_align": "end" }
+      ],
+      "scene_hint": "点击两侧的引霄灵藤，进入对应卧房。",
       "summary": "青玄阁内连接两间卧房的厅堂，共用防猎犬生成、恒温、避雨与夜间照明。太极莲尊是陈设。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": [

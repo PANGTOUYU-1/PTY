@@ -261,7 +261,7 @@
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
             {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
             {{#building_entry}}<button class="building-entry__enter" type="button" data-building-room="{{target}}" aria-label="{{label}}"><span>{{label}} →</span></button>{{/building_entry}}
-            {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" aria-label="{{label}}：{{hint}}"><span class="scene-hotspot__hint">{{label}} · {{hint}} →</span></button>{{/scene_hotspots}}
+            {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}"><span class="scene-hotspot__hint">{{label}} · {{hint}} →</span></button>{{/scene_hotspots}}
           </div>
           <p class="building-entry__caption"><span>{{number}}</span> {{#preview_caption}}{{preview_caption}}{{/preview_caption}}{{^preview_caption}}屋外入口{{/preview_caption}}</p>
           <div class="building-entry__exits" role="group" aria-label="从{{name}}出发">
@@ -443,7 +443,7 @@
         </picture>
         {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
         {{#scene_hotspots}}
-        <button class="scene-hotspot" type="button" style="{{position}}" data-open-entry="{{target}}" aria-label="{{label}}：{{hint}}">
+        <button class="scene-hotspot" type="button" style="{{position}}" data-open-entry="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}">
           <span class="scene-hotspot__hint">{{label}} · {{hint}} →</span>
         </button>
         {{/scene_hotspots}}
