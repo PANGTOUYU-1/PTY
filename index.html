@@ -519,26 +519,9 @@
 
   <script id="tpl-footer" type="x-tmpl-mustache">
     <div class="footer-grid">
-      <div>
-        <div class="site-mark site-mark--footer" aria-hidden="true">
-          <span class="site-mark__line"></span>
-          <span class="site-mark__label">序</span>
-        </div>
-        <p>{{manifesto}}</p>
-      </div>
-      <div>
-        <h2>外链</h2>
-        <ul class="plain-list">
-          {{#links}}
-          <li><a href="{{url}}" target="_blank" rel="noreferrer">{{label}}</a></li>
-          {{/links}}
-        </ul>
-      </div>
-      <div>
-        <h2>落款</h2>
-        <p>{{author}}</p>
-        <p>{{year}}</p>
-      </div>
+      <p class="site-footer__intro">{{manifesto}}</p>
+      <nav class="site-footer__links" aria-label="相关链接">{{#links}}<a href="{{url}}" target="_blank" rel="noreferrer">{{label}} <span aria-hidden="true">↗</span></a>{{/links}}</nav>
+      <p class="site-footer__credit">作者 <span>{{author}}</span></p>
     </div>
     <p class="site-footer__note">{{copyright}}</p>
   </script>

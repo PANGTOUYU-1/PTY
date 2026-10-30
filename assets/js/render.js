@@ -386,8 +386,7 @@
         manifesto: App.STATE.meta.manifesto || "一黑一白，并立成道。",
         author: App.STATE.meta.author || "作者未署名",
         links: App.STATE.meta.links || [],
-        copyright: App.STATE.meta.copyright || "",
-        year: new Date().getFullYear()
+        copyright: App.STATE.meta.copyright || ""
       });
     }
   };

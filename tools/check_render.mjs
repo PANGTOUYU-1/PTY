@@ -205,7 +205,6 @@ const footHtml = Mustache.render(tpl('tpl-footer'), {
   author: S.meta.author || '作者未署名',
   links: S.meta.links || [],
   copyright: S.meta.copyright || '',
-  year: new Date().getFullYear(),
 });
 check(!S.meta.author || footHtml.includes(S.meta.author), 'footer：作者已渲染');
 check(!/\{\{/.test(footHtml), 'footer：无 Mustache 残留占位符');
