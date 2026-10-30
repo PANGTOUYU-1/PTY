@@ -56,7 +56,7 @@ function allItemCards() {
       App.Render.renderItems();
       output.push(node('items-root').innerHTML);
     }
-    const buildings = App.sections.find(section => section.id === 'terrains');
+    const buildings = App.sections.find(section => section.id === 'buildings');
     App.Render.renderGenericSection(buildings);
     output.push(node(buildings.rootId).innerHTML);
   } finally { App.ui = previous; App.Render.renderItems(); }
@@ -233,11 +233,12 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   const previous = { ...App.ui };
   for (const item of state.items.filter(item => item.category === 'structure')) {
     App.Modal.open(item.id);
-    assert.equal(App.ui.section, 'terrains');
-    assert.equal(App.route.read(`#items/${item.id}`).section, 'terrains');
+    assert.equal(App.ui.section, 'buildings');
+    assert.equal(App.route.read(`#items/${item.id}`).section, 'buildings');
+    assert.equal(App.route.read(`#terrains/${item.id}`).section, 'buildings');
   }
   App.ui = previous;
-  assert.equal(App.route.read('#items?cat=structure').section, 'terrains');
+  assert.equal(App.route.read('#items?cat=structure').section, 'buildings');
   App.ui.cats = ['food'];
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
@@ -369,14 +370,39 @@ check('各分区、详情与外观统一显示专属印章，通用内容不误�
   assert.equal(state.entries.mech_shixin.owner, 'gaojiaoniao');
   assert.equal(state.entries.mech_wudao.owner, 'gaojiaoniao');
 });
+check('建筑与小房子各有独立栏目、内容与搜索类型', () => {
+  const buildings = App.sections.find(section => section.id === 'buildings');
+  const house = App.sections.find(section => section.id === 'terrains');
+  assert.equal(buildings.title, '建筑');
+  assert.equal(house.title, '小房子');
+  App.Render.renderGenericSection(buildings);
+  App.Render.renderGenericSection(house);
+  const cards = node(buildings.rootId).innerHTML;
+  const rooms = node(house.rootId).innerHTML;
+  assert.equal((cards.match(/class="item-card card"/g) || []).length, state.items.filter(item => item.category === 'structure').length);
+  assert.ok(!cards.includes('building-list'));
+  for (const room of state.terrains) {
+    assert.ok(!cards.includes(`data-entry-target="${room.id}"`));
+    assert.equal(App.Data.entrySection(state.entries[room.id]), 'terrains');
+    assert.equal(App.route.read(`#terrains/${room.id}`).section, 'terrains');
+  }
+  for (const item of state.items.filter(item => item.category === 'structure')) assert.ok(!rooms.includes(`data-entry-target="${item.id}"`));
+  const previous = { ...App.ui };
+  App.ui.q = '太极青玄阁';
+  assert.equal(App.Filter.getSearchResults().find(item => item.id === 'loc_qingxuan').type_label, '小房子');
+  App.Modal.open('loc_qingxuan');
+  assert.equal(App.ui.section, 'terrains');
+  assert.ok(node('modal-root').innerHTML.includes('小房子'));
+  App.ui = previous;
+});
 check('屋外入口和四间独立房间均可查看，内景匹配各自墙面、地板与门的连接', () => {
   const config = App.sections.find(section => section.id === 'terrains');
-  assert.equal(config.title, '建筑');
+  assert.equal(config.title, '小房子');
   App.Render.renderGenericSection(config);
   const cards = node(config.rootId).innerHTML;
   assert.ok(cards.includes('class="building-list"'));
-  assert.ok(!cards.split('class="building-structures"')[0].includes('class="items-grid"'));
-  assert.ok(cards.includes('id="building-structures-title">功能建筑</h2>'));
+  assert.ok(!cards.includes('building-structures'));
+  assert.ok(!cards.includes('class="items-grid"'));
   assert.ok(cards.includes('室内有什么用'));
   assert.ok(cards.includes('房间中心'));
   assert.ok(cards.includes('怎么进去、怎么回来'));
@@ -396,7 +422,7 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
     assert.ok(card.includes('class="building-entry__body"'), entry.id);
     assert.ok(card.includes('完整规则与路线'), entry.id);
     App.Modal.open(entry.id);
-    assert.ok(node('modal-root').innerHTML.includes('>建筑</p>'));
+    assert.ok(node('modal-root').innerHTML.includes('>小房子</p>'));
     assert.ok(node('modal-root').innerHTML.includes(`class="modal-card__hero" src="${image}"`));
   }
   for (const asset of manifest.assets) {
@@ -737,7 +763,7 @@ check('27款外观全部在对应物品中横向展示，支持查看、返回�
   }
   for (const skin of state.skins) {
     App.Modal.open(skin.id);
-    const section = state.entries[skin.item_id].category === 'structure' ? 'terrains' : 'items';
+    const section = state.entries[skin.item_id].category === 'structure' ? 'buildings' : 'items';
     assert.equal(App.ui.section, section);
     const output = node('modal-root').innerHTML;
     assert.ok(output.includes(`class="modal-card__hero" src="${skin.display_image}"`), skin.id);

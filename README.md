@@ -13,7 +13,7 @@
 
 - 所有内容都写在 **一个文件** 里：`data/site-data.js`
 - 页面由 Mustache 模板在浏览器里实时渲染
-- 分区：序 → 人物 → 物品 → 食物 → 机制 → 建筑 → 节气 → 设置 → 更新；外观合并到对应物品详情
+- 分区：序 → 人物 → 物品 → 食物 → 机制 → 建筑 → 小房子 → 节气 → 设置 → 更新；外观合并到对应物品详情
 - 顶部导航切换栏目，一次只显示当前栏目；栏目内正常滚动，底部不会接到其他栏目。「回到顶部」保留当前栏目，导航切换支持浏览器前进、后退和详情深链。
 - 自带全局搜索、分类筛选、详情弹窗、站内 `[[双链]]` 跳转
 - 收录 69 项物品、29 项节气、8 项机制、27 款装备外观及 12 项模组设置
@@ -137,7 +137,8 @@ dao-yinyang-site/
 | 两个角色的立绘、属性、设定、专属 | `site-data.js` → `characters` |
 | 物品（图标、简介、配方、科技、详情） | `site-data.js` → `items` |
 | 机制 | `site-data.js` → `mechanics` |
-| 建筑 | `site-data.js` → `terrains` |
+| 建筑 | `site-data.js` → `items` 中的 `structure` 分类 |
+| 小房子 | `site-data.js` → `terrains`（太极青玄阁与内部房间） |
 | 季节 | `site-data.js` → `seasons` |
 | 更新日志 | `site-data.js` → `changelog` |
 | 首页海报轮播 | `site-data.js` → `posters` |

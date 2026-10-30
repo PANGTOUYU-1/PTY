@@ -57,8 +57,9 @@
     let section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
     let cats = (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1);
     const entry = App.STATE && App.STATE.entries[pathParts[1]];
-    if (section === "items" && (cats[0] === "structure" || (entry && entrySection(entry) === "terrains"))) {
-      section = "terrains";
+    if ((section === "items" && cats[0] === "structure") ||
+        (entry && entrySection(entry) === "buildings" && ["items", "terrains"].includes(section))) {
+      section = "buildings";
       cats = [];
     }
     const foodKind = search.get("kind") || "";
@@ -89,7 +90,7 @@
 
   function entrySection(entry) {
     const item = entry.type === "skins" ? App.STATE.entries[entry.item_id] : entry;
-    return item && item.category === "structure" ? "terrains" : entry.type === "skins" ? "items" : entry.type;
+    return item && item.category === "structure" ? "buildings" : entry.type === "skins" ? "items" : entry.type;
   }
 
   function ensureArray(value) {

@@ -385,11 +385,12 @@ for (const sec of sections) {
     );
   }
 
-  const hasData = Object.prototype.hasOwnProperty.call(data, sec.id);
+  const source = sec.source || sec.id;
+  const hasData = Object.prototype.hasOwnProperty.call(data, source);
   if (!hasData) {
-    E('SECTION_NO_DATA', `分区「${sec.title}」(id: ${sec.id}) 在数据里找不到同名字段，页面会是空的`);
-  } else if (Array.isArray(data[sec.id]) && data[sec.id].length === 0) {
-    W('SECTION_EMPTY_DATA', `分区「${sec.title}」的 ${sec.id} 是空数组`);
+    E('SECTION_NO_DATA', `分区「${sec.title}」(id: ${sec.id}) 在数据里找不到来源字段「${source}」，页面会是空的`);
+  } else if (Array.isArray(data[source]) && data[source].filter(entry => !sec.category || entry.category === sec.category).length === 0) {
+    W('SECTION_EMPTY_DATA', `分区「${sec.title}」的 ${source} 中没有符合分类的条目`);
   }
 
   if (sec.themeClass && !['section--paper', 'section--ink'].includes(sec.themeClass)) {

@@ -80,7 +80,7 @@
       eyebrow: entry.category === "structure" ? "建筑" : entry.category === "food" ? "食物" : {
         items: "物品",
         mechanics: "机制",
-        terrains: "建筑",
+        terrains: "小房子",
         seasons: "节气",
         skins: "外观",
         settings: "模组设置",
@@ -206,7 +206,7 @@
       renderModal(entryId);
       if (!(options && options.skipHash)) {
         const section = sectionForEntry(entry);
-        App.route.sync({ section: section, detailId: entryId, ...(section === "terrains" ? { cats: [] } : {}) });
+        App.route.sync({ section: section, detailId: entryId, ...(["terrains", "buildings"].includes(section) ? { cats: [] } : {}) });
       }
     },
 

@@ -5040,8 +5040,16 @@ window.SITE_DATA = {
       "rootId": "mechanics-root"
     },
     {
-      "id": "terrains",
+      "id": "buildings",
       "title": "建筑",
+      "themeClass": "section--paper",
+      "rootId": "buildings-root",
+      "source": "items",
+      "category": "structure"
+    },
+    {
+      "id": "terrains",
+      "title": "小房子",
       "themeClass": "section--paper",
       "rootId": "terrains-root"
     },

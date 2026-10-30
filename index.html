@@ -86,7 +86,7 @@
       </div>
       <label class="search-field">
         <span class="sr-only">输入关键词</span>
-        <input type="search" placeholder="检索角色、物品、机制、建筑、更新" data-global-search-input>
+        <input type="search" placeholder="检索角色、物品、机制、建筑、小房子、更新" data-global-search-input>
       </label>
       <div class="search-panel__results" id="search-results-root"></div>
     </div>
@@ -430,20 +430,20 @@
       </article>
       {{/entries}}
     </div>
-    <section class="building-structures" aria-labelledby="building-structures-title">
-      <header class="section-head"><h2 id="building-structures-title">功能建筑</h2></header>
-      <div class="items-grid">
-        {{#structures}}
-        <article class="item-card card" data-entry-target="{{id}}">
-          <button class="card-link{{#owner_stamp}} card-link--owned{{/owner_stamp}}" type="button" data-open-entry="{{id}}">
-            <span class="item-card__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="item-card__owner-stamp owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>
-            <span class="item-card__meta"><span class="item-card__topline">{{category_label}}</span>{{#availability}}<span class="availability-badge">{{availability}}</span>{{/availability}}<strong class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<span>{{{name_html}}}</span></strong><span>{{{summary_html}}}</span></span>
-            {{^owner_stamp}}<span class="item-card__owner">{{owner_label}}</span>{{/owner_stamp}}
-          </button>
-        </article>
-        {{/structures}}
-      </div>
-    </section>
+  </script>
+
+  <script id="tpl-structures" type="x-tmpl-mustache">
+    <div class="items-grid building-structures">
+      {{#entries}}
+      <article class="item-card card" data-entry-target="{{id}}">
+        <button class="card-link{{#owner_stamp}} card-link--owned{{/owner_stamp}}" type="button" data-open-entry="{{id}}">
+          <span class="item-card__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="item-card__owner-stamp owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>
+          <span class="item-card__meta"><span class="item-card__topline">{{category_label}}</span>{{#availability}}<span class="availability-badge">{{availability}}</span>{{/availability}}<strong class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<span>{{{name_html}}}</span></strong><span>{{{summary_html}}}</span></span>
+          {{^owner_stamp}}<span class="item-card__owner">{{owner_label}}</span>{{/owner_stamp}}
+        </button>
+      </article>
+      {{/entries}}
+    </div>
   </script>
 
   <script id="tpl-search-results" type="x-tmpl-mustache">
