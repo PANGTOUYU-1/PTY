@@ -5023,7 +5023,7 @@ window.SITE_DATA = {
     {
       "id": "seasons",
       "title": "节气",
-      "themeClass": "section--ink",
+      "themeClass": "section--paper",
       "rootId": "season-root"
     },
     {
