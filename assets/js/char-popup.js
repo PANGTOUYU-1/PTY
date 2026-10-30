@@ -168,7 +168,7 @@
 
   function layoutGear(character) {
     const panel = character.querySelector(".duo-gear");
-    const width = panel.getBoundingClientRect().width;
+    const width = panel.offsetWidth;
     if (!width) return 0;
     const columns = width >= 320 ? 3 : 2;
     const itemWidth = Math.min(90, (width - 32) / columns);
@@ -203,8 +203,6 @@
   function layoutCharacterModels() {
     const duo = document.querySelector(".duo");
     if (!duo) return 0;
-    // Reserve room for the widest enabled skin while giving every model the
-    // same image height. Width follows each image's original proportions.
     const aspect = Math.max(1, ...(App.STATE.characters || []).flatMap(function (character) {
       return (character.appearances || []).map(function (skin) { return skin.width / skin.height; });
     }));
@@ -212,77 +210,73 @@
       duo.style.setProperty("--model-height", (180 / aspect) + "px");
       return 0;
     }
-    let bottom = 0;
     const characters = Array.from(duo.querySelectorAll(".duo__char"));
-    const portraits = characters.map(function (character) { return character.querySelector(".duo__portrait"); });
-    const portraitTop = Math.min(...portraits.map(function (portrait) { return portrait.offsetTop; }));
-    const portraitBottom = Math.max(...portraits.map(function (portrait) { return portrait.offsetTop + portrait.offsetHeight; }));
+    const width = duo.clientWidth;
+    const gearWidth = Math.min(390, Math.max(320, width * .30));
+    const modelWidth = Math.min(180, Math.max(96, width * .13));
+    duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
+    duo.style.setProperty('--model-height', Math.min(240, modelWidth / aspect) + 'px');
+    let bottom = 0;
     characters.forEach(function (character) {
-      const model = character.querySelector(".duo-model");
-      const portrait = character.querySelector(".duo__portrait");
-      const other = characters.find(function (entry) { return entry !== character; });
-      if (!model || !other) return;
-      const opposite = other.querySelector(".duo__portrait");
-      if (window.innerWidth < 1200) {
-        model.style.setProperty("--model-left", "50%");
-        model.style.setProperty("--model-width", "160px");
-        return;
-      }
-      const name = other.querySelector(".duo__name");
-      const fish = character.dataset.char === "pangtouyu";
-      // offsetLeft uses the resting layout, so a resize or quick character
-      // switch cannot measure the other portrait halfway through its slide.
-      const space = fish
-        ? duo.clientWidth - Math.max(opposite.offsetLeft + opposite.offsetWidth, name.offsetLeft + name.offsetWidth)
-        : Math.min(opposite.offsetLeft, name.offsetLeft);
-      const shift = Math.max(0, Math.min(260, space - 12));
-      duo.style.setProperty(fish ? "--fish-shift" : "--bird-shift", shift + "px");
-      const start = fish ? portrait.offsetLeft + portrait.offsetWidth
-        : opposite.offsetLeft + opposite.offsetWidth - shift - opposite.offsetWidth * .15;
-      const end = fish ? opposite.offsetLeft + shift + opposite.offsetWidth * .15 : portrait.offsetLeft;
-      const width = Math.max(80, Math.min(200, end - start - 20));
-      model.style.setProperty("--model-left", ((start + end) / 2) + "px");
-      model.style.setProperty("--model-width", width + "px");
-    });
-    const height = Math.min(240, ...characters.map(function (character) {
-      return parseFloat(character.querySelector('.duo-model').style.getPropertyValue('--model-width')) / aspect;
-    }));
-    duo.style.setProperty('--model-height', height + 'px');
-    characters.forEach(function (character) {
-      const model = character.querySelector('.duo-model');
       const portrait = character.querySelector('.duo__portrait');
-      const center = window.innerWidth < 1200 ? portraitBottom + 32 + model.offsetHeight / 2
-        : (portraitTop + portraitBottom) / 2;
-      model.style.setProperty('--model-top', center + 'px');
-      bottom = Math.max(bottom, layoutSkinSelector(character, portrait, model));
+      const other = characters.find(function (entry) { return entry !== character; });
+      const others = [other.querySelector('.duo__portrait'), other.querySelector('.duo__name')];
+      // Measure untransformed geometry so resizing and swapping characters are stable.
+      const left = Math.min(...others.map(function (node) { return node.offsetLeft; }));
+      const right = Math.max(...others.map(function (node) { return node.offsetLeft + node.offsetWidth; }));
+      const top = Math.min(...others.map(function (node) { return node.offsetTop; }));
+      const baseBottom = Math.max(...others.map(function (node) { return node.offsetTop + node.offsetHeight; }));
+      const otherWidth = Math.min(right - left, Math.max(132, width - gearWidth - portrait.offsetWidth - modelWidth - 64));
+      const portraitWidth = Math.min(portrait.offsetWidth, width - gearWidth - otherWidth - modelWidth - 64);
+      const gap = (width - gearWidth - portraitWidth - modelWidth - otherWidth) / 4;
+      const mirror = character.dataset.char === 'gaojiaoniao';
+      const position = function (x, size) { return mirror ? width - x - size : x; };
+      const portraitLeft = position(gearWidth + gap, portraitWidth);
+      const portraitScale = portraitWidth / portrait.offsetWidth;
+      const portraitTop = 64;
+      const portraitHeight = portrait.offsetHeight * portraitScale;
+      const centerY = portraitTop + portraitHeight / 2;
+      const otherScale = otherWidth / (right - left);
+      const otherLeft = position(width - gap - otherWidth, otherWidth);
+      const otherTop = centerY - (baseBottom - top) * otherScale / 2;
+      if (gearCharacter === character) {
+        const name = character.querySelector('.duo__name');
+        ['--focus-x', '--focus-y', '--focus-scale'].forEach(function (property) {
+          name.style.removeProperty(property);
+        });
+        const move = function (node, x, y, scale) {
+          node.style.setProperty('--focus-x', (x - node.offsetLeft) + 'px');
+          node.style.setProperty('--focus-y', (y - node.offsetTop) + 'px');
+          node.style.setProperty('--focus-scale', scale);
+        };
+        move(portrait, portraitLeft, portraitTop, portraitScale);
+        others.forEach(function (node) {
+          move(node, otherLeft + (node.offsetLeft - left) * otherScale,
+            otherTop + (node.offsetTop - top) * otherScale, otherScale);
+        });
+      }
+      const model = character.querySelector('.duo-model');
+      model.style.setProperty('--model-left', (position(gearWidth + portraitWidth + gap * 2, modelWidth) + modelWidth / 2) + 'px');
+      model.style.setProperty('--model-width', modelWidth + 'px');
+      model.style.setProperty('--model-top', centerY + 'px');
+      const skins = character.querySelector('.duo-skins');
+      const skinsWidth = Math.min(420, width - gearWidth - gap * 2);
+      const skinsLeft = position(gearWidth + gap + (width - gearWidth - gap * 2 - skinsWidth) / 2, skinsWidth);
+      const skinsTop = Math.max(portraitTop + portraitHeight, centerY + model.offsetHeight / 2) + 24;
+      skins.style.setProperty('--skins-left', skinsLeft + 'px');
+      skins.style.setProperty('--skins-top', skinsTop + 'px');
+      skins.style.setProperty('--skins-width', skinsWidth + 'px');
+      bottom = Math.max(bottom, skinsTop + skins.offsetHeight + 24);
     });
     return bottom;
   }
 
-  function layoutSkinSelector(character, portrait, model) {
-    const skins = character.querySelector('.duo-skins');
-    const modelLeft = model.style.getPropertyValue('--model-left');
-    const modelX = modelLeft.endsWith('%') ? character.closest('.duo').clientWidth * parseFloat(modelLeft) / 100 : parseFloat(modelLeft);
-    const modelWidth = parseFloat(model.style.getPropertyValue('--model-width'));
-    const compact = window.innerWidth < 1200;
-    const left = compact ? modelX - 180 : Math.min(portrait.offsetLeft, modelX - modelWidth / 2);
-    const right = Math.max(portrait.offsetLeft + portrait.offsetWidth, modelX + modelWidth / 2);
-    const modelBottom = parseFloat(model.style.getPropertyValue('--model-top')) + model.offsetHeight / 2;
-    const top = compact ? modelBottom + 24
-      : Math.max(portrait.offsetTop + portrait.offsetHeight + 16, modelBottom + 16);
-    skins.style.setProperty('--skins-left', left + 'px');
-    skins.style.setProperty('--skins-top', top + 'px');
-    skins.style.setProperty('--skins-width', (compact ? 360 : Math.min(420, right - left)) + 'px');
-    return top + skins.offsetHeight + 24;
-  }
-
   function layoutAllGear() {
-    let height = 480;
+    let height = Math.max(480, layoutCharacterModels());
     document.querySelectorAll(".duo__char").forEach(function (character) {
       height = Math.max(height, layoutGear(character) + 32);
     });
     const duo = document.querySelector(".duo");
-    height = Math.max(height, layoutCharacterModels());
     if (duo) duo.style.setProperty("--gear-height", height + "px");
     layoutRestingPortraits();
   }
