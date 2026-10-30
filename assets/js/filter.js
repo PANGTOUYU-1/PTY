@@ -5,6 +5,11 @@
     { id: "gaojiaoniao", name: "鸟专属" },
     { id: "common", name: "通用" }
   ];
+  const itemCategories = [
+    { id: "tool", name: "工具" },
+    { id: "crop", name: "作物" },
+    { id: "material", name: "材料" }
+  ];
 
   function normalizeText(text) {
     return String(text || "").toLowerCase();
@@ -54,7 +59,7 @@
 
     categoryOptions: function () {
       const foodView = App.Filter.isFoodView();
-      const list = foodView ? App.config.foodCategories : ownerCategories;
+      const list = foodView ? App.config.foodCategories : ownerCategories.concat(itemCategories);
       var cats = [{ label: "全部", value: "all" }].concat(list.map(function (c) {
         return { label: c.name, value: c.id };
       }));
