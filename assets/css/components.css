@@ -1773,7 +1773,7 @@
 
 .building-entry__caption > span { color: var(--cinnabar); font-size: 24px; }
 /* The left column is 1.05 times wider; match its square without content resizing it. */
-.building-entry__body { min-width: 0; min-height: 0; aspect-ratio: 1 / 1.05; contain: size; overflow-y: auto; scrollbar-gutter: stable; padding-block: 16px; }
+.building-entry__body { min-width: 0; min-height: 0; aspect-ratio: 1 / 1.05; contain: size; overflow-y: auto; padding-block: 16px; }
 .building-entry__eyebrow { color: var(--ink-3); font-size: 12px; letter-spacing: .18em; }
 .building-entry__title { margin: 12px 0 20px; font-size: clamp(28px, 3vw, 40px); }
 .building-entry__summary { color: var(--ink-2); font-size: 16px; line-height: 1.9; }
