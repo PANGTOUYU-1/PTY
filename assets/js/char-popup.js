@@ -90,7 +90,7 @@
     skins.setAttribute('aria-hidden', 'true');
     skins.inert = true;
     const duo = gearCharacter.closest(".duo");
-    gearCharacter.querySelector(".duo__name").removeAttribute("aria-hidden");
+    duo.querySelectorAll('.duo__name').forEach(function (name) { name.removeAttribute('aria-hidden'); });
     delete duo.dataset.gearFocus;
     gearCharacter = null;
     layoutAllGear();
@@ -128,12 +128,11 @@
     const coordinateScale = base.width ? svg.clientWidth / base.width : 1;
     const portrait = character.querySelector(".duo__portrait").getBoundingClientRect();
     const wide = window.innerWidth > 900;
-    const itemsOnLeft = character.classList.contains("duo__char--left");
-    const x = ((wide ? (itemsOnLeft ? portrait.left + 28 : portrait.right - 28) : portrait.left + portrait.width / 2) - base.left) * coordinateScale;
+    const x = ((wide ? portrait.left + 28 : portrait.left + portrait.width / 2) - base.left) * coordinateScale;
     const y = ((wide ? portrait.top + portrait.height * .42 : portrait.bottom + 4) - base.top) * coordinateScale;
     [activeGearItem].forEach(function (item) {
       const icon = item.querySelector("img").getBoundingClientRect();
-      const endX = ((wide ? (itemsOnLeft ? icon.right + 8 : icon.left - 8) : icon.left + icon.width / 2) - base.left) * coordinateScale;
+      const endX = ((wide ? icon.right + 8 : icon.left + icon.width / 2) - base.left) * coordinateScale;
       const endY = ((wide ? icon.top + icon.height / 2 : icon.top - 8) - base.top) * coordinateScale;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       if (wide) {
@@ -187,6 +186,7 @@
         portrait.style.setProperty('--focus-y', (selected && !landscape ? 92 : 4) + 'px');
         portrait.style.setProperty('--focus-scale', targetWidth / portrait.offsetWidth);
         const name = character.querySelector('.duo__name');
+        name.setAttribute('aria-hidden', String(selected));
         name.style.setProperty('--focus-x', (landscape ? width - 54 : width * .66) + 'px');
         name.style.setProperty('--focus-y', '4px');
         name.style.setProperty('--focus-scale', landscape ? '.4' : '.65');
@@ -204,69 +204,57 @@
     const width = duo.clientWidth;
     const stage = duo.closest('.duo-stage');
     const availableHeight = stage.clientHeight;
-    const gearWidth = Math.min(560, Math.max(320, width * .43));
-    const modelWidth = Math.min(180, Math.max(96, width * .13));
+    if (!gearCharacter) return 0;
+    const portrait = gearCharacter.querySelector('.duo__portrait');
+    const skins = gearCharacter.querySelector('.duo-skins');
+    const portraitWidth = Math.min(300, width * .24,
+      portrait.offsetWidth * Math.max(140, availableHeight - skins.offsetHeight - 80) / portrait.offsetHeight);
+    const portraitHeight = portrait.offsetHeight * portraitWidth / portrait.offsetWidth;
+    const name = gearCharacter.querySelector('.duo__name');
+    const nameScale = Math.min(.85, portraitHeight * .62 / name.offsetHeight);
+    const nameWidth = name.offsetWidth * nameScale;
+    const modelWidth = Math.min(156, Math.max(88, width * .115));
+    const gap = Math.min(24, width * .018);
+    const rearOffset = portraitWidth * .38;
+    const stackWidth = portraitWidth * 1.30;
+    const gearWidth = width - modelWidth - stackWidth - nameWidth - gap * 4;
     duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
-    duo.style.setProperty('--gear-spread', gearWidth / 384);
+    duo.style.setProperty('--gear-spread', gearWidth / 480);
     duo.style.setProperty('--model-height', Math.min(240, modelWidth / aspect) + 'px');
-    let bottom = 0;
+    const portraitLeft = gearWidth + modelWidth + gap * 2;
+    const portraitTop = 20;
+    const centerY = portraitTop + portraitHeight / 2;
+    const move = function (node, x, y, scale, angle) {
+      node.style.setProperty('--focus-x', (x - node.offsetLeft) + 'px');
+      node.style.setProperty('--focus-y', (y - node.offsetTop) + 'px');
+      node.style.setProperty('--focus-scale', scale);
+      node.style.setProperty('--focus-angle', (angle || 0) + 'deg');
+    };
     characters.forEach(function (character) {
-      const portrait = character.querySelector('.duo__portrait');
-      const other = characters.find(function (entry) { return entry !== character; });
-      const others = [other.querySelector('.duo__portrait'), other.querySelector('.duo__name')];
-      // Measure untransformed geometry so resizing and swapping characters are stable.
-      const left = Math.min(...others.map(function (node) { return node.offsetLeft; }));
-      const right = Math.max(...others.map(function (node) { return node.offsetLeft + node.offsetWidth; }));
-      const top = Math.min(...others.map(function (node) { return node.offsetTop; }));
-      const baseBottom = Math.max(...others.map(function (node) { return node.offsetTop + node.offsetHeight; }));
-      let otherWidth = Math.min(right - left, Math.max(88, width - gearWidth - portrait.offsetWidth - modelWidth - 64));
-      const skins = character.querySelector('.duo-skins');
-      const portraitHeightLimit = Math.max(140, availableHeight - skins.offsetHeight - 60);
-      const portraitWidth = Math.min(portrait.offsetWidth, width - gearWidth - otherWidth - modelWidth - 64,
-        portrait.offsetWidth * portraitHeightLimit / portrait.offsetHeight);
-      otherWidth = Math.min(otherWidth, (right - left) * portrait.offsetHeight * portraitWidth / portrait.offsetWidth * .45 / (baseBottom - top));
-      const gap = (width - gearWidth - portraitWidth - modelWidth - otherWidth) / 4;
-      const mirror = character.dataset.char === 'gaojiaoniao';
-      const position = function (x, size) { return mirror ? width - x - size : x; };
-      const portraitLeft = position(gearWidth + gap, portraitWidth);
-      const portraitScale = portraitWidth / portrait.offsetWidth;
-      const portraitTop = 24;
-      const portraitHeight = portrait.offsetHeight * portraitScale;
-      const centerY = portraitTop + portraitHeight / 2;
-      const otherScale = otherWidth / (right - left);
-      const otherLeft = position(width - gap - otherWidth, otherWidth);
-      const otherTop = centerY - (baseBottom - top) * otherScale / 2;
-      if (gearCharacter === character) {
-        const name = character.querySelector('.duo__name');
-        ['--focus-x', '--focus-y', '--focus-scale'].forEach(function (property) {
-          name.style.removeProperty(property);
-        });
-        const move = function (node, x, y, scale) {
-          node.style.setProperty('--focus-x', (x - node.offsetLeft) + 'px');
-          node.style.setProperty('--focus-y', (y - node.offsetTop) + 'px');
-          node.style.setProperty('--focus-scale', scale);
-        };
-        move(portrait, portraitLeft, portraitTop, portraitScale);
-        others.forEach(function (node) {
-          move(node, otherLeft + (node.offsetLeft - left) * otherScale,
-            otherTop + (node.offsetTop - top) * otherScale, otherScale);
-        });
-      }
-      const model = character.querySelector('.duo-model');
-      model.style.removeProperty('top');
-      model.style.setProperty('--model-left', (position(gearWidth + portraitWidth + gap * 2, modelWidth) + modelWidth / 2) + 'px');
-      model.style.setProperty('--model-width', modelWidth + 'px');
-      const modelCenterY = Math.max(centerY, model.offsetHeight / 2 + 8);
-      model.style.setProperty('--model-top', modelCenterY + 'px');
-      const skinsWidth = Math.min(420, width - gearWidth - gap * 2);
-      const skinsLeft = position(gearWidth + gap + (width - gearWidth - gap * 2 - skinsWidth) / 2, skinsWidth);
-      const skinsTop = Math.max(portraitTop + portraitHeight, modelCenterY + model.offsetHeight / 2) + 16;
-      skins.style.setProperty('--skins-left', skinsLeft + 'px');
-      skins.style.setProperty('--skins-top', skinsTop + 'px');
-      skins.style.setProperty('--skins-width', skinsWidth + 'px');
-      bottom = Math.max(bottom, skinsTop + skins.offsetHeight + 12);
+      const selected = character === gearCharacter;
+      const image = character.querySelector('.duo__portrait');
+      const label = character.querySelector('.duo__name');
+      label.setAttribute('aria-hidden', String(!selected));
+      const targetWidth = portraitWidth * (selected ? 1 : .92);
+      move(image, portraitLeft + (selected ? 0 : rearOffset), portraitTop + (selected ? 0 : 16),
+        targetWidth / image.offsetWidth, selected ? 0 : 8);
+      if (selected) move(label, portraitLeft + stackWidth + gap, centerY - label.offsetHeight * nameScale / 2, nameScale);
     });
-    return bottom;
+    const model = gearCharacter.querySelector('.duo-model');
+    model.style.removeProperty('top');
+    model.style.setProperty('--model-left', (gearWidth + gap + modelWidth / 2) + 'px');
+    model.style.setProperty('--model-width', modelWidth + 'px');
+    const modelCenterY = Math.max(centerY, model.offsetHeight / 2 + 8);
+    model.style.setProperty('--model-top', modelCenterY + 'px');
+    const rear = characters.find(function (character) { return character !== gearCharacter; }).querySelector('.duo__portrait');
+    const rearHeight = rear.offsetHeight * portraitWidth * .92 / rear.offsetWidth;
+    const rearBottom = portraitTop + 16 + rearHeight * Math.cos(Math.PI * 8 / 180) + portraitWidth * .92 * Math.sin(Math.PI * 8 / 180);
+    const skinsTop = Math.max(portraitTop + portraitHeight, rearBottom, modelCenterY + model.offsetHeight / 2) + 20;
+    const skinsWidth = Math.min(480, width - gearWidth - gap);
+    skins.style.setProperty('--skins-left', (gearWidth + gap) + 'px');
+    skins.style.setProperty('--skins-top', skinsTop + 'px');
+    skins.style.setProperty('--skins-width', skinsWidth + 'px');
+    return skinsTop + skins.offsetHeight + 12;
   }
 
   function layoutAllGear() {
@@ -442,7 +430,11 @@
       document.addEventListener("pointerover", function (event) {
         if (event.pointerType === "touch") return;
         const trigger = event.target.closest(".duo__portrait-trigger");
-        if (trigger && hoverArmed) openGear(trigger.closest(".duo__char"));
+        // The exposed rear portrait switches on click so moving cards cannot
+        // repeatedly swap themselves underneath a stationary pointer.
+        if (trigger && hoverArmed && (!gearCharacter || window.innerWidth <= 900 || gearCharacter.contains(trigger))) {
+          openGear(trigger.closest(".duo__char"));
+        }
         const item = event.target.closest(".duo-gear__item, .duo-gear__craft");
         if (gearCharacter && item && gearCharacter.contains(item)) setGearItem(item);
         if (gearCharacter && gearArea(gearCharacter).contains(event.target)) clearTimeout(gearCloseTimer);
