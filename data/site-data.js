@@ -5450,7 +5450,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "此外观有指定用户解锁限制。"
+          "content": "此外观需通过特殊方式解锁。"
         }
       ],
       "display_image": "assets/img/displays/bighead_buran_skin5.png"
@@ -5471,7 +5471,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "此外观有指定用户解锁限制。"
+          "content": "此外观需通过特殊方式解锁。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_lh_skin2.png"
@@ -5492,7 +5492,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "此外观有指定用户解锁限制。"
+          "content": "此外观需通过特殊方式解锁。"
         }
       ],
       "display_image": "assets/img/displays/bighead_back_skin3.png"
@@ -5513,7 +5513,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "此外观有指定用户解锁限制。"
+          "content": "此外观需通过特殊方式解锁。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_cmyh_skin3.png"
@@ -5534,7 +5534,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "此外观有指定用户解锁限制。"
+          "content": "此外观需通过特殊方式解锁。"
         }
       ],
       "display_image": "assets/img/displays/bighead_armor_skin3.png"
@@ -5555,7 +5555,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "此外观有指定用户解锁限制。"
+          "content": "此外观需通过特殊方式解锁。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh_skin3.png"
