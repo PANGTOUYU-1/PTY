@@ -276,7 +276,7 @@
     </div>
   </script>
 
-  <!-- 通用分区卡片模板，mechanics / 新增分区共用 -->
+  <!-- 通用分区卡片模板，机制分组 / 新增分区共用 -->
   <script id="tpl-section-cards" type="x-tmpl-mustache">
     <div class="items-grid">
       {{#entries}}
@@ -465,22 +465,13 @@
   </script>
 
   <script id="tpl-mechanics" type="x-tmpl-mustache">
-    <div class="items-grid">
-      {{#mechanics}}
-      <article class="item-card card" data-entry-target="{{id}}">
-        <button class="card-link" type="button" data-open-entry="{{id}}">
-          <span class="item-card__image">
-            <img src="{{illustration}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
-          </span>
-          <span class="item-card__meta">
-            <span class="item-card__topline">机制</span>
-            <strong>{{title}}</strong>
-            <span>{{subtitle}}</span>
-          </span>
-          <span class="item-card__owner">机制</span>
-        </button>
-      </article>
-      {{/mechanics}}
+    <div class="mechanics-groups">
+      {{#groups}}
+      <section class="mechanics-group mechanics-group--{{id}}" data-mechanics-group="{{id}}" aria-labelledby="mechanics-heading-{{id}}">
+        <h3 id="mechanics-heading-{{id}}">{{title}}</h3>
+        {{{cards_html}}}
+      </section>
+      {{/groups}}
     </div>
   </script>
 

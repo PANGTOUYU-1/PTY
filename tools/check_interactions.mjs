@@ -85,6 +85,19 @@ check('真实渲染模块生成设置与节气卡片', () => {
     assert.ok(output.includes(state[id][0].name || state[id][0].title));
   }
 });
+check('机制按角色和通用分组，每条只展示一次且保留详情入口', () => {
+  App.Render.renderGenericSection(App.sections.find(section => section.id === 'mechanics'));
+  const output = node('mechanics-root').innerHTML;
+  const groups = [...output.matchAll(/data-mechanics-group="([^"]+)"[\s\S]*?<\/section>/g)];
+  assert.deepEqual(groups.map(group => group[1]), ['pangtouyu', 'gaojiaoniao', 'common']);
+  for (const [content, owner] of groups) {
+    const actualIds = [...content.matchAll(/data-entry-target="([^"]+)"/g)].map(match => match[1]);
+    const expectedIds = Array.from(state.mechanics).filter(entry => entry.owner === owner).map(entry => entry.id);
+    assert.deepEqual(actualIds, expectedIds);
+    for (const id of actualIds) assert.ok(content.includes(`data-open-entry="${id}"`));
+  }
+  assert.equal((output.match(/data-entry-target=/g) || []).length, state.mechanics.length);
+});
 check('节气按四季分组，每季均展示真实满级效果，冬季另列满级兑换', () => {
   const config = App.sections.find(s => s.id === 'seasons');
   App.Render.renderGenericSection(config);

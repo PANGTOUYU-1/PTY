@@ -289,6 +289,19 @@
     renderGenericSection: function (sec) {
       var data = App.STATE[sec.source || sec.id] || [];
       if (sec.category) data = data.filter(function (entry) { return entry.category === sec.category; });
+      if (sec.id === "mechanics") {
+        const groups = [
+          { id: "pangtouyu", title: "胖头鱼 · 专属机制" },
+          { id: "gaojiaoniao", title: "高脚鸟 · 专属机制" },
+          { id: "common", title: "通用机制" }
+        ].map(function (group) {
+          const entries = data.filter(function (entry) { return entry.owner === group.id; })
+            .map(function (entry) { return compactEntryCardView(entry, sec.title); });
+          return { ...group, cards_html: window.Mustache.render(template("tpl-section-cards"), { entries: entries }) };
+        });
+        renderTo(sec.rootId, "tpl-mechanics", { groups: groups });
+        return;
+      }
       if (sec.id === "seasons") {
         const mainIds = ["jq_chun", "jq_xia", "jq_qiu", "jq_dong"];
         const groups = mainIds.map(function (id, index) {
