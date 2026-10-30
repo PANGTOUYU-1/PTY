@@ -223,7 +223,7 @@
 .back-to-top {
   position: fixed;
   right: max(24px, env(safe-area-inset-right));
-  bottom: max(24px, env(safe-area-inset-bottom));
+  bottom: calc(var(--footer-height, 80px) + 24px);
   z-index: 40;
   display: flex;
   flex-direction: column;
@@ -251,7 +251,7 @@
 @media (max-width: 767px) {
   .back-to-top {
     right: max(16px, env(safe-area-inset-right));
-    bottom: max(16px, env(safe-area-inset-bottom));
+    bottom: calc(var(--footer-height, 80px) + 16px);
     min-width: 60px;
     min-height: 60px;
     padding: 8px 6px;

@@ -198,6 +198,24 @@
     );
   }
 
+  function bindFooterLayout() {
+    const footer = document.querySelector(".site-footer");
+    if (!footer) return;
+    const sync = function () {
+      const height = Math.ceil(footer.getBoundingClientRect().height) + "px";
+      if (document.documentElement.style.getPropertyValue("--footer-height") === height) return;
+      document.documentElement.style.setProperty("--footer-height", height);
+      if (App.ui.section === "intro" && App.CharPopup) App.CharPopup.refreshLayout();
+    };
+    sync();
+    if (window.ResizeObserver) {
+      new window.ResizeObserver(sync).observe(footer);
+    } else {
+      window.addEventListener("resize", sync);
+      if (document.fonts) document.fonts.ready.then(sync);
+    }
+  }
+
   App.bindInteractive = function () {
     App.Carousel.init(document);
     App.Render.renderSearchResults();
@@ -221,6 +239,7 @@
     App.Data.load().then(function () {
       renderNav();
       App.Render.renderAll();
+      bindFooterLayout();
       App.Navigation.ready = true;
       App.Navigation.sync({ resetScroll: true });
       App.Modal.syncFromRoute();
