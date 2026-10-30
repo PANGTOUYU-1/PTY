@@ -287,7 +287,9 @@ check('物品支持归属与工具、作物、材料、建筑单选筛选，停�
     assert.equal(options.find(option => option.active).label, label);
     const expected = standaloneItems.filter(item => item.category === category);
     assert.ok(expected.length > 0);
-    assert.deepEqual(Array.from(App.Filter.getFilteredItems(), item => item.id), Array.from(expected, item => item.id));
+    const ordered = Array.from(expected).filter(item => item.owner === 'common')
+      .concat(Array.from(expected).filter(item => item.owner !== 'common'));
+    assert.deepEqual(Array.from(App.Filter.getFilteredItems(), item => item.id), ordered.map(item => item.id));
     App.Render.renderItems();
     assert.ok(node('items-root').innerHTML.includes(`共 ${expected.length} 项 · ${label}`));
     assert.equal(App.route.read(App.route.build(App.ui)).cats[0], category);

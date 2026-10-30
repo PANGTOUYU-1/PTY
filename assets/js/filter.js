@@ -90,6 +90,10 @@
         filtered.sort(function (a, b) {
           return (order.get(a.food_category) ?? order.size) - (order.get(b.food_category) ?? order.size);
         });
+      } else if (itemCategories.some(function (category) { return category.id === App.ui.cats[0]; })) {
+        filtered.sort(function (a, b) {
+          return Number(a.owner !== "common") - Number(b.owner !== "common");
+        });
       }
       return filtered;
     },
