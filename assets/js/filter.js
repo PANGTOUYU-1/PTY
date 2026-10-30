@@ -8,7 +8,8 @@
   const itemCategories = [
     { id: "tool", name: "工具" },
     { id: "crop", name: "作物" },
-    { id: "material", name: "材料" }
+    { id: "material", name: "材料" },
+    { id: "structure", name: "建筑" }
   ];
 
   function normalizeText(text) {
@@ -77,7 +78,7 @@
       const query = normalizeText(App.ui.q);
       const owner = ownerCategories.find(function (category) { return category.id === App.ui.cats[0]; });
       return App.STATE.items.filter(function (item) {
-        const collectionPass = App.Filter.isFoodView() ? item.category === "food" : item.category !== "food" && item.category !== "structure";
+        const collectionPass = App.Filter.isFoodView() ? item.category === "food" : item.category !== "food";
         const categoryPass = App.ui.cats.length === 0 || (owner ? item.owner === owner.id : App.ui.cats[0] === item.category);
         const foodPass = !App.Filter.isFoodView() || !App.ui.foodKind || item.food_category === App.ui.foodKind;
         const queryPass = !query || normalizeText(App.STATE.entries[item.id].searchText).indexOf(query) > -1;

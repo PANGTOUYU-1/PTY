@@ -206,7 +206,10 @@
       renderModal(entryId);
       if (!(options && options.skipHash)) {
         const section = sectionForEntry(entry);
-        App.route.sync({ section: section, detailId: entryId, ...(["terrains", "buildings"].includes(section) ? { cats: [] } : {}) });
+        const item = entry.type === "skins" ? App.STATE.entries[entry.item_id] : entry;
+        const filters = item.category === "structure" ? { cats: ["structure"] } : section === "terrains" ? { cats: [] } : {};
+        App.route.sync({ section: section, detailId: entryId, ...filters });
+        if (item.category === "structure") App.Render.renderItems();
       }
     },
 

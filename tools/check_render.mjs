@@ -170,7 +170,7 @@ check(!/\{\{/.test(hero), 'hero：无 Mustache 残留占位符');
 
 // items —— 按 render.js renderItems 组装
 const itemsTpl = tpl('tpl-items');
-const standaloneItems = S.items.filter(item => !['food', 'structure'].includes(item.category));
+const standaloneItems = S.items.filter(item => item.category !== 'food');
 const itemsHtml = Mustache.render(itemsTpl, {
   category_options: [{ label: '全部', value: 'all', active_class: 'is-active' }],
   items: standaloneItems.map((i) => ({ ...i, image: i.display_image || '', icon: i.image || '', name_html: i.name, summary_html: i.summary || '' })),

@@ -54,14 +54,6 @@
       rootId: "mechanics-root"
     },
     {
-      id: "buildings",
-      title: "建筑",
-      themeClass: "section--paper",
-      rootId: "buildings-root",
-      source: "items",
-      category: "structure"
-    },
-    {
       id: "terrains",
       title: "小房子",
       themeClass: "section--paper",
@@ -297,12 +289,6 @@
     renderGenericSection: function (sec) {
       var data = App.STATE[sec.source || sec.id] || [];
       if (sec.category) data = data.filter(function (entry) { return entry.category === sec.category; });
-      if (sec.id === "buildings") {
-        renderTo(sec.rootId, "tpl-structures", {
-          entries: data.map(function (entry) { return baseItemView(entry, ""); })
-        });
-        return;
-      }
       if (sec.id === "seasons") {
         const mainIds = ["jq_chun", "jq_xia", "jq_qiu", "jq_dong"];
         const groups = mainIds.map(function (id, index) {

@@ -62,14 +62,17 @@
     let section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
     let cats = selectedCategories((search.get("cat") || "").split(",").filter(Boolean));
     const entry = App.STATE && App.STATE.entries[pathParts[1]];
-    if (entry && ["buildings", "terrains"].includes(section) && entrySection(entry) === "items") {
+    const item = entry && (entry.type === "skins" ? App.STATE.entries[entry.item_id] : entry);
+    if (section === "buildings") {
       section = "items";
-      cats = [];
+      cats = item && item.category !== "structure" ? [] : ["structure"];
     }
-    if ((section === "items" && cats[0] === "structure") ||
-        (entry && entrySection(entry) === "buildings" && ["items", "terrains"].includes(section))) {
-      section = "buildings";
-      cats = [];
+    if (entry && section === "terrains" && entrySection(entry) === "items") {
+      section = "items";
+      cats = item.category === "structure" ? ["structure"] : [];
+    }
+    if (section === "items" && item && item.category === "structure" && cats[0] === "food") {
+      cats = ["structure"];
     }
     const foodKind = search.get("kind") || "";
     return {
@@ -98,8 +101,7 @@
   }
 
   function entrySection(entry) {
-    const item = entry.type === "skins" ? App.STATE.entries[entry.item_id] : entry;
-    return item && item.category === "structure" ? "buildings" : entry.type === "skins" ? "items" : entry.type;
+    return entry.type === "skins" ? "items" : entry.type;
   }
 
   function ensureArray(value) {
