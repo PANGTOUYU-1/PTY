@@ -1,0 +1,68 @@
+{
+  "characters": [
+    {
+      "character": "pangtouyu",
+      "build": "bighead",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bighead.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        311,
+        477
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/pangtouyu_idle.png",
+      "path": "assets/img/characters/pangtouyu_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "gaojiaoniao",
+      "build": "bb_gaojiaoniao",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bb_gaojiaoniao.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        426,
+        442
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/gaojiaoniao_idle.png",
+      "path": "assets/img/characters/gaojiaoniao_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    }
+  ]
+}

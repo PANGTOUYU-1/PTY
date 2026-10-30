@@ -69,6 +69,8 @@ window.SITE_DATA = {
       "name": "胖头鱼",
       "epithet": "鸿元净莲",
       "portrait": "assets/img/characters/pangtouyu_head.png",
+      "model_image": "assets/img/characters/pangtouyu_idle.webp",
+      "model_poster": "assets/img/characters/pangtouyu_idle.png",
       "featured_items": ["bighead_spear", "bighead_fanhua", "bighead_armor", "bighead_back"],
       "shared_crafts": ["bighead_ruyi", "bighead_scrolls", "dug_bb_cmbush", "bighead_mwgt"],
       "stats": {
@@ -96,6 +98,8 @@ window.SITE_DATA = {
       "name": "高脚鸟",
       "epithet": "上古魔龙",
       "portrait": "assets/img/characters/gaojiaoniao_head.png",
+      "model_image": "assets/img/characters/gaojiaoniao_idle.webp",
+      "model_poster": "assets/img/characters/gaojiaoniao_idle.png",
       "featured_items": ["bb_gaojiaoniao_cs", "bb_gaojiaoniao_fqh", "bb_gaojiaoniao_fh", "bb_gaojiaoniao_cmyh"],
       "shared_crafts": ["bighead_ybhz"],
       "stats": {

@@ -136,6 +136,13 @@
           </div>
           {{/character_a.has_shared_crafts}}
         </div>
+        <figure class="duo-model" aria-hidden="true">
+          <picture>
+            <source media="(prefers-reduced-motion: reduce)" srcset="{{character_a.model_poster}}">
+            <img src="{{character_a.model_image}}" alt="{{character_a.name}}的游戏人物模型" width="311" height="477" loading="lazy" onerror="window.App.onImageError(this)">
+          </picture>
+          <figcaption>游戏内形象</figcaption>
+        </figure>
         <nav class="duo__fields duo__fields--bottom" aria-label="胖头鱼字段">
           <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="setting">
             <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
@@ -175,6 +182,13 @@
           </div>
           {{/character_b.has_shared_crafts}}
         </div>
+        <figure class="duo-model" aria-hidden="true">
+          <picture>
+            <source media="(prefers-reduced-motion: reduce)" srcset="{{character_b.model_poster}}">
+            <img src="{{character_b.model_image}}" alt="{{character_b.name}}的游戏人物模型" width="426" height="442" loading="lazy" onerror="window.App.onImageError(this)">
+          </picture>
+          <figcaption>游戏内形象</figcaption>
+        </figure>
         <div class="duo__name duo__name--right">
           <img src="assets/img/ui/gaojiaoniao.png" alt="高脚鸟" loading="eager" onerror="window.App.onImageError(this)">
         </div>

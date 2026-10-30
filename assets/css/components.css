@@ -584,6 +584,42 @@
 .duo-gear-lines circle { fill: var(--ink-3); opacity: .6; }
 .is-showing-gear > .duo-gear-lines { opacity: 1; }
 
+.duo-model {
+  position: absolute;
+  left: var(--model-left, 50%);
+  top: var(--model-top, 50%);
+  width: var(--model-width, 180px);
+  margin: 0;
+  z-index: 4;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, calc(-50% + 12px));
+  transition: opacity 280ms var(--ease), transform 420ms var(--ease);
+}
+.duo-model picture { display: block; }
+.duo-model img { display: block; width: 100%; height: auto; }
+.duo-model figcaption { margin-top: 12px; color: var(--ink-3); font: 12px / 1.6 var(--ff-serif); letter-spacing: .14em; }
+.is-showing-gear > .duo-model {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1200px) {
+  .duo__char > .duo__portrait,
+  .duo__char > .duo__fields,
+  .duo__char > .duo__name { transition: transform 420ms var(--ease), filter 360ms var(--ease); }
+  .duo[data-gear-focus="pangtouyu"] .duo__char--right > .duo__name,
+  .duo[data-gear-focus="pangtouyu"] .duo__char--right > .duo__fields { transform: translateX(var(--fish-shift)); }
+  .duo[data-gear-focus="pangtouyu"] .duo__char--right > .duo__portrait { transform: translateX(var(--fish-shift)) scale(.85); transform-origin: right center; }
+  .duo[data-gear-focus="gaojiaoniao"] .duo__char--left > .duo__name,
+  .duo[data-gear-focus="gaojiaoniao"] .duo__char--left > .duo__fields { transform: translateX(calc(-1 * var(--bird-shift))); }
+  .duo[data-gear-focus="gaojiaoniao"] .duo__char--left > .duo__portrait { transform: translateX(calc(-1 * var(--bird-shift))) scale(.85); transform-origin: left center; }
+}
+
 @media (min-width: 901px) {
   /* Mirror exclusive items along the outer edge of each portrait. */
   .duo__char { position: static; align-self: start; margin-top: 80px; }
@@ -613,6 +649,15 @@
     margin-top: 24px;
   }
   .duo__char.is-showing-gear > .duo-gear { display: block; }
+  .duo-model {
+    display: none;
+    position: static;
+    grid-area: model;
+    width: 180px;
+    justify-self: center;
+    transform: none;
+  }
+  .is-showing-gear > .duo-model { display: block; transform: none; }
 }
 
 .filters-panel__label,
@@ -1456,6 +1501,7 @@
       "name"
       "portrait"
       "fields"
+      "model"
       "gear";
     grid-template-columns: 1fr;
     grid-template-rows: auto;

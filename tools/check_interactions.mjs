@@ -78,8 +78,22 @@ check('首页立绘完整展示角色专属，专属制作的共用物品使用�
   try { App.Render.renderAll(); }
   finally { sandbox.document.getElementById = getElementById; }
   const hero = node('hero-root').innerHTML;
+  const models = JSON.parse(readFileSync(join(root, 'data/character-models.json'), 'utf8')).characters;
+  assert.equal(models.length, state.characters.length);
   assert.equal((hero.match(/class="duo-gear__item"/g) || []).length, state.items.filter(item => ['pangtouyu', 'gaojiaoniao'].includes(item.owner)).length);
   for (const character of state.characters) {
+    const model = models.find(entry => entry.character === character.id);
+    assert.ok(model, character.id);
+    assert.equal(character.model_image, model.path);
+    assert.equal(character.model_poster, model.poster);
+    assert.notEqual(character.model_poster, character.portrait);
+    const poster = readFileSync(join(root, model.poster));
+    assert.deepEqual([poster.readUInt32BE(16), poster.readUInt32BE(20)], model.display_size);
+    const animated = readFileSync(join(root, model.path));
+    assert.equal(animated.subarray(8, 12).toString(), 'WEBP');
+    assert.ok(animated.includes(Buffer.from('ANIM')), character.id);
+    assert.ok(hero.includes(`src="${model.path}"`));
+    assert.ok(hero.includes(`srcset="${model.poster}"`));
     const expected = state.items.filter(item => item.owner === character.id);
     const panel = hero.match(new RegExp(`<div class="duo-gear" id="gear-${character.id}"[\\s\\S]*?</article>`))?.[0];
     assert.ok(panel, character.id);

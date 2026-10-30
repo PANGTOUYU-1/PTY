@@ -96,6 +96,7 @@
     const panel = gearCharacter.querySelector(".duo-gear");
     panel.setAttribute("aria-hidden", "true");
     panel.inert = true;
+    gearCharacter.querySelector(".duo-model").setAttribute("aria-hidden", "true");
     const duo = gearCharacter.closest(".duo");
     gearCharacter.querySelector(".duo__name").removeAttribute("aria-hidden");
     delete duo.dataset.gearFocus;
@@ -179,6 +180,42 @@
     return height;
   }
 
+  function layoutCharacterModels() {
+    const duo = document.querySelector(".duo");
+    if (!duo || window.innerWidth <= 900) return;
+    const characters = Array.from(duo.querySelectorAll(".duo__char"));
+    characters.forEach(function (character) {
+      const model = character.querySelector(".duo-model");
+      const portrait = character.querySelector(".duo__portrait");
+      const other = characters.find(function (entry) { return entry !== character; });
+      if (!model || !other) return;
+      const opposite = other.querySelector(".duo__portrait");
+      if (window.innerWidth < 1200) {
+        model.style.setProperty("--model-left", "50%");
+        model.style.setProperty("--model-top", (Math.max(portrait.offsetTop + portrait.offsetHeight,
+          opposite.offsetTop + opposite.offsetHeight) + 180) + "px");
+        model.style.setProperty("--model-width", "160px");
+        return;
+      }
+      const name = other.querySelector(".duo__name");
+      const fish = character.dataset.char === "pangtouyu";
+      // offsetLeft uses the resting layout, so a resize or quick character
+      // switch cannot measure the other portrait halfway through its slide.
+      const space = fish
+        ? duo.clientWidth - Math.max(opposite.offsetLeft + opposite.offsetWidth, name.offsetLeft + name.offsetWidth)
+        : Math.min(opposite.offsetLeft, name.offsetLeft);
+      const shift = Math.max(0, Math.min(260, space - 12));
+      duo.style.setProperty(fish ? "--fish-shift" : "--bird-shift", shift + "px");
+      const start = fish ? portrait.offsetLeft + portrait.offsetWidth
+        : opposite.offsetLeft + opposite.offsetWidth - shift - opposite.offsetWidth * .15;
+      const end = fish ? opposite.offsetLeft + shift + opposite.offsetWidth * .15 : portrait.offsetLeft;
+      const width = Math.max(80, Math.min(200, end - start - 20));
+      model.style.setProperty("--model-left", ((start + end) / 2) + "px");
+      model.style.setProperty("--model-top", (portrait.offsetTop + portrait.offsetHeight * .58) + "px");
+      model.style.setProperty("--model-width", width + "px");
+    });
+  }
+
   function layoutAllGear() {
     let height = 480;
     document.querySelectorAll(".duo__char").forEach(function (character) {
@@ -186,6 +223,7 @@
     });
     const duo = document.querySelector(".duo");
     if (duo) duo.style.setProperty("--gear-height", height + "px");
+    layoutCharacterModels();
   }
 
   function openGear(character) {
@@ -201,6 +239,8 @@
     character.querySelector(".duo__portrait-trigger").setAttribute("aria-expanded", "true");
     const panel = character.querySelector(".duo-gear");
     layoutGear(character);
+    layoutCharacterModels();
+    character.querySelector(".duo-model").setAttribute("aria-hidden", "false");
     panel.inert = false;
     panel.setAttribute("aria-hidden", "false");
     queueGearLines();
@@ -306,11 +346,14 @@
         if (trigger) openGear(trigger.closest(".duo__char"));
         const item = event.target.closest(".duo-gear__item, .duo-gear__craft");
         if (gearCharacter && item && gearCharacter.contains(item)) setGearItem(item);
-        if (gearCharacter && gearCharacter.contains(event.target)) clearTimeout(gearCloseTimer);
+        if (gearCharacter && gearCharacter.closest(".duo").contains(event.target)) clearTimeout(gearCloseTimer);
       });
       document.addEventListener("pointerout", function (event) {
         if (activeGearItem && activeGearItem.contains(event.target) && !activeGearItem.contains(event.relatedTarget)) setGearItem(null);
-        if (gearCharacter && gearCharacter.contains(event.target) && !gearCharacter.contains(event.relatedTarget)) scheduleGearClose();
+        // Keep the expansion open while moving across the model or towards
+        // the other portrait, including the space created by its slide.
+        if (gearCharacter && gearCharacter.closest(".duo").contains(event.target)
+            && !gearCharacter.closest(".duo").contains(event.relatedTarget)) scheduleGearClose();
       });
       document.addEventListener("focusin", function (event) {
         const trigger = event.target.closest(".duo__portrait-trigger");
