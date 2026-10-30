@@ -2441,7 +2441,7 @@ window.SITE_DATA = {
       "id": "bighead_spring_spirit",
       "name": "春之灵",
       "category": "material",
-      "owner": "common",
+      "owner": "pangtouyu",
       "image": "assets/img/items/bighead_spring_spirit.png",
       "summary": "春季节气制作、四季主物品升级与胖头鱼补充灵气的消耗材料。",
       "recipe": "金企鹅兑换：[bighead_qbi]×10",
@@ -2454,7 +2454,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，可捕捉对应[[寄生灵]]获取，也可在金企鹅出现对应商品时用10[[Q币]]兑换。"
+          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，其他角色也能捕捉对应[[寄生灵]]释放的灵体，或在金企鹅出现对应商品时用10[[Q币]]兑换；吸收灵气仅限胖头鱼。"
         },
         {
           "type": "text",
@@ -2484,7 +2484,7 @@ window.SITE_DATA = {
       "id": "bighead_summer_spirit",
       "name": "夏之灵",
       "category": "material",
-      "owner": "common",
+      "owner": "pangtouyu",
       "image": "assets/img/items/bighead_summer_spirit.png",
       "summary": "夏季节气制作、四季主物品升级与胖头鱼补充灵气的消耗材料。",
       "recipe": "金企鹅兑换：[bighead_qbi]×10",
@@ -2497,7 +2497,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，可捕捉对应[[寄生灵]]获取，也可在金企鹅出现对应商品时用10[[Q币]]兑换。"
+          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，其他角色也能捕捉对应[[寄生灵]]释放的灵体，或在金企鹅出现对应商品时用10[[Q币]]兑换；吸收灵气仅限胖头鱼。"
         },
         {
           "type": "text",
@@ -2527,7 +2527,7 @@ window.SITE_DATA = {
       "id": "bighead_autumn_spirit",
       "name": "秋之灵",
       "category": "material",
-      "owner": "common",
+      "owner": "pangtouyu",
       "image": "assets/img/items/bighead_autumn_spirit.png",
       "summary": "秋季节气制作、四季主物品升级与胖头鱼补充灵气的消耗材料。",
       "recipe": "金企鹅兑换：[bighead_qbi]×10",
@@ -2540,7 +2540,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，可捕捉对应[[寄生灵]]获取，也可在金企鹅出现对应商品时用10[[Q币]]兑换。"
+          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，其他角色也能捕捉对应[[寄生灵]]释放的灵体，或在金企鹅出现对应商品时用10[[Q币]]兑换；吸收灵气仅限胖头鱼。"
         },
         {
           "type": "text",
@@ -2570,7 +2570,7 @@ window.SITE_DATA = {
       "id": "bighead_winter_spirit",
       "name": "冬之灵",
       "category": "material",
-      "owner": "common",
+      "owner": "pangtouyu",
       "image": "assets/img/items/bighead_winter_spirit.png",
       "summary": "冬季节气制作、四季主物品升级与胖头鱼补充灵气的消耗材料。",
       "recipe": "金企鹅兑换：[bighead_qbi]×10",
@@ -2583,7 +2583,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，可捕捉对应[[寄生灵]]获取，也可在金企鹅出现对应商品时用10[[Q币]]兑换。"
+          "content": "每次吸收消耗1个，回复50灵气，不能超过当前上限；没有激活四季主物品时不能吸收。给予四季主物品每个提供200经验。开启节气系统后，其他角色也能捕捉对应[[寄生灵]]释放的灵体，或在金企鹅出现对应商品时用10[[Q币]]兑换；吸收灵气仅限胖头鱼。"
         },
         {
           "type": "text",
