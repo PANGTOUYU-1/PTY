@@ -227,7 +227,7 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   App.Render.renderItems();
   assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, standaloneItems.length);
   assert.ok(!node('items-root').innerHTML.includes('data-owner='));
-  assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.value), ['all', 'pangtouyu', 'gaojiaoniao']);
+  assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.value), ['all', 'pangtouyu', 'gaojiaoniao', 'common']);
   const cards = allItemCards();
   for (const item of state.items) assert.equal(cards.split(`data-entry-target="${item.id}"`).length - 1, 1, item.id);
   const previous = { ...App.ui };
@@ -243,12 +243,12 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
 });
-check('物品仅按鱼鸟归属单选筛选，旧类型筛选链接回到全部', () => {
+check('物品按鱼专属、鸟专属与通用单选筛选，旧类型筛选链接回到全部', () => {
   const previous = { ...App.ui };
   for (const category of ['weapon', 'armor', 'tool', 'crop', 'material', 'misc']) {
     assert.equal(App.route.read(`#items?cat=${category}`).cats.length, 0);
   }
-  for (const [owner, label] of [['pangtouyu', '鱼专属'], ['gaojiaoniao', '鸟专属']]) {
+  for (const [owner, label] of [['pangtouyu', '鱼专属'], ['gaojiaoniao', '鸟专属'], ['common', '通用']]) {
     App.route.sync({ section: 'items', cats: [owner], q: '' });
     const options = App.Filter.categoryOptions();
     assert.equal(options.filter(option => option.active).length, 1);
@@ -257,7 +257,7 @@ check('物品仅按鱼鸟归属单选筛选，旧类型筛选链接回到全部'
     const expected = standaloneItems.filter(item => item.owner === owner);
     assert.deepEqual(Array.from(filtered, item => item.id), Array.from(expected, item => item.id));
     assert.ok(filtered.length > 0);
-    assert.ok(!filtered.some(item => item.id === 'bighead_ybhz'));
+    assert.equal(filtered.some(item => item.id === 'bighead_ybhz'), owner === 'common');
     App.Render.renderItems();
     assert.ok(node('items-root').innerHTML.includes(`共 ${expected.length} 项 · ${label}`));
     assert.equal(App.route.read(App.route.build(App.ui)).cats[0], owner);

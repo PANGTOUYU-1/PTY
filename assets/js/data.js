@@ -50,7 +50,7 @@
 
   function selectedCategories(cats) {
     const first = (cats || [])[0];
-    return ["food", "structure", "pangtouyu", "gaojiaoniao"].includes(first) ? [first] : [];
+    return ["food", "structure", "pangtouyu", "gaojiaoniao", "common"].includes(first) ? [first] : [];
   }
 
   function readHash(hash) {

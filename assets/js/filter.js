@@ -1,8 +1,9 @@
 (function () {
   const App = window.App;
-  const exclusiveCategories = [
+  const ownerCategories = [
     { id: "pangtouyu", name: "鱼专属" },
-    { id: "gaojiaoniao", name: "鸟专属" }
+    { id: "gaojiaoniao", name: "鸟专属" },
+    { id: "common", name: "通用" }
   ];
 
   function normalizeText(text) {
@@ -53,7 +54,7 @@
 
     categoryOptions: function () {
       const foodView = App.Filter.isFoodView();
-      const list = foodView ? App.config.foodCategories : exclusiveCategories;
+      const list = foodView ? App.config.foodCategories : ownerCategories;
       var cats = [{ label: "全部", value: "all" }].concat(list.map(function (c) {
         return { label: c.name, value: c.id };
       }));
@@ -69,10 +70,10 @@
 
     getFilteredItems: function () {
       const query = normalizeText(App.ui.q);
-      const exclusive = exclusiveCategories.find(function (category) { return category.id === App.ui.cats[0]; });
+      const owner = ownerCategories.find(function (category) { return category.id === App.ui.cats[0]; });
       return App.STATE.items.filter(function (item) {
         const collectionPass = App.Filter.isFoodView() ? item.category === "food" : item.category !== "food" && item.category !== "structure";
-        const categoryPass = App.ui.cats.length === 0 || (exclusive ? item.owner === exclusive.id : App.ui.cats[0] === item.category);
+        const categoryPass = App.ui.cats.length === 0 || (owner ? item.owner === owner.id : App.ui.cats[0] === item.category);
         const foodPass = !App.Filter.isFoodView() || !App.ui.foodKind || item.food_category === App.ui.foodKind;
         const queryPass = !query || normalizeText(App.STATE.entries[item.id].searchText).indexOf(query) > -1;
         return collectionPass && categoryPass && foodPass && queryPass;
@@ -114,9 +115,9 @@
 
     summary: function (count) {
       const foodCategory = App.config.foodCategories.find(function (item) { return item.id === App.ui.foodKind; });
-      const exclusive = exclusiveCategories.find(function (category) { return category.id === App.ui.cats[0]; });
+      const owner = ownerCategories.find(function (category) { return category.id === App.ui.cats[0]; });
       const catText = App.Filter.isFoodView() ? (foodCategory ? foodCategory.name : "全部食物")
-        : exclusive ? exclusive.name : App.ui.cats.length ? App.config.categoryLabels[App.ui.cats[0]] : "全部分类";
+        : owner ? owner.name : App.ui.cats.length ? App.config.categoryLabels[App.ui.cats[0]] : "全部分类";
       const queryText = App.ui.q ? " · 关键词 “" + App.ui.q + "”" : "";
       return "共 " + count + " 项 · " + catText + queryText;
     },
