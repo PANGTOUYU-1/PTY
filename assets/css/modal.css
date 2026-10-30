@@ -791,6 +791,10 @@
     max-height: 140px;
   }
 
+  .modal-card__visual--owned {
+    margin-top: 32px;
+  }
+
   .modal-card__overview--scene {
     grid-template-columns: minmax(0, 1fr);
   }

@@ -384,7 +384,7 @@
           <button class="button button--ghost" type="button" data-copy-link="{{id}}">复制链接</button>
         </div>
         {{#image}}
-        <div class="modal-card__visual{{#has_scene_hotspots}} scene-preview{{/has_scene_hotspots}}">
+        <div class="modal-card__visual{{#owner_stamp}} modal-card__visual--owned{{/owner_stamp}}{{#has_scene_hotspots}} scene-preview{{/has_scene_hotspots}}">
         <picture class="display-picture">
         {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
         <img class="modal-card__hero" src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
