@@ -78,7 +78,8 @@
     shell.className = "shell";
 
     const head = document.createElement("div");
-    head.className = "section-head" + (config.splitHeader ? " section-head--split" : "");
+    head.className = config.id === "terrains" ? "sr-only"
+      : "section-head" + (config.splitHeader ? " section-head--split" : "");
 
     const titleWrap = document.createElement("div");
     const title = document.createElement("h2");

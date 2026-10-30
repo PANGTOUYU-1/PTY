@@ -1212,7 +1212,7 @@
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
   align-items: start;
   gap: clamp(32px, 5vw, 72px);
-  padding-top: 40px;
+  padding-top: 24px;
   border-top: var(--bd);
 }
 

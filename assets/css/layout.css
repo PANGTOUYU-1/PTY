@@ -8,6 +8,11 @@
   padding-block: var(--sp-9);
 }
 
+#terrains {
+  padding-top: 24px;
+  scroll-margin-top: var(--header-h);
+}
+
 [data-section][hidden] { display: none !important; }
 #main-content { min-height: calc(100svh - var(--header-h)); }
 .hero[data-character-page] .hero__head { display: none; }
