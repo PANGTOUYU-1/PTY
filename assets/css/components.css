@@ -270,9 +270,10 @@
 .character-profile__heading h2 { flex-shrink: 0; font-size: 32px; }
 .character-profile__quote { min-width: 0; color: var(--ink-3); font: 14px/1.7 var(--ff-serif); }
 .character-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin: 20px 0 0; padding-block: 12px; border-block: var(--bd); }
-.character-stats > div { display: flex; align-items: baseline; justify-content: center; gap: 12px; border-right: var(--bd); }
+.character-stats > div { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 8px; border-right: var(--bd); }
 .character-stats > div:last-child { border-right: 0; }
-.character-stats dt { color: var(--ink-3); font-size: 12px; }
+.character-stats dt { display: flex; align-items: center; gap: 4px; color: var(--ink-3); font-size: 12px; }
+.character-stats dt img { width: 24px; height: 24px; flex-shrink: 0; object-fit: contain; }
 .character-stats dd { margin: 0; font: 22px/1.4 var(--ff-serif); }
 .character-profile__stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 16px; padding-block: 20px 16px; }
 .character-profile__portrait { height: 290px; display: flex; align-items: center; justify-content: center; }

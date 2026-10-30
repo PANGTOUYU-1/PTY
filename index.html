@@ -219,7 +219,7 @@
       {{#characters}}
       <article class="character-profile" data-char="{{id}}" data-entry-target="{{id}}" aria-labelledby="profile-{{id}}">
         <header class="character-profile__heading"><p>{{epithet}}</p><div class="character-profile__title"><h2 id="profile-{{id}}" tabindex="-1">{{name}}</h2><span class="character-profile__quote">“{{profile_quote}}”</span></div></header>
-        <dl class="character-stats"><div><dt>生命</dt><dd>{{stats.hp}}</dd></div><div><dt>理智</dt><dd>{{stats.san}}</dd></div><div><dt>饥饿</dt><dd>{{stats.hunger}}</dd></div></dl>
+        <dl class="character-stats"><div><dt><img src="assets/img/ui/status_health.png" alt="" width="24" height="24">生命</dt><dd>{{stats.hp}}</dd></div><div><dt><img src="assets/img/ui/status_sanity.png" alt="" width="24" height="24">理智</dt><dd>{{stats.san}}</dd></div><div><dt><img src="assets/img/ui/status_hunger.png" alt="" width="24" height="24">饥饿</dt><dd>{{stats.hunger}}</dd></div></dl>
         <div class="character-profile__stage">
           <figure class="character-profile__portrait"><img src="{{portrait}}" alt="{{name}}立绘" loading="eager" onerror="window.App.onImageError(this)"></figure>
           <figure class="character-model"><picture><source media="(prefers-reduced-motion: reduce)" srcset="{{model_poster}}"><img src="{{model_image}}" alt="{{name}}的游戏人物模型" loading="eager" onerror="window.App.onImageError(this)"></picture><figcaption>游戏内形象 · <span data-model-name>{{model_name}}</span></figcaption></figure>
