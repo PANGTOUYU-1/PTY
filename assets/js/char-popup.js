@@ -280,9 +280,9 @@
     duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
     duo.style.setProperty('--gear-spread', gearWidth / 480);
     duo.style.setProperty('--model-height', Math.min(260, availableHeight * .48, (modelWidth - 12) / aspect) + 'px');
-    const portraitLeft = gearWidth + gap;
+    const portraitLeft = gearWidth + gap + Math.min(64, width * .045);
     const portraitTop = 20;
-    const modelLeft = portraitLeft + stackWidth + gap;
+    const modelLeft = gearWidth + stackWidth + gap * 2;
     const model = gearCharacter.querySelector('.duo-model');
     model.style.removeProperty('top');
     model.style.setProperty('--model-left', (modelLeft + modelWidth / 2) + 'px');
