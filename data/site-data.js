@@ -3608,6 +3608,16 @@ window.SITE_DATA = {
       "building_exits": [{ "target": "loc_foyer", "label": "进入青玄阁" }],
       "title": "太极青玄阁",
       "summary": "位于月岛碎片区域的可进入建筑，内有前室、厅堂与左右两间独立卧房。",
+      "building_highlights": [
+        { "title": "躲猎犬", "text": "阻止针对你的普通猎犬波次生成，已生成的不会消失。" },
+        { "title": "防寒暑", "text": "房间中心32范围内，环境温度保持32℃。" },
+        { "title": "避雨", "text": "雨水不再增加潮湿，已有潮湿不会清零。" },
+        { "title": "防蛙雨", "text": "房间中心32范围内，不生成蛙雨青蛙。" },
+        { "title": "防夏季自燃", "text": "跳过室内玩家附近的夏季自燃触发。" },
+        { "title": "防蚁狮塌陷", "text": "房间中心32范围内，不生成蚁狮地陷。" },
+        { "title": "承接天气落雷", "text": "中心可承接普通天气落雷，不代表免疫雷电攻击。" },
+        { "title": "夜间照明", "text": "入夜亮灯，中心光照半径10；白天、黄昏关闭。" }
+      ],
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": [
         "pangtouyu",

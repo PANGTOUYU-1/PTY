@@ -267,7 +267,7 @@
         {{#entries}}<button type="button" data-building-tab data-building-room="{{id}}" aria-pressed="{{selected}}">{{name}}</button>{{/entries}}
       </div>
       {{#entries}}
-      <article class="building-entry" data-entry-target="{{id}}"{{^selected}} hidden{{/selected}}>
+      <article class="building-entry{{#has_building_highlights}} building-entry--overview{{/has_building_highlights}}" data-entry-target="{{id}}"{{^selected}} hidden{{/selected}}>
         <div class="building-entry__visual">
           <div class="building-entry__image{{#is_interior}} building-entry__image--interior{{/is_interior}}">
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
@@ -284,6 +284,16 @@
           <p class="building-entry__eyebrow">{{category_label}}{{#owner_label}} · {{owner_label}}{{/owner_label}}</p>
           <h3 class="building-entry__title" tabindex="-1">{{name}}</h3>
           <p class="building-entry__summary">{{summary}}</p>
+          {{#has_building_highlights}}
+          <section class="building-overview" aria-label="室内功能概览">
+            <h4>室内有什么用 <span>进入任一房间后生效</span></h4>
+            <div class="building-overview__grid">
+              {{#building_highlights}}<div class="building-overview__feature"><h5>{{title}}</h5><p>{{{html}}}</p></div>{{/building_highlights}}
+            </div>
+          </section>
+          <details class="building-entry__rules">
+            <summary>效果限制与往返路线 <span class="building-entry__expand">展开查看</span></summary>
+          {{/has_building_highlights}}
           <div class="building-entry__sections">
             {{#building_sections}}
             <section class="building-detail{{#is_note}} building-detail--note{{/is_note}}">
@@ -298,6 +308,7 @@
             {{/building_sections}}
           </div>
           <button class="building-entry__more" type="button" data-open-entry="{{id}}">完整规则与路线 <span aria-hidden="true">↗</span></button>
+          {{#has_building_highlights}}</details>{{/has_building_highlights}}
         </div>
       </article>
       {{/entries}}

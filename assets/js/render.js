@@ -233,6 +233,10 @@
           number: String(index + 1).padStart(2, "0"),
           selected: entry.id === (App.ui.buildingId || data[0].id),
           is_interior: !!entry.illustration,
+          has_building_highlights: !!(entry.building_highlights || []).length,
+          building_highlights: (entry.building_highlights || []).map(function (highlight) {
+            return { title: highlight.title, html: App.Linkify.textToHtml(highlight.text, { emphasizeNumbers: true }) };
+          }),
           building_entry: entry.building_entry || null,
           building_exits: entry.building_exits || [],
           scene_hotspots: (entry.scene_hotspots || []).map(function (hotspot) {
