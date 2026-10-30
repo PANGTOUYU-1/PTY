@@ -118,6 +118,10 @@
       <p class="hero__subtitle">{{subtitle_latin}}</p>
       <p class="hero__meta">{{version}} · {{author}} · <a href="{{workshop_url}}" target="_blank" rel="noreferrer">创意工坊 ↗</a>{{#qq_group_url}} · <a class="hero__join" href="{{qq_group_url}}" target="_blank" rel="noopener noreferrer" aria-label="加入《我们饥佬是这样的》mod交流群">加入交流群 <span aria-hidden="true">↗</span></a>{{/qq_group_url}}</p>
     </div>
+    <div class="duo-quotes" aria-label="角色台词">
+      <figure class="duo-quote duo-quote--fish"><figcaption>{{character_a.name}} <span>{{character_a.epithet}}</span></figcaption><blockquote>“{{character_a.quote}}”</blockquote><p>{{character_a.tagline}}</p></figure>
+      <figure class="duo-quote duo-quote--bird"><figcaption>{{character_b.name}} <span>{{character_b.epithet}}</span></figcaption><blockquote>“{{character_b.quote}}”</blockquote><p>{{character_b.tagline}}</p></figure>
+    </div>
     <div class="duo-stage">
     <div class="duo reveal in" role="region" aria-label="人物立绘" data-entry-target="hero-duo">
       <article class="duo__char duo__char--left" data-char="{{character_a.id}}" data-entry-target="{{character_a.id}}">

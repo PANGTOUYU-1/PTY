@@ -330,6 +330,25 @@
   .character-profile__abilities { min-height: 0; }
 }
 
+.duo-quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; width: min(100%, 1040px); margin: 8px auto 12px; }
+.duo-quote { position: relative; min-width: 0; margin: 0; padding: 4px 24px 4px 36px; }
+.duo-quote::before { content: ""; position: absolute; left: 16px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(#64715d, transparent); }
+.duo-quote--bird { padding-top: 16px; }
+.duo-quote--bird::before { top: 20px; background: linear-gradient(#8b5146, transparent); }
+.duo-quote figcaption { color: #64715d; font: 12px/1.6 var(--ff-serif); letter-spacing: .12em; }
+.duo-quote--bird figcaption { color: #8b5146; }
+.duo-quote figcaption > span { margin-left: 10px; color: var(--ink-3); font-size: 10px; }
+.duo-quote blockquote { margin: 4px 0; color: var(--ink); font: 500 clamp(18px, 1.7vw, 24px)/1.5 var(--ff-serif); }
+.duo-quote > p { margin: 0; padding-left: .7em; color: var(--ink-3); font: 12px/1.6 var(--ff-serif); }
+@media (max-width: 600px) {
+  .duo-quotes { gap: 12px; margin-block: 12px 20px; }
+  .duo-quote, .duo-quote--bird { padding: 4px 0 4px 12px; }
+  .duo-quote::before { left: 0; top: 8px; }
+  .duo-quote figcaption > span { display: block; margin-left: 0; }
+  .duo-quote blockquote { font-size: 18px; }
+  .duo-quote > p { padding-left: 0; font-size: 11px; }
+}
+
 .duo {
   position: relative;
   width: 100%;
