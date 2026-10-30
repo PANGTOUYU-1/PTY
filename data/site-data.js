@@ -86,7 +86,7 @@ window.SITE_DATA = {
         "她的物件分成几路：武器是[[避尘]]（制作栏动作名「惊鸿」），护具有[[灵墨]]与[[两仪]]，工具里有[[玉如意]]、[[蕴灵如意]]、[[琦玉器]]、[[玄清灵鉴]]，住处则是[[太极青玄阁]]。",
         "对四季之灵的检查台词是「无比纯粹的能量，我要好好想想！」，对[[玄清灵鉴]]只有一句「用着不错。」",
         "包内还有以她命名的[[胖头鱼月饼]]，检查台词为「鱼哥联名款！」。",
-        "已注册人物外观：小七、库洛米、2026情人节-胖头鱼、贫穷游侠、奶龙。"
+        "人物外观：小七、库洛米、2026情人节-胖头鱼、贫穷游侠、奶龙。"
       ],
       "quote": "三宝，不要乱跑！"
     },
@@ -113,7 +113,7 @@ window.SITE_DATA = {
         "他的制作栏物件：[[凤求凰]]（动作名「万箭」）、[[封魂]]（「驱邪魂为己用，以怨念化剑锋。」）、[[除祟]]、[[轮回]]、[[芙蓉]]、[[古祭神辉]]、[[重明遗骨]]。",
         "对四季之灵的检查台词是「啧，还是问问她吧！」——包内胖头鱼、高脚鸟互相评价的句子基本都成对出现。",
         "以他命名的[[高脚鸟月饼]]，检查台词为「鸟弟联名款！」。",
-        "已注册人物外观：萧诧、玉桂狗、2026情人节-高脚鸟、富贵王爷。"
+        "人物外观：萧诧、玉桂狗、2026情人节-高脚鸟、富贵王爷。"
       ],
       "quote": "此间天地的妖兽颇为有趣！"
     }
@@ -264,7 +264,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "搭配",
-          "content": "可将封魂交给[[古祭神辉]]收纳并保留成长与外观，改由头部装备触发飞剑；同一角色同时只启用一组飞剑来源。"
+          "content": "可将封魂交给[[古祭神辉]]收纳并保留成长与外观，改由头部装备触发飞剑；同一角色同时只能召出一组飞剑。"
         }
       ],
       "related": [
@@ -298,7 +298,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "耐久3000、普通伤害吸收90%，穿戴每分钟回复10理智。护盾充能完成时可抵挡一次战斗、爆炸或部分落物伤害，护盾冷却沿用骨甲参数。"
+          "content": "耐久3000、普通伤害吸收90%，穿戴每分钟回复10理智。护盾充能完成时可抵挡一次战斗、爆炸或部分落物伤害，护盾冷却时间与骨甲相同。"
         },
         {
           "type": "text",
@@ -337,7 +337,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "20个储物格，允许超过普通上限的堆叠；装备时绝缘，火焰伤害按龙鳞甲的抗火参数降低。物品本身不能再塞进其他容器。"
+          "content": "20个储物格，允许超过普通上限的堆叠；装备时绝缘，抗火效果与龙鳞甲相同。物品本身不能再塞进其他容器。"
         }
       ],
       "related": [
@@ -371,7 +371,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础攻击68、距离2、初始100次使用；对带暗影相关标签的目标普通伤害翻倍。命中触发目标附近3距离的20点位面范围攻击，可使能惊慌的目标惊慌2秒。噬心>25时每次攻击扣2理智。"
+          "content": "基础攻击68、距离2、初始100次使用；对暗影、梦魇类目标的普通伤害翻倍。命中触发目标附近3距离的20点位面范围攻击，可使能惊慌的目标惊慌2秒。噬心>25时每次攻击扣2理智。"
         },
         {
           "type": "text",
@@ -404,7 +404,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "装备后点击树、矿石或可挖物等执行对应工作；对池塘钓鱼，对海面使用海钓。右键施法收取自己周围8距离内可拾取的散落物。耕地会在当前地块尝试生成3×3土堆。"
+          "content": "装备后点击树木可伐木，点击矿石可挖矿，点击可挖物可挖掘；对池塘钓鱼，对海面使用海钓。右键施法收取自己周围8距离内可拾取的散落物。耕地会在当前地块尝试生成3×3土堆。"
         },
         {
           "type": "text",
@@ -493,7 +493,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "维护",
-          "content": "每片月亮碎片补充10%燃料，也能修好耗尽的伞。伞罩半径与基础燃料容量沿用原版虚空风衣伞参数。"
+          "content": "每片月亮碎片补充10%燃料，也能修好耗尽的伞。遮蔽范围和初始燃料容量与原版虚空风衣伞相同。"
         }
       ],
       "related": [
@@ -513,7 +513,7 @@ window.SITE_DATA = {
       "category": "tool",
       "owner": "common",
       "image": "assets/img/items/bighead_flw.png",
-      "summary": "捕捉寄生灵释放的四季灵体的网，也可执行捕虫动作；可用25次。",
+      "summary": "捕捉寄生灵释放的四季灵体的网，也能捕虫；可用25次。",
       "recipe": "金企鹅兑换：[bighead_qbi]×16",
       "detail_blocks": [
         {
@@ -554,7 +554,7 @@ window.SITE_DATA = {
       "category": "tool",
       "owner": "common",
       "image": "assets/img/items/bighead_czflw.png",
-      "summary": "捕捉寄生灵释放的四季灵体的网，也可执行捕虫动作；可用5次。",
+      "summary": "捕捉寄生灵释放的四季灵体的网，也能捕虫；可用5次。",
       "recipe": "金企鹅兑换：[bighead_qbi]×4",
       "detail_blocks": [
         {
@@ -601,7 +601,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "装备后把春、夏、秋、冬对应的节气物品放入四个季节槽。需要开启“节气系统”；虽然任何角色都能装备，节气的装卸回调与攻击联动仅对胖头鱼执行。"
+          "content": "装备后把春、夏、秋、冬对应的节气物品放入四个季节槽。需要开启“节气系统”；任何角色都能装备，但只有胖头鱼能获得装入节气后的效果与攻击联动。"
         },
         {
           "type": "text",
@@ -793,7 +793,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "升级",
-          "content": "通过建筑的施工界面提交材料扩建。升级会迁移原有食物与堆肥；随机料理从当前世界已注册的非调味料理中抽取。"
+          "content": "通过建筑的施工界面提交材料扩建。升级会保留原有食物与堆肥；随机料理从当前世界可用的未调味料理中抽取。"
         }
       ],
       "related": [],
@@ -822,7 +822,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "兼容已注册的普通烹饪锅料理，烹饪时间倍率为0。收起时会处理锅内食材与已完成产物；食谱仍须满足材料条件，不能用它直接煮出月饼。"
+          "content": "可制作当前世界的普通烹饪锅料理，放好食材后点击烹饪即可完成，无需等待。收起时，锅内食材和已做好的料理会掉落在地上；食谱仍须满足材料条件，不能用它直接煮出月饼。"
         },
         {
           "type": "text",
@@ -1477,7 +1477,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+30、饥饿+50、理智+10。命中时对可冰冻目标增加1点寒冷，增益持续480秒；不能冰冻没有冰冻组件的目标。"
+          "content": "基础回复：生命+30、饥饿+50、理智+10。命中时对可冰冻目标增加1点寒冷，增益持续480秒；对无法冰冻的目标无效。"
         },
         {
           "type": "text",
@@ -1569,7 +1569,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+30、饥饿+50、理智+10。增加240点夏季隔热参数，持续480秒；隔热不等于固定温度。"
+          "content": "基础回复：生命+30、饥饿+50、理智+10。夏季隔热增加240点，持续480秒；隔热不等于固定温度。"
         },
         {
           "type": "text",
@@ -1661,7 +1661,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+30、饥饿+50、理智+10。触发原版夜视增益，持续时间沿用游戏的夜视参数；夜视效果与照亮队友的光源不同。"
+          "content": "基础回复：生命+30、饥饿+50、理智+10。触发原版夜视增益，持续时间与原版夜视增益相同；夜视效果与照亮队友的光源不同。"
         },
         {
           "type": "text",
@@ -1835,7 +1835,7 @@ window.SITE_DATA = {
       "category": "food",
       "owner": "common",
       "image": "assets/img/items/bighead_gjnyb.png",
-      "summary": "给予电击攻击的隐藏月饼，可为已有位面伤害组件的角色增加位面攻击。",
+      "summary": "给予电击攻击的隐藏月饼，可为原本具备位面攻击能力的角色增加位面伤害。",
       "recipe": "",
       "detail_blocks": [
         {
@@ -1846,7 +1846,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+30、饥饿+50、理智+10。获得电击攻击，持续480秒；角色本来具有位面伤害组件时额外+100位面伤害，不会为没有该组件的角色自动创建它。"
+          "content": "基础回复：生命+30、饥饿+50、理智+10。获得电击攻击，持续480秒；原本具备位面攻击能力的角色额外获得100点位面伤害；其他角色只获得电击攻击效果。"
         },
         {
           "type": "text",
@@ -1893,7 +1893,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+30、饥饿+50、理智+10。踏水和体温上限65℃持续480秒，并额外触发原版夜视。踏水到期前应回到陆地；夜视时长使用原版参数。"
+          "content": "基础回复：生命+30、饥饿+50、理智+10。踏水和体温上限65℃持续480秒，并额外触发原版夜视。踏水到期前应回到陆地；夜视持续时间与原版夜视增益相同。"
         },
         {
           "type": "text",
@@ -1986,7 +1986,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "每次成熟可采3颗草莓，重生时间沿用浆果参数；夏季暂停生长，其他季节恢复。不按采收次数耗尽肥力。挖起时若正成熟，还会掉落1颗草莓。"
+          "content": "每次成熟可采3颗草莓，再次成熟所需时间与普通浆果丛相同；夏季暂停生长，其他季节恢复。不按采收次数耗尽肥力。挖起时若正成熟，还会掉落1颗草莓。"
         }
       ],
       "related": [
@@ -2056,7 +2056,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "获取说明",
-          "content": "掉落判断依赖生物有生命与掉落组件，并排除装备模特；不要把所有普通矿石都当作稳定来源。"
+          "content": "只有击杀能掉落战利品的生物才可能获得，装备模特不掉落。不能通过开采普通矿石稳定获取。"
         }
       ],
       "related": [
@@ -2122,7 +2122,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "把符文放入[[不染]]配件槽，再装备武器攻击带暗影阵营或暗影生物标签的目标。"
+          "content": "把符文放入[[不染]]配件槽，再装备武器攻击暗影阵营的目标或暗影生物。"
         },
         {
           "type": "text",
@@ -2725,7 +2725,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "它属于活体授粉生物，生命只有1。不是普通背包材料；当前版本未启用捕虫网捕捉它的工作接口。击杀主要掉蝴蝶翅膀，也有较低权重掉黄油。"
+          "content": "它属于活体授粉生物，生命只有1。不是普通背包材料；当前版本不能用捕虫网捕捉。击杀通常掉落蝴蝶翅膀，也有较低概率掉落黄油。"
         },
         {
           "type": "text",
@@ -2846,7 +2846,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "获得与搭配",
-          "content": "击败天体英雄第三阶段，原启迪碎片掉落有10%概率被替换为古祭神辉。收纳封魂保留其封印成长和皮肤；同一角色只启用一组飞剑，不能靠头部与手部重复叠出两组。"
+          "content": "击败天体英雄第三阶段，原启迪碎片掉落有10%概率被替换为古祭神辉。收纳封魂保留其封印成长和皮肤；同一角色同时只能召出一组飞剑，不能靠头部与手部重复叠出两组。"
         }
       ],
       "related": [
@@ -2878,7 +2878,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "罐头自身没有玩家食用组件。喂[[三宝]]会消耗1份；未满100级时升级，满级时寻宝，寻宝冷却5秒。也可作为有金价的物品交易。"
+          "content": "玩家不能直接食用。每次喂给[[何三宝]]消耗1份：未满100级时升1级，满级后触发寻宝，两次寻宝至少间隔5秒。也可用于交易。"
         }
       ],
       "related": [
@@ -3020,7 +3020,7 @@ window.SITE_DATA = {
             ["0点", "人物攻击倍率降为0.5；恢复到至少1点后，恢复正常倍率。"],
             ["至少1点", "恢复人物正常攻击倍率，基础为1.5；不会仅因继续攒灵气而无限提高普攻倍率。"],
             ["至少10点", "开启人物自带照明；低于10点关闭。"],
-            ["至少50点", "可以直接踏水行走，并移除人物的物理碰撞、关闭溺水；低于50点恢复碰撞与溺水判定。"],
+            ["至少50点", "可以直接在水面行走，并穿过原本会挡路的物体；低于50点后失去这些能力，在水上可能溺水。"],
             ["至少100点", "额外获得50%的普通伤害吸收，并获得食用灵魂的能力；食用灵魂每次回复1点灵气。低于100点时，这两项能力移除。"]
           ]
         },
@@ -3041,7 +3041,7 @@ window.SITE_DATA = {
           "type": "list",
           "title": "实战怎么留灵气",
           "items": [
-            "跨海前至少攒到50点；踏水期间避免施法把灵气扣到50以下，以免失去踏水能力并重新启用溺水判定。",
+            "跨海前至少攒到50点；踏水期间避免施法把灵气扣到50以下，以免失去踏水能力而溺水。",
             "需要减伤时尽量保留100点以上。例如100点施放一次避尘后剩98点，会失去50%的额外伤害吸收；102点施放后剩100点，仍保留这项能力。",
             "提高上限只是扩大储量，不会自动把当前灵气补满。想同时保住被动能力和连续施法，先提高上限，再补充当前灵气。"
           ]
@@ -3107,7 +3107,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "别等用光才关注灵气",
-          "content": "灵气不足时，对应主动技能无法施放；即使还没耗尽，跌破10、50、100点也会分别失去照明、踏水与额外减伤。维持这些被动本身不持续扣灵气。以上依据当前模组代码整理，尚未在游戏内实测。",
+          "content": "灵气不足时，对应主动技能无法施放；即使还没耗尽，跌破10、50、100点也会分别失去照明、踏水与额外减伤。维持这些被动本身不持续扣灵气。",
           "tone": "note"
         }
       ],
@@ -3302,7 +3302,7 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "content": "不染共有5种已注册的装备皮肤，外观可在「外观」分区查看。",
+          "content": "不染共有5种装备外观，可在[[不染]]详情的外观栏查看。",
           "title": "装备外观"
         }
       ],
@@ -3658,7 +3658,7 @@ window.SITE_DATA = {
           "type": "text",
           "title": "适用范围",
           "tone": "note",
-          "content": "前室、厅堂和两间卧房共用表中效果，不能据此视为全怪物免伤。以上依据当前模组与本地游戏代码整理，尚未在游戏内实测。"
+          "content": "前室、厅堂和两间卧房都具有表中效果，但不能免疫所有怪物的伤害。"
         },
         {
           "type": "text",
@@ -3739,7 +3739,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "太极莲尊能回血吗？",
-          "content": "当前代码里的太极莲尊只有外观和检查功能，没有接入坐下、睡眠、回血或回理智效果。它是厅堂陈设，不是恢复设施。"
+          "content": "太极莲尊是厅堂陈设，可以检查，但不能坐下、睡觉，也不会恢复生命或理智。"
         },
         {
           "type": "text",
@@ -4729,7 +4729,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "提供50%普通伤害减免；角色已有位面防御时，其数值×1.3。另有采集增产逻辑，但当前版本存在异常，不能保证稳定增产。"
+          "content": "提供50%普通伤害减免；角色已有位面防御时，其数值×1.3。采集增产效果在当前版本可能失效，不能保证每次采集都有额外产出。"
         },
         {
           "type": "text",
@@ -4933,10 +4933,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[避尘]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_spear_skin1.png"
@@ -4954,10 +4950,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[避尘]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_spear_skin2.png"
@@ -4975,10 +4967,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[繁花]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_fanhua_skin1.png"
@@ -4996,10 +4984,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[不染]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_buran_skin1.png"
@@ -5017,10 +5001,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[不染]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_buran_skin2.png"
@@ -5038,10 +5018,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[不染]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_buran_skin3.png"
@@ -5059,10 +5035,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[不染]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_buran_skin4.png"
@@ -5080,10 +5052,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[两仪]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_back_skin1.png"
@@ -5101,10 +5069,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[两仪]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_back_skin2.png"
@@ -5122,10 +5086,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[轮回]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_lh_skin1.png"
@@ -5143,10 +5103,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[灵墨]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_armor_skin1.png"
@@ -5164,10 +5120,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[灵墨]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bighead_armor_skin2.png"
@@ -5185,10 +5137,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[重明遗骨]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_cmyh_skin1.png"
@@ -5206,10 +5154,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[重明遗骨]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_cmyh_skin2.png"
@@ -5227,10 +5171,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[莲令]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         },
         {
           "type": "text",
@@ -5252,10 +5192,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[封魂]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_fh_skin1.png"
@@ -5273,10 +5209,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[封魂]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_fh_skin2.png"
@@ -5294,10 +5226,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[凤求凰]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh_skin1.png"
@@ -5315,10 +5243,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[凤求凰]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh_skin2.png"
@@ -5336,10 +5260,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[除祟]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_cs_skin1.png"
@@ -5357,10 +5277,6 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "对应装备：[[古祭神辉]]。"
-        },
-        {
-          "type": "text",
-          "content": "模组已注册的装备外观。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh_skin1.png"
