@@ -250,20 +250,27 @@
   </script>
 
   <script id="tpl-buildings" type="x-tmpl-mustache">
-    <div class="building-list">
+    <div class="building-list" data-building-explorer>
+      <div class="building-rooms" role="group" aria-label="青玄阁房间导览">
+        {{#entries}}<button type="button" data-building-tab data-building-room="{{id}}" aria-pressed="{{selected}}">{{name}}</button>{{/entries}}
+      </div>
       {{#entries}}
-      <article class="building-entry" data-entry-target="{{id}}">
+      <article class="building-entry" data-entry-target="{{id}}"{{^selected}} hidden{{/selected}}>
         <div class="building-entry__visual">
-          <button class="building-entry__image" type="button" data-open-entry="{{id}}" aria-label="查看{{name}}大图与完整详情">
+          <div class="building-entry__image{{#is_interior}} building-entry__image--interior{{/is_interior}}">
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
             {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
-            <span class="building-entry__zoom" aria-hidden="true">查看大图 ↗</span>
-          </button>
+            {{#building_entry}}<button class="building-entry__enter" type="button" data-building-room="{{target}}" aria-label="{{label}}"><span>{{label}} →</span></button>{{/building_entry}}
+            {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" aria-label="{{label}}：{{hint}}"><span class="scene-hotspot__hint">{{label}} · {{hint}} →</span></button>{{/scene_hotspots}}
+          </div>
           <p class="building-entry__caption"><span>{{number}}</span> {{#preview_caption}}{{preview_caption}}{{/preview_caption}}{{^preview_caption}}屋外入口{{/preview_caption}}</p>
+          <div class="building-entry__exits" role="group" aria-label="从{{name}}出发">
+            {{#building_exits}}<button type="button" data-building-room="{{target}}">{{label}} <span aria-hidden="true">→</span></button>{{/building_exits}}
+          </div>
         </div>
         <div class="building-entry__body">
           <p class="building-entry__eyebrow">{{category_label}}{{#owner_label}} · {{owner_label}}{{/owner_label}}</p>
-          <h3 class="building-entry__title">{{name}}</h3>
+          <h3 class="building-entry__title" tabindex="-1">{{name}}</h3>
           <p class="building-entry__summary">{{summary}}</p>
           <div class="building-entry__sections">
             {{#building_sections}}

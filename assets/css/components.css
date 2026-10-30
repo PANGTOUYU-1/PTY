@@ -1114,8 +1114,14 @@
 
 .building-list {
   display: grid;
-  gap: 88px;
+  gap: 24px;
 }
+
+.building-rooms { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.building-rooms button { padding: 8px 0; color: var(--ink-3); font: 14px / 1.7 var(--ff-serif); border-bottom: 2px solid transparent; }
+.building-rooms button[aria-pressed="true"] { color: var(--cinnabar); border-bottom-color: currentColor; }
+.building-rooms button:hover { color: var(--ink); }
+.building-entry[hidden] { display: none; }
 
 .building-entry {
   display: grid;
@@ -1130,6 +1136,7 @@
   position: sticky;
   top: calc(var(--header-h) + 24px);
   min-width: 0;
+  scroll-margin-top: calc(var(--header-h) + 24px);
 }
 
 .building-entry__image {
@@ -1148,10 +1155,10 @@
   transition: transform var(--dur) var(--ease);
 }
 
-.building-entry__image:hover > img,
-.building-entry__image:focus-visible > img { transform: translateY(-5px); }
+.building-entry__image--interior { aspect-ratio: 1616 / 1285; }
 
-.building-entry__zoom {
+.building-entry__enter { position: absolute; inset: 0; width: 100%; height: 100%; }
+.building-entry__enter > span {
   position: absolute;
   right: 8px;
   bottom: 8px;
@@ -1160,6 +1167,11 @@
   background: var(--paper);
   font: 12px / 1.6 var(--ff-mono);
 }
+
+.building-entry__enter:hover > span { color: var(--cinnabar); }
+.building-entry__exits { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.building-entry__exits button { display: inline-flex; align-items: center; gap: 12px; padding: 8px 12px; border: var(--bd); color: var(--ink-2); font-size: 13px; }
+.building-entry__exits button:hover { color: var(--cinnabar); border-color: currentColor; }
 
 .building-entry__caption {
   display: flex;
@@ -1194,7 +1206,7 @@
 .building-entry__more:hover { gap: 40px; }
 
 @media (max-width: 900px) {
-  .building-list { gap: 56px; }
+  .building-list { gap: 20px; }
   .building-entry { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 24px; }
   .building-entry__visual { position: static; width: min(600px, 100%); justify-self: center; }
   .building-entry__body { padding-block: 0; }

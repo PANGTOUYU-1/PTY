@@ -265,6 +265,52 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.match(node('modal-root').innerHTML, /银翘古木门/);
   assert.ok(!node('modal-root').innerHTML.includes('class="scene-hotspot"'));
 });
+check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、导览与焦点', () => {
+  const config = App.sections.find(section => section.id === 'terrains');
+  App.Render.renderGenericSection(config);
+  const markup = node(config.rootId).innerHTML;
+  assert.equal((markup.match(/data-entry-target="[^"]+" hidden/g) || []).length, 4);
+  assert.match(markup, /class="building-entry__enter"[^>]+data-building-room="loc_foyer"/);
+  assert.match(markup, /class="scene-hotspot"[^>]+data-building-room="loc_hall"/);
+  for (const room of state.terrains) {
+    for (const exit of room.building_exits) {
+      assert.equal(state.entries[exit.target]?.type, 'terrains');
+      assert.ok(exit.label);
+    }
+  }
+  const container = node(config.rootId);
+  const original = { querySelector: container.querySelector, querySelectorAll: container.querySelectorAll };
+  let focused = '';
+  const scenes = Array.from(state.terrains, room => ({
+    dataset: { entryTarget: room.id }, hidden: room.id !== 'loc_qingxuan',
+    querySelector: selector => selector === '.building-entry__title'
+      ? { focus() { focused = room.id; } } : { scrollIntoView() {} },
+  }));
+  const tabs = Array.from(state.terrains, room => ({
+    dataset: { buildingRoom: room.id },
+    setAttribute(name, value) { this[name] = value; },
+  }));
+  container.querySelectorAll = selector => selector === '.building-entry' ? scenes : tabs;
+  container.querySelector = selector => scenes.find(scene => selector.includes(`"${scene.dataset.entryTarget}"`));
+  try {
+    let previous = 'loc_qingxuan';
+    for (const id of ['loc_foyer', 'loc_hall', 'loc_bedroom', 'loc_hall', 'loc_bedroom_right', 'loc_hall', 'loc_foyer', 'loc_qingxuan']) {
+      assert.ok(state.entries[previous].building_exits.some(exit => exit.target === id));
+      App.Render.selectBuilding(id, { focus: true });
+      assert.deepEqual(scenes.filter(scene => !scene.hidden).map(scene => scene.dataset.entryTarget), [id]);
+      assert.deepEqual(tabs.filter(tab => tab['aria-pressed'] === 'true').map(tab => tab.dataset.buildingRoom), [id]);
+      assert.equal(focused, id);
+      assert.equal(node('aria-live').textContent, '当前所在：' + state.entries[id].title);
+      previous = id;
+    }
+    App.Render.selectBuilding('bighead_spear');
+    assert.equal(App.ui.buildingId, 'loc_qingxuan');
+    assert.equal(scenes.filter(scene => !scene.hidden).length, 1);
+  } finally {
+    Object.assign(container, original);
+    delete App.ui.buildingId;
+  }
+});
 check('切换分类再回到全部时，69项卡片直接显示且不依赖整张网格淡入', () => {
   for (const cats of [['weapon'], []]) {
     App.ui.cats = cats;

@@ -3602,6 +3602,8 @@ window.SITE_DATA = {
     {
       "id": "loc_qingxuan",
       "owner": "common",
+      "building_entry": { "target": "loc_foyer", "label": "进入青玄阁" },
+      "building_exits": [{ "target": "loc_foyer", "label": "进入青玄阁" }],
       "title": "太极青玄阁",
       "summary": "可进入的避难屋：室内阻止猎犬波次生成，环境温度保持32℃，并有避雨、防蛙雨与夜间照明。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
@@ -3679,6 +3681,7 @@ window.SITE_DATA = {
     {
       "id": "loc_foyer",
       "owner": "common",
+      "building_exits": [{ "target": "loc_qingxuan", "label": "青石楼梯 · 回到屋外" }, { "target": "loc_hall", "label": "鎏金太极铃 · 进入厅堂" }],
       "title": "入阁前室",
       "aliases": ["第一间房", "青玄阁前室"],
       "illustration": "assets/img/terrains/loc_foyer.png",
@@ -3715,6 +3718,7 @@ window.SITE_DATA = {
     {
       "id": "loc_hall",
       "owner": "common",
+      "building_exits": [{ "target": "loc_foyer", "label": "青石楼梯 · 返回前室" }, { "target": "loc_bedroom", "label": "引霄灵藤 · 左侧卧房" }, { "target": "loc_bedroom_right", "label": "引霄灵藤 · 右侧卧房" }],
       "title": "阁中厅堂",
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
@@ -3751,6 +3755,7 @@ window.SITE_DATA = {
     {
       "id": "loc_bedroom",
       "owner": "common",
+      "building_exits": [{ "target": "loc_hall", "label": "鎏角青玄门 · 返回厅堂" }],
       "title": "阁主卧房（左侧）",
       "aliases": ["阁主卧房", "左侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom.png",
@@ -3787,6 +3792,7 @@ window.SITE_DATA = {
     {
       "id": "loc_bedroom_right",
       "owner": "common",
+      "building_exits": [{ "target": "loc_hall", "label": "银翘古木门 · 返回厅堂" }],
       "title": "阁主卧房（右侧）",
       "aliases": ["右侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom_right.png",

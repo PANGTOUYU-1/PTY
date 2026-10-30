@@ -77,6 +77,12 @@
       const drawerOpen = event.target.closest("[data-filter-drawer-open]");
       const drawerClose = event.target.closest("[data-filter-drawer-close]");
       const backToTop = event.target.closest("[data-back-to-top]");
+      const buildingRoom = event.target.closest("[data-building-room]");
+
+      if (buildingRoom) {
+        App.Render.selectBuilding(buildingRoom.dataset.buildingRoom, { focus: true });
+        return;
+      }
 
       if (backToTop) {
         if (App.CharPopup) App.CharPopup.closeAll();

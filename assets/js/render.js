@@ -222,10 +222,21 @@
         return {
           ...view,
           number: String(index + 1).padStart(2, "0"),
+          selected: entry.id === (App.ui.buildingId || data[0].id),
+          is_interior: !!entry.illustration,
+          building_entry: entry.building_entry || null,
+          building_exits: entry.building_exits || [],
+          scene_hotspots: (entry.scene_hotspots || []).map(function (hotspot) {
+            return { ...hotspot, position: 'left:' + Number(hotspot.x) + '%;top:' + Number(hotspot.y) + '%;width:' + Number(hotspot.width) + '%;height:' + Number(hotspot.height) + '%' };
+          }),
           building_sections: (entry.detail_blocks || []).filter(function (block) {
             return !/台词|陈设/.test(block.title || "") && block.title;
           }).slice(0, 3).map(function (block) {
-            const html = function (text) { return App.Linkify.textToHtml(text || "", { emphasizeNumbers: true }); };
+            const html = function (text) {
+              return App.Linkify.textToHtml(text || "", { emphasizeNumbers: true }).replace(/data-open-entry="([^"]+)"/g, function (attribute, id) {
+                return App.STATE.entries[id] && App.STATE.entries[id].type === "terrains" ? 'data-building-room="' + id + '"' : attribute;
+              });
+            };
             return {
               title: block.title,
               is_note: block.tone === "note",
@@ -242,6 +253,26 @@
         };
       });
       renderTo(sec.rootId, sec.id === "terrains" ? "tpl-buildings" : "tpl-section-cards", { entries: entries });
+    },
+
+    selectBuilding: function (id, options) {
+      if (!(App.STATE.terrains || []).some(function (entry) { return entry.id === id; })) return;
+      const root = document.getElementById("terrains-root");
+      if (!root) return;
+      App.ui.buildingId = id;
+      root.querySelectorAll(".building-entry").forEach(function (entry) {
+        entry.hidden = entry.dataset.entryTarget !== id;
+      });
+      root.querySelectorAll("[data-building-tab]").forEach(function (tab) {
+        tab.setAttribute("aria-pressed", String(tab.dataset.buildingRoom === id));
+      });
+      const current = root.querySelector('.building-entry[data-entry-target="' + id + '"]');
+      if (current && options && options.focus) {
+        current.querySelector(".building-entry__title").focus({ preventScroll: true });
+        current.querySelector(".building-entry__visual").scrollIntoView({ behavior: "instant", block: "start" });
+      }
+      const live = document.getElementById("aria-live");
+      if (live) live.textContent = "当前所在：" + App.STATE.entries[id].title;
     },
 
     renderChangelog: function () {
