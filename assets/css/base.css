@@ -12,8 +12,8 @@ html {
 /* Native image cursors keep the weapon tip aligned with the click target. */
 @media (pointer: fine) {
   html {
-    --cursor-default: url("../img/ui/cursor-buran.png") 7 6, auto;
-    --cursor-pointer: url("../img/ui/cursor-buran.png") 7 6, pointer;
+    --cursor-default: url("../img/ui/cursor-buran.png?v=held-20261031") 7 6, auto;
+    --cursor-pointer: url("../img/ui/cursor-buran.png?v=held-20261031") 7 6, pointer;
     cursor: var(--cursor-default);
   }
 
