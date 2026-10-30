@@ -37,14 +37,9 @@
       if (changed && App.CharPopup) App.CharPopup.closeAll();
       document.documentElement.dataset.activeSection = current;
       document.querySelectorAll("[data-section]").forEach(function (section) {
-        section.hidden = section.id !== (current === "characters" ? "intro" : current);
+        section.hidden = section.id !== current;
       });
-      const hero = document.getElementById("intro");
-      if (hero) {
-        if (current === "characters") hero.dataset.characterPage = "";
-        else delete hero.dataset.characterPage;
-      }
-      if ((current === "intro" || current === "characters") && App.CharPopup && App.CharPopup.refreshLayout) {
+      if (current === "intro" && App.CharPopup && App.CharPopup.refreshLayout) {
         App.CharPopup.refreshLayout();
       }
       if (options && options.resetScroll) window.scrollTo({ top: 0, behavior: "instant" });

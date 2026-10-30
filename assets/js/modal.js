@@ -4,7 +4,7 @@
   let openedFromHash = false;
 
   function sectionForEntry(entry) {
-    return entry.type === "characters" ? "intro" : entry.type === "skins" ? "items" : entry.type;
+    return entry.type === "skins" ? "items" : entry.type;
   }
 
   function live(message) {
@@ -194,11 +194,7 @@
       if (entry.type === "characters") {
         closeModal({ updateHash: false });
         if (!(options && options.skipHash)) {
-          App.route.sync({ section: "intro", detailId: entryId });
-        }
-        const hero = document.getElementById("intro");
-        if (hero) {
-          hero.scrollIntoView({ behavior: "smooth", block: "start" });
+          App.route.sync({ section: "characters", detailId: entryId });
         }
         if (App.CharPopup) {
           App.CharPopup.openForCharacter(entryId, "profile");
@@ -220,6 +216,9 @@
         const entry = App.STATE.entries[App.ui.detailId];
         if (entry.type === "characters") {
           closeModal({ updateHash: false });
+          if (App.ui.section !== 'characters') {
+            App.route.sync({ section: 'characters' }, { replace: true });
+          }
           if (App.CharPopup) {
             App.CharPopup.openForCharacter(entry.id, "profile");
           }

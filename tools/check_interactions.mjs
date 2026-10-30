@@ -135,6 +135,22 @@ check('首页立绘完整展示角色专属，专属制作的共用物品使用�
     }
   }
 });
+check('人物页使用独立分栏模板，属性、特点和全部专属物品各归其主', () => {
+  const output = node('characters-root').innerHTML;
+  assert.ok(output.includes('class="character-columns"'));
+  assert.ok(!output.includes('duo__portrait-trigger'));
+  assert.ok(!node('hero-root').innerHTML.includes('id="characters"'));
+  for (const character of state.characters) {
+    const profile = output.match(new RegExp(`<article class="character-profile" data-char="${character.id}"[\\s\\S]*?<\\/article>`))?.[0];
+    assert.ok(profile, character.id);
+    for (const stat of Object.values(character.stats)) assert.ok(profile.includes(`<dd>${stat}</dd>`));
+    assert.equal((profile.match(/data-profile-skin=/g) || []).length, character.appearances.length);
+    assert.equal((profile.match(/aria-pressed="true"/g) || []).length, 1);
+    for (const item of state.items.filter(item => item.owner === character.id)) {
+      assert.ok(profile.includes(`data-open-entry="${item.id}"`), item.id);
+    }
+  }
+});
 check('人物皮肤使用9款已启用外观的原生待机动画，默认形象保留且每人仅选中一项', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/character-models.json'), 'utf8'));
   assert.equal(manifest.skins.length, 9);
@@ -919,11 +935,11 @@ check('点击弹窗外空白、遮罩或关闭按钮可关闭，点击内容不�
   for (const listener of documentListeners.get('keydown') || []) listener({ key: 'Escape' });
   assert.equal(node('modal-root').hidden, true, 'Escape');
 });
-check('角色搜索结果进入角色面板，深链刷新仍可打开', () => {
+check('角色搜索结果进入独立人物页，深链刷新仍可打开', () => {
   let opened = '';
   App.CharPopup = { openForCharacter(id) { opened = id; } };
   App.Modal.open('gaojiaoniao');
-  assert.equal(App.ui.section, 'intro');
+  assert.equal(App.ui.section, 'characters');
   assert.equal(opened, 'gaojiaoniao');
   assert.equal(node('modal-root').hidden, true);
   opened = '';

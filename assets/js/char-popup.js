@@ -300,20 +300,23 @@
     const data = getCharacter(character.dataset.char);
     const appearance = (data.appearances || []).find(function (skin) { return skin.id === id; });
     if (!appearance) return;
-    openGear(character);
+    if (character.classList.contains('duo__char')) openGear(character);
     App.ui.characterSkins = App.ui.characterSkins || {};
     App.ui.characterSkins[data.id] = id;
-    const model = character.querySelector('.duo-model');
-    const image = model.querySelector('img');
-    delete image.dataset.fallback;
-    model.querySelector('source').srcset = appearance.poster;
-    image.src = appearance.image;
-    image.width = appearance.width;
-    image.height = appearance.height;
-    image.alt = data.name + ' · ' + appearance.name + '的游戏人物模型';
-    model.querySelector('[data-model-name]').textContent = appearance.name;
-    character.querySelectorAll('[data-character-skin]').forEach(function (button) {
-      button.setAttribute('aria-pressed', String(button.dataset.characterSkin === id));
+    // Both views share the selected appearance while keeping separate layouts.
+    document.querySelectorAll('.duo__char[data-char="' + data.id + '"], .character-profile[data-char="' + data.id + '"]').forEach(function (view) {
+      const model = view.querySelector('.duo-model, .character-model');
+      const image = model.querySelector('img');
+      delete image.dataset.fallback;
+      model.querySelector('source').srcset = appearance.poster;
+      image.src = appearance.image;
+      image.width = appearance.width;
+      image.height = appearance.height;
+      image.alt = data.name + ' · ' + appearance.name + '的游戏人物模型';
+      model.querySelector('[data-model-name]').textContent = appearance.name;
+      view.querySelectorAll('[data-character-skin], [data-profile-skin]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String((button.dataset.characterSkin || button.dataset.profileSkin) === id));
+      });
     });
     const live = document.getElementById('aria-live');
     if (live) live.textContent = data.name + '已切换为' + appearance.name;
@@ -391,6 +394,17 @@
     ready: false,
 
     openForCharacter: function (charId, panelKey) {
+      if (App.ui.section === 'characters') {
+        const title = document.getElementById('profile-' + charId);
+        if (title) {
+          title.focus({ preventScroll: true });
+          const profile = title.closest('.character-profile');
+          if (profile.getBoundingClientRect().top < 64 || title.getBoundingClientRect().bottom > window.innerHeight) {
+            profile.scrollIntoView({ block: 'start', behavior: 'instant' });
+          }
+        }
+        return;
+      }
       const field = document.querySelector('.duo-field[data-char="' + charId + '"][data-panel="' + (panelKey || "setting") + '"]') ||
         document.querySelector('.duo-field[data-char="' + charId + '"]');
       if (field) {
@@ -436,6 +450,11 @@
       });
 
       document.addEventListener("click", function (event) {
+        const profileSkin = event.target.closest('[data-profile-skin]');
+        if (profileSkin) {
+          selectSkin(profileSkin.closest('.character-profile'), profileSkin.dataset.profileSkin);
+          return;
+        }
         const skin = event.target.closest('[data-character-skin]');
         if (skin) {
           selectSkin(skin.closest('.duo__char'), skin.dataset.characterSkin);

@@ -161,7 +161,7 @@
       shared_crafts: sharedCrafts,
       has_shared_crafts: sharedCrafts.length > 0,
       featured_items: items.map(function (item, index) {
-        return { id: item.id, name: item.name, display_image: item.display_image, order: index, ...App.Data.ownerView(item) };
+        return { id: item.id, name: item.name, icon: item.image, display_image: item.display_image, order: index, ...App.Data.ownerView(item) };
       })
     };
   }
@@ -209,6 +209,22 @@
         ...meta,
         character_a: heroCharacter(characters[0]),
         character_b: heroCharacter(characters[1])
+      });
+      renderTo("characters-root", "tpl-characters", {
+        characters: characters.map(function (character) {
+          const view = heroCharacter(character);
+          return {
+            ...view,
+            profile_quote: String(view.quote).replace(/^[“"]|[”"]$/g, ''),
+            traits: (character.setting || []).slice(1).map(function (text) {
+              return { html: App.Linkify.textToHtml(text, { emphasizeNumbers: true }) };
+            }),
+            primary_items: view.featured_items.slice(0, 4),
+            more_items: view.featured_items.slice(4),
+            more_count: Math.max(0, view.featured_items.length - 4),
+            has_more_items: view.featured_items.length > 4
+          };
+        })
       });
 
       renderSectionShells();
