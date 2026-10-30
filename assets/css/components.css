@@ -572,11 +572,10 @@
 }
 
 .duo-gear {
-  --gear-item-width: min(90px, calc((100% - 32px) / var(--gear-columns, 2)));
+  --gear-icon-size: 44px;
   position: absolute;
   top: 54px;
   width: 224px;
-  height: 450px;
   z-index: 8;
   visibility: hidden;
   pointer-events: none;
@@ -586,9 +585,9 @@
 .duo__char--right .duo-gear { left: calc(100% + 16px); top: 145px; }
 
 .duo-gear__heading {
-  grid-column: 1 / -1;
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 13px;
+  line-height: 1.5;
   letter-spacing: .2em;
   color: var(--ink-2);
   opacity: 0;
@@ -603,21 +602,18 @@
 }
 
 .duo-gear__item {
-  position: absolute;
-  left: calc(var(--gear-item-width) / 2 + 10px + (100% - var(--gear-item-width) - 20px) * var(--gear-position, .25));
-  top: var(--gear-y, 52px);
-  width: var(--gear-item-width, 90px);
-  translate: -50% 0;
+  min-width: 0;
+  width: 100%;
   border: 0;
   background: transparent;
-  padding: 6px 4px;
+  padding: 2px;
   color: var(--ink-2);
   font: inherit;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   border-radius: 12px;
   opacity: 0;
   transform: translateY(12px) scale(.94);
@@ -625,8 +621,8 @@
 }
 
 .duo-gear__item img {
-  width: min(68px, 100%);
-  height: 68px;
+  width: min(var(--gear-icon-size), 100%);
+  height: var(--gear-icon-size);
   object-fit: contain;
   filter: drop-shadow(0 4px 4px #3a342e18);
   transition: transform 200ms var(--ease);
@@ -636,13 +632,17 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 100%;
-  height: 68px;
+  width: 64px;
+  height: var(--gear-icon-size);
 }
 
-.duo-gear__item > span { font-size: 12px; line-height: 1.5; letter-spacing: .03em; overflow-wrap: anywhere; }
-.duo-gear__shared { position: absolute; top: var(--gear-shared-top, 500px); inset-inline: 0; border-top: var(--bd); padding-top: 12px; }
-.duo-gear__shared > p { margin: 0 0 10px; font-size: 12px; color: var(--ink-2); }
+.duo-gear__group { margin-bottom: 8px; }
+.duo-gear__group h4 { margin: 0 0 4px; color: var(--ink-3); font: 11px/1.5 var(--ff-serif); letter-spacing: .12em; }
+.duo-gear__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 8px; }
+.duo-gear__group[data-gear-group="spirits"] .duo-gear__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.duo-gear__item > span { font-size: 11px; line-height: 1.5; letter-spacing: .03em; overflow-wrap: anywhere; }
+.duo-gear__shared { border-top: var(--bd); margin-top: 10px; padding-top: 8px; }
+.duo-gear__shared > p { margin: 0 0 6px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
 .duo-gear__shared > p span { margin-left: 8px; color: var(--ink-3); font-size: 10px; }
 .duo-gear__crafts { display: flex; flex-wrap: wrap; gap: 6px 12px; }
 .duo-gear__craft { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; padding: 2px 0; font-size: 12px; color: var(--ink-2); }
@@ -749,6 +749,7 @@
   .hero:not([data-character-page]) .duo-field[data-panel="exclusive"] { height: 60px; }
   .hero:not([data-character-page]) .duo-field[data-panel="exclusive"] img { max-height: 60px; }
   .duo__char .duo-gear {
+    --gear-icon-size: clamp(30px, calc(5svh - 9px), 44px);
     top: 16px;
     width: var(--focus-gear-width, min(390px, 36%));
   }
@@ -757,6 +758,16 @@
     right: auto;
   }
   .duo__char--right .duo-gear { left: auto; right: 0; }
+}
+
+@media (min-width: 901px) and (max-height: 800px) {
+  .duo-gear__heading { margin-bottom: 4px; }
+  .duo-gear__group { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 6px; margin-bottom: 6px; }
+  .duo-gear__group h4 { margin: 2px 0 0; font-size: 10px; }
+  .duo-gear__shared { margin-top: 8px; padding-top: 6px; }
+  .duo-gear__shared > p { margin-bottom: 0; font-size: 10px; }
+  .duo-gear__craft { min-height: 24px; font-size: 11px; }
+  .duo-gear__craft img { width: 20px; height: 20px; }
 }
 
 @media (max-width: 900px) {
@@ -1301,10 +1312,10 @@
 .duo-gear__image .owner-stamp {
   top: 0;
   right: 0;
-  width: 22px;
-  font-size: 16px;
+  width: 18px;
+  font-size: 12px;
 }
-.duo-gear__image .type-stamp { top: 26px; right: 0; width: 18px; font-size: 12px; }
+.duo-gear__image .type-stamp { top: 21px; right: 0; width: 15px; font-size: 10px; }
 
 .item-card__meta {
   display: grid;

@@ -136,11 +136,18 @@
         <svg class="duo-gear-lines" aria-hidden="true"></svg>
         <div class="duo-gear" id="gear-{{character_a.id}}" aria-label="{{character_a.name}}的专属物品" aria-hidden="true" inert>
           <p class="duo-gear__heading">角色专属 <span>{{character_a.exclusive_count}} 件 · 点击查看</span></p>
-          {{#character_a.featured_items}}
+          {{#character_a.exclusive_groups}}
+          <section class="duo-gear__group" data-gear-group="{{id}}" aria-label="{{title}}">
+          <h4>{{title}}</h4>
+          <div class="duo-gear__grid">
+          {{#items}}
           <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
             <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}</span><span>{{name}}</span>
           </button>
-          {{/character_a.featured_items}}
+          {{/items}}
+          </div>
+          </section>
+          {{/character_a.exclusive_groups}}
           {{#character_a.has_shared_crafts}}
           <div class="duo-gear__shared">
             <p>专属制作 <span>其他角色也可使用</span></p>
@@ -172,11 +179,18 @@
         <svg class="duo-gear-lines" aria-hidden="true"></svg>
         <div class="duo-gear" id="gear-{{character_b.id}}" aria-label="{{character_b.name}}的专属物品" aria-hidden="true" inert>
           <p class="duo-gear__heading">角色专属 <span>{{character_b.exclusive_count}} 件 · 点击查看</span></p>
-          {{#character_b.featured_items}}
+          {{#character_b.exclusive_groups}}
+          <section class="duo-gear__group" data-gear-group="{{id}}" aria-label="{{title}}">
+          <h4>{{title}}</h4>
+          <div class="duo-gear__grid">
+          {{#items}}
           <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
             <span class="duo-gear__image"><img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}{{#type_stamp}}<span class="type-stamp" role="img" aria-label="{{type_label}}" title="{{type_label}}">{{type_stamp}}</span>{{/type_stamp}}</span><span>{{name}}</span>
           </button>
-          {{/character_b.featured_items}}
+          {{/items}}
+          </div>
+          </section>
+          {{/character_b.exclusive_groups}}
           {{#character_b.has_shared_crafts}}
           <div class="duo-gear__shared">
             <p>专属制作 <span>其他角色也可使用</span></p>

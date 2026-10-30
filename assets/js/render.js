@@ -156,6 +156,18 @@
       return { ...skin, selected: skin.id === selectedSkin };
     });
     const appearance = appearances.find(function (skin) { return skin.selected; });
+    const featuredItems = items.map(function (item, index) {
+      return { id: item.id, name: item.name, category: item.category, icon: item.image, display_image: item.display_image, order: index, ...App.Data.ownerView(item) };
+    });
+    const spiritIds = ["spring", "summer", "autumn", "winter"].map(function (season) { return "bighead_" + season + "_spirit"; });
+    const equipment = function (item) { return ["weapon", "armor", "tool"].includes(item.category); };
+    const exclusiveGroups = [
+      { id: "equipment", title: "兵器与装备", items: featuredItems.filter(equipment).sort(function (a, b) {
+        return ["weapon", "armor", "tool"].indexOf(a.category) - ["weapon", "armor", "tool"].indexOf(b.category);
+      }) },
+      { id: "crafts", title: "灵材与造物", items: featuredItems.filter(function (item) { return !equipment(item) && !spiritIds.includes(item.id); }) },
+      { id: "spirits", title: "四季之灵", items: spiritIds.map(function (id) { return featuredItems.find(function (item) { return item.id === id; }); }).filter(Boolean) }
+    ].filter(function (group) { return group.items.length; });
     return {
       ...character,
       appearances: appearances,
@@ -166,9 +178,8 @@
       exclusive_count: items.length,
       shared_crafts: sharedCrafts,
       has_shared_crafts: sharedCrafts.length > 0,
-      featured_items: items.map(function (item, index) {
-        return { id: item.id, name: item.name, icon: item.image, display_image: item.display_image, order: index, ...App.Data.ownerView(item) };
-      })
+      featured_items: featuredItems,
+      exclusive_groups: exclusiveGroups
     };
   }
 

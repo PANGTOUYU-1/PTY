@@ -158,6 +158,12 @@ check('首页立绘完整展示角色专属，专属制作的共用物品使用�
       assert.ok(!panel.includes(`src="${item.image}"`));
     }
     assert.ok(panel.includes('其他角色也可使用'));
+    if (character.id === 'pangtouyu') {
+      const spirits = panel.match(/data-gear-group="spirits"[\s\S]*?<\/section>/)?.[0];
+      assert.ok(spirits);
+      assert.deepEqual([...spirits.matchAll(/data-open-entry="([^"]+)"/g)].map(match => match[1]),
+        ['bighead_spring_spirit', 'bighead_summer_spirit', 'bighead_autumn_spirit', 'bighead_winter_spirit']);
+    }
     assert.equal((panel.match(/class="duo-gear__craft"/g) || []).length, character.shared_crafts.length);
     for (const id of character.shared_crafts) {
       assert.equal(state.entries[id].owner, 'common');

@@ -168,35 +168,7 @@
 
   function layoutGear(character) {
     const panel = character.querySelector(".duo-gear");
-    const width = panel.offsetWidth;
-    if (!width) return 0;
-    const columns = width >= 320 ? 3 : 2;
-    const mirror = character.classList.contains("duo__char--right");
-    const items = panel.querySelectorAll(".duo-gear__item");
-    const scattered = [[0, 72], [.5, 40], [1, 100], [.02, 206], [.5, 190],
-      [1, 300], [0, 350], [.5, 360], [1, 442], [.04, 486], [.5, 506]];
-    let bottom = 0;
-    panel.style.setProperty("--gear-columns", columns);
-    items.forEach(function (item, index) {
-      const column = index % columns;
-      const row = Math.floor(index / columns);
-      const point = columns === 3 && scattered[index];
-      const position = point ? point[0] : column / (columns - 1);
-      // Extra entries continue below the freeform cluster instead of wrapping
-      // onto an occupied position. Narrow panels use a staggered pair of lanes.
-      const y = point ? point[1] : columns === 3
-        ? 680 + Math.floor((index - scattered.length) / columns) * 128 + [24, 0, 16][column]
-        : 50 + row * 128 + [24, 0][column];
-      // Resolve against the panel's current width, including during layout changes.
-      item.style.setProperty("--gear-position", mirror ? 1 - position : position);
-      item.style.setProperty("--gear-y", (y + Math.random() * 8 - 4) + "px");
-      bottom = Math.max(bottom, y + item.offsetHeight + 8);
-    });
-    panel.style.setProperty("--gear-shared-top", (bottom + 12) + "px");
-    const shared = panel.querySelector(".duo-gear__shared");
-    const height = bottom + (shared ? shared.getBoundingClientRect().height + 24 : 12);
-    panel.style.height = height + "px";
-    return height;
+    return panel.offsetWidth ? panel.offsetHeight : 0;
   }
 
   function layoutCharacterModels() {
@@ -211,6 +183,10 @@
     }
     const characters = Array.from(duo.querySelectorAll(".duo__char"));
     const width = duo.clientWidth;
+    const stage = duo.closest('.duo-stage');
+    const footer = document.querySelector('.site-footer');
+    const availableHeight = Math.max(300, window.innerHeight - (stage.getBoundingClientRect().top + window.scrollY)
+      - footer.offsetHeight - 24);
     const gearWidth = Math.min(390, Math.max(320, width * .30));
     const modelWidth = Math.min(180, Math.max(96, width * .13));
     duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
@@ -225,14 +201,18 @@
       const right = Math.max(...others.map(function (node) { return node.offsetLeft + node.offsetWidth; }));
       const top = Math.min(...others.map(function (node) { return node.offsetTop; }));
       const baseBottom = Math.max(...others.map(function (node) { return node.offsetTop + node.offsetHeight; }));
-      const otherWidth = Math.min(right - left, Math.max(132, width - gearWidth - portrait.offsetWidth - modelWidth - 64));
-      const portraitWidth = Math.min(portrait.offsetWidth, width - gearWidth - otherWidth - modelWidth - 64);
+      let otherWidth = Math.min(right - left, Math.max(132, width - gearWidth - portrait.offsetWidth - modelWidth - 64));
+      const skins = character.querySelector('.duo-skins');
+      const portraitHeightLimit = Math.max(140, availableHeight - skins.offsetHeight - 60);
+      const portraitWidth = Math.min(portrait.offsetWidth, width - gearWidth - otherWidth - modelWidth - 64,
+        portrait.offsetWidth * portraitHeightLimit / portrait.offsetHeight);
+      otherWidth = Math.min(otherWidth, (right - left) * portrait.offsetHeight * portraitWidth / portrait.offsetWidth * .8 / (baseBottom - top));
       const gap = (width - gearWidth - portraitWidth - modelWidth - otherWidth) / 4;
       const mirror = character.dataset.char === 'gaojiaoniao';
       const position = function (x, size) { return mirror ? width - x - size : x; };
       const portraitLeft = position(gearWidth + gap, portraitWidth);
       const portraitScale = portraitWidth / portrait.offsetWidth;
-      const portraitTop = 64;
+      const portraitTop = 24;
       const portraitHeight = portrait.offsetHeight * portraitScale;
       const centerY = portraitTop + portraitHeight / 2;
       const otherScale = otherWidth / (right - left);
@@ -258,22 +238,22 @@
       model.style.setProperty('--model-left', (position(gearWidth + portraitWidth + gap * 2, modelWidth) + modelWidth / 2) + 'px');
       model.style.setProperty('--model-width', modelWidth + 'px');
       model.style.setProperty('--model-top', centerY + 'px');
-      const skins = character.querySelector('.duo-skins');
       const skinsWidth = Math.min(420, width - gearWidth - gap * 2);
       const skinsLeft = position(gearWidth + gap + (width - gearWidth - gap * 2 - skinsWidth) / 2, skinsWidth);
-      const skinsTop = Math.max(portraitTop + portraitHeight, centerY + model.offsetHeight / 2) + 24;
+      const skinsTop = Math.max(portraitTop + portraitHeight, centerY + model.offsetHeight / 2) + 16;
       skins.style.setProperty('--skins-left', skinsLeft + 'px');
       skins.style.setProperty('--skins-top', skinsTop + 'px');
       skins.style.setProperty('--skins-width', skinsWidth + 'px');
-      bottom = Math.max(bottom, skinsTop + skins.offsetHeight + 24);
+      bottom = Math.max(bottom, skinsTop + skins.offsetHeight + 12);
     });
     return bottom;
   }
 
   function layoutAllGear() {
-    let height = Math.max(480, layoutCharacterModels());
+    let height = layoutCharacterModels();
     document.querySelectorAll(".duo__char").forEach(function (character) {
-      height = Math.max(height, layoutGear(character) + 32);
+      const panelHeight = layoutGear(character);
+      if (character === gearCharacter) height = Math.max(height, panelHeight + 20);
     });
     const duo = document.querySelector(".duo");
     if (duo) duo.style.setProperty("--gear-height", height + "px");
