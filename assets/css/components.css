@@ -315,13 +315,13 @@
 }
 
 .duo[data-focus="pangtouyu"] .duo__char--right,
-.duo[data-focus="gaojiaoniao"] .duo__char--left,
-.duo[data-gear-focus="gaojiaoniao"] .duo__char--left {
+.duo[data-focus="gaojiaoniao"] .duo__char--left {
   opacity: 0;
   pointer-events: none;
 }
 
-.duo[data-gear-focus="pangtouyu"] .duo__name--left {
+.duo[data-gear-focus="pangtouyu"] .duo__name--left,
+.duo[data-gear-focus="gaojiaoniao"] .duo__name--right {
   visibility: hidden;
 }
 
@@ -569,18 +569,17 @@
 .is-showing-gear > .duo-gear-lines { opacity: 1; }
 
 @media (min-width: 901px) {
-  /* Keep exclusive items to the left of the portraits. */
+  /* Mirror exclusive items along the outer edge of each portrait. */
   .duo__char.is-showing-gear { position: static; }
   .duo__char .duo-gear {
     top: 28px;
-    width: min(320px, calc(50% - 64px));
+    width: min(260px, calc(50% - 264px));
   }
   .duo__char--left .duo-gear {
     left: 0;
     right: auto;
-    width: min(260px, calc(50% - 264px));
   }
-  .duo__char--right .duo-gear { left: 0; right: auto; }
+  .duo__char--right .duo-gear { left: auto; right: 0; }
 }
 
 @media (max-width: 900px) {

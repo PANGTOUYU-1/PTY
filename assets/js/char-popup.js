@@ -97,12 +97,8 @@
     panel.setAttribute("aria-hidden", "true");
     panel.inert = true;
     const duo = gearCharacter.closest(".duo");
-    duo.querySelector(".duo__name--left").removeAttribute("aria-hidden");
+    gearCharacter.querySelector(".duo__name").removeAttribute("aria-hidden");
     delete duo.dataset.gearFocus;
-    duo.querySelectorAll(".duo__char").forEach(function (character) {
-      character.inert = false;
-      character.removeAttribute("aria-hidden");
-    });
     gearCharacter = null;
   }
 
@@ -115,11 +111,12 @@
     const base = svg.getBoundingClientRect();
     const portrait = character.querySelector(".duo__portrait").getBoundingClientRect();
     const wide = window.innerWidth > 900;
-    const x = wide ? portrait.left + 28 - base.left : portrait.left + portrait.width / 2 - base.left;
+    const itemsOnLeft = character.classList.contains("duo__char--left");
+    const x = (wide ? (itemsOnLeft ? portrait.left + 28 : portrait.right - 28) : portrait.left + portrait.width / 2) - base.left;
     const y = (wide ? portrait.top + portrait.height * .42 : portrait.bottom + 4) - base.top;
     [activeGearItem].forEach(function (item) {
       const icon = item.querySelector("img").getBoundingClientRect();
-      const endX = (wide ? icon.right + 8 : icon.left + icon.width / 2) - base.left;
+      const endX = (wide ? (itemsOnLeft ? icon.right + 8 : icon.left - 8) : icon.left + icon.width / 2) - base.left;
       const endY = (wide ? icon.top + icon.height / 2 : icon.top - 8) - base.top;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       if (wide) {
@@ -157,13 +154,7 @@
     character.classList.add("is-showing-gear");
     const duo = character.closest(".duo");
     duo.dataset.gearFocus = character.dataset.char;
-    const isPangtouyu = character.dataset.char === "pangtouyu";
-    if (isPangtouyu) duo.querySelector(".duo__name--left").setAttribute("aria-hidden", "true");
-    duo.querySelectorAll(".duo__char").forEach(function (other) {
-      if (other === character || isPangtouyu) return;
-      other.inert = true;
-      other.setAttribute("aria-hidden", "true");
-    });
+    character.querySelector(".duo__name").setAttribute("aria-hidden", "true");
     character.querySelector(".duo__portrait-trigger").setAttribute("aria-expanded", "true");
     const panel = character.querySelector(".duo-gear");
     const positions = character.classList.contains("duo__char--left")
