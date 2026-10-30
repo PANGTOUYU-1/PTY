@@ -167,7 +167,7 @@
 .hero__title {
   margin: 0;
   font-family: var(--ff-serif);
-  font-size: clamp(32px, min(6vw, 9svh), 84px);
+  font-size: clamp(32px, min(5.2vw, 6svh), 64px);
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--ink);
@@ -182,7 +182,7 @@
 }
 
 .hero__meta {
-  margin: clamp(12px, 2svh, 20px) 0 0;
+  margin: 8px 0 0;
   font-family: var(--ff-mono);
   font-size: 13px;
   letter-spacing: 0.1em;
@@ -199,9 +199,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 32px;
-  margin-block: 4px;
-  padding: 4px 10px;
+  min-height: 28px;
+  margin-block: 0;
+  padding: 2px 10px;
   border: 1px solid var(--cinnabar);
   color: var(--cinnabar);
   vertical-align: middle;
@@ -263,6 +263,12 @@
   align-items: center;
   justify-items: center;
   gap: 0;
+}
+
+.duo:not([data-gear-focus]) { min-height: 0; }
+.duo:not([data-gear-focus]):not([data-focus]) {
+  overflow: clip;
+  overflow-clip-margin: 16px;
 }
 
 .duo__char {
@@ -649,9 +655,12 @@
 
 @media (min-width: 901px) {
   /* Mirror exclusive items along the outer edge of each portrait. */
-  .duo__char { position: static; align-self: start; margin-top: clamp(16px, 3svh, 32px); }
+  .duo__char { position: static; align-self: start; margin-top: 8px; }
   .duo__portrait { width: clamp(200px, calc(50svh - 140px), 280px); }
   .duo__name img { max-height: clamp(180px, 28svh, 280px); }
+  .hero:not([data-character-page]) .duo__char { gap: 8px; }
+  .hero:not([data-character-page]) .duo-field[data-panel="exclusive"] { height: 60px; }
+  .hero:not([data-character-page]) .duo-field[data-panel="exclusive"] img { max-height: 60px; }
   .duo__char .duo-gear {
     top: 16px;
     width: min(390px, calc(50% - 252px));
