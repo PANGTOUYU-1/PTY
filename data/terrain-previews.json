@@ -111,7 +111,7 @@
       ],
       "display_size": [
         1616,
-        1047
+        1102
       ],
       "furnishings": [
         {
@@ -136,8 +136,8 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            291,
-            294,
+            41,
+            449,
             234,
             488
           ],
@@ -147,8 +147,8 @@
             -15
           ],
           "preview_offset": [
-            110,
-            115
+            -140,
+            270
           ],
           "preview_scale": 1.5,
           "label": "引霄灵藤（左侧）",
@@ -161,8 +161,8 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            1091,
-            294,
+            1341,
+            449,
             234,
             488
           ],
@@ -173,8 +173,8 @@
           ],
           "mirror_x": true,
           "preview_offset": [
-            -110,
-            115
+            140,
+            270
           ],
           "preview_scale": 1.5,
           "label": "引霄灵藤（右侧）",
@@ -188,7 +188,7 @@
           "frame": 1,
           "bounds": [
             632,
-            922,
+            1002,
             340,
             92
           ],
@@ -196,6 +196,10 @@
           "world_position": [
             14,
             -0.15
+          ],
+          "preview_offset": [
+            0,
+            80
           ],
           "preview_scale": 2.6,
           "label": "青石楼梯",
@@ -259,7 +263,7 @@
           "frame": 1,
           "bounds": [
             1271,
-            716,
+            791,
             320,
             464
           ],
@@ -267,6 +271,10 @@
           "world_position": [
             14,
             14
+          ],
+          "preview_offset": [
+            0,
+            75
           ],
           "preview_scale": 1.6,
           "label": "鎏角青玄门",
@@ -331,7 +339,7 @@
           "frame": 1,
           "bounds": [
             23,
-            713,
+            791,
             320,
             464
           ],
@@ -339,6 +347,10 @@
           "world_position": [
             14,
             -14
+          ],
+          "preview_offset": [
+            0,
+            78
           ],
           "preview_scale": 1.6,
           "label": "银翘古木门",

@@ -35,7 +35,7 @@ FLOOR_QUADS = {
 
 # Separate prefabs spawned by bighead_door_exit.lua, not baked into the walls.
 # World positions are (x, z) relative to each house centre. Preview offsets
-# bring the vines onto the visible inner edge of the cutaway wall; they are
+# align the vines with the side stairs and doors with the front wall openings; they are
 # image-space calibration, not changes to the mod's world coordinates.
 # preview_scale also calibrates the cutaway composition: foreground doors and
 # steps must remain readable beside the separately projected floor and walls.
@@ -54,28 +54,31 @@ FURNISHINGS = {
          'world_position': (-15.3, 0)},
         {'prefab': 'bighead_men2', 'animation': 'men2',
          'preview_scale': 1.5,
-         'world_position': (1.65, -15), 'preview_offset': (110, 115),
+         'world_position': (1.65, -15), 'preview_offset': (-140, 270),
          'target': 'loc_bedroom', 'label': '引霄灵藤（左侧）',
          'hint': '进入左侧卧房', 'hint_align': 'start'},
         {'prefab': 'bighead_men2', 'animation': 'men2',
          'preview_scale': 1.5,
          'world_position': (1.65, 15), 'mirror_x': True,
-         'preview_offset': (-110, 115),
+         'preview_offset': (140, 270),
          'target': 'loc_bedroom_right', 'label': '引霄灵藤（右侧）',
          'hint': '进入右侧卧房', 'hint_align': 'end'},
         {'prefab': 'bighead_door_exit', 'source': 'bighead_door_exit',
          'animation': 'idle', 'world_position': (14, -.15), 'preview_scale': 2.6,
+         'preview_offset': (0, 80),
          'target': 'loc_foyer', 'label': '青石楼梯', 'hint': '返回前室'},
     ],
     'loc_bedroom': [
         {'prefab': 'bighead_men3', 'animation': 'men3',
          'preview_scale': 1.6,
+         'preview_offset': (0, 75),
          'world_position': (14, 14), 'target': 'loc_hall',
          'label': '鎏角青玄门', 'hint': '返回厅堂', 'hint_align': 'end'},
     ],
     'loc_bedroom_right': [
         {'prefab': 'bighead_men4', 'animation': 'men4',
          'preview_scale': 1.6,
+         'preview_offset': (0, 78),
          'world_position': (14, -14), 'target': 'loc_hall',
          'label': '银翘古木门', 'hint': '返回厅堂', 'hint_align': 'start'},
     ],
@@ -159,6 +162,13 @@ def composite_furnishings(scene, entry_id, ratio, scratch, frames):
             position = (round(ground[0] - anchor[0]), round(ground[1] - anchor[1]))
         dx, dy = furnishing.get('preview_offset', (0, 0))
         position = (position[0] + dx, position[1] + dy)
+        # Front steps extend beyond the floor edge. Preserve their entire sprite
+        # by adding transparent canvas below, without moving or scaling the room.
+        required_height = max(scene.height, position[1] + sprite.height + 8)
+        if required_height > scene.height:
+            extended = Image.new('RGBA', (scene.width, required_height))
+            extended.alpha_composite(scene)
+            scene = extended
         scene.alpha_composite(sprite, position)
         record = {'prefab': furnishing['prefab'],
                   'source': furnishing.get('source', 'bighead_men'),
@@ -169,7 +179,7 @@ def composite_furnishings(scene, entry_id, ratio, scratch, frames):
             if key in furnishing:
                 record[key] = furnishing[key]
         records.append(record)
-    return records
+    return scene, records
 
 
 def sync_hotspots(records):
@@ -294,8 +304,8 @@ def export(tool, mod):
             floor_size = floor.size
             floor = floor.crop(floor.getchannel('A').getbbox())
             padded = composite_floor(padded, floor, FLOOR_QUADS[entry_id])
-            furnishings = composite_furnishings(padded, entry_id, image.width / native_size[0],
-                                                scratch, frames)
+            padded, furnishings = composite_furnishings(padded, entry_id, image.width / native_size[0],
+                                                        scratch, frames)
             target = ROOT / 'assets/img/terrains' / f'{entry_id}.png'
             padded.save(target, optimize=True)
             source = next(source for room_id, source, _ in ROOMS if room_id == entry_id)

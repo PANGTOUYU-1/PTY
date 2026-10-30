@@ -3734,9 +3734,9 @@ window.SITE_DATA = {
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
       "scene_hotspots": [
-        {"label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 25.2475, "y": 51.3849, "width": 14.4802, "height": 46.6094, "hint": "进入左侧卧房", "hint_align": "start"},
-        {"label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 74.7525, "y": 51.3849, "width": 14.4802, "height": 46.6094, "hint": "进入右侧卧房", "hint_align": "end"},
-        {"label": "青石楼梯", "target": "loc_foyer", "x": 49.6287, "y": 92.4546, "width": 21.0396, "height": 8.787, "hint": "返回前室"}
+        {"label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 9.7772, "y": 62.8857, "width": 14.4802, "height": 44.2831, "hint": "进入左侧卧房", "hint_align": "start"},
+        {"label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 90.2228, "y": 62.8857, "width": 14.4802, "height": 44.2831, "hint": "进入右侧卧房", "hint_align": "end"},
+        {"label": "青石楼梯", "target": "loc_foyer", "x": 49.6287, "y": 95.0998, "width": 21.0396, "height": 8.3485, "hint": "返回前室"}
       ],
       "scene_hint": "点击图中引霄灵藤（左侧）、引霄灵藤（右侧）、青石楼梯，前往对应位置。",
       "summary": "青玄阁内连接两间卧房的厅堂，共用防猎犬生成、恒温、避雨与夜间照明。",
@@ -3777,7 +3777,7 @@ window.SITE_DATA = {
       "aliases": ["阁主卧房", "左侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom.png",
       "scene_hotspots": [
-        {"label": "鎏角青玄门", "target": "loc_hall", "x": 88.552, "y": 75.0594, "width": 19.802, "height": 36.7379, "hint": "返回厅堂", "hint_align": "end"}
+        {"label": "鎏角青玄门", "target": "loc_hall", "x": 88.552, "y": 80.9976, "width": 19.802, "height": 36.7379, "hint": "返回厅堂", "hint_align": "end"}
       ],
       "preview_caption": "左侧卧房内景预览",
       "scene_hint": "点击图中鎏角青玄门，前往对应位置。",
@@ -3818,7 +3818,7 @@ window.SITE_DATA = {
       "aliases": ["右侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom_right.png",
       "scene_hotspots": [
-        {"label": "银翘古木门", "target": "loc_hall", "x": 11.3243, "y": 74.8219, "width": 19.802, "height": 36.7379, "hint": "返回厅堂", "hint_align": "start"}
+        {"label": "银翘古木门", "target": "loc_hall", "x": 11.3243, "y": 80.9976, "width": 19.802, "height": 36.7379, "hint": "返回厅堂", "hint_align": "start"}
       ],
       "preview_caption": "右侧卧房内景预览",
       "scene_hint": "点击图中银翘古木门，前往对应位置。",

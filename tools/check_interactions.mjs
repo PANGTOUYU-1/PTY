@@ -298,6 +298,12 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.ok(Math.abs((y + height / 2) / 1285 * 100 - hotspot.y) < 0.1);
   const hall = manifest.assets.find(asset => asset.id === 'loc_hall');
   assert.equal(hall.furnishings.length, 4);
+  const hallSteps = hall.furnishings.find(part => part.prefab === 'bighead_door_exit');
+  const frontEdge = hall.floor.quad[2][1];
+  assert.ok(hallSteps.bounds[1] < frontEdge && hallSteps.bounds[1] + hallSteps.bounds[3] > frontEdge,
+    '出口台阶应跨过前侧地板边缘');
+  assert.ok(hallSteps.bounds[1] + hallSteps.bounds[3] <= hall.display_size[1] - 8,
+    '台阶必须完整显示，底部保留透明边距');
   for (const id of ['loc_foyer', 'loc_hall']) {
     const stair = manifest.assets.find(asset => asset.id === id).furnishings.find(part => part.prefab === 'bighead_door_exit');
     assert.ok(stair);
@@ -310,11 +316,16 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
     assert.equal(door.prefab, prefab);
     assert.equal(door.animation, animation);
     assert.equal(door.target, 'loc_hall');
+    const room = manifest.assets.find(asset => asset.id === id);
+    assert.equal(door.bounds[1] + door.bounds[3], room.floor.quad[2][1],
+      '卧房门底边应与前侧墙口地面齐平');
   }
   assert.ok(hall.furnishings.some(part => part.prefab === 'bighead_yizi' && part.animation === 'yizi'));
   const vines = hall.furnishings.filter(part => part.prefab === 'bighead_men2');
   assert.deepEqual(vines.map(part => part.target), ['loc_bedroom', 'loc_bedroom_right']);
   assert.ok(!vines[0].mirror_x && vines[1].mirror_x);
+  assert.ok(vines[0].bounds[0] < hall.floor.quad[3][0], '左侧灵藤应靠外侧楼梯');
+  assert.ok(vines[1].bounds[0] + vines[1].bounds[2] > hall.floor.quad[2][0], '右侧灵藤应靠外侧楼梯');
   for (const vine of vines) {
     const hit = state.entries.loc_hall.scene_hotspots.find(part => part.target === vine.target);
     assert.ok(hit, vine.target);
