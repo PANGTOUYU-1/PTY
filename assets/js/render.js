@@ -144,8 +144,17 @@
     const sharedCrafts = (character.shared_crafts || []).map(function (id) {
       return App.STATE.entries[id];
     }).filter(function (item) { return item && item.type === "items" && item.owner === "common"; });
+    const selectedSkin = (App.ui.characterSkins || {})[character.id] || 'default';
+    const appearances = (character.appearances || []).map(function (skin) {
+      return { ...skin, selected: skin.id === selectedSkin };
+    });
+    const appearance = appearances.find(function (skin) { return skin.selected; });
     return {
       ...character,
+      appearances: appearances,
+      model_image: appearance ? appearance.image : character.model_image,
+      model_poster: appearance ? appearance.poster : character.model_poster,
+      model_name: appearance ? appearance.name : '原始形象',
       quote: heroQuote(character),
       exclusive_count: items.length,
       shared_crafts: sharedCrafts,

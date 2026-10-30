@@ -64,5 +64,314 @@
       "path": "assets/img/characters/gaojiaoniao_idle.webp",
       "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
     }
-  ]
+  ],
+  "skins": [
+    {
+      "character": "pangtouyu",
+      "id": "bighead_skin2",
+      "name": "小七",
+      "build": "bighead_skin2",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bighead_skin2.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        371,
+        379
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bighead_skin2_idle.png",
+      "path": "assets/img/characters/bighead_skin2_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "pangtouyu",
+      "id": "bighead_skin3",
+      "name": "库洛米",
+      "build": "bighead_skin3",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bighead_skin3.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        316,
+        377
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bighead_skin3_idle.png",
+      "path": "assets/img/characters/bighead_skin3_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "pangtouyu",
+      "id": "bighead_skin4",
+      "name": "2026情人节-胖头鱼",
+      "build": "bighead_skin4",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bighead_skin4.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        376,
+        352
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bighead_skin4_idle.png",
+      "path": "assets/img/characters/bighead_skin4_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "pangtouyu",
+      "id": "bighead_skin5",
+      "name": "贫穷游侠",
+      "build": "bighead_skin5",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bighead_skin5.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        255,
+        328
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bighead_skin5_idle.png",
+      "path": "assets/img/characters/bighead_skin5_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "pangtouyu",
+      "id": "bighead_skin6",
+      "name": "奶龙",
+      "build": "bighead_skin6",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bighead_skin6.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        312,
+        350
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bighead_skin6_idle.png",
+      "path": "assets/img/characters/bighead_skin6_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "gaojiaoniao",
+      "id": "bb_gaojiaoniao_skin2",
+      "name": "萧诧",
+      "build": "bb_gaojiaoniao_skin2",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bb_gaojiaoniao_skin2.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        297,
+        391
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bb_gaojiaoniao_skin2_idle.png",
+      "path": "assets/img/characters/bb_gaojiaoniao_skin2_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "gaojiaoniao",
+      "id": "bb_gaojiaoniao_skin3",
+      "name": "玉桂狗",
+      "build": "bb_gaojiaoniao_skin3",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bb_gaojiaoniao_skin3.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        243,
+        381
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bb_gaojiaoniao_skin3_idle.png",
+      "path": "assets/img/characters/bb_gaojiaoniao_skin3_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "gaojiaoniao",
+      "id": "bb_gaojiaoniao_skin4",
+      "name": "2026情人节-高脚鸟",
+      "build": "bb_gaojiaoniao_skin4",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bb_gaojiaoniao_skin4.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        330,
+        371
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bb_gaojiaoniao_skin4_idle.png",
+      "path": "assets/img/characters/bb_gaojiaoniao_skin4_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    },
+    {
+      "character": "gaojiaoniao",
+      "id": "bb_gaojiaoniao_skin5",
+      "name": "富贵王爷",
+      "build": "bb_gaojiaoniao_skin5",
+      "bank": "wilson",
+      "animation": "idle_loop_down",
+      "source_frames": 66,
+      "source_fps": 30.0,
+      "frames": 33,
+      "fps": 15.0,
+      "resources": [
+        "player_idles.zip",
+        "bb_gaojiaoniao_skin5.zip"
+      ],
+      "hide_layers": [
+        "ARM_carry",
+        "hat",
+        "hat_hair",
+        "headbase_hat",
+        "swap_object",
+        "swap_hat"
+      ],
+      "scale": 1,
+      "display_size": [
+        276,
+        398
+      ],
+      "webp_quality": 90,
+      "alpha_quality": 100,
+      "poster": "assets/img/characters/bb_gaojiaoniao_skin5_idle.png",
+      "path": "assets/img/characters/bb_gaojiaoniao_skin5_idle.webp",
+      "processing": "Shared alpha bounds, 8px padding; no resizing or flipping."
+    }
+  ],
+  "skin_source": "scripts/main/skins.lua"
 }

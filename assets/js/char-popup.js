@@ -97,6 +97,9 @@
     panel.setAttribute("aria-hidden", "true");
     panel.inert = true;
     gearCharacter.querySelector(".duo-model").setAttribute("aria-hidden", "true");
+    const skins = gearCharacter.querySelector('.duo-skins');
+    skins.setAttribute('aria-hidden', 'true');
+    skins.inert = true;
     const duo = gearCharacter.closest(".duo");
     gearCharacter.querySelector(".duo__name").removeAttribute("aria-hidden");
     delete duo.dataset.gearFocus;
@@ -182,7 +185,8 @@
 
   function layoutCharacterModels() {
     const duo = document.querySelector(".duo");
-    if (!duo || window.innerWidth <= 900) return;
+    if (!duo || window.innerWidth <= 900) return 0;
+    let bottom = 0;
     const characters = Array.from(duo.querySelectorAll(".duo__char"));
     characters.forEach(function (character) {
       const model = character.querySelector(".duo-model");
@@ -195,6 +199,7 @@
         model.style.setProperty("--model-top", (Math.max(portrait.offsetTop + portrait.offsetHeight,
           opposite.offsetTop + opposite.offsetHeight) + 180) + "px");
         model.style.setProperty("--model-width", "160px");
+        bottom = Math.max(bottom, layoutSkinSelector(character, portrait, model));
         return;
       }
       const name = other.querySelector(".duo__name");
@@ -213,7 +218,25 @@
       model.style.setProperty("--model-left", ((start + end) / 2) + "px");
       model.style.setProperty("--model-top", (portrait.offsetTop + portrait.offsetHeight * .58) + "px");
       model.style.setProperty("--model-width", width + "px");
+      bottom = Math.max(bottom, layoutSkinSelector(character, portrait, model));
     });
+    return bottom;
+  }
+
+  function layoutSkinSelector(character, portrait, model) {
+    const skins = character.querySelector('.duo-skins');
+    const modelLeft = model.style.getPropertyValue('--model-left');
+    const modelX = modelLeft.endsWith('%') ? character.closest('.duo').clientWidth * parseFloat(modelLeft) / 100 : parseFloat(modelLeft);
+    const modelWidth = parseFloat(model.style.getPropertyValue('--model-width'));
+    const compact = window.innerWidth < 1200;
+    const left = compact ? modelX - 180 : Math.min(portrait.offsetLeft, modelX - modelWidth / 2);
+    const right = Math.max(portrait.offsetLeft + portrait.offsetWidth, modelX + modelWidth / 2);
+    const top = compact ? parseFloat(model.style.getPropertyValue('--model-top')) + modelWidth * .75 + 56
+      : portrait.offsetTop + portrait.offsetHeight + 16;
+    skins.style.setProperty('--skins-left', left + 'px');
+    skins.style.setProperty('--skins-top', top + 'px');
+    skins.style.setProperty('--skins-width', (compact ? 360 : Math.min(420, right - left)) + 'px');
+    return top + skins.offsetHeight + 24;
   }
 
   function layoutAllGear() {
@@ -222,8 +245,8 @@
       height = Math.max(height, layoutGear(character) + 32);
     });
     const duo = document.querySelector(".duo");
+    height = Math.max(height, layoutCharacterModels());
     if (duo) duo.style.setProperty("--gear-height", height + "px");
-    layoutCharacterModels();
   }
 
   function openGear(character) {
@@ -238,9 +261,11 @@
     character.querySelector(".duo__name").setAttribute("aria-hidden", "true");
     character.querySelector(".duo__portrait-trigger").setAttribute("aria-expanded", "true");
     const panel = character.querySelector(".duo-gear");
-    layoutGear(character);
-    layoutCharacterModels();
+    layoutAllGear();
     character.querySelector(".duo-model").setAttribute("aria-hidden", "false");
+    const skins = character.querySelector('.duo-skins');
+    skins.setAttribute('aria-hidden', 'false');
+    skins.inert = false;
     panel.inert = false;
     panel.setAttribute("aria-hidden", "false");
     queueGearLines();
@@ -249,6 +274,29 @@
   function scheduleGearClose() {
     clearTimeout(gearCloseTimer);
     gearCloseTimer = setTimeout(closeGear, 420);
+  }
+
+  function selectSkin(character, id) {
+    const data = getCharacter(character.dataset.char);
+    const appearance = (data.appearances || []).find(function (skin) { return skin.id === id; });
+    if (!appearance) return;
+    openGear(character);
+    App.ui.characterSkins = App.ui.characterSkins || {};
+    App.ui.characterSkins[data.id] = id;
+    const model = character.querySelector('.duo-model');
+    const image = model.querySelector('img');
+    delete image.dataset.fallback;
+    model.querySelector('source').srcset = appearance.poster;
+    image.src = appearance.image;
+    image.width = appearance.width;
+    image.height = appearance.height;
+    image.alt = data.name + ' · ' + appearance.name + '的游戏人物模型';
+    model.querySelector('[data-model-name]').textContent = appearance.name;
+    character.querySelectorAll('[data-character-skin]').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.dataset.characterSkin === id));
+    });
+    const live = document.getElementById('aria-live');
+    if (live) live.textContent = data.name + '已切换为' + appearance.name;
   }
 
   function drawLine(field) {
@@ -368,6 +416,11 @@
       });
 
       document.addEventListener("click", function (event) {
+        const skin = event.target.closest('[data-character-skin]');
+        if (skin) {
+          selectSkin(skin.closest('.duo__char'), skin.dataset.characterSkin);
+          return;
+        }
         const entryLink = event.target.closest("[data-open-entry]");
         const entry = entryLink && App.STATE.entries[entryLink.dataset.openEntry];
         // Modal navigation already opens the character panel. The source link may
@@ -432,7 +485,7 @@
       });
       // Portrait dimensions can settle after the first interaction on a slow connection.
       document.querySelectorAll(".duo__portrait img").forEach(function (img) {
-        img.addEventListener("load", queueGearLines);
+        img.addEventListener("load", function () { layoutAllGear(); queueGearLines(); });
       });
       layoutAllGear();
     }

@@ -117,6 +117,47 @@ check('首页立绘完整展示角色专属，专属制作的共用物品使用�
     }
   }
 });
+check('人物皮肤使用9款已启用外观的原生待机动画，默认形象保留且每人仅选中一项', () => {
+  const manifest = JSON.parse(readFileSync(join(root, 'data/character-models.json'), 'utf8'));
+  assert.equal(manifest.skins.length, 9);
+  assert.ok(!manifest.skins.some(skin => /_skin1$/.test(skin.id)), '注释停用的皮肤不展示');
+  const expected = { pangtouyu: 6, gaojiaoniao: 5 };
+  for (const character of state.characters) {
+    assert.equal(character.appearances.length, expected[character.id]);
+    assert.equal(new Set(character.appearances.map(skin => skin.id)).size, expected[character.id]);
+    const original = character.appearances.find(skin => skin.id === 'default');
+    assert.equal(original.image, character.model_image);
+    assert.equal(original.poster, character.model_poster);
+    for (const option of character.appearances.filter(skin => skin.id !== 'default')) {
+      const record = manifest.skins.find(skin => skin.id === option.id);
+      assert.equal(record.character, character.id);
+      assert.equal(record.name, option.name);
+      assert.equal(record.path, option.image);
+      assert.equal(record.poster, option.poster);
+      const png = readFileSync(join(root, option.poster));
+      assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], record.display_size);
+      assert.deepEqual([option.width, option.height], record.display_size);
+      assert.ok(readFileSync(join(root, option.image)).includes(Buffer.from('ANIM')));
+      assert.equal(record.frames, 33);
+      assert.equal(record.scale, 1);
+    }
+  }
+  App.ui.characterSkins = { pangtouyu: 'bighead_skin3', gaojiaoniao: 'bb_gaojiaoniao_skin5' };
+  const getElementById = sandbox.document.getElementById;
+  sandbox.document.getElementById = id => id === 'sections-root' ? null : getElementById(id);
+  try { App.Render.renderAll(); }
+  finally { sandbox.document.getElementById = getElementById; }
+  const hero = node('hero-root').innerHTML;
+  for (const character of state.characters) {
+    const markup = hero.match(new RegExp(`<article[^>]*data-char="${character.id}"[\\s\\S]*?<\\/article>`))[0];
+    assert.equal((markup.match(/data-character-skin=/g) || []).length, expected[character.id]);
+    assert.equal((markup.match(/aria-pressed="true"/g) || []).length, 1);
+    const selected = character.appearances.find(skin => skin.id === App.ui.characterSkins[character.id]);
+    assert.ok(markup.includes(`src="${selected.image}"`));
+    assert.ok(markup.includes(`srcset="${selected.poster}"`));
+  }
+  delete App.ui.characterSkins;
+});
 check('真实物品渲染保留全部条目，分类筛选有效且不显示角色筛选', () => {
   App.Render.renderItems();
   assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, state.items.length);

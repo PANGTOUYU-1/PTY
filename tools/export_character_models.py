@@ -1,6 +1,7 @@
 """Export the two characters' in-game idle models through DST Mod Tool."""
 import argparse
 import json
+import re
 import tempfile
 from pathlib import Path
 from zipfile import ZipFile
@@ -14,17 +15,35 @@ CHARACTERS = {"pangtouyu": "bighead", "gaojiaoniao": "bb_gaojiaoniao"}
 HIDDEN = ["ARM_carry", "hat", "hat_hair", "headbase_hat", "swap_object", "swap_hat"]
 
 
-def export(tool, mod, game_anim):
+def registered_skins(archive):
+    member = next(name for name in archive.namelist() if name.endswith('/scripts/main/skins.lua'))
+    source = re.sub(r'--[^\n]*', '', archive.read(member).decode('utf-8-sig'))
+    owners = {prefab: character for character, prefab in CHARACTERS.items()}
+    skins = []
+    for prefab, skin_id, body in re.findall(r'MakeCharacterSkin\("([^"]+)",\s*"([^"]+)",\s*\{([\s\S]*?)\n\}\)', source):
+        skins.append({'character': owners[prefab], 'id': skin_id,
+                      'name': re.search(r'\bname\s*=\s*"([^"]+)"', body)[1],
+                      'build': re.search(r'normal_skin\s*=\s*"([^"]+)"', body)[1]})
+    return skins
+
+
+def export(tool, mod, game_anim, skins_only=False):
     records = []
+    skins = []
     output = ROOT / "assets/img/characters"
     with tempfile.TemporaryDirectory(prefix="pty-character-idles-") as temporary:
         scratch = Path(temporary)
         with ZipFile(mod) as archive:
-            for build in CHARACTERS.values():
+            skins = registered_skins(archive)
+            variants = ([] if skins_only else [
+                {'character': character, 'build': build, 'id': character}
+                for character, build in CHARACTERS.items()]) + skins
+            for build in {variant['build'] for variant in variants}:
                 member = next(n for n in archive.namelist() if n.endswith(f"/anim/{build}.zip"))
                 (scratch / f"{build}.zip").write_bytes(archive.read(member))
-        for character, build in CHARACTERS.items():
-            sequence = scratch / character
+        for variant in variants:
+            character, build, variant_id = variant['character'], variant['build'], variant['id']
+            sequence = scratch / variant_id
             before = request(tool, 'assert(tool.document_is_empty); print(tool.document_revision)', scratch)
             try:
                 report = request(tool, "\n".join([
@@ -55,8 +74,8 @@ def export(tool, mod, game_anim):
                 padded = Image.new("RGBA", (cropped.width + 16, cropped.height + 16))
                 padded.paste(cropped, (8, 8))
                 prepared.append(padded)
-            poster = output / f"{character}_idle.png"
-            animated = output / f"{character}_idle.webp"
+            poster = output / f"{variant_id}_idle.png"
+            animated = output / f"{variant_id}_idle.webp"
             prepared[0].save(poster, optimize=True)
             # Keep native pixel dimensions but sample the idle at 15 fps.
             # Transparent costume effects otherwise make a small preview very large.
@@ -66,6 +85,7 @@ def export(tool, mod, game_anim):
             sampled[0].save(animated, save_all=True, append_images=sampled[1:],
                             duration=durations, loop=0, lossless=False, quality=90, alpha_quality=100, method=3)
             records.append({
+                **variant,
                 "character": character, "build": build, "bank": "wilson",
                 "animation": "idle_loop_down", "source_frames": len(prepared), "source_fps": fps,
                 "frames": len(sampled), "fps": display_fps,
@@ -76,9 +96,13 @@ def export(tool, mod, game_anim):
                 "path": animated.relative_to(ROOT).as_posix(),
                 "processing": "Shared alpha bounds, 8px padding; no resizing or flipping.",
             })
-            print(f"Exported {character}: {prepared[0].size}, {len(sampled)} frames at {display_fps:g} fps", flush=True)
+            print(f"Exported {variant_id}: {prepared[0].size}, {len(sampled)} frames at {display_fps:g} fps", flush=True)
+    manifest = ROOT / 'data/character-models.json'
+    defaults = (json.loads(manifest.read_text(encoding='utf-8'))['characters'] if skins_only else
+                [record for record in records if record['id'] in CHARACTERS])
     (ROOT / "data/character-models.json").write_text(
-        json.dumps({"characters": records}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        json.dumps({"characters": defaults, 'skins': [record for record in records if record['id'] not in CHARACTERS],
+                    'skin_source': 'scripts/main/skins.lua'}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
@@ -86,5 +110,6 @@ if __name__ == "__main__":
     parser.add_argument("--tool", type=Path, required=True)
     parser.add_argument("--mod", type=Path, required=True)
     parser.add_argument("--game-anim", type=Path, required=True)
+    parser.add_argument('--skins-only', action='store_true', help='Preserve existing default models and export registered skins only')
     args = parser.parse_args()
-    export(args.tool, args.mod, args.game_anim)
+    export(args.tool, args.mod, args.game_anim, args.skins_only)

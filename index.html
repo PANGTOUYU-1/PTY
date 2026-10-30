@@ -141,8 +141,14 @@
             <source media="(prefers-reduced-motion: reduce)" srcset="{{character_a.model_poster}}">
             <img src="{{character_a.model_image}}" alt="{{character_a.name}}的游戏人物模型" width="311" height="477" loading="lazy" onerror="window.App.onImageError(this)">
           </picture>
-          <figcaption>游戏内形象</figcaption>
+          <figcaption>游戏内形象 · <span data-model-name>{{character_a.model_name}}</span></figcaption>
         </figure>
+        <div class="duo-skins" role="group" aria-label="{{character_a.name}}皮肤选择" aria-hidden="true" inert>
+          <p>人物皮肤 <span>点击切换游戏内形象</span></p>
+          <div class="duo-skins__options">
+            {{#character_a.appearances}}<button class="duo-skin" type="button" data-character-skin="{{id}}" aria-pressed="{{selected}}" aria-label="{{name}}" title="{{name}}"><img src="{{poster}}" alt="" width="{{width}}" height="{{height}}" loading="lazy" onerror="window.App.onImageError(this)"><span>{{label}}</span></button>{{/character_a.appearances}}
+          </div>
+        </div>
         <nav class="duo__fields duo__fields--bottom" aria-label="胖头鱼字段">
           <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="setting">
             <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
@@ -187,8 +193,14 @@
             <source media="(prefers-reduced-motion: reduce)" srcset="{{character_b.model_poster}}">
             <img src="{{character_b.model_image}}" alt="{{character_b.name}}的游戏人物模型" width="426" height="442" loading="lazy" onerror="window.App.onImageError(this)">
           </picture>
-          <figcaption>游戏内形象</figcaption>
+          <figcaption>游戏内形象 · <span data-model-name>{{character_b.model_name}}</span></figcaption>
         </figure>
+        <div class="duo-skins" role="group" aria-label="{{character_b.name}}皮肤选择" aria-hidden="true" inert>
+          <p>人物皮肤 <span>点击切换游戏内形象</span></p>
+          <div class="duo-skins__options">
+            {{#character_b.appearances}}<button class="duo-skin" type="button" data-character-skin="{{id}}" aria-pressed="{{selected}}" aria-label="{{name}}" title="{{name}}"><img src="{{poster}}" alt="" width="{{width}}" height="{{height}}" loading="lazy" onerror="window.App.onImageError(this)"><span>{{label}}</span></button>{{/character_b.appearances}}
+          </div>
+        </div>
         <div class="duo__name duo__name--right">
           <img src="assets/img/ui/gaojiaoniao.png" alt="高脚鸟" loading="eager" onerror="window.App.onImageError(this)">
         </div>

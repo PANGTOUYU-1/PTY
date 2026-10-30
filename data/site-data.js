@@ -71,6 +71,62 @@ window.SITE_DATA = {
       "portrait": "assets/img/characters/pangtouyu_head.png",
       "model_image": "assets/img/characters/pangtouyu_idle.webp",
       "model_poster": "assets/img/characters/pangtouyu_idle.png",
+      "appearances": [
+        {
+          "id": "default",
+          "name": "原始形象",
+          "label": "原始",
+          "image": "assets/img/characters/pangtouyu_idle.webp",
+          "poster": "assets/img/characters/pangtouyu_idle.png",
+          "width": 311,
+          "height": 477
+        },
+        {
+          "id": "bighead_skin2",
+          "name": "小七",
+          "label": "小七",
+          "image": "assets/img/characters/bighead_skin2_idle.webp",
+          "poster": "assets/img/characters/bighead_skin2_idle.png",
+          "width": 371,
+          "height": 379
+        },
+        {
+          "id": "bighead_skin3",
+          "name": "库洛米",
+          "label": "库洛米",
+          "image": "assets/img/characters/bighead_skin3_idle.webp",
+          "poster": "assets/img/characters/bighead_skin3_idle.png",
+          "width": 316,
+          "height": 377
+        },
+        {
+          "id": "bighead_skin4",
+          "name": "2026情人节-胖头鱼",
+          "label": "情人节",
+          "image": "assets/img/characters/bighead_skin4_idle.webp",
+          "poster": "assets/img/characters/bighead_skin4_idle.png",
+          "width": 376,
+          "height": 352
+        },
+        {
+          "id": "bighead_skin5",
+          "name": "贫穷游侠",
+          "label": "贫穷游侠",
+          "image": "assets/img/characters/bighead_skin5_idle.webp",
+          "poster": "assets/img/characters/bighead_skin5_idle.png",
+          "width": 255,
+          "height": 328
+        },
+        {
+          "id": "bighead_skin6",
+          "name": "奶龙",
+          "label": "奶龙",
+          "image": "assets/img/characters/bighead_skin6_idle.webp",
+          "poster": "assets/img/characters/bighead_skin6_idle.png",
+          "width": 312,
+          "height": 350
+        }
+      ],
       "featured_items": ["bighead_spear", "bighead_fanhua", "bighead_armor", "bighead_back"],
       "shared_crafts": ["bighead_ruyi", "bighead_scrolls", "dug_bb_cmbush", "bighead_mwgt"],
       "stats": {
@@ -100,6 +156,53 @@ window.SITE_DATA = {
       "portrait": "assets/img/characters/gaojiaoniao_head.png",
       "model_image": "assets/img/characters/gaojiaoniao_idle.webp",
       "model_poster": "assets/img/characters/gaojiaoniao_idle.png",
+      "appearances": [
+        {
+          "id": "default",
+          "name": "原始形象",
+          "label": "原始",
+          "image": "assets/img/characters/gaojiaoniao_idle.webp",
+          "poster": "assets/img/characters/gaojiaoniao_idle.png",
+          "width": 426,
+          "height": 442
+        },
+        {
+          "id": "bb_gaojiaoniao_skin2",
+          "name": "萧诧",
+          "label": "萧诧",
+          "image": "assets/img/characters/bb_gaojiaoniao_skin2_idle.webp",
+          "poster": "assets/img/characters/bb_gaojiaoniao_skin2_idle.png",
+          "width": 297,
+          "height": 391
+        },
+        {
+          "id": "bb_gaojiaoniao_skin3",
+          "name": "玉桂狗",
+          "label": "玉桂狗",
+          "image": "assets/img/characters/bb_gaojiaoniao_skin3_idle.webp",
+          "poster": "assets/img/characters/bb_gaojiaoniao_skin3_idle.png",
+          "width": 243,
+          "height": 381
+        },
+        {
+          "id": "bb_gaojiaoniao_skin4",
+          "name": "2026情人节-高脚鸟",
+          "label": "情人节",
+          "image": "assets/img/characters/bb_gaojiaoniao_skin4_idle.webp",
+          "poster": "assets/img/characters/bb_gaojiaoniao_skin4_idle.png",
+          "width": 330,
+          "height": 371
+        },
+        {
+          "id": "bb_gaojiaoniao_skin5",
+          "name": "富贵王爷",
+          "label": "富贵王爷",
+          "image": "assets/img/characters/bb_gaojiaoniao_skin5_idle.webp",
+          "poster": "assets/img/characters/bb_gaojiaoniao_skin5_idle.png",
+          "width": 276,
+          "height": 398
+        }
+      ],
       "featured_items": ["bb_gaojiaoniao_cs", "bb_gaojiaoniao_fqh", "bb_gaojiaoniao_fh", "bb_gaojiaoniao_cmyh"],
       "shared_crafts": ["bighead_ybhz"],
       "stats": {

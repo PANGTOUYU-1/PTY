@@ -598,15 +598,37 @@
   transform: translate(-50%, calc(-50% + 12px));
   transition: opacity 280ms var(--ease), transform 420ms var(--ease);
 }
-.duo-model picture { display: block; }
-.duo-model img { display: block; width: 100%; height: auto; }
-.duo-model figcaption { margin-top: 12px; color: var(--ink-3); font: 12px / 1.6 var(--ff-serif); letter-spacing: .14em; }
+.duo-model picture { display: block; aspect-ratio: 2 / 3; }
+.duo-model img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.duo-model figcaption { min-height: 3.2em; margin-top: 12px; color: var(--ink-3); font: 12px / 1.6 var(--ff-serif); letter-spacing: .14em; }
 .is-showing-gear > .duo-model {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translate(-50%, -50%);
 }
+
+.duo-skins {
+  position: absolute;
+  left: var(--skins-left, 50%);
+  top: var(--skins-top, 600px);
+  width: var(--skins-width, 380px);
+  z-index: 8;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease);
+}
+.is-showing-gear > .duo-skins { visibility: visible; opacity: 1; pointer-events: auto; }
+.duo-skins > p { margin: 0 0 10px; color: var(--ink-2); font-size: 12px; }
+.duo-skins > p span { margin-left: 10px; color: var(--ink-3); font-size: 10px; }
+.duo-skins__options { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.duo-skin { display: grid; grid-template-rows: 60px auto; align-items: center; justify-items: center; gap: 6px; padding: 6px 2px; border: 1px solid transparent; color: var(--ink-3); transition: border-color 160ms var(--ease), background 160ms var(--ease); }
+.duo-skin img { width: 100%; height: 60px; object-fit: contain; }
+.duo-skin span { font-size: 11px; line-height: 1.5; white-space: nowrap; }
+.duo-skin:hover { color: var(--cinnabar); background: #b6534220; }
+.duo-skin[aria-pressed="true"] { color: var(--cinnabar); border-color: var(--cinnabar); background: #b653420c; }
+.duo-skin:focus-visible { outline: 2px solid var(--cinnabar); outline-offset: 3px; }
 
 @media (min-width: 1200px) {
   .duo__char > .duo__portrait,
@@ -658,6 +680,8 @@
     transform: none;
   }
   .is-showing-gear > .duo-model { display: block; transform: none; }
+  .duo-skins { display: none; position: static; grid-area: skins; width: min(100%, 380px); justify-self: center; margin-top: 8px; }
+  .is-showing-gear > .duo-skins { display: block; }
 }
 
 .filters-panel__label,
@@ -1526,6 +1550,7 @@
       "name"
       "portrait"
       "fields"
+      "skins"
       "model"
       "gear";
     grid-template-columns: 1fr;
