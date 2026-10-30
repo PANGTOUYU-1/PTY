@@ -36,6 +36,16 @@
   }
 }
 
+@keyframes nav-ink-draw {
+  from { stroke-dasharray: 100; stroke-dashoffset: 100; }
+  to { stroke-dasharray: 100; stroke-dashoffset: 0; }
+}
+
+@keyframes nav-ink-breathe {
+  0%, 100% { transform: rotate(-4deg) scale(1); }
+  50% { transform: rotate(2deg) scale(1.025, .97); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -50,6 +60,7 @@
   }
 
   .reveal {
+    opacity: 1;
     transform: none;
   }
 }

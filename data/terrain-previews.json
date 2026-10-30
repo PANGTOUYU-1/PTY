@@ -1,0 +1,221 @@
+{
+  "kind": "original_room_composite",
+  "source_prefab": "scripts/prefabs/bighead_door_exit.lua",
+  "composition": "Original floor projected into wall perspective, with wall above floor; not a gameplay screenshot.",
+  "assets": [
+    {
+      "id": "loc_foyer",
+      "source": "bighead_wall",
+      "bank": "bighead_wall",
+      "build": "bighead_wall",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "tiles": [
+        2,
+        2
+      ],
+      "native_size": [
+        5944,
+        4716
+      ],
+      "display_size": [
+        1616,
+        1285
+      ],
+      "furnishings": [
+        {
+          "prefab": "bighead_men1",
+          "source": "bighead_men",
+          "animation": "men1",
+          "frame": 1,
+          "target": "loc_hall",
+          "bounds": [
+            688,
+            312,
+            241,
+            166
+          ]
+        }
+      ],
+      "floor": {
+        "source": "bighead_floor",
+        "animation": "idle",
+        "frame": 1,
+        "native_size": [
+          1512,
+          1512
+        ],
+        "quad": [
+          [
+            345,
+            550
+          ],
+          [
+            1271,
+            550
+          ],
+          [
+            1564,
+            1277
+          ],
+          [
+            52,
+            1277
+          ]
+        ]
+      },
+      "path": "assets/img/terrains/loc_foyer.png"
+    },
+    {
+      "id": "loc_hall",
+      "source": "bighead_wall1",
+      "bank": "bighead_wall1",
+      "build": "bighead_wall1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "tiles": [
+        2,
+        2
+      ],
+      "native_size": [
+        6480,
+        4174
+      ],
+      "display_size": [
+        1616,
+        1047
+      ],
+      "furnishings": [],
+      "floor": {
+        "source": "bighead_floor1",
+        "animation": "idle",
+        "frame": 1,
+        "native_size": [
+          1512,
+          1512
+        ],
+        "quad": [
+          [
+            380,
+            375
+          ],
+          [
+            1236,
+            375
+          ],
+          [
+            1507,
+            1039
+          ],
+          [
+            109,
+            1039
+          ]
+        ]
+      },
+      "path": "assets/img/terrains/loc_hall.png"
+    },
+    {
+      "id": "loc_bedroom",
+      "source": "bighead_wall2",
+      "bank": "bighead_wall2",
+      "build": "bighead_wall2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "tiles": [
+        2,
+        2
+      ],
+      "native_size": [
+        6018,
+        4692
+      ],
+      "display_size": [
+        1616,
+        1263
+      ],
+      "furnishings": [],
+      "floor": {
+        "source": "bighead_floor2",
+        "animation": "idle",
+        "frame": 1,
+        "native_size": [
+          1512,
+          1512
+        ],
+        "quad": [
+          [
+            345,
+            540
+          ],
+          [
+            1271,
+            540
+          ],
+          [
+            1561,
+            1255
+          ],
+          [
+            55,
+            1255
+          ]
+        ]
+      },
+      "path": "assets/img/terrains/loc_bedroom.png"
+    },
+    {
+      "id": "loc_bedroom_right",
+      "source": "bighead_wall3",
+      "bank": "bighead_wall3",
+      "build": "bighead_wall3",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "tiles": [
+        2,
+        2
+      ],
+      "native_size": [
+        6018,
+        4692
+      ],
+      "display_size": [
+        1616,
+        1263
+      ],
+      "furnishings": [],
+      "floor": {
+        "source": "bighead_floor3",
+        "animation": "idle",
+        "frame": 1,
+        "native_size": [
+          1512,
+          1512
+        ],
+        "quad": [
+          [
+            345,
+            540
+          ],
+          [
+            1271,
+            540
+          ],
+          [
+            1561,
+            1255
+          ],
+          [
+            55,
+            1255
+          ]
+        ]
+      },
+      "path": "assets/img/terrains/loc_bedroom_right.png"
+    }
+  ]
+}

@@ -33,6 +33,7 @@
     </div>
     <nav class="topbar__nav" aria-label="章节导航">
       <a href="#intro">序</a>
+      <a href="#characters">人物</a>
     </nav>
     <div class="topbar__right">
       <button class="icon-button" type="button" data-search-open aria-label="打开全局搜索">
@@ -44,6 +45,7 @@
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="移动导航" hidden>
       <a href="#intro">序</a>
+      <a href="#characters">人物</a>
     </nav>
   </header>
 
@@ -58,6 +60,11 @@
   <footer class="site-footer section--ink">
     <div class="shell" id="footer-root"></div>
   </footer>
+
+  <button class="back-to-top" type="button" data-back-to-top aria-label="回到页面顶部" title="回到顶部" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14M6 13l6-6 6 6M12 7v13"></path></svg>
+    <span>回到顶部</span>
+  </button>
 
   <aside class="search-panel" data-search-panel hidden>
     <div class="search-panel__mask" data-search-close></div>
@@ -102,16 +109,27 @@
       <p class="hero__tag"></p>
       <h1 class="hero__title">{{site_title}}</h1>
       <p class="hero__subtitle">{{subtitle_latin}}</p>
-      <p class="hero__meta">{{version}} · {{author}} · <a href="{{workshop_url}}" target="_blank" rel="noreferrer">创意工坊 ↗</a></p>
+      <p class="hero__meta">{{version}} · {{author}} · <a href="{{workshop_url}}" target="_blank" rel="noreferrer">创意工坊 ↗</a>{{#qq_group_url}} · <a class="hero__join" href="{{qq_group_url}}" target="_blank" rel="noopener noreferrer" aria-label="加入《我们饥佬是这样的》mod交流群">加入交流群 <span aria-hidden="true">↗</span></a>{{/qq_group_url}}</p>
     </div>
-    <div class="duo reveal in" data-entry-target="hero-duo">
+    <div class="duo reveal in" id="characters" data-section="characters" role="region" aria-label="人物" data-entry-target="hero-duo">
       <article class="duo__char duo__char--left" data-char="{{character_a.id}}" data-entry-target="{{character_a.id}}">
         <div class="duo__name duo__name--left">
           <img src="assets/img/ui/pangtouyu.png" alt="胖头鱼" loading="eager" onerror="window.App.onImageError(this)">
         </div>
         <figure class="duo__portrait">
+          <button class="duo__portrait-trigger" type="button" aria-label="查看{{character_a.name}}的专属物品" aria-expanded="false" aria-controls="gear-{{character_a.id}}">
           <img src="{{character_a.portrait}}" alt="{{character_a.name}} 立绘" loading="eager" fetchpriority="high" onerror="window.App.onImageError(this)">
+          </button>
         </figure>
+        <svg class="duo-gear-lines" aria-hidden="true"></svg>
+        <div class="duo-gear" id="gear-{{character_a.id}}" aria-label="{{character_a.name}}的专属物品" aria-hidden="true" inert>
+          <p class="duo-gear__heading">随身专属 <span>点击查看</span></p>
+          {{#character_a.featured_items}}
+          <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
+            <img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)"><span>{{name}}</span>
+          </button>
+          {{/character_a.featured_items}}
+        </div>
         <nav class="duo__fields duo__fields--bottom" aria-label="胖头鱼字段">
           <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="setting">
             <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
@@ -132,8 +150,19 @@
           </button>
         </nav>
         <figure class="duo__portrait">
+          <button class="duo__portrait-trigger" type="button" aria-label="查看{{character_b.name}}的专属物品" aria-expanded="false" aria-controls="gear-{{character_b.id}}">
           <img src="{{character_b.portrait}}" alt="{{character_b.name}} 立绘" loading="eager" fetchpriority="high" onerror="window.App.onImageError(this)">
+          </button>
         </figure>
+        <svg class="duo-gear-lines" aria-hidden="true"></svg>
+        <div class="duo-gear" id="gear-{{character_b.id}}" aria-label="{{character_b.name}}的专属物品" aria-hidden="true" inert>
+          <p class="duo-gear__heading">随身专属 <span>点击查看</span></p>
+          {{#character_b.featured_items}}
+          <button class="duo-gear__item" type="button" data-open-entry="{{id}}" style="--gear-order:{{order}}" aria-label="查看{{name}}详情">
+            <img src="{{display_image}}" alt="" loading="eager" onerror="window.App.onImageError(this)"><span>{{name}}</span>
+          </button>
+          {{/character_b.featured_items}}
+        </div>
         <div class="duo__name duo__name--right">
           <img src="assets/img/ui/gaojiaoniao.png" alt="高脚鸟" loading="eager" onerror="window.App.onImageError(this)">
         </div>
@@ -152,16 +181,15 @@
         </div>
       </aside>
     </div>
-    <section class="poster-band" aria-label="模组海报"></section>
   </script>
 
   <script id="tpl-items" type="x-tmpl-mustache">
     <div class="filters-panel card reveal">
       <div class="filters-panel__block">
         <span class="filters-panel__label">分类</span>
-        <div class="chip-row" data-filter-group="category">
+        <div class="chip-row" data-filter-group="category" role="group" aria-label="物品分类（单选）">
           {{#category_options}}
-          <button class="chip {{active_class}}" type="button" data-cat="{{value}}">{{label}}</button>
+          <button class="chip {{active_class}}" type="button" data-cat="{{value}}" aria-pressed="{{active}}">{{label}}</button>
           {{/category_options}}
         </div>
       </div>
@@ -173,19 +201,21 @@
       <button class="button button--ghost" type="button" data-clear-filters>清空</button>
       <p class="filters-summary" id="items-summary-root">{{summary}}</p>
     </div>
-    <div class="items-grid reveal" id="items-grid-root">
+    <div class="items-grid" id="items-grid-root">
       {{#items}}
       <article class="item-card card" data-entry-target="{{id}}">
-        <button class="card-link" type="button" data-open-entry="{{id}}">
+        <button class="card-link{{#owner_stamp}} card-link--owned{{/owner_stamp}}" type="button" data-open-entry="{{id}}">
           <span class="item-card__image">
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
+            {{#owner_stamp}}<span class="item-card__owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
           </span>
           <span class="item-card__meta">
-            <span class="item-card__topline">{{category_label}}</span>
-            <strong>{{{name_html}}}</strong>
+            <span class="item-card__topline">{{category_label}}{{#skin_count}} · {{skin_count}} 款外观{{/skin_count}}</span>
+            {{#availability}}<span class="availability-badge">{{availability}}</span>{{/availability}}
+            <strong class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<span>{{{name_html}}}</span></strong>
             <span>{{{summary_html}}}</span>
           </span>
-          <span class="item-card__owner">{{owner_label}}</span>
+          {{^owner_stamp}}<span class="item-card__owner">{{owner_label}}</span>{{/owner_stamp}}
         </button>
       </article>
       {{/items}}
@@ -194,16 +224,21 @@
 
   <!-- 通用分区卡片模板，mechanics / terrains / 新增分区共用 -->
   <script id="tpl-section-cards" type="x-tmpl-mustache">
-    <div class="items-grid reveal">
+    <div class="items-grid">
       {{#entries}}
       <article class="item-card card" data-entry-target="{{id}}">
-        <button class="card-link" type="button" data-open-entry="{{id}}">
-          <span class="item-card__image">
+        <button class="card-link{{^image}} card-link--text{{/image}}" type="button" data-open-entry="{{id}}">
+          {{#image}}
+          <span class="item-card__image{{#preview_caption}} item-card__image--scene{{/preview_caption}}">
+            <picture class="display-picture">
+            {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
+            </picture>
           </span>
+          {{/image}}
           <span class="item-card__meta">
-            <span class="item-card__topline">{{category_label}}</span>
-            <strong>{{name}}</strong>
+            <span class="item-card__topline">{{category_label}}{{#preview_caption}} · {{preview_caption}}{{/preview_caption}}</span>
+            <strong class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<span>{{name}}</span></strong>
             <span>{{summary}}</span>
           </span>
           <span class="item-card__owner">{{owner_label}}</span>
@@ -238,7 +273,7 @@
   </script>
 
   <script id="tpl-mechanics" type="x-tmpl-mustache">
-    <div class="items-grid reveal">
+    <div class="items-grid">
       {{#mechanics}}
       <article class="item-card card" data-entry-target="{{id}}">
         <button class="card-link" type="button" data-open-entry="{{id}}">
@@ -258,7 +293,7 @@
   </script>
 
   <script id="tpl-terrains" type="x-tmpl-mustache">
-    <div class="items-grid reveal">
+    <div class="items-grid">
       {{#terrains}}
       <article class="item-card card" data-entry-target="{{id}}">
         <button class="card-link" type="button" data-open-entry="{{id}}">
@@ -336,17 +371,33 @@
             <path d="M6 6l12 12M18 6L6 18"></path>
           </svg>
         </button>
+        <div class="modal-card__overview{{#image}} modal-card__overview--illustrated{{/image}}{{#preview_caption}} modal-card__overview--scene{{/preview_caption}}">
         <div class="modal-card__head">
+          {{#parent_item}}<button class="button button--ghost" type="button" data-open-entry="{{id}}">← 返回{{name}}</button>{{/parent_item}}
           <div>
             <p class="modal-card__eyebrow">{{eyebrow}}</p>
-            <h2 id="modal-title">{{title}}</h2>
+            {{#availability}}<p class="availability-badge">{{availability}}</p>{{/availability}}
+            <h2 id="modal-title" class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" onerror="window.App.onImageError(this)">{{/icon}}<span>{{title}}{{#title_note}}<small class="entry-title__note">{{title_note}}</small>{{/title_note}}</span></h2>
             <p>{{subtitle}}</p>
           </div>
           <button class="button button--ghost" type="button" data-copy-link="{{id}}">复制链接</button>
         </div>
         {{#image}}
+        {{#has_scene_hotspots}}<div class="scene-preview">{{/has_scene_hotspots}}
+        <picture class="display-picture">
+        {{#display_poster}}<source media="(prefers-reduced-motion: reduce)" srcset="{{display_poster}}">{{/display_poster}}
         <img class="modal-card__hero" src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
+        </picture>
+        {{#scene_hotspots}}
+        <button class="scene-hotspot" type="button" style="{{position}}" data-open-entry="{{target}}" aria-label="{{label}}：{{hint}}">
+          <span class="scene-hotspot__hint">{{label}} · {{hint}} →</span>
+        </button>
+        {{/scene_hotspots}}
+        {{#has_scene_hotspots}}</div>{{/has_scene_hotspots}}
         {{/image}}
+        {{#preview_caption}}<p class="scene-preview-caption">{{preview_caption}}</p>{{/preview_caption}}
+        {{#scene_hint}}<p class="scene-preview-hint">{{scene_hint}}</p>{{/scene_hint}}
+        </div>
         <div class="modal-card__content prose">
           {{#paragraphs}}
           <p>{{{html}}}</p>
@@ -355,8 +406,27 @@
         {{#has_detail_blocks}}
         <div class="detail-blocks">
           {{#detail_blocks}}
-          <section class="detail-block">
-            {{#is_text}}<p>{{{content_html}}}</p>{{/is_text}}
+          <section class="detail-block{{#is_image}} detail-block--image{{/is_image}}{{#is_note}} detail-block--note{{/is_note}}">
+            {{#title}}<h3>{{title}}</h3>{{/title}}
+            {{#is_text}}{{#text_paragraphs}}<p>{{{html}}}</p>{{/text_paragraphs}}{{/is_text}}
+            {{#is_list}}
+            <ul class="detail-list{{#list_is_grid}} detail-list--grid{{/list_is_grid}}">
+              {{#list_items}}<li>{{{html}}}</li>{{/list_items}}
+            </ul>
+            {{/is_list}}
+            {{#is_stats}}
+            <dl class="detail-stats">
+              {{#stats}}<div><dt>{{label}}</dt><dd>{{value}}{{#unit}}<span>{{unit}}</span>{{/unit}}</dd></div>{{/stats}}
+            </dl>
+            {{/is_stats}}
+            {{#is_table}}
+            <div class="detail-table-wrap" role="region" aria-label="{{table_label}}" tabindex="0">
+              <table class="detail-table">
+                <thead><tr>{{#table_headers}}<th scope="col">{{label}}</th>{{/table_headers}}</tr></thead>
+                <tbody>{{#table_rows}}<tr><th scope="row">{{{label_html}}}</th>{{#cells}}<td>{{{html}}}</td>{{/cells}}</tr>{{/table_rows}}</tbody>
+              </table>
+            </div>
+            {{/is_table}}
             {{#is_image}}
             <figure>
               <img src="{{src}}" alt="{{caption}}" loading="lazy" onerror="window.App.onImageError(this)">
@@ -368,12 +438,25 @@
         </div>
         {{/has_detail_blocks}}
         {{#recipe_html}}
-        <div class="recipe-row">
+        <section class="recipe-row detail-block">
           <h3>制作与获取</h3>
-          {{#tech}}<p class="recipe-tech">{{tech}}</p>{{/tech}}
+          {{#tech_html}}<p class="recipe-tech">{{{tech_html}}}</p>{{/tech_html}}
           <div>{{{recipe_html}}}</div>
-        </div>
+        </section>
         {{/recipe_html}}
+        {{#has_skins}}
+        <section class="item-appearances detail-block" aria-labelledby="item-appearances-title">
+          <h3 id="item-appearances-title">物品外观 <span class="item-appearances__count">{{skin_count}} 款</span></h3>
+          <div class="item-appearances__grid">
+            {{#skins}}
+            <button class="item-appearance" type="button" data-open-entry="{{id}}" aria-label="查看{{name}}外观">
+              <span class="item-appearance__image"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)"></span>
+              <span>{{name}}</span>
+            </button>
+            {{/skins}}
+          </div>
+        </section>
+        {{/has_skins}}
         {{#has_related}}
         <div class="related-row">
           <h3>关联</h3>
@@ -405,6 +488,7 @@
 
   <script src="assets/js/vendor/mustache.min.js" defer></script>
   <script src="data/site-data.js" defer></script>
+  <script src="data/vanilla-icons.js" defer></script>
   <script src="assets/js/data.js" defer></script>
   <script src="assets/js/render.js" defer></script>
   <script src="assets/js/recipe.js" defer></script>
@@ -413,7 +497,6 @@
   <script src="assets/js/carousel.js" defer></script>
   <script src="assets/js/modal.js" defer></script>
   <script src="assets/js/char-popup.js" defer></script>
-  <script src="assets/js/poster.js" defer></script>
   <script src="assets/js/editor.js" defer></script>
   <script src="assets/js/motion.js" defer></script>
   <script src="assets/js/main.js" defer></script>

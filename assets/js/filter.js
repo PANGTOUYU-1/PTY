@@ -49,9 +49,11 @@
         return { label: c.name, value: c.id };
       }));
       return cats.map(function (item) {
+        const active = item.value === (App.ui.cats[0] || "all");
         return {
           ...item,
-          active_class: App.ui.cats.length === 0 ? (item.value === "all" ? "is-active" : "") : App.ui.cats.indexOf(item.value) > -1 ? "is-active" : ""
+          active: active,
+          active_class: active ? "is-active" : ""
         };
       });
     },
@@ -59,10 +61,9 @@
     getFilteredItems: function () {
       const query = normalizeText(App.ui.q);
       return App.STATE.items.filter(function (item) {
-        const categoryPass = App.ui.cats.length === 0 || App.ui.cats.indexOf(item.category) > -1;
-        const ownerPass = App.ui.owner === "all" || item.owner === App.ui.owner;
+        const categoryPass = App.ui.cats.length === 0 || App.ui.cats[0] === item.category;
         const queryPass = !query || normalizeText(App.STATE.entries[item.id].searchText).indexOf(query) > -1;
-        return categoryPass && ownerPass && queryPass;
+        return categoryPass && queryPass;
       });
     },
 
@@ -100,7 +101,7 @@
     },
 
     summary: function (count) {
-      const catText = App.ui.cats.length ? App.ui.cats.map(function (cat) { return App.config.categoryLabels[cat]; }).join(" / ") : "全部分类";
+      const catText = App.ui.cats.length ? App.config.categoryLabels[App.ui.cats[0]] : "全部分类";
       const queryText = App.ui.q ? " · 关键词 “" + App.ui.q + "”" : "";
       return "共 " + count + " 项 · " + catText + queryText;
     },
@@ -136,14 +137,7 @@
 
         if (catButton) {
           const value = catButton.dataset.cat;
-          const nextCats =
-            value === "all"
-              ? []
-              : App.ui.cats.indexOf(value) > -1
-              ? App.ui.cats.filter(function (cat) {
-                  return cat !== value;
-                })
-              : App.ui.cats.concat(value);
+          const nextCats = value === "all" ? [] : [value];
           App.route.sync({ section: "items", cats: nextCats, detailId: App.ui.detailId }, { replace: true });
           App.Render.renderItems();
           App.bindInteractive();

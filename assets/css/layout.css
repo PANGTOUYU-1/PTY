@@ -72,18 +72,50 @@
 }
 
 .topbar__nav a {
+  position: relative;
   padding: 4px 0;
   color: var(--ink-2);
   font-family: var(--ff-serif);
   font-size: 16px;
   letter-spacing: 0.2em;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .topbar__nav a.is-active {
   color: var(--ink);
-  border-bottom: 2px solid var(--cinnabar);
 }
+
+.nav-ink-ring {
+  position: absolute;
+  inset: -8px -10px;
+  width: calc(100% + 20px);
+  max-width: none;
+  height: calc(100% + 16px);
+  overflow: visible;
+  color: var(--ink-2);
+  pointer-events: none;
+  visibility: hidden;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-ink-ring__stroke { stroke-width: 2.6; opacity: .8; }
+.nav-ink-ring__dry { stroke-width: .8; opacity: .38; }
+
+.topbar__nav a.is-active .nav-ink-ring,
+.mobile-nav a.is-active .nav-ink-ring {
+  visibility: visible;
+  animation: nav-ink-breathe 5s ease-in-out 800ms infinite;
+}
+
+.is-active .nav-ink-ring path {
+  animation: nav-ink-draw 800ms ease-out both;
+}
+
+.is-active .nav-ink-ring__dry { animation-delay: 100ms; }
 
 .mobile-nav {
   position: fixed;
@@ -91,6 +123,8 @@
   right: 0;
   bottom: 0;
   width: min(360px, 100%);
+  height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
   padding: var(--sp-6) var(--sp-5);
   background: var(--ink);
   display: none;
@@ -104,12 +138,16 @@
 }
 
 .mobile-nav a {
+  position: relative;
+  width: max-content;
   color: var(--paper);
   font-family: var(--ff-serif);
   font-size: 24px;
   letter-spacing: 0.16em;
   text-decoration: none;
 }
+
+.mobile-nav .nav-ink-ring { color: var(--paper); }
 
 .hero {
   background: var(--paper);
@@ -127,6 +165,14 @@
   max-width: 960px;
   text-align: center;
   margin: 0 0 48px;
+}
+
+#hero-root {
+  width: 100%;
+}
+
+#characters {
+  scroll-margin-top: calc(var(--header-h) + 16px);
 }
 
 .section--paper .section-head__eyebrow {
@@ -190,6 +236,17 @@
 @media (max-width: 1023px) {
   .items-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .topbar__left,
+  .topbar__right {
+    min-width: 40px;
+  }
+
+  .topbar__nav {
+    gap: 16px;
   }
 }
 

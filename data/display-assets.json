@@ -1,0 +1,3474 @@
+{
+  "generator": "DST Mod Tool 1.1.13 official Lua API",
+  "mod_version": "4.8",
+  "processing": "Native scale 1; alpha crop and 8px transparent padding; no resizing or vertical flip.",
+  "assets": [
+    {
+      "source": "status_bighead_lingqi",
+      "bank": "status_bighead_lingqi",
+      "build": "status_bighead_lingqi",
+      "animation": "frame",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 84,
+      "height": 72,
+      "alpha_bounds": [8, 3, 84, 70],
+      "display_size": [92, 83],
+      "path": "assets/img/displays/status_bighead_lingqi.png",
+      "icon_symbol": "icon",
+      "icon_size": [55, 38],
+      "icon_path": "assets/img/mechanics/lingqi.png"
+    },
+    {
+      "source": "bb_cct",
+      "bank": "bb_cct",
+      "build": "bb_cct",
+      "animation": "honey3",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 815,
+      "height": 552,
+      "alpha_bounds": [
+        113,
+        0,
+        703,
+        545
+      ],
+      "display_size": [
+        606,
+        561
+      ],
+      "path": "assets/img/displays/bb_cct.png"
+    },
+    {
+      "source": "bb_cm",
+      "bank": "bb_cm",
+      "build": "bb_cm",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 130,
+      "height": 111,
+      "alpha_bounds": [
+        3,
+        1,
+        129,
+        109
+      ],
+      "display_size": [
+        142,
+        124
+      ],
+      "path": "assets/img/displays/bb_cm.png"
+    },
+    {
+      "source": "bb_cmbush",
+      "bank": "bb_cmbush",
+      "build": "bb_cmbush",
+      "animation": "idle_full",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 397,
+      "height": 325,
+      "alpha_bounds": [
+        1,
+        2,
+        396,
+        323
+      ],
+      "display_size": [
+        411,
+        337
+      ],
+      "path": "assets/img/displays/bb_cmbush.png"
+    },
+    {
+      "source": "bb_cwd",
+      "bank": "bb_cwd",
+      "build": "bb_cwd",
+      "animation": "idle_flight_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 191,
+      "height": 193,
+      "alpha_bounds": [
+        30,
+        35,
+        178,
+        167
+      ],
+      "display_size": [
+        164,
+        148
+      ],
+      "path": "assets/img/displays/bb_cwd.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_bzmgt",
+      "bank": "bb_gaojiaoniao_bzmgt",
+      "build": "bb_gaojiaoniao_bzmgt",
+      "animation": "f1",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 253,
+      "height": 211,
+      "alpha_bounds": [
+        4,
+        4,
+        249,
+        207
+      ],
+      "display_size": [
+        261,
+        219
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_bzmgt.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_cmyh",
+      "bank": "bb_gaojiaoniao_cmyh",
+      "build": "bb_gaojiaoniao_cmyh",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 784,
+      "height": 345,
+      "alpha_bounds": [
+        0,
+        7,
+        784,
+        345
+      ],
+      "display_size": [
+        800,
+        354
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cmyh.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_cmyh_skin1",
+      "bank": "bb_gaojiaoniao_cmyh_skin1",
+      "build": "bb_gaojiaoniao_cmyh_skin1",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 523,
+      "height": 303,
+      "alpha_bounds": [
+        0,
+        0,
+        522,
+        303
+      ],
+      "display_size": [
+        538,
+        319
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cmyh_skin1.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_cmyh_skin2",
+      "bank": "bb_gaojiaoniao_cmyh_skin2",
+      "build": "bb_gaojiaoniao_cmyh_skin2",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 177,
+      "height": 130,
+      "alpha_bounds": [
+        2,
+        0,
+        172,
+        123
+      ],
+      "display_size": [
+        186,
+        139
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cmyh_skin2.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_cmyh_skin3",
+      "bank": "bb_gaojiaoniao_cmyh_skin3",
+      "build": "bb_gaojiaoniao_cmyh_skin3",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 250,
+      "height": 232,
+      "alpha_bounds": [
+        0,
+        0,
+        250,
+        232
+      ],
+      "display_size": [
+        266,
+        248
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cmyh_skin3.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_cs",
+      "bank": "bb_gaojiaoniao_cs",
+      "build": "bb_gaojiaoniao_cs",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 400,
+      "height": 163,
+      "alpha_bounds": [
+        0,
+        8,
+        400,
+        163
+      ],
+      "display_size": [
+        416,
+        171
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cs.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_cs_skin1",
+      "bank": "bb_gaojiaoniao_cs_skin1",
+      "build": "bb_gaojiaoniao_cs_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 283,
+      "height": 423,
+      "alpha_bounds": [
+        0,
+        7,
+        283,
+        423
+      ],
+      "display_size": [
+        299,
+        432
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cs_skin1.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fh",
+      "bank": "bb_gaojiaoniao_fh",
+      "build": "bb_gaojiaoniao_fh",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 315,
+      "height": 600,
+      "alpha_bounds": [
+        7,
+        0,
+        302,
+        573
+      ],
+      "display_size": [
+        311,
+        589
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fh.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fh_skin1",
+      "bank": "bb_gaojiaoniao_fh_skin1",
+      "build": "bb_gaojiaoniao_fh_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 288,
+      "height": 597,
+      "alpha_bounds": [
+        6,
+        22,
+        274,
+        597
+      ],
+      "display_size": [
+        284,
+        591
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fh_skin1.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fh_skin2",
+      "bank": "bb_gaojiaoniao_fh_skin2",
+      "build": "bb_gaojiaoniao_fh_skin2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 289,
+      "height": 253,
+      "alpha_bounds": [
+        10,
+        3,
+        289,
+        251
+      ],
+      "display_size": [
+        295,
+        264
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fh_skin2.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fhd",
+      "bank": "bb_gaojiaoniao_fhd",
+      "build": "bb_gaojiaoniao_fhd",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 300,
+      "height": 236,
+      "alpha_bounds": [
+        9,
+        0,
+        292,
+        233
+      ],
+      "display_size": [
+        299,
+        249
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fhd.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fqh",
+      "bank": "bb_gaojiaoniao_fqh",
+      "build": "bb_gaojiaoniao_fqh",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 324,
+      "height": 254,
+      "alpha_bounds": [
+        12,
+        0,
+        312,
+        254
+      ],
+      "display_size": [
+        316,
+        270
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fqh.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fqh_skin1",
+      "bank": "bb_gaojiaoniao_fqh_skin1",
+      "build": "bb_gaojiaoniao_fqh_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 324,
+      "height": 254,
+      "alpha_bounds": [
+        12,
+        0,
+        312,
+        254
+      ],
+      "display_size": [
+        316,
+        270
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fqh_skin1.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fqh_skin2",
+      "bank": "bb_gaojiaoniao_fqh_skin1",
+      "build": "bb_gaojiaoniao_fqh_skin2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 284,
+      "height": 405,
+      "alpha_bounds": [
+        0,
+        7,
+        284,
+        405
+      ],
+      "display_size": [
+        300,
+        414
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fqh_skin2.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fqh_skin3",
+      "bank": "bb_gaojiaoniao_fqh_skin3",
+      "build": "bb_gaojiaoniao_fqh_skin3",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 206,
+      "height": 407,
+      "alpha_bounds": [
+        4,
+        5,
+        201,
+        407
+      ],
+      "display_size": [
+        213,
+        418
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fqh_skin3.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fr",
+      "bank": "bb_gaojiaoniao_fr",
+      "build": "bb_gaojiaoniao_fr",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        1,
+        1,
+        188,
+        190
+      ],
+      "display_size": [
+        203,
+        205
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fr.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_gjsh",
+      "bank": "bb_gaojiaoniao_gjsh",
+      "build": "bb_gaojiaoniao_gjsh",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 301,
+      "height": 335,
+      "alpha_bounds": [
+        5,
+        0,
+        291,
+        325
+      ],
+      "display_size": [
+        302,
+        341
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_gjsh_skin1",
+      "bank": "bb_gaojiaoniao_gjsh_skin1",
+      "build": "bb_gaojiaoniao_gjsh_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 320,
+      "height": 335,
+      "alpha_bounds": [
+        5,
+        0,
+        320,
+        325
+      ],
+      "display_size": [
+        331,
+        341
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_gjsh_skin1.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_lh",
+      "bank": "bb_gaojiaoniao_lh",
+      "build": "bb_gaojiaoniao_lh",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 380,
+      "height": 326,
+      "alpha_bounds": [
+        1,
+        0,
+        380,
+        326
+      ],
+      "display_size": [
+        395,
+        342
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_lh.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_lh_skin1",
+      "bank": "bb_gaojiaoniao_lh_skin1",
+      "build": "bb_gaojiaoniao_lh_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 252,
+      "height": 210,
+      "alpha_bounds": [
+        1,
+        20,
+        251,
+        184
+      ],
+      "display_size": [
+        266,
+        180
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_lh_skin1.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_lh_skin2",
+      "bank": "bb_gaojiaoniao_lh_skin2",
+      "build": "bb_gaojiaoniao_lh_skin2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 150,
+      "height": 142,
+      "alpha_bounds": [
+        9,
+        0,
+        142,
+        142
+      ],
+      "display_size": [
+        149,
+        158
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_lh_skin2.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_px",
+      "bank": "bb_gaojiaoniao_px",
+      "build": "bb_gaojiaoniao_px",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 767,
+      "height": 735,
+      "alpha_bounds": [
+        15,
+        6,
+        752,
+        692
+      ],
+      "display_size": [
+        753,
+        702
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_px.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_px_skin1",
+      "bank": "bb_gaojiaoniao_px_skin1",
+      "build": "bb_gaojiaoniao_px_skin1",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 717,
+      "height": 508,
+      "alpha_bounds": [
+        20,
+        6,
+        717,
+        508
+      ],
+      "display_size": [
+        713,
+        518
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_px_skin1.png"
+    },
+    {
+      "source": "bb_hhlct",
+      "bank": "bb_hhlct",
+      "build": "bb_hhlct",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 992,
+      "height": 517,
+      "alpha_bounds": [
+        0,
+        0,
+        992,
+        517
+      ],
+      "display_size": [
+        1008,
+        533
+      ],
+      "path": "assets/img/displays/bb_hhlct.png"
+    },
+    {
+      "source": "bighead_armor",
+      "bank": "bighead_armor",
+      "build": "bighead_armor",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 252,
+      "height": 210,
+      "alpha_bounds": [
+        18,
+        12,
+        233,
+        199
+      ],
+      "display_size": [
+        231,
+        203
+      ],
+      "path": "assets/img/displays/bighead_armor.png"
+    },
+    {
+      "source": "bighead_armor_skin1",
+      "bank": "bighead_armor_skin1",
+      "build": "bighead_armor_skin1",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 422,
+      "height": 277,
+      "alpha_bounds": [
+        31,
+        5,
+        391,
+        273
+      ],
+      "display_size": [
+        376,
+        284
+      ],
+      "path": "assets/img/displays/bighead_armor_skin1.png"
+    },
+    {
+      "source": "bighead_armor_skin2",
+      "bank": "bighead_armor_skin2",
+      "build": "bighead_armor_skin2",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 177,
+      "height": 130,
+      "alpha_bounds": [
+        0,
+        0,
+        177,
+        130
+      ],
+      "display_size": [
+        193,
+        146
+      ],
+      "path": "assets/img/displays/bighead_armor_skin2.png"
+    },
+    {
+      "source": "bighead_armor_skin3",
+      "bank": "bighead_armor_skin3",
+      "build": "bighead_armor_skin3",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 250,
+      "height": 232,
+      "alpha_bounds": [
+        0,
+        0,
+        250,
+        232
+      ],
+      "display_size": [
+        266,
+        248
+      ],
+      "path": "assets/img/displays/bighead_armor_skin3.png"
+    },
+    {
+      "source": "bighead_autumn_spirit",
+      "bank": "bighead_autumn_spirit",
+      "build": "bighead_autumn_spirit",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 213,
+      "height": 660,
+      "alpha_bounds": [
+        12,
+        4,
+        197,
+        655
+      ],
+      "display_size": [
+        201,
+        667
+      ],
+      "path": "assets/img/displays/bighead_autumn_spirit.png"
+    },
+    {
+      "source": "bighead_back",
+      "bank": "bighead_back",
+      "build": "bighead_back",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 346,
+      "height": 181,
+      "alpha_bounds": [
+        0,
+        0,
+        345,
+        181
+      ],
+      "display_size": [
+        361,
+        197
+      ],
+      "path": "assets/img/displays/bighead_back.png"
+    },
+    {
+      "source": "bighead_back_skin1",
+      "bank": "bighead_back_skin1",
+      "build": "bighead_back_skin1",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 234,
+      "height": 222,
+      "alpha_bounds": [
+        10,
+        19,
+        224,
+        222
+      ],
+      "display_size": [
+        230,
+        219
+      ],
+      "path": "assets/img/displays/bighead_back_skin1.png"
+    },
+    {
+      "source": "bighead_back_skin2",
+      "bank": "bighead_back_skin2",
+      "build": "bighead_back_skin2",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 252,
+      "height": 239,
+      "alpha_bounds": [
+        4,
+        11,
+        236,
+        239
+      ],
+      "display_size": [
+        248,
+        244
+      ],
+      "path": "assets/img/displays/bighead_back_skin2.png"
+    },
+    {
+      "source": "bighead_back_skin3",
+      "bank": "bighead_back_skin3",
+      "build": "bighead_back_skin3",
+      "animation": "anim",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 150,
+      "height": 142,
+      "alpha_bounds": [
+        9,
+        0,
+        142,
+        142
+      ],
+      "display_size": [
+        149,
+        158
+      ],
+      "path": "assets/img/displays/bighead_back_skin3.png"
+    },
+    {
+      "source": "bighead_buran",
+      "bank": "bighead_buran",
+      "build": "bighead_buran",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 138,
+      "height": 307,
+      "alpha_bounds": [
+        1,
+        0,
+        138,
+        307
+      ],
+      "display_size": [
+        153,
+        323
+      ],
+      "path": "assets/img/displays/bighead_buran.png"
+    },
+    {
+      "source": "bighead_buran_skin1",
+      "bank": "bighead_buran_skin1",
+      "build": "bighead_buran_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 130,
+      "height": 280,
+      "alpha_bounds": [
+        3,
+        0,
+        128,
+        280
+      ],
+      "display_size": [
+        141,
+        296
+      ],
+      "path": "assets/img/displays/bighead_buran_skin1.png"
+    },
+    {
+      "source": "bighead_buran_skin2",
+      "bank": "bighead_buran_skin2",
+      "build": "bighead_buran_skin2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 120,
+      "height": 274,
+      "alpha_bounds": [
+        0,
+        0,
+        120,
+        274
+      ],
+      "display_size": [
+        136,
+        290
+      ],
+      "path": "assets/img/displays/bighead_buran_skin2.png"
+    },
+    {
+      "source": "bighead_buran_skin3",
+      "bank": "bighead_buran_skin3",
+      "build": "bighead_buran_skin3",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 258,
+      "height": 384,
+      "alpha_bounds": [
+        0,
+        4,
+        254,
+        384
+      ],
+      "display_size": [
+        270,
+        396
+      ],
+      "path": "assets/img/displays/bighead_buran_skin3.png"
+    },
+    {
+      "source": "bighead_buran_skin4",
+      "bank": "bighead_buran_skin4",
+      "build": "bighead_buran_skin4",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 285,
+      "height": 433,
+      "alpha_bounds": [
+        4,
+        8,
+        273,
+        410
+      ],
+      "display_size": [
+        285,
+        418
+      ],
+      "path": "assets/img/displays/bighead_buran_skin4.png"
+    },
+    {
+      "source": "bighead_buran_skin5",
+      "bank": "bighead_buran_skin5",
+      "build": "bighead_buran_skin5",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 302,
+      "height": 291,
+      "alpha_bounds": [
+        9,
+        5,
+        287,
+        289
+      ],
+      "display_size": [
+        294,
+        300
+      ],
+      "path": "assets/img/displays/bighead_buran_skin5.png"
+    },
+    {
+      "source": "bighead_cmgt",
+      "bank": "bighead_cmgt",
+      "build": "bighead_cmgt",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 180,
+      "height": 171,
+      "alpha_bounds": [
+        0,
+        0,
+        180,
+        170
+      ],
+      "display_size": [
+        196,
+        186
+      ],
+      "path": "assets/img/displays/bighead_cmgt.png"
+    },
+    {
+      "source": "bighead_cmklb",
+      "bank": "bighead_cmklb",
+      "build": "bighead_cmklb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 198,
+      "height": 212,
+      "alpha_bounds": [
+        0,
+        0,
+        198,
+        212
+      ],
+      "display_size": [
+        214,
+        228
+      ],
+      "path": "assets/img/displays/bighead_cmklb.png"
+    },
+    {
+      "source": "bighead_cmrl",
+      "bank": "bighead_cmrl",
+      "build": "bighead_cmrl",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 225,
+      "height": 209,
+      "alpha_bounds": [
+        1,
+        2,
+        225,
+        209
+      ],
+      "display_size": [
+        240,
+        223
+      ],
+      "path": "assets/img/displays/bighead_cmrl.png"
+    },
+    {
+      "source": "bighead_cmyb",
+      "bank": "bighead_cmyb",
+      "build": "bighead_cmyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 167,
+      "alpha_bounds": [
+        1,
+        5,
+        183,
+        166
+      ],
+      "display_size": [
+        198,
+        177
+      ],
+      "path": "assets/img/displays/bighead_cmyb.png"
+    },
+    {
+      "source": "bighead_czflw",
+      "bank": "bighead_czflw",
+      "build": "bighead_czflw",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 208,
+      "height": 342,
+      "alpha_bounds": [
+        1,
+        9,
+        202,
+        332
+      ],
+      "display_size": [
+        217,
+        339
+      ],
+      "path": "assets/img/displays/bighead_czflw.png"
+    },
+    {
+      "source": "bighead_fanhua",
+      "bank": "bighead_fanhua",
+      "build": "bighead_fanhua",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 240,
+      "height": 360,
+      "alpha_bounds": [
+        11,
+        13,
+        229,
+        360
+      ],
+      "display_size": [
+        234,
+        363
+      ],
+      "path": "assets/img/displays/bighead_fanhua.png"
+    },
+    {
+      "source": "bighead_fanhua_skin1",
+      "bank": "bighead_fanhua_skin1",
+      "build": "bighead_fanhua_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 197,
+      "height": 357,
+      "alpha_bounds": [
+        20,
+        21,
+        195,
+        357
+      ],
+      "display_size": [
+        191,
+        352
+      ],
+      "path": "assets/img/displays/bighead_fanhua_skin1.png"
+    },
+    {
+      "source": "bighead_fgyb",
+      "bank": "bighead_fgyb",
+      "build": "bighead_fgyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        2,
+        15,
+        183,
+        189
+      ],
+      "display_size": [
+        197,
+        190
+      ],
+      "path": "assets/img/displays/bighead_fgyb.png"
+    },
+    {
+      "source": "bighead_fishhouse",
+      "bank": "bighead_fishhouse",
+      "build": "bighead_fishhouse",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 2413,
+      "height": 2277,
+      "alpha_bounds": [
+        2,
+        1,
+        2411,
+        2276
+      ],
+      "display_size": [
+        2425,
+        2291
+      ],
+      "path": "assets/img/displays/bighead_fishhouse.png"
+    },
+    {
+      "source": "bighead_flw",
+      "bank": "bighead_flw",
+      "build": "bighead_flw",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 189,
+      "height": 391,
+      "alpha_bounds": [
+        8,
+        1,
+        179,
+        358
+      ],
+      "display_size": [
+        187,
+        373
+      ],
+      "path": "assets/img/displays/bighead_flw.png"
+    },
+    {
+      "source": "bighead_fmss",
+      "bank": "bighead_fmss",
+      "build": "bighead_fmss",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 198,
+      "height": 226,
+      "alpha_bounds": [
+        0,
+        0,
+        198,
+        226
+      ],
+      "display_size": [
+        214,
+        242
+      ],
+      "path": "assets/img/displays/bighead_fmss.png"
+    },
+    {
+      "source": "bighead_gjnyb",
+      "bank": "bighead_gjnyb",
+      "build": "bighead_gjnyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        0,
+        1,
+        183,
+        189
+      ],
+      "display_size": [
+        199,
+        204
+      ],
+      "path": "assets/img/displays/bighead_gjnyb.png"
+    },
+    {
+      "source": "bighead_gwyb",
+      "bank": "bighead_gwyb",
+      "build": "bighead_gwyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 167,
+      "alpha_bounds": [
+        4,
+        1,
+        190,
+        166
+      ],
+      "display_size": [
+        202,
+        181
+      ],
+      "path": "assets/img/displays/bighead_gwyb.png"
+    },
+    {
+      "source": "bighead_hy",
+      "bank": "bighead_hy",
+      "build": "bighead_hy",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 618,
+      "height": 909,
+      "alpha_bounds": [
+        0,
+        0,
+        618,
+        909
+      ],
+      "display_size": [
+        634,
+        925
+      ],
+      "path": "assets/img/displays/bighead_hy.png"
+    },
+    {
+      "source": "bighead_jisheng_taoling",
+      "bank": "bighead_jisheng_taoling",
+      "build": "bighead_jisheng_taoling",
+      "animation": "idle_loop_down",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 266,
+      "height": 316,
+      "alpha_bounds": [
+        55,
+        47,
+        244,
+        303
+      ],
+      "display_size": [
+        205,
+        272
+      ],
+      "path": "assets/img/displays/bighead_jisheng_taoling.png"
+    },
+    {
+      "source": "bighead_jlyb",
+      "bank": "bighead_jlyb",
+      "build": "bighead_jlyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        1,
+        0,
+        183,
+        189
+      ],
+      "display_size": [
+        198,
+        205
+      ],
+      "path": "assets/img/displays/bighead_jlyb.png"
+    },
+    {
+      "source": "bighead_jq_bl",
+      "bank": "bighead_jq_bl",
+      "build": "bighead_jq_bl",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_bl.png"
+    },
+    {
+      "source": "bighead_jq_cf",
+      "bank": "bighead_jq_cf",
+      "build": "bighead_jq_cf",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_cf.png"
+    },
+    {
+      "source": "bighead_jq_chun",
+      "bank": "bighead_jq_chun",
+      "build": "bighead_jq_chun",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_chun.png"
+    },
+    {
+      "source": "bighead_jq_cs",
+      "bank": "bighead_jq_cs",
+      "build": "bighead_jq_cs",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_cs.png"
+    },
+    {
+      "source": "bighead_jq_dh",
+      "bank": "bighead_jq_dh",
+      "build": "bighead_jq_dh",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_dh.png"
+    },
+    {
+      "source": "bighead_jq_dong",
+      "bank": "bighead_jq_dong",
+      "build": "bighead_jq_dong",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_dong.png"
+    },
+    {
+      "source": "bighead_jq_ds",
+      "bank": "bighead_jq_ds",
+      "build": "bighead_jq_ds",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_ds.png"
+    },
+    {
+      "source": "bighead_jq_dx",
+      "bank": "bighead_jq_dx",
+      "build": "bighead_jq_dx",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_dx.png"
+    },
+    {
+      "source": "bighead_jq_dz",
+      "bank": "bighead_jq_dz",
+      "build": "bighead_jq_dz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_dz.png"
+    },
+    {
+      "source": "bighead_jq_gy",
+      "bank": "bighead_jq_gy",
+      "build": "bighead_jq_gy",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_gy.png"
+    },
+    {
+      "source": "bighead_jq_hl",
+      "bank": "bighead_jq_hl",
+      "build": "bighead_jq_hl",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_hl.png"
+    },
+    {
+      "source": "bighead_jq_jz",
+      "bank": "bighead_jq_jz",
+      "build": "bighead_jq_jz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_jz.png"
+    },
+    {
+      "source": "bighead_jq_lc",
+      "bank": "bighead_jq_lc",
+      "build": "bighead_jq_lc",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_lc.png"
+    },
+    {
+      "source": "bighead_jq_ld",
+      "bank": "bighead_jq_ld",
+      "build": "bighead_jq_ld",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_ld.png"
+    },
+    {
+      "source": "bighead_jq_lq",
+      "bank": "bighead_jq_lq",
+      "build": "bighead_jq_lq",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_lq.png"
+    },
+    {
+      "source": "bighead_jq_lx",
+      "bank": "bighead_jq_lx",
+      "build": "bighead_jq_lx",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_lx.png"
+    },
+    {
+      "source": "bighead_jq_mz",
+      "bank": "bighead_jq_mz",
+      "build": "bighead_jq_mz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_mz.png"
+    },
+    {
+      "source": "bighead_jq_qf",
+      "bank": "bighead_jq_qf",
+      "build": "bighead_jq_qf",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_qf.png"
+    },
+    {
+      "source": "bighead_jq_qiu",
+      "bank": "bighead_jq_qiu",
+      "build": "bighead_jq_qiu",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_qiu.png"
+    },
+    {
+      "source": "bighead_jq_qm",
+      "bank": "bighead_jq_qm",
+      "build": "bighead_jq_qm",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_qm.png"
+    },
+    {
+      "source": "bighead_jq_sj",
+      "bank": "bighead_jq_sj",
+      "build": "bighead_jq_sj",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_sj.png"
+    },
+    {
+      "source": "bighead_jq_xh",
+      "bank": "bighead_jq_xh",
+      "build": "bighead_jq_xh",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_xh.png"
+    },
+    {
+      "source": "bighead_jq_xia",
+      "bank": "bighead_jq_xia",
+      "build": "bighead_jq_xia",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_xia.png"
+    },
+    {
+      "source": "bighead_jq_xm",
+      "bank": "bighead_jq_xm",
+      "build": "bighead_jq_xm",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_xm.png"
+    },
+    {
+      "source": "bighead_jq_xs",
+      "bank": "bighead_jq_xs",
+      "build": "bighead_jq_xs",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_xs.png"
+    },
+    {
+      "source": "bighead_jq_xx",
+      "bank": "bighead_jq_xx",
+      "build": "bighead_jq_xx",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        8,
+        196,
+        186
+      ],
+      "display_size": [
+        212,
+        194
+      ],
+      "path": "assets/img/displays/bighead_jq_xx.png"
+    },
+    {
+      "source": "bighead_jq_xz",
+      "bank": "bighead_jq_xz",
+      "build": "bighead_jq_xz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        7,
+        199,
+        186
+      ],
+      "display_size": [
+        215,
+        195
+      ],
+      "path": "assets/img/displays/bighead_jq_xz.png"
+    },
+    {
+      "source": "bighead_jq_ys",
+      "bank": "bighead_jq_ys",
+      "build": "bighead_jq_ys",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 200,
+      "height": 188,
+      "alpha_bounds": [
+        0,
+        0,
+        200,
+        186
+      ],
+      "display_size": [
+        216,
+        202
+      ],
+      "path": "assets/img/displays/bighead_jq_ys.png"
+    },
+    {
+      "source": "bighead_lblyb",
+      "bank": "bighead_lblyb",
+      "build": "bighead_lblyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        0,
+        1,
+        187,
+        182
+      ],
+      "display_size": [
+        203,
+        197
+      ],
+      "path": "assets/img/displays/bighead_lblyb.png"
+    },
+    {
+      "source": "bighead_llxz",
+      "bank": "bighead_llxz",
+      "build": "bighead_llxz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 520,
+      "height": 563,
+      "alpha_bounds": [
+        74,
+        45,
+        455,
+        540
+      ],
+      "display_size": [
+        397,
+        511
+      ],
+      "path": "assets/img/displays/bighead_llxz.png"
+    },
+    {
+      "source": "bighead_llxz_xz",
+      "bank": "bighead_llxz_xz",
+      "build": "bighead_llxz_xz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 106,
+      "height": 117,
+      "alpha_bounds": [
+        1,
+        13,
+        106,
+        106
+      ],
+      "display_size": [
+        121,
+        109
+      ],
+      "path": "assets/img/displays/bighead_llxz_xz.png"
+    },
+    {
+      "source": "bighead_mdxyb",
+      "bank": "bighead_mdxyb",
+      "build": "bighead_mdxyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        0,
+        0,
+        183,
+        189
+      ],
+      "display_size": [
+        199,
+        205
+      ],
+      "path": "assets/img/displays/bighead_mdxyb.png"
+    },
+    {
+      "source": "bighead_mwgt",
+      "bank": "bighead_mwgt",
+      "build": "bighead_mwgt",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 128,
+      "height": 128,
+      "alpha_bounds": [
+        4,
+        12,
+        120,
+        127
+      ],
+      "display_size": [
+        132,
+        131
+      ],
+      "path": "assets/img/displays/bighead_mwgt.png"
+    },
+    {
+      "source": "bighead_nr",
+      "bank": "bighead_nr",
+      "build": "bighead_nr",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 128,
+      "height": 112,
+      "alpha_bounds": [
+        5,
+        12,
+        125,
+        101
+      ],
+      "display_size": [
+        136,
+        105
+      ],
+      "path": "assets/img/displays/bighead_nr.png"
+    },
+    {
+      "source": "bighead_ptyyb",
+      "bank": "bighead_ptyyb",
+      "build": "bighead_ptyyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        1,
+        8,
+        183,
+        189
+      ],
+      "display_size": [
+        198,
+        197
+      ],
+      "path": "assets/img/displays/bighead_ptyyb.png"
+    },
+    {
+      "source": "bighead_qbi",
+      "bank": "bighead_qbi",
+      "build": "bighead_qbi",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 140,
+      "height": 101,
+      "alpha_bounds": [
+        4,
+        2,
+        135,
+        97
+      ],
+      "display_size": [
+        147,
+        111
+      ],
+      "path": "assets/img/displays/bighead_qbi.png"
+    },
+    {
+      "source": "bighead_qyq",
+      "bank": "bighead_qyq",
+      "build": "bighead_qyq",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 300,
+      "height": 105,
+      "alpha_bounds": [
+        8,
+        14,
+        300,
+        95
+      ],
+      "display_size": [
+        308,
+        97
+      ],
+      "path": "assets/img/displays/bighead_qyq.png"
+    },
+    {
+      "source": "bighead_ruyi",
+      "bank": "bighead_ruyi",
+      "build": "bighead_ruyi",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 192,
+      "height": 81,
+      "alpha_bounds": [
+        0,
+        0,
+        192,
+        81
+      ],
+      "display_size": [
+        208,
+        97
+      ],
+      "path": "assets/img/displays/bighead_ruyi.png"
+    },
+    {
+      "source": "bighead_sanbao",
+      "bank": "catcoon",
+      "build": "bighead_sanbao",
+      "animation": "idle_loop_side",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [
+        "catcoon_basic.zip"
+      ],
+      "width": 335,
+      "height": 247,
+      "alpha_bounds": [
+        7,
+        14,
+        333,
+        232
+      ],
+      "display_size": [
+        342,
+        234
+      ],
+      "path": "assets/img/displays/bighead_sanbao.png"
+    },
+    {
+      "source": "bighead_scrolls",
+      "bank": "bighead_scrolls",
+      "build": "bighead_scrolls",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 371,
+      "height": 285,
+      "alpha_bounds": [
+        0,
+        1,
+        370,
+        285
+      ],
+      "display_size": [
+        386,
+        300
+      ],
+      "path": "assets/img/displays/bighead_scrolls.png"
+    },
+    {
+      "source": "bighead_sgbql",
+      "bank": "bighead_sgbql",
+      "build": "bighead_sgbql",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 216,
+      "height": 219,
+      "alpha_bounds": [
+        0,
+        0,
+        216,
+        219
+      ],
+      "display_size": [
+        232,
+        235
+      ],
+      "path": "assets/img/displays/bighead_sgbql.png"
+    },
+    {
+      "source": "bighead_sgdg",
+      "bank": "bighead_sgdg",
+      "build": "bighead_sgdg",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 216,
+      "height": 196,
+      "alpha_bounds": [
+        0,
+        0,
+        216,
+        196
+      ],
+      "display_size": [
+        232,
+        212
+      ],
+      "path": "assets/img/displays/bighead_sgdg.png"
+    },
+    {
+      "source": "bighead_snbql",
+      "bank": "bighead_snbql",
+      "build": "bighead_snbql",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 198,
+      "height": 175,
+      "alpha_bounds": [
+        0,
+        2,
+        198,
+        174
+      ],
+      "display_size": [
+        214,
+        188
+      ],
+      "path": "assets/img/displays/bighead_snbql.png"
+    },
+    {
+      "source": "bighead_soul_ball",
+      "bank": "wortox_soul_ball",
+      "build": "bighead_soul_ball",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [
+        "wortox_soul_ball.zip"
+      ],
+      "width": 242,
+      "height": 464,
+      "alpha_bounds": [
+        30,
+        4,
+        226,
+        459
+      ],
+      "display_size": [
+        212,
+        471
+      ],
+      "path": "assets/img/displays/bighead_soul_ball.png"
+    },
+    {
+      "source": "bighead_spear",
+      "bank": "bighead_spear",
+      "build": "bighead_spear",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 500,
+      "height": 188,
+      "alpha_bounds": [
+        6,
+        22,
+        497,
+        165
+      ],
+      "display_size": [
+        507,
+        159
+      ],
+      "path": "assets/img/displays/bighead_spear.png"
+    },
+    {
+      "source": "bighead_spear_skin1",
+      "bank": "bighead_spear_skin1",
+      "build": "bighead_spear_skin1",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 400,
+      "height": 160,
+      "alpha_bounds": [
+        12,
+        0,
+        390,
+        154
+      ],
+      "display_size": [
+        394,
+        170
+      ],
+      "path": "assets/img/displays/bighead_spear_skin1.png"
+    },
+    {
+      "source": "bighead_spear_skin2",
+      "bank": "bighead_spear_skin2",
+      "build": "bighead_spear_skin2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 206,
+      "height": 287,
+      "alpha_bounds": [
+        17,
+        1,
+        194,
+        287
+      ],
+      "display_size": [
+        193,
+        302
+      ],
+      "path": "assets/img/displays/bighead_spear_skin2.png"
+    },
+    {
+      "source": "bighead_spring_spirit",
+      "bank": "bighead_spring_spirit",
+      "build": "bighead_spring_spirit",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 213,
+      "height": 660,
+      "alpha_bounds": [
+        12,
+        4,
+        197,
+        655
+      ],
+      "display_size": [
+        201,
+        667
+      ],
+      "path": "assets/img/displays/bighead_spring_spirit.png"
+    },
+    {
+      "source": "bighead_sucookpot",
+      "bank": "bighead_sucookpot",
+      "build": "bighead_sucookpot",
+      "animation": "idle_ground",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 312,
+      "height": 216,
+      "alpha_bounds": [
+        0,
+        7,
+        303,
+        216
+      ],
+      "display_size": [
+        319,
+        225
+      ],
+      "path": "assets/img/displays/bighead_sucookpot.png"
+    },
+    {
+      "source": "bighead_summer_spirit",
+      "bank": "bighead_summer_spirit",
+      "build": "bighead_summer_spirit",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 213,
+      "height": 660,
+      "alpha_bounds": [
+        12,
+        4,
+        197,
+        655
+      ],
+      "display_size": [
+        201,
+        667
+      ],
+      "path": "assets/img/displays/bighead_summer_spirit.png"
+    },
+    {
+      "source": "bighead_ths",
+      "bank": "bighead_ths",
+      "build": "bighead_ths",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 207,
+      "height": 187,
+      "alpha_bounds": [
+        0,
+        0,
+        207,
+        187
+      ],
+      "display_size": [
+        223,
+        203
+      ],
+      "path": "assets/img/displays/bighead_ths.png"
+    },
+    {
+      "source": "bighead_umbrella",
+      "bank": "umbrella_voidcloth",
+      "build": "bighead_umbrella",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [
+        "umbrella_voidcloth.zip"
+      ],
+      "width": 217,
+      "height": 507,
+      "alpha_bounds": [
+        0,
+        0,
+        217,
+        507
+      ],
+      "display_size": [
+        233,
+        523
+      ],
+      "path": "assets/img/displays/bighead_umbrella.png"
+    },
+    {
+      "source": "bighead_wcs",
+      "bank": "bighead_wcs",
+      "build": "bighead_wcs",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 228,
+      "height": 232,
+      "alpha_bounds": [
+        10,
+        5,
+        222,
+        203
+      ],
+      "display_size": [
+        228,
+        214
+      ],
+      "path": "assets/img/displays/bighead_wcs.png"
+    },
+    {
+      "source": "bighead_winter_spirit",
+      "bank": "bighead_winter_spirit",
+      "build": "bighead_winter_spirit",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 213,
+      "height": 660,
+      "alpha_bounds": [
+        12,
+        4,
+        197,
+        655
+      ],
+      "display_size": [
+        201,
+        667
+      ],
+      "path": "assets/img/displays/bighead_winter_spirit.png"
+    },
+    {
+      "source": "bighead_xgss",
+      "bank": "bighead_xgss",
+      "build": "bighead_xgss",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 216,
+      "height": 189,
+      "alpha_bounds": [
+        0,
+        0,
+        216,
+        188
+      ],
+      "display_size": [
+        232,
+        204
+      ],
+      "path": "assets/img/displays/bighead_xgss.png"
+    },
+    {
+      "source": "bighead_xgyb",
+      "bank": "bighead_xgyb",
+      "build": "bighead_xgyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        0,
+        4,
+        185,
+        189
+      ],
+      "display_size": [
+        201,
+        201
+      ],
+      "path": "assets/img/displays/bighead_xgyb.png"
+    },
+    {
+      "source": "bighead_xjyb",
+      "bank": "bighead_xjyb",
+      "build": "bighead_xjyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        7,
+        19,
+        183,
+        189
+      ],
+      "display_size": [
+        192,
+        186
+      ],
+      "path": "assets/img/displays/bighead_xjyb.png"
+    },
+    {
+      "source": "bighead_xqlj",
+      "bank": "bighead_xqlj",
+      "build": "bighead_xqlj",
+      "animation": "idle_loop",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 369,
+      "height": 546,
+      "alpha_bounds": [
+        6,
+        12,
+        363,
+        542
+      ],
+      "display_size": [
+        373,
+        546
+      ],
+      "path": "assets/img/displays/bighead_xqlj.png"
+    },
+    {
+      "source": "bighead_xrzslz",
+      "bank": "bighead_xrzslz",
+      "build": "bighead_xrzslz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 198,
+      "height": 198,
+      "alpha_bounds": [
+        0,
+        0,
+        195,
+        198
+      ],
+      "display_size": [
+        211,
+        214
+      ],
+      "path": "assets/img/displays/bighead_xrzslz.png"
+    },
+    {
+      "source": "bighead_ybhz",
+      "bank": "bighead_ybhz",
+      "build": "bighead_ybhz",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 357,
+      "height": 357,
+      "alpha_bounds": [
+        1,
+        0,
+        351,
+        357
+      ],
+      "display_size": [
+        366,
+        373
+      ],
+      "path": "assets/img/displays/bighead_ybhz.png"
+    },
+    {
+      "source": "bighead_ygxlfw",
+      "bank": "bighead_ygxlfw",
+      "build": "bighead_ygxlfw",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 237,
+      "height": 418,
+      "alpha_bounds": [
+        26,
+        0,
+        213,
+        406
+      ],
+      "display_size": [
+        203,
+        422
+      ],
+      "path": "assets/img/displays/bighead_ygxlfw.png"
+    },
+    {
+      "source": "bighead_ylry",
+      "bank": "bighead_ylry",
+      "build": "bighead_ylry",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 192,
+      "height": 81,
+      "alpha_bounds": [
+        0,
+        0,
+        192,
+        81
+      ],
+      "display_size": [
+        208,
+        97
+      ],
+      "path": "assets/img/displays/bighead_ylry.png"
+    },
+    {
+      "source": "bighead_ylss",
+      "bank": "bighead_ylss",
+      "build": "bighead_ylss",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 280,
+      "height": 304,
+      "alpha_bounds": [
+        6,
+        3,
+        274,
+        299
+      ],
+      "display_size": [
+        284,
+        312
+      ],
+      "path": "assets/img/displays/bighead_ylss.png"
+    },
+    {
+      "source": "bighead_ymlx",
+      "bank": "bighead_ymlx",
+      "build": "bighead_ymlx",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 237,
+      "height": 418,
+      "alpha_bounds": [
+        26,
+        0,
+        213,
+        406
+      ],
+      "display_size": [
+        203,
+        422
+      ],
+      "path": "assets/img/displays/bighead_ymlx.png"
+    },
+    {
+      "source": "bighead_ymyb",
+      "bank": "bighead_ymyb",
+      "build": "bighead_ymyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        9,
+        5,
+        183,
+        189
+      ],
+      "display_size": [
+        190,
+        200
+      ],
+      "path": "assets/img/displays/bighead_ymyb.png"
+    },
+    {
+      "source": "bighead_yr",
+      "bank": "bighead_yr",
+      "build": "bighead_yr",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 128,
+      "height": 112,
+      "alpha_bounds": [
+        3,
+        5,
+        118,
+        108
+      ],
+      "display_size": [
+        131,
+        119
+      ],
+      "path": "assets/img/displays/bighead_yr.png"
+    },
+    {
+      "source": "bighead_ywyb",
+      "bank": "bighead_ywyb",
+      "build": "bighead_ywyb",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 190,
+      "height": 190,
+      "alpha_bounds": [
+        2,
+        0,
+        183,
+        189
+      ],
+      "display_size": [
+        197,
+        205
+      ],
+      "path": "assets/img/displays/bighead_ywyb.png"
+    }
+  ],
+  "bindings": [
+    {
+      "id": "bighead_spear",
+      "group": "items",
+      "source": "bighead_spear"
+    },
+    {
+      "id": "bighead_fanhua",
+      "group": "items",
+      "source": "bighead_fanhua"
+    },
+    {
+      "id": "bb_gaojiaoniao_fqh",
+      "group": "items",
+      "source": "bb_gaojiaoniao_fqh"
+    },
+    {
+      "id": "bb_gaojiaoniao_fh",
+      "group": "items",
+      "source": "bb_gaojiaoniao_fh"
+    },
+    {
+      "id": "bighead_armor",
+      "group": "items",
+      "source": "bighead_armor"
+    },
+    {
+      "id": "bighead_back",
+      "group": "items",
+      "source": "bighead_back"
+    },
+    {
+      "id": "bb_gaojiaoniao_cs",
+      "group": "items",
+      "source": "bb_gaojiaoniao_cs"
+    },
+    {
+      "id": "bighead_ruyi",
+      "group": "items",
+      "source": "bighead_ruyi"
+    },
+    {
+      "id": "bighead_ylry",
+      "group": "items",
+      "source": "bighead_ylry"
+    },
+    {
+      "id": "bighead_umbrella",
+      "group": "items",
+      "source": "bighead_umbrella"
+    },
+    {
+      "id": "bighead_flw",
+      "group": "items",
+      "source": "bighead_flw"
+    },
+    {
+      "id": "bighead_czflw",
+      "group": "items",
+      "source": "bighead_czflw"
+    },
+    {
+      "id": "bighead_qyq",
+      "group": "items",
+      "source": "bighead_qyq"
+    },
+    {
+      "id": "bighead_scrolls",
+      "group": "items",
+      "source": "bighead_scrolls"
+    },
+    {
+      "id": "bighead_hy",
+      "group": "items",
+      "source": "bighead_hy"
+    },
+    {
+      "id": "bighead_llxz",
+      "group": "items",
+      "source": "bighead_llxz"
+    },
+    {
+      "id": "bb_cct",
+      "group": "items",
+      "source": "bb_cct"
+    },
+    {
+      "id": "bb_hhlct",
+      "group": "items",
+      "source": "bb_hhlct"
+    },
+    {
+      "id": "bighead_sucookpot_item",
+      "group": "items",
+      "source": "bighead_sucookpot"
+    },
+    {
+      "id": "bighead_ybhz",
+      "group": "items",
+      "source": "bighead_ybhz"
+    },
+    {
+      "id": "bighead_xqlj",
+      "group": "items",
+      "source": "bighead_xqlj"
+    },
+    {
+      "id": "bb_cm",
+      "group": "items",
+      "source": "bb_cm"
+    },
+    {
+      "id": "bighead_cmgt",
+      "group": "items",
+      "source": "bighead_cmgt"
+    },
+    {
+      "id": "bighead_cmklb",
+      "group": "items",
+      "source": "bighead_cmklb"
+    },
+    {
+      "id": "bighead_cmrl",
+      "group": "items",
+      "source": "bighead_cmrl"
+    },
+    {
+      "id": "bighead_fmss",
+      "group": "items",
+      "source": "bighead_fmss"
+    },
+    {
+      "id": "bighead_sgbql",
+      "group": "items",
+      "source": "bighead_sgbql"
+    },
+    {
+      "id": "bighead_sgdg",
+      "group": "items",
+      "source": "bighead_sgdg"
+    },
+    {
+      "id": "bighead_snbql",
+      "group": "items",
+      "source": "bighead_snbql"
+    },
+    {
+      "id": "bighead_ths",
+      "group": "items",
+      "source": "bighead_ths"
+    },
+    {
+      "id": "bighead_xgss",
+      "group": "items",
+      "source": "bighead_xgss"
+    },
+    {
+      "id": "bighead_xrzslz",
+      "group": "items",
+      "source": "bighead_xrzslz"
+    },
+    {
+      "id": "bighead_ywyb",
+      "group": "items",
+      "source": "bighead_ywyb"
+    },
+    {
+      "id": "bighead_jlyb",
+      "group": "items",
+      "source": "bighead_jlyb"
+    },
+    {
+      "id": "bighead_gwyb",
+      "group": "items",
+      "source": "bighead_gwyb"
+    },
+    {
+      "id": "bighead_xgyb",
+      "group": "items",
+      "source": "bighead_xgyb"
+    },
+    {
+      "id": "bighead_fgyb",
+      "group": "items",
+      "source": "bighead_fgyb"
+    },
+    {
+      "id": "bighead_ymyb",
+      "group": "items",
+      "source": "bighead_ymyb"
+    },
+    {
+      "id": "bighead_xjyb",
+      "group": "items",
+      "source": "bighead_xjyb"
+    },
+    {
+      "id": "bighead_cmyb",
+      "group": "items",
+      "source": "bighead_cmyb"
+    },
+    {
+      "id": "bighead_ptyyb",
+      "group": "items",
+      "source": "bighead_ptyyb"
+    },
+    {
+      "id": "bighead_gjnyb",
+      "group": "items",
+      "source": "bighead_gjnyb"
+    },
+    {
+      "id": "bighead_lblyb",
+      "group": "items",
+      "source": "bighead_lblyb"
+    },
+    {
+      "id": "bighead_mdxyb",
+      "group": "items",
+      "source": "bighead_mdxyb"
+    },
+    {
+      "id": "dug_bb_cmbush",
+      "group": "items",
+      "source": "bb_cmbush"
+    },
+    {
+      "id": "bighead_wcs",
+      "group": "items",
+      "source": "bighead_wcs"
+    },
+    {
+      "id": "bighead_ylss",
+      "group": "items",
+      "source": "bighead_ylss"
+    },
+    {
+      "id": "bighead_ymlx",
+      "group": "items",
+      "source": "bighead_ymlx"
+    },
+    {
+      "id": "bighead_ygxlfw",
+      "group": "items",
+      "source": "bighead_ygxlfw"
+    },
+    {
+      "id": "bighead_soul",
+      "group": "items",
+      "source": "bighead_soul_ball"
+    },
+    {
+      "id": "bighead_llxz_xz",
+      "group": "items",
+      "source": "bighead_llxz_xz"
+    },
+    {
+      "id": "bighead_qbi",
+      "group": "items",
+      "source": "bighead_qbi"
+    },
+    {
+      "id": "bighead_spring_spirit",
+      "group": "items",
+      "source": "bighead_spring_spirit"
+    },
+    {
+      "id": "bighead_summer_spirit",
+      "group": "items",
+      "source": "bighead_summer_spirit"
+    },
+    {
+      "id": "bighead_autumn_spirit",
+      "group": "items",
+      "source": "bighead_autumn_spirit"
+    },
+    {
+      "id": "bighead_winter_spirit",
+      "group": "items",
+      "source": "bighead_winter_spirit"
+    },
+    {
+      "id": "bb_gaojiaoniao_fhd",
+      "group": "items",
+      "source": "bb_gaojiaoniao_fhd"
+    },
+    {
+      "id": "bb_gaojiaoniao_cmyh",
+      "group": "items",
+      "source": "bb_gaojiaoniao_cmyh"
+    },
+    {
+      "id": "bb_gaojiaoniao_bzmgt",
+      "group": "items",
+      "source": "bb_gaojiaoniao_bzmgt"
+    },
+    {
+      "id": "bighead_buran",
+      "group": "items",
+      "source": "bighead_buran"
+    },
+    {
+      "id": "bb_gaojiaoniao_px_builder",
+      "group": "items",
+      "source": "bb_gaojiaoniao_px"
+    },
+    {
+      "id": "bighead_sanbao_builder",
+      "group": "items",
+      "source": "bighead_sanbao"
+    },
+    {
+      "id": "bb_cwd",
+      "group": "items",
+      "source": "bb_cwd"
+    },
+    {
+      "id": "bb_gaojiaoniao_fr",
+      "group": "items",
+      "source": "bb_gaojiaoniao_fr"
+    },
+    {
+      "id": "bb_gaojiaoniao_lh",
+      "group": "items",
+      "source": "bb_gaojiaoniao_lh"
+    },
+    {
+      "id": "bb_gaojiaoniao_gjsh",
+      "group": "items",
+      "source": "bb_gaojiaoniao_gjsh"
+    },
+    {
+      "id": "bighead_mwgt",
+      "group": "items",
+      "source": "bighead_mwgt"
+    },
+    {
+      "id": "bighead_nr",
+      "group": "items",
+      "source": "bighead_nr"
+    },
+    {
+      "id": "bighead_yr",
+      "group": "items",
+      "source": "bighead_yr"
+    },
+    {
+      "id": "jq_lc",
+      "group": "seasons",
+      "source": "bighead_jq_lc"
+    },
+    {
+      "id": "jq_ys",
+      "group": "seasons",
+      "source": "bighead_jq_ys"
+    },
+    {
+      "id": "jq_jz",
+      "group": "seasons",
+      "source": "bighead_jq_jz"
+    },
+    {
+      "id": "jq_cf",
+      "group": "seasons",
+      "source": "bighead_jq_cf"
+    },
+    {
+      "id": "jq_qm",
+      "group": "seasons",
+      "source": "bighead_jq_qm"
+    },
+    {
+      "id": "jq_gy",
+      "group": "seasons",
+      "source": "bighead_jq_gy"
+    },
+    {
+      "id": "jq_lx",
+      "group": "seasons",
+      "source": "bighead_jq_lx"
+    },
+    {
+      "id": "jq_xm",
+      "group": "seasons",
+      "source": "bighead_jq_xm"
+    },
+    {
+      "id": "jq_mz",
+      "group": "seasons",
+      "source": "bighead_jq_mz"
+    },
+    {
+      "id": "jq_xz",
+      "group": "seasons",
+      "source": "bighead_jq_xz"
+    },
+    {
+      "id": "jq_xs",
+      "group": "seasons",
+      "source": "bighead_jq_xs"
+    },
+    {
+      "id": "jq_ds",
+      "group": "seasons",
+      "source": "bighead_jq_ds"
+    },
+    {
+      "id": "jq_lq",
+      "group": "seasons",
+      "source": "bighead_jq_lq"
+    },
+    {
+      "id": "jq_cs",
+      "group": "seasons",
+      "source": "bighead_jq_cs"
+    },
+    {
+      "id": "jq_bl",
+      "group": "seasons",
+      "source": "bighead_jq_bl"
+    },
+    {
+      "id": "jq_qf",
+      "group": "seasons",
+      "source": "bighead_jq_qf"
+    },
+    {
+      "id": "jq_hl",
+      "group": "seasons",
+      "source": "bighead_jq_hl"
+    },
+    {
+      "id": "jq_sj",
+      "group": "seasons",
+      "source": "bighead_jq_sj"
+    },
+    {
+      "id": "jq_ld",
+      "group": "seasons",
+      "source": "bighead_jq_ld"
+    },
+    {
+      "id": "jq_xx",
+      "group": "seasons",
+      "source": "bighead_jq_xx"
+    },
+    {
+      "id": "jq_dx",
+      "group": "seasons",
+      "source": "bighead_jq_dx"
+    },
+    {
+      "id": "jq_dz",
+      "group": "seasons",
+      "source": "bighead_jq_dz"
+    },
+    {
+      "id": "jq_xh",
+      "group": "seasons",
+      "source": "bighead_jq_xh"
+    },
+    {
+      "id": "jq_dh",
+      "group": "seasons",
+      "source": "bighead_jq_dh"
+    },
+    {
+      "id": "jq_chun",
+      "group": "seasons",
+      "source": "bighead_jq_chun"
+    },
+    {
+      "id": "jq_xia",
+      "group": "seasons",
+      "source": "bighead_jq_xia"
+    },
+    {
+      "id": "jq_qiu",
+      "group": "seasons",
+      "source": "bighead_jq_qiu"
+    },
+    {
+      "id": "jq_dong",
+      "group": "seasons",
+      "source": "bighead_jq_dong"
+    },
+    {
+      "id": "jq_dong10",
+      "group": "seasons",
+      "source": "bighead_jq_dong"
+    },
+    {
+      "id": "bighead_spear_skin1",
+      "group": "skins",
+      "source": "bighead_spear_skin1"
+    },
+    {
+      "id": "bighead_spear_skin2",
+      "group": "skins",
+      "source": "bighead_spear_skin2"
+    },
+    {
+      "id": "bighead_fanhua_skin1",
+      "group": "skins",
+      "source": "bighead_fanhua_skin1"
+    },
+    {
+      "id": "bighead_buran_skin1",
+      "group": "skins",
+      "source": "bighead_buran_skin1"
+    },
+    {
+      "id": "bighead_buran_skin2",
+      "group": "skins",
+      "source": "bighead_buran_skin2"
+    },
+    {
+      "id": "bighead_buran_skin3",
+      "group": "skins",
+      "source": "bighead_buran_skin3"
+    },
+    {
+      "id": "bighead_buran_skin4",
+      "group": "skins",
+      "source": "bighead_buran_skin4"
+    },
+    {
+      "id": "bighead_back_skin1",
+      "group": "skins",
+      "source": "bighead_back_skin1"
+    },
+    {
+      "id": "bighead_back_skin2",
+      "group": "skins",
+      "source": "bighead_back_skin2"
+    },
+    {
+      "id": "bb_gaojiaoniao_lh_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_lh_skin1"
+    },
+    {
+      "id": "bighead_armor_skin1",
+      "group": "skins",
+      "source": "bighead_armor_skin1"
+    },
+    {
+      "id": "bighead_armor_skin2",
+      "group": "skins",
+      "source": "bighead_armor_skin2"
+    },
+    {
+      "id": "bb_gaojiaoniao_cmyh_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_cmyh_skin1"
+    },
+    {
+      "id": "bb_gaojiaoniao_cmyh_skin2",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_cmyh_skin2"
+    },
+    {
+      "id": "bb_gaojiaoniao_px_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_px_skin1"
+    },
+    {
+      "id": "bb_gaojiaoniao_fh_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_fh_skin1"
+    },
+    {
+      "id": "bb_gaojiaoniao_fh_skin2",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_fh_skin2"
+    },
+    {
+      "id": "bb_gaojiaoniao_fqh_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_fqh_skin1"
+    },
+    {
+      "id": "bb_gaojiaoniao_fqh_skin2",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_fqh_skin2"
+    },
+    {
+      "id": "bb_gaojiaoniao_cs_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_cs_skin1"
+    },
+    {
+      "id": "bb_gaojiaoniao_gjsh_skin1",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_gjsh_skin1"
+    },
+    {
+      "id": "bighead_buran_skin5",
+      "group": "skins",
+      "source": "bighead_buran_skin5"
+    },
+    {
+      "id": "bb_gaojiaoniao_lh_skin2",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_lh_skin2"
+    },
+    {
+      "id": "bighead_back_skin3",
+      "group": "skins",
+      "source": "bighead_back_skin3"
+    },
+    {
+      "id": "bb_gaojiaoniao_cmyh_skin3",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_cmyh_skin3"
+    },
+    {
+      "id": "bighead_armor_skin3",
+      "group": "skins",
+      "source": "bighead_armor_skin3"
+    },
+    {
+      "id": "bb_gaojiaoniao_fqh_skin3",
+      "group": "skins",
+      "source": "bb_gaojiaoniao_fqh_skin3"
+    },
+    {
+      "id": "mech_parasite",
+      "group": "mechanics",
+      "source": "bighead_jisheng_taoling"
+    },
+    {
+      "id": "loc_qingxuan",
+      "group": "terrains",
+      "source": "bighead_fishhouse"
+    },
+    {
+      "id": "mech_lingqi",
+      "group": "mechanics",
+      "source": "status_bighead_lingqi"
+    },
+    {
+      "id": "mech_jieqi",
+      "group": "mechanics",
+      "source": "bighead_jq_chun"
+    },
+    {
+      "id": "mech_spirits",
+      "group": "mechanics",
+      "source": "bighead_spring_spirit"
+    },
+    {
+      "id": "mech_buran",
+      "group": "mechanics",
+      "source": "bighead_buran"
+    },
+    {
+      "id": "mech_shixin",
+      "group": "mechanics",
+      "source": "bb_gaojiaoniao_gjsh"
+    },
+    {
+      "id": "mech_wudao",
+      "group": "mechanics",
+      "source": "bb_gaojiaoniao_lh"
+    },
+    {
+      "id": "mech_gardening",
+      "group": "mechanics",
+      "source": "bighead_fanhua"
+    }
+  ]
+}

@@ -107,9 +107,28 @@
     return "“未着墨。”";
   }
 
+  function heroCharacter(character) {
+    character = character || {};
+    return {
+      ...character,
+      quote: heroQuote(character),
+      featured_items: (character.featured_items || []).map(function (id) {
+        return (App.STATE.items || []).find(function (item) {
+          return item.id === id && item.owner === character.id && item.display_image;
+        });
+      }).filter(Boolean).map(function (item, index) {
+        return { id: item.id, name: item.name, display_image: item.display_image, order: index };
+      })
+    };
+  }
+
   function baseItemView(item, query) {
     return {
       ...item,
+      image: item.display_image || "",
+      icon: item.image || "",
+      owner_stamp: { pangtouyu: "鱼", gaojiaoniao: "鸟" }[item.owner] || "",
+      skin_count: (App.STATE.skins || []).filter(function (skin) { return skin.item_id === item.id; }).length,
       name_html: App.Filter.highlight(item.name, query),
       summary_html: App.Filter.highlight(item.summary, query)
     };
@@ -118,9 +137,12 @@
   function compactEntryCardView(entry, label) {
     return {
       id: entry.id,
-      image: entry.image || entry.illustration || App.config.placeholderImage,
+      image: entry.display_image || entry.illustration || "",
+      display_poster: entry.display_poster || "",
+      icon: entry.image || "",
       name: entry.name || entry.title || entry.version || "条目占位",
       summary: entry.summary || entry.subtitle || "",
+      preview_caption: entry.preview_caption || "",
       category_label: label,
       owner_label: ""
     };
@@ -135,19 +157,14 @@
         subtitle_latin: state.meta.subtitle_latin || "",
         version: state.meta.version || "v0.0",
         author: state.meta.author || "作者未署名",
-        workshop_url: state.meta.workshop_url || "#"
+        workshop_url: state.meta.workshop_url || "#",
+        qq_group_url: state.meta.qq_group_url || ""
       };
 
       renderTo("hero-root", "tpl-hero", {
         ...meta,
-        character_a: {
-          ...characters[0],
-          quote: heroQuote(characters[0] || {})
-        },
-        character_b: {
-          ...characters[1],
-          quote: heroQuote(characters[1] || {})
-        }
+        character_a: heroCharacter(characters[0]),
+        character_b: heroCharacter(characters[1])
       });
 
       renderSectionShells();

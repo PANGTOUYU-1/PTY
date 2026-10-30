@@ -1,0 +1,26 @@
+{
+  "source_prefab": "scripts/prefabs/bighead_gold_penguin.lua",
+  "resources": [
+    "penguin.zip",
+    "penguin_build.zip"
+  ],
+  "bank": "penguin",
+  "build": "penguin_build",
+  "animation": "idle_loop_down",
+  "frames": 35,
+  "fps": 30.0,
+  "mult_colour": [
+    1,
+    0.85,
+    0.2,
+    1
+  ],
+  "scale": 1,
+  "processing": "Shared alpha bounds, 8px padding; no resizing or flipping.",
+  "display_size": [
+    252,
+    314
+  ],
+  "poster": "assets/img/displays/bighead_gold_penguin.png",
+  "path": "assets/img/displays/bighead_gold_penguin.webp"
+}

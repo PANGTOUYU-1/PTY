@@ -65,7 +65,10 @@ try {
   runFile('assets/js/vendor/mustache.min.js');
   if (!sandbox.window.Mustache) sandbox.window.Mustache = sandbox.Mustache;
   runFile('data/site-data.js');
+  runFile('data/vanilla-icons.js');
   runFile('assets/js/data.js');
+  runFile('assets/js/linkify.js');
+  runFile('assets/js/recipe.js');
 } catch (e) {
   console.error(`\n✗ JS 载入失败：${e.message}\n`);
   process.exit(1);
@@ -169,7 +172,7 @@ check(!/\{\{/.test(hero), 'hero：无 Mustache 残留占位符');
 const itemsTpl = tpl('tpl-items');
 const itemsHtml = Mustache.render(itemsTpl, {
   category_options: [{ label: '全部', value: 'all', active_class: 'is-active' }],
-  items: S.items.map((i) => ({ ...i, name_html: i.name, summary_html: i.summary || '' })),
+  items: S.items.map((i) => ({ ...i, image: i.display_image || '', icon: i.image || '', name_html: i.name, summary_html: i.summary || '' })),
   query: '',
   summary: `共 ${S.items.length} 项`,
 });
@@ -212,22 +215,24 @@ const modalTpl = tpl('tpl-modal-generic');
 const sample = S.items[0];
 if (sample) {
   const paragraphs = [];
-  if (sample.summary) paragraphs.push(App.Linkify ? App.Linkify.textToHtml(sample.summary) : sample.summary);
   const modalHtml = Mustache.render(modalTpl, {
     id: sample.id,
     title: sample.name,
     subtitle: sample.summary || '',
     eyebrow: '物品',
-    image: sample.image || '',
+    image: sample.display_image || sample.illustration || '',
+    icon: sample.image || '',
     paragraphs: paragraphs.map((p) => ({ html: p })),
     detail_blocks: (sample.detail_blocks || []).map((b) => ({
       ...b,
+      title: b.title || '',
       is_text: b.type === 'text',
       is_image: b.type === 'image',
-      content_html: App.Linkify ? App.Linkify.textToHtml(b.content || '') : b.content || '',
+      text_paragraphs: (b.content || '').split(/\n+/).filter(Boolean).map(text => ({ html: text })),
     })),
     has_detail_blocks: (sample.detail_blocks || []).length > 0,
-    recipe_html: sample.recipe && App.Recipe ? App.Recipe.toHtml(sample.recipe) : '',
+    recipe_html: sample.recipe && App.Recipe ? App.Recipe.toBlockHtml(sample.recipe) : '',
+    tech_html: sample.tech ? App.Linkify.textToHtml(sample.tech.replace(/金企鹅兑换/g, '[[金企鹅兑换]]')) : '',
     related: (sample.related || []).map((id) => ({ id, name: S.relations[id] || id })),
     has_related: (sample.related || []).length > 0,
   });

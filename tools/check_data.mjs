@@ -69,6 +69,22 @@ for (const key of Object.keys(data)) {
 
 const ids = new Map();      // id → "分组/名称"
 const names = new Set();    // 所有可被 [[双链]] 命中的名称
+const nameOwners = new Map();
+const linkCounts = { inline: 0, recipe: 0, related: 0 };
+function registerName(name, id) {
+  if (typeof name !== 'string' || !name.trim()) return;
+  if (nameOwners.has(name) && nameOwners.get(name) !== id) {
+    E('LINK_AMBIGUOUS', `关联词「${name}」同时指向 ${nameOwners.get(name)} 和 ${id}`);
+  }
+  names.add(name);
+  nameOwners.set(name, id);
+}
+function textValues(value) {
+  if (typeof value === 'string') return [value];
+  if (Array.isArray(value)) return value.flatMap(textValues);
+  if (value && typeof value === 'object') return Object.values(value).flatMap(textValues);
+  return [];
+}
 const entries = [];         // { group, label, id, title, entry }
 
 for (const [key, label] of groups) {
@@ -79,6 +95,9 @@ for (const [key, label] of groups) {
       continue;
     }
     const title = entry.name || entry.title || entry.version || '(未命名)';
+    if (entry.availability !== undefined && !['未实装', '特殊获取'].includes(entry.availability)) {
+      E('AVAILABILITY_INVALID', `${label}「${title}」的 availability 必须为「未实装」或「特殊获取」`);
+    }
     if (!entry.id) {
       E('ID_MISSING', `${label}「${title}」缺少 id 字段`);
       continue;
@@ -88,16 +107,26 @@ for (const [key, label] of groups) {
     } else {
       ids.set(entry.id, `${label}「${title}」`);
     }
-    if (entry.name) names.add(entry.name);
-    if (entry.title) names.add(entry.title);
+    registerName(entry.name, entry.id);
+    registerName(entry.title, entry.id);
+    if (entry.aliases !== undefined) {
+      if (!Array.isArray(entry.aliases) || entry.aliases.some(name => typeof name !== 'string' || !name.trim())) {
+        E('ALIASES_TYPE', `${label}「${title}」的 aliases 必须是非空名称组成的数组`);
+      } else {
+        if (new Set(entry.aliases).size !== entry.aliases.length) E('ALIASES_DUPLICATE', `${label}「${title}」的 aliases 有重复名称`);
+        entry.aliases.forEach(name => registerName(name, entry.id));
+      }
+    }
     entries.push({ group: key, label, id: entry.id, title, entry });
   }
 }
 
 // relations 里手动指定的展示名也算合法双链目标
 if (data.relations && typeof data.relations === 'object') {
-  for (const value of Object.values(data.relations)) {
-    if (typeof value === 'string' && value) names.add(value);
+  for (const [id, value] of Object.entries(data.relations)) {
+    if (!ids.has(id)) E('RELATION_DEAD', `relations 指向不存在的 id：${id}`);
+    if (typeof value !== 'string' || !value.trim()) E('RELATION_LABEL', `relations.${id} 必须是非空名称`);
+    else registerName(value, id);
   }
 }
 
@@ -200,6 +229,8 @@ for (const p of [
 for (const { label, title, id, entry } of entries) {
   const where = `${label}「${title}」(${id})`;
   checkAsset(entry.image, `${where}.image`);
+  checkAsset(entry.display_image, `${where}.display_image`);
+  checkAsset(entry.display_poster, `${where}.display_poster`);
   checkAsset(entry.portrait, `${where}.portrait`);
   checkAsset(entry.illustration, `${where}.illustration`);
   checkAsset(entry.cover, `${where}.cover`);
@@ -210,11 +241,27 @@ for (const { label, title, id, entry } of entries) {
         if (!block.src) E('BLOCK_NO_SRC', `${where}.detail_blocks[${i}] 是 image 类型但没有 src`);
         else checkAsset(block.src, `${where}.detail_blocks[${i}].src`);
         if (!block.caption) W('BLOCK_NO_CAPTION', `${where}.detail_blocks[${i}] 图片没有 caption 说明`);
-      } else if (block.type === 'text') {
+      } else if (!block.type || block.type === 'text') {
         if (!block.content) E('BLOCK_NO_CONTENT', `${where}.detail_blocks[${i}] 是 text 类型但没有 content`);
+      } else if (block.type === 'list') {
+        if (!Array.isArray(block.items) || !block.items.length || block.items.some(text => typeof text !== 'string' || !text.trim())) {
+          E('BLOCK_LIST', `${where}.detail_blocks[${i}] 的 items 必须是非空文本数组`);
+        }
+      } else if (block.type === 'table') {
+        if (!Array.isArray(block.columns) || block.columns.length < 2 || block.columns.some(text => typeof text !== 'string' || !text.trim())) {
+          E('BLOCK_TABLE_COLUMNS', `${where}.detail_blocks[${i}] 必须提供至少两个文本列名`);
+        }
+        if (!Array.isArray(block.rows) || !block.rows.length || block.rows.some(row => !Array.isArray(row) || row.length !== block.columns?.length || row.some(text => typeof text !== 'string' || !text.trim()))) {
+          E('BLOCK_TABLE_ROWS', `${where}.detail_blocks[${i}] 的每行必须与表头列数一致，且单元格为非空文本`);
+        }
+      } else if (block.type === 'stats') {
+        if (!Array.isArray(block.stats) || !block.stats.length || block.stats.some(stat => !stat || typeof stat.label !== 'string' || !stat.label.trim() || typeof stat.value !== 'string' || !stat.value.trim())) {
+          E('BLOCK_STATS', `${where}.detail_blocks[${i}] 的 stats 必须提供文本 label 和 value`);
+        }
       } else if (block.type) {
-        E('BLOCK_TYPE', `${where}.detail_blocks[${i}] 的 type 只能是 "text" 或 "image"，当前是「${block.type}」`);
+        E('BLOCK_TYPE', `${where}.detail_blocks[${i}] 的 type 只能是 text、image、list、table 或 stats，当前是「${block.type}」`);
       }
+      if (block.tone !== undefined && block.tone !== 'note') E('BLOCK_TONE', `${where}.detail_blocks[${i}] 的 tone 只能是 note`);
     });
   }
 }
@@ -240,7 +287,9 @@ for (const { label, title, id, entry } of entries) {
     if (!Array.isArray(entry.related)) {
       E('RELATED_TYPE', `${where}.related 必须是数组`);
     } else {
+      if (new Set(entry.related).size !== entry.related.length) E('RELATED_DUPLICATE', `${where}.related 有重复条目`);
       for (const relId of entry.related) {
+        linkCounts.related++;
         if (!ids.has(relId)) E('RELATED_DEAD', `${where}.related 指向不存在的 id：${relId}`);
         else if (relId === id) W('RELATED_SELF', `${where}.related 指向了自己`);
       }
@@ -249,9 +298,12 @@ for (const { label, title, id, entry } of entries) {
 
   // recipe 里的 [id] 必须是可识别的条目 id
   if (typeof entry.recipe === 'string' && entry.recipe) {
-    for (const m of entry.recipe.matchAll(/\[([^\]]+)\]/g)) {
+    const tokens = /\[([^\[\]]+)\]/g;
+    for (const m of entry.recipe.matchAll(tokens)) {
+      linkCounts.recipe++;
       if (!ids.has(m[1])) E('RECIPE_DEAD', `${where}.recipe 里的 [${m[1]}] 不是任何条目的 id`);
     }
+    if (/[\[\]]/.test(entry.recipe.replace(tokens, ''))) E('RECIPE_SYNTAX', `${where}.recipe 的 [id] 括号不完整或发生嵌套`);
   }
 
   // owner 必须是角色 id 或 common
@@ -269,18 +321,22 @@ for (const { label, title, id, entry } of entries) {
   // [[双链]] 必须能解析到名称
   const texts = [];
   if (typeof entry.summary === 'string') texts.push(entry.summary);
+  if (typeof entry.subtitle === 'string') texts.push(entry.subtitle);
   for (const key of ['setting', 'exclusive_intro', 'changes']) {
     if (Array.isArray(entry[key])) texts.push(...entry[key].filter((t) => typeof t === 'string'));
   }
   if (Array.isArray(entry.detail_blocks)) {
     for (const b of entry.detail_blocks) {
-      if (b && typeof b.content === 'string') texts.push(b.content);
+      texts.push(...textValues(b));
     }
   }
   for (const text of texts) {
-    for (const m of text.matchAll(/\[\[([^\]]+)\]\]/g)) {
+    const tokens = /\[\[([^\[\]]+)\]\]/g;
+    for (const m of text.matchAll(tokens)) {
+      linkCounts.inline++;
       if (!names.has(m[1])) E('LINK_DEAD', `${where} 的 [[${m[1]}]] 找不到同名条目`);
     }
+    if (/\[\[|\]\]/.test(text.replace(tokens, ''))) E('LINK_SYNTAX', `${where} 的关联词括号不完整或发生嵌套：${text}`);
   }
 
   // 占位文案
@@ -297,6 +353,14 @@ for (const { label, title, id, entry } of entries) {
 }
 
 /* ────────────────────────── sections ────────────────────────── */
+
+for (const skin of data.skins || []) {
+  const item = (data.items || []).find(item => item.id === skin.item_id);
+  if (!item) E('SKIN_ITEM', `外观「${skin.name}」的 item_id 必须指向现有物品`);
+  else if (!(skin.related || []).includes(item.id) || !(item.related || []).includes(skin.id)) {
+    E('SKIN_RELATION', `外观「${skin.name}」与物品「${item.name}」缺少双向关联`);
+  }
+}
 
 const HARD_CODED_ROOTS = { items: 'items-root', changelog: 'changelog-root' };
 const sections = Array.isArray(data.sections) ? data.sections : [];
@@ -335,6 +399,28 @@ for (const sec of sections) {
 
 /* ────────────────────────── index.html 静态引用 ────────────────────────── */
 
+try {
+  const iconSandbox = { window: {} };
+  vm.runInNewContext(readFileSync(join(ROOT, 'data/vanilla-icons.js'), 'utf8'), iconSandbox);
+  const registry = iconSandbox.window.VANILLA_ICONS;
+  if (!registry || typeof registry !== 'object' || Array.isArray(registry)) throw new Error('缺少原版图标索引');
+  const iconNames = new Map();
+  for (const [prefab, icon] of Object.entries(registry)) {
+    if (!icon.name || !Array.isArray(icon.aliases) || typeof icon.image !== 'string' || !/^assets\/img\/inventoryimages[1-4]\/[^/]+\.png$/.test(icon.image)) {
+      E('VANILLA_ICON', `原版图标「${prefab}」缺少名称、路径或别称数组`);
+      continue;
+    }
+    checkAsset(icon.image, `原版图标 ${prefab}`);
+    for (const name of [icon.name, ...icon.aliases]) {
+      if (typeof name !== 'string' || !name.trim()) E('VANILLA_NAME', `原版图标「${prefab}」存在空名称`);
+      if (iconNames.has(name) && iconNames.get(name) !== prefab) E('VANILLA_AMBIGUOUS', `原版材料「${name}」对应多个图标`);
+      iconNames.set(name, prefab);
+    }
+  }
+} catch (error) {
+  E('VANILLA_REGISTRY', `原版图标索引无法载入：${error.message}`);
+}
+
 const INDEX = join(ROOT, 'index.html');
 if (!existsSync(INDEX)) {
   E('INDEX_MISSING', '找不到 index.html');
@@ -367,6 +453,7 @@ console.log(`站点标题: ${meta.site_title || '(空)'}   版本: ${meta.versio
 console.log('');
 console.log('条目统计:');
 console.log(byGroup.join('\n'));
+console.log(`关联检查: 正文 ${linkCounts.inline} 处 · 配方 ${linkCounts.recipe} 处 · 关联按钮 ${linkCounts.related} 个`);
 console.log('');
 
 if (errors.length) {

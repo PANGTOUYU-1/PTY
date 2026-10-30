@@ -18,7 +18,7 @@
 .filter-drawer {
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: 60;
 }
 
 .modal-backdrop,
@@ -86,18 +86,47 @@
   margin-block: var(--sp-4);
 }
 
-/* 物品详情大图：包内图标原生只有 64×64，撑满整幅会糊，这里限制尺寸并保持像素硬边 */
+/* Native world renders: show the complete pose and never enlarge beyond its pixels. */
 .modal-card__hero {
-  width: 100%;
-  max-width: 200px;
-  max-height: 200px;
+  width: auto;
+  height: auto;
+  max-width: min(560px, 100%);
+  max-height: min(360px, 45vh);
   min-height: 0;
   margin-inline: auto;
-  object-fit: contain;
+  object-fit: scale-down;
+  border: 0;
 }
 
 .detail-block figure {
   margin: 0;
+}
+
+.detail-block h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 0 14px;
+  font: 650 18px / 1.5 var(--ff-sans);
+}
+
+.detail-block h3::before {
+  content: "";
+  width: 3px;
+  height: 16px;
+  flex: 0 0 3px;
+  background: var(--cinnabar);
+}
+
+.detail-block p {
+  margin: 0;
+  max-width: 78ch;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.detail-block p + p {
+  margin-top: 10px;
 }
 
 .detail-block figure img {
@@ -112,6 +141,98 @@
   font-size: var(--fs-small);
 }
 
+.recipe-introduction,
+.recipe-option__note,
+.recipe-prose {
+  margin: 0;
+  line-height: 1.7;
+}
+
+.recipe-introduction,
+.recipe-option__note {
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+}
+
+.recipe-options,
+.recipe-ingredients {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.recipe-options {
+  display: grid;
+  min-width: 0;
+  gap: 14px;
+}
+
+.recipe-option {
+  min-width: 0;
+}
+
+.recipe-options--multiple > .recipe-option {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 14px 0 0;
+  border-top: var(--bd);
+}
+
+.recipe-option__label {
+  padding-top: 6px;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+.recipe-option__body {
+  display: grid;
+  min-width: 0;
+  gap: 8px;
+}
+
+.recipe-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.recipe-ingredient {
+  max-width: 100%;
+  padding: 5px 9px;
+  border: var(--bd);
+  background: var(--paper-2);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.recipe-ingredient .recipe-token {
+  margin-right: 0;
+  gap: 6px;
+}
+
+.recipe-ingredient .inline-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .recipe-options--multiple > .recipe-option {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .recipe-option__label {
+    padding-top: 0;
+  }
+}
+
 .modal-card__content,
 .detail-blocks,
 .related-row,
@@ -119,6 +240,342 @@
   display: grid;
   gap: var(--sp-4);
   margin-top: var(--sp-4);
+}
+
+.recipe-row {
+  gap: 12px;
+}
+
+.recipe-row > h3 {
+  margin-bottom: 0;
+}
+
+.detail-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 28px;
+}
+
+.detail-blocks > .detail-block {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.detail-blocks > .detail-block--image {
+  flex: 0 1 136px;
+}
+
+.detail-block--image figure {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-2);
+  text-align: center;
+}
+
+.modal-card__overview {
+  display: grid;
+  gap: var(--sp-4);
+  padding: 4px 24px 24px 0;
+  margin-bottom: 28px;
+  border-bottom: var(--bd);
+}
+
+.modal-card__overview--illustrated {
+  grid-template-columns: minmax(0, 1fr) 200px;
+  align-items: center;
+}
+
+.modal-card__overview .modal-card__head {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  padding-right: 0;
+}
+
+.modal-card__eyebrow {
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+  letter-spacing: 0.14em;
+}
+
+.modal-card__head h2 {
+  margin-block: 8px 12px;
+}
+
+.entry-title__note {
+  margin-left: 12px;
+  color: var(--ink-3);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.modal-card__head h2 + p {
+  color: var(--ink-2);
+  line-height: 1.8;
+}
+
+.modal-card__head > .button {
+  justify-self: start;
+  padding: 5px 12px;
+  font-size: var(--fs-small);
+}
+
+.modal-card__overview .modal-card__hero {
+  max-width: 100%;
+  max-height: 200px;
+  margin-block: 0;
+}
+
+.modal-card__overview--scene {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.modal-card__overview--scene .modal-card__hero {
+  max-width: min(760px, 100%);
+  max-height: 400px;
+}
+
+.scene-preview-caption {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+  text-align: center;
+}
+
+.scene-preview {
+  position: relative;
+  width: min(760px, 100%, calc(400px * 1616 / 1285));
+  justify-self: center;
+}
+
+.modal-card__overview--scene .scene-preview .modal-card__hero {
+  display: block;
+  width: 100%;
+  max-height: none;
+}
+
+.scene-hotspot {
+  position: absolute;
+  min-width: 44px;
+  min-height: 44px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.scene-hotspot:hover,
+.scene-hotspot:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 4px;
+  background: color-mix(in srgb, var(--paper) 12%, transparent);
+}
+
+.scene-hotspot__hint {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 5px 9px;
+  border: var(--bd);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--fs-small);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.scene-hotspot:hover .scene-hotspot__hint,
+.scene-hotspot:focus-visible .scene-hotspot__hint {
+  visibility: visible;
+}
+
+.scene-preview-hint {
+  margin: 0;
+  color: var(--ink-2);
+  text-align: center;
+  font-size: var(--fs-small);
+}
+
+.modal-card__content:empty {
+  display: none;
+}
+
+.modal-card__content:not(:has(p)) {
+  display: none;
+}
+
+.detail-value {
+  color: var(--cinnabar);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-list {
+  display: grid;
+  gap: 10px;
+  padding-left: 1.3em;
+}
+
+.detail-list li {
+  max-width: 78ch;
+  line-height: 1.85;
+}
+
+.detail-list li::marker {
+  color: var(--ink-3);
+}
+
+.detail-list--grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-list--grid li {
+  padding: 7px 8px;
+  border: var(--bd);
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 600px) {
+  .detail-list--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.detail-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(90px, 100%), 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.detail-stats > div {
+  min-width: 0;
+  padding: 14px 16px;
+  border: var(--bd);
+  background: var(--paper-2);
+}
+
+.detail-stats dt {
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+
+.detail-stats dd {
+  margin: 4px 0 0;
+  color: var(--cinnabar);
+  font-size: 30px;
+  line-height: 1.4;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-stats dd span {
+  margin-left: 4px;
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+  font-weight: 400;
+}
+
+.detail-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: var(--bd);
+}
+
+.detail-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.detail-table th,
+.detail-table td {
+  padding: 11px 14px;
+  vertical-align: top;
+  border-bottom: var(--bd);
+}
+
+.detail-table thead th {
+  background: var(--paper-2);
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.detail-table tbody th {
+  width: 22%;
+  font-weight: 600;
+}
+
+.detail-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.detail-block--note {
+  padding: 16px 20px;
+  border-left: 3px solid var(--cinnabar);
+  background: var(--paper-2);
+}
+
+.detail-block--note h3::before {
+  display: none;
+}
+
+.item-appearances {
+  margin-top: 28px;
+}
+
+.item-appearances__count {
+  color: var(--ink-3);
+  font-size: var(--fs-small);
+  font-weight: 400;
+}
+
+.item-appearances__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
+  gap: 12px;
+}
+
+.item-appearance {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  text-align: center;
+  line-height: 1.6;
+  border: var(--bd);
+  background: var(--paper-2);
+  overflow-wrap: anywhere;
+}
+
+.item-appearance:hover {
+  border-color: var(--cinnabar);
+  color: var(--cinnabar);
+}
+
+.item-appearance__image {
+  display: grid;
+  place-items: center;
+  height: 140px;
+}
+
+.item-appearance__image img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 140px;
+  object-fit: scale-down;
 }
 
 .character-modal__hero {
@@ -205,11 +662,21 @@
   margin-left: auto;
   width: min(360px, 100%);
   min-height: 100%;
+  height: 100%;
+  overflow-y: auto;
   padding: var(--sp-5);
   border-left: var(--bd);
   background: var(--paper);
   transform: translateX(100%);
   animation: drawer-in 320ms var(--ease) forwards;
+}
+
+.filter-drawer .filters-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.filter-drawer .search-field {
+  grid-column: 1 / -1;
 }
 
 .editor-panel {
@@ -267,7 +734,7 @@
 }
 
 @media (max-width: 767px) {
-  .filters-panel {
+  #items-root > .filters-panel {
     display: none;
   }
 
@@ -275,5 +742,76 @@
   .character-modal__grid,
   .modal-card__head {
     grid-template-columns: 1fr;
+  }
+
+  .modal-shell {
+    padding: 12px;
+  }
+
+  .modal-card {
+    padding: 24px 20px;
+    max-height: 92vh;
+  }
+
+  .modal-card__overview {
+    gap: 16px;
+    padding-right: 16px;
+  }
+
+  .modal-card__overview--illustrated {
+    grid-template-columns: minmax(0, 1fr) 104px;
+  }
+
+  .modal-card__overview .modal-card__hero {
+    max-height: 140px;
+  }
+
+  .modal-card__overview--scene {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .modal-card__overview--scene .modal-card__hero {
+    max-height: 300px;
+  }
+
+  .modal-card__head h2 {
+    font-size: 26px;
+  }
+
+  .detail-stats > div {
+    padding: 10px;
+  }
+
+  .detail-stats dd {
+    font-size: 26px;
+  }
+
+  .detail-table {
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 14px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+
+  .detail-table th,
+  .detail-table td {
+    padding: 9px 8px;
+  }
+
+  .detail-table tbody th {
+    width: auto;
+  }
+
+  .detail-table thead th:first-child {
+    width: 36%;
+  }
+
+  .detail-table:has(thead th:nth-child(3)) thead th:first-child {
+    width: 20%;
+  }
+
+  .detail-table thead th:nth-child(3) {
+    width: 30%;
   }
 }

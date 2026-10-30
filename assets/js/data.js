@@ -6,7 +6,7 @@
    *
    * - placeholderImage: 图片加载失败时的占位图路径。
    * - categoryLabels: 物品分类 id → 中文名映射，用于分类筛选和展示。
-   * - ownerLabels: 角色归属 id → 中文标签映射，用于归属筛选。
+   * - ownerLabels: 角色归属 id → 中文标签映射，用于物品卡片。
    */
   App.config = {
     placeholderImage: "assets/img/placeholders/missing.svg",  // 缺图占位资源
@@ -27,7 +27,6 @@
     section: "intro",
     detailId: "",
     cats: [],
-    owner: "all",
     q: ""
   };
 
@@ -49,12 +48,11 @@
     const path = parts[0] || "intro";
     const search = new URLSearchParams(parts[1] || "");
     const pathParts = path.split("/").filter(Boolean);
-    const section = pathParts[0] === "序" ? "intro" : pathParts[0];
+    const section = pathParts[0] === "序" ? "intro" : pathParts[0] === "skins" ? "items" : pathParts[0];
     return {
       section: section || "intro",
       detailId: pathParts[1] || "",
-      cats: (search.get("cat") || "").split(",").filter(Boolean),
-      owner: search.get("owner") || "all",
+      cats: (search.get("cat") || "").split(",").filter(Boolean).slice(0, 1),
       q: search.get("q") || ""
     };
   }
@@ -62,10 +60,7 @@
   function buildHash(ui) {
     const params = new URLSearchParams();
     if (ui.cats && ui.cats.length) {
-      params.set("cat", ui.cats.join(","));
-    }
-    if (ui.owner && ui.owner !== "all") {
-      params.set("owner", ui.owner);
+      params.set("cat", ui.cats[0]);
     }
     if (ui.q) {
       params.set("q", ui.q);
@@ -140,24 +135,23 @@
 
   function buildSearchText(entry) {
     const parts = [];
-    ["name", "title", "summary", "epithet", "version", "date", "tech"].forEach(function (key) {
+    ["name", "title", "title_note", "summary", "epithet", "version", "date", "tech", "availability"].forEach(function (key) {
       if (entry[key]) {
         parts.push(entry[key]);
       }
     });
-    ["tags", "setting", "exclusive_intro", "changes"].forEach(function (key) {
+    ["tags", "aliases", "setting", "exclusive_intro", "changes"].forEach(function (key) {
       if (Array.isArray(entry[key])) {
         parts.push(entry[key].join(" "));
       }
     });
     if (entry.detail_blocks) {
-      parts.push(
-        entry.detail_blocks
-          .map(function (block) {
-            return block.content || block.caption || "";
-          })
-          .join(" ")
-      );
+      const appendText = function (value) {
+        if (typeof value === "string") parts.push(value);
+        else if (Array.isArray(value)) value.forEach(appendText);
+        else if (value && typeof value === "object") Object.values(value).forEach(appendText);
+      };
+      entry.detail_blocks.forEach(appendText);
     }
     if (entry.recipe) {
       parts.push(entry.recipe);
@@ -185,32 +179,16 @@
     const mechanics = (raw.mechanics || []).map(Object.freeze);
     const terrains = (raw.terrains || []).map(Object.freeze);
     const changelog = (raw.changelog || []).map(Object.freeze);
-    // 自动生成 id → 中文名映射：shou dong de relations 为底，自动从 name/title 补全
-    const relations = Object.assign({}, raw.relations || {});
-    (raw.characters || []).forEach(function (c) { if (c.name) { relations[c.id] = c.name; } });
-    (raw.items || []).forEach(function (i) { if (i.name) { relations[i.id] = i.name; } });
-    (raw.mechanics || []).forEach(function (m) { if (m.title) { relations[m.id] = m.title; } });
-    (raw.terrains || []).forEach(function (t) { if (t.title) { relations[t.id] = t.title; } });
-    (raw.changelog || []).forEach(function (l) { if (l.title) { relations[l.id] = l.title; } });
-
-    // 自动发现 site-data.js 中的未知数据键（如 seasons），统一添加到 relations 和 entries
+    // 自动发现 site-data.js 中的未知数据键（如 seasons），统一添加到 entries
     var knownKeys = ["meta", "categories", "sections", "characters", "items", "mechanics", "terrains", "changelog", "relations", "posters", "loadFailures"];
     var extra = {};
     Object.keys(raw).forEach(function (key) {
       if (knownKeys.indexOf(key) === -1 && Array.isArray(raw[key])) {
         var frozen = raw[key].map(Object.freeze);
         extra[key] = Object.freeze(frozen);
-        frozen.forEach(function (entry) {
-          var name = entry.name || entry.title;
-          if (name) { relations[entry.id] = name; }
-        });
       }
     });
 
-    const nameToId = Object.keys(relations).reduce(function (acc, id) {
-      acc[relations[id]] = id;
-      return acc;
-    }, {});
     const entries = {};
 
     // 所有已知数据键 → entries
@@ -228,6 +206,26 @@
     Object.keys(extra).forEach(function (key) {
       extra[key].forEach(function (entry) {
         entries[entry.id] = { ...entry, type: key, searchText: buildSearchText(entry) };
+      });
+    });
+
+    // Searching for an appearance also finds the item it belongs to.
+    (extra.skins || []).forEach(function (skin) {
+      const item = entries[skin.item_id];
+      if (item && item.type === "items") item.searchText += " " + buildSearchText(skin);
+    });
+
+    // Canonical names stay linkable when an alias or a custom label is added.
+    const relations = {};
+    const nameToId = {};
+    Object.keys(entries).forEach(function (id) {
+      const entry = entries[id];
+      const label = (raw.relations || {})[id] || entry.name || entry.title || entry.version || id;
+      relations[id] = label;
+      [entry.name, entry.title, label].concat(ensureArray(entry.aliases)).forEach(function (name) {
+        if (typeof name === "string" && name) {
+          nameToId[name] = id;
+        }
       });
     });
 
@@ -254,6 +252,7 @@
         ...App.ui,
         ...patch
       };
+      next.cats = (next.cats || []).slice(0, 1);
       App.ui = next;
       const hash = buildHash(next);
       if ((options && options.replace) || window.location.hash === hash) {

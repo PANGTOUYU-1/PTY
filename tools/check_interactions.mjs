@@ -10,6 +10,7 @@ import vm from 'node:vm';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const html = readFileSync(join(root, 'index.html'), 'utf8');
 const nodes = new Map();
+const documentListeners = new Map();
 const node = id => {
   if (!nodes.has(id)) {
     const template = html.match(new RegExp(`<script id="${id}"[^>]*>([\\s\\S]*?)<\\/script>`));
@@ -27,13 +28,16 @@ const sandbox = {
     getElementById: node,
     querySelector: () => null, querySelectorAll: () => [],
     activeElement: null, body: { classList: { add() {}, remove() {} } },
-    addEventListener() {},
+    addEventListener(type, listener) {
+      if (!documentListeners.has(type)) documentListeners.set(type, []);
+      documentListeners.get(type).push(listener);
+    },
   },
   history: { pushState(_a, _b, hash) { sandbox.window.location.hash = hash; }, replaceState(_a, _b, hash) { sandbox.window.location.hash = hash; } },
   URLSearchParams, console,
 };
 vm.createContext(sandbox);
-for (const file of ['assets/js/vendor/mustache.min.js', 'data/site-data.js', 'assets/js/data.js',
+for (const file of ['assets/js/vendor/mustache.min.js', 'data/site-data.js', 'data/vanilla-icons.js', 'assets/js/data.js',
   'assets/js/render.js', 'assets/js/recipe.js', 'assets/js/linkify.js', 'assets/js/filter.js',
   'assets/js/carousel.js', 'assets/js/modal.js', 'assets/js/editor.js']) {
   vm.runInContext(readFileSync(join(root, file), 'utf8'), sandbox, { filename: file });
@@ -42,6 +46,7 @@ for (const file of ['assets/js/vendor/mustache.min.js', 'data/site-data.js', 'as
 const App = sandbox.window.App;
 await App.Data.load();
 const state = App.STATE;
+App.Modal.bind();
 let passed = 0;
 const check = (label, fn) => { fn(); passed++; console.log(`  ✓ ${label}`); };
 
@@ -51,14 +56,15 @@ check('分类和分区配置不进入条目与名称索引', () => {
     assert.equal(state.relations[config.id], undefined);
   }
 });
-check('所有内容条目都具有对应页面分区', () => {
+check('内容有对应页面分区，外观归入物品且不再单列导航', () => {
   const sections = new Set(App.sections.map(s => s.id));
+  assert.ok(!sections.has('skins'));
   for (const entry of Object.values(state.entries)) {
-    assert.ok(entry.type === 'characters' || sections.has(entry.type));
+    assert.ok(entry.type === 'characters' || sections.has(entry.type === 'skins' ? 'items' : entry.type));
   }
 });
-check('真实渲染模块生成外观、设置与节气卡片', () => {
-  for (const id of ['skins', 'settings', 'seasons']) {
+check('真实渲染模块生成设置与节气卡片', () => {
+  for (const id of ['settings', 'seasons']) {
     const config = App.sections.find(s => s.id === id);
     App.Render.renderGenericSection(config);
     const output = node(config.rootId).innerHTML;
@@ -66,12 +72,179 @@ check('真实渲染模块生成外观、设置与节气卡片', () => {
     assert.ok(output.includes(state[id][0].name || state[id][0].title));
   }
 });
-check('真实物品渲染保留全部条目，归属筛选有效', () => {
+check('首页立绘展示各自四件专属，使用高清落地图并跳转到对应物品', () => {
+  const getElementById = sandbox.document.getElementById;
+  sandbox.document.getElementById = id => id === 'sections-root' ? null : getElementById(id);
+  try { App.Render.renderAll(); }
+  finally { sandbox.document.getElementById = getElementById; }
+  const hero = node('hero-root').innerHTML;
+  assert.equal((hero.match(/class="duo-gear__item"/g) || []).length, 8);
+  for (const character of state.characters) {
+    assert.equal(character.featured_items.length, 4);
+    assert.equal(new Set(character.featured_items).size, 4);
+    const panel = hero.match(new RegExp(`<div class="duo-gear" id="gear-${character.id}"[\\s\\S]*?</div>`))?.[0];
+    assert.ok(panel, character.id);
+    assert.ok(panel.includes('aria-hidden="true" inert'));
+    for (const id of character.featured_items) {
+      const item = state.entries[id];
+      assert.equal(item.type, 'items');
+      assert.equal(item.owner, character.id);
+      assert.ok(panel.includes(`data-open-entry="${id}"`));
+      assert.ok(panel.includes(`src="${item.display_image}"`));
+      assert.ok(!panel.includes(`src="${item.image}"`));
+    }
+  }
+});
+check('真实物品渲染保留全部条目，分类筛选有效且不显示角色筛选', () => {
   App.Render.renderItems();
   assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, state.items.length);
-  App.ui.owner = 'gaojiaoniao';
-  assert.ok(App.Filter.getFilteredItems().every(e => e.owner === 'gaojiaoniao'));
-  App.ui.owner = 'all';
+  assert.ok(!node('items-root').innerHTML.includes('data-owner='));
+  App.ui.cats = ['food'];
+  assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
+  App.ui.cats = [];
+});
+check('127张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
+  const manifest = JSON.parse(readFileSync(join(root, 'data/display-assets.json'), 'utf8'));
+  const assets = new Map(manifest.assets.map(asset => [asset.source, asset]));
+  assert.equal(assets.size, 127);
+  for (const asset of assets.values()) {
+    const png = readFileSync(join(root, asset.path));
+    assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', asset.source);
+    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], asset.display_size, asset.source);
+    assert.equal(asset.scale, 1);
+    if (asset.icon_path) {
+      const pngIcon = readFileSync(join(root, asset.icon_path));
+      assert.deepEqual([pngIcon.readUInt32BE(16), pngIcon.readUInt32BE(20)], asset.icon_size);
+    }
+  }
+  const lingqi = assets.get('status_bighead_lingqi');
+  assert.equal(state.entries.mech_lingqi.image, lingqi.icon_path);
+  assert.equal(state.entries.mech_lingqi.display_image, lingqi.path);
+  assert.notEqual(state.entries.mech_lingqi.display_image, state.entries.bighead_xqlj.display_image);
+  for (const binding of manifest.bindings) {
+    assert.equal(state.entries[binding.id].display_image, assets.get(binding.source).path, binding.id);
+  }
+  for (const entry of [...state.items, ...state.seasons, ...state.skins]) {
+    assert.ok(entry.display_image?.startsWith('assets/img/displays/'), entry.id);
+    assert.notEqual(entry.display_image, entry.image, entry.id);
+  }
+});
+check('实际卡片和详情使用落地图，名称前和配方仍使用原始小图标', () => {
+  App.Render.renderItems();
+  const cards = [node('items-root').innerHTML];
+  for (const id of ['seasons', 'mechanics']) {
+    const config = App.sections.find(section => section.id === id);
+    App.Render.renderGenericSection(config);
+    cards.push(node(config.rootId).innerHTML);
+  }
+  for (const [i, group] of ['items', 'seasons', 'mechanics'].entries()) {
+    for (const entry of state[group]) {
+      const card = cards[i].match(new RegExp(`<article[^>]*data-entry-target="${entry.id}"[\\s\\S]*?<\\/article>`))?.[0];
+      const image = entry.display_image || entry.illustration;
+      assert.ok(card, entry.id);
+      if (image) assert.ok(card.includes(`src="${image}"`), entry.id);
+      else assert.ok(card.includes('card-link--text'), entry.id);
+      if (entry.image) assert.ok(card.includes(`class="entry-icon" src="${entry.image}"`), entry.id);
+      App.Modal.open(entry.id);
+      if (image) assert.ok(node('modal-root').innerHTML.includes(`class="modal-card__hero" src="${image}"`), entry.id);
+      else assert.ok(!node('modal-root').innerHTML.includes('class="modal-card__hero"'), entry.id);
+      if (entry.image) assert.ok(node('modal-root').innerHTML.includes(`class="entry-icon" src="${entry.image}"`), entry.id);
+    }
+  }
+  const item = state.items[0];
+  const recipe = App.Recipe.toHtml(`[${item.id}] ×1`);
+  assert.ok(recipe.includes(`src="${item.image}"`));
+  assert.ok(!recipe.includes(item.display_image));
+  App.Modal.open('config_bighead_speed_bonus');
+  assert.ok(!node('modal-root').innerHTML.includes('class="modal-card__hero"'));
+});
+check('屋外入口和四间独立房间均可查看，内景匹配各自墙面、地板与门的连接', () => {
+  const config = App.sections.find(section => section.id === 'terrains');
+  App.Render.renderGenericSection(config);
+  const cards = node(config.rootId).innerHTML;
+  const manifest = JSON.parse(readFileSync(join(root, 'data/terrain-previews.json'), 'utf8'));
+  assert.equal(manifest.kind, 'original_room_composite');
+  const roomSources = { loc_foyer: 'bighead_wall', loc_hall: 'bighead_wall1', loc_bedroom: 'bighead_wall2', loc_bedroom_right: 'bighead_wall3' };
+  assert.equal(manifest.assets.length, 4);
+  assert.equal(state.terrains.length, 5);
+  assert.deepEqual(manifest.assets.map(asset => asset.id).sort(), Object.keys(roomSources).sort());
+  for (const entry of state.terrains) {
+    const image = entry.display_image || entry.illustration;
+    assert.ok(image, entry.id);
+    const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${entry.id}"[\\s\\S]*?<\\/article>`))?.[0];
+    assert.ok(card.includes(`src="${image}"`), entry.id);
+    assert.ok(!card.includes('card-link--text'), entry.id);
+    App.Modal.open(entry.id);
+    assert.ok(node('modal-root').innerHTML.includes(`class="modal-card__hero" src="${image}"`));
+  }
+  for (const asset of manifest.assets) {
+    const entry = state.entries[asset.id];
+    assert.equal(entry.illustration, asset.path);
+    assert.ok(cards.includes(entry.preview_caption));
+    assert.equal(asset.source, roomSources[asset.id]);
+    assert.equal(asset.floor.source, roomSources[asset.id].replace('wall', 'floor'));
+    assert.equal(asset.floor.animation, 'idle');
+    assert.equal(asset.floor.quad.length, 4);
+    const png = readFileSync(join(root, asset.path));
+    assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], asset.display_size);
+    assert.ok(asset.display_size[0] > 1000);
+    assert.equal(asset.scale, 1);
+  }
+  assert.equal(state.nameToId['阁主卧房'], 'loc_bedroom');
+  for (const id of Object.keys(roomSources)) {
+    assert.ok(state.entries.loc_qingxuan.related.includes(id));
+    assert.ok(state.entries[id].related.includes('loc_qingxuan'));
+    if (id !== 'loc_hall') {
+      assert.ok(state.entries[id].related.includes('loc_hall'));
+      assert.ok(state.entries.loc_hall.related.includes(id));
+    }
+  }
+  App.Modal.open('loc_foyer');
+  assert.match(node('modal-root').innerHTML, /鎏金太极铃/);
+  assert.match(node('modal-root').innerHTML, /青石楼梯/);
+  const foyerHtml = node('modal-root').innerHTML;
+  assert.match(foyerHtml, /class="scene-preview"/);
+  assert.match(foyerHtml, /class="scene-hotspot"[^>]+data-open-entry="loc_hall"[^>]+aria-label="鎏金太极铃：进入厅堂"/);
+  const bell = manifest.assets.find(asset => asset.id === 'loc_foyer').furnishings[0];
+  assert.equal(bell.prefab, 'bighead_men1');
+  assert.equal(bell.animation, 'men1');
+  assert.equal(bell.target, 'loc_hall');
+  const hotspot = state.entries.loc_foyer.scene_hotspots[0];
+  const [x, y, width, height] = bell.bounds;
+  assert.ok(Math.abs((x + width / 2) / 1616 * 100 - hotspot.x) < 0.1);
+  assert.ok(Math.abs((y + height / 2) / 1285 * 100 - hotspot.y) < 0.1);
+  App.Modal.open('loc_bedroom_right');
+  assert.match(node('modal-root').innerHTML, /银翘古木门/);
+  assert.ok(!node('modal-root').innerHTML.includes('class="scene-hotspot"'));
+});
+check('切换分类再回到全部时，69项卡片直接显示且不依赖整张网格淡入', () => {
+  for (const cats of [['weapon'], []]) {
+    App.ui.cats = cats;
+    App.Render.renderItems();
+    const output = node('items-root').innerHTML;
+    const expected = cats.length ? state.items.filter(item => item.category === 'weapon').length : state.items.length;
+    assert.equal((output.match(/data-open-entry=/g) || []).length, expected);
+    const gridClass = output.match(/<div class="([^"]*)" id="items-grid-root">/)?.[1];
+    assert.ok(gridClass);
+    assert.ok(!gridClass.split(/\s+/).includes('reveal'));
+  }
+  assert.ok(node('items-root').innerHTML.includes(`共 ${state.items.length} 项 · 全部分类`));
+  for (const config of App.sections.filter(section => !['items', 'changelog'].includes(section.id))) {
+    App.Render.renderGenericSection(config);
+    assert.ok(!/class="[^"]*items-grid[^\"]*\breveal\b/.test(node(config.rootId).innerHTML));
+  }
+});
+check('浏览器缺少滚动观察器时，动画内容仍可见', () => {
+  const classes = new Set(['reveal']);
+  const motionSandbox = {
+    window: { App: {} },
+    document: { querySelectorAll: () => [{ classList: { add: name => classes.add(name) } }] },
+  };
+  vm.createContext(motionSandbox);
+  vm.runInContext(readFileSync(join(root, 'assets/js/motion.js'), 'utf8'), motionSandbox);
+  motionSandbox.window.App.Motion.init();
+  assert.ok(classes.has('in'));
 });
 check('搜索能找到新机制、外观与设置，类型标签不为空', () => {
   for (const [query, expected] of [['噬心', 'mech_shixin'], ['万籁华光', 'bighead_buran_skin5'], ['嫁接上限', 'config_bighead_graft_limit']]) {
@@ -85,14 +258,394 @@ check('搜索能找到新机制、外观与设置，类型标签不为空', () =
 check('真实详情模块显示配方、科技与正确的分区链接', () => {
   for (const id of ['bighead_spear', 'jq_lc', 'mech_gardening', 'bighead_buran_skin5', 'config_bighead_graft_limit']) {
     App.Modal.open(id);
-    assert.equal(App.ui.section, state.entries[id].type);
+    assert.equal(App.ui.section, state.entries[id].type === 'skins' ? 'items' : state.entries[id].type);
     assert.equal(App.route.read().detailId, id);
     assert.ok(node('modal-root').innerHTML.includes(state.entries[id].name || state.entries[id].title));
   }
   App.Modal.open('bighead_spear');
-  assert.ok(node('modal-root').innerHTML.includes('冰×6 + 月亮碎片×6'));
-  assert.ok(node('modal-root').innerHTML.includes('recipe-tech'));
+  const plain = node('modal-root').innerHTML.replace(/<[^>]*>/g, '');
+  assert.ok(plain.includes('冰×6') && plain.includes('月亮碎片×6'));
+  assert.equal((node('modal-root').innerHTML.match(/class="recipe-ingredient"/g) || []).length, 2);
+  assert.ok(plain.includes('无需科技'));
   assert.ok(node('modal-root').innerHTML.includes('物品'));
+});
+check('原版材料使用新目录内24px图标，保留配方文字数量且不生成无效链接', () => {
+  const icons = sandbox.window.VANILLA_ICONS;
+  assert.equal(Object.keys(icons).length, 71);
+  for (const [id, icon] of Object.entries(icons)) {
+    const png = readFileSync(join(root, icon.image));
+    assert.match(icon.image, /^assets\/img\/inventoryimages[1-4]\//);
+    assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', id);
+    const rendered = App.Recipe.toHtml(`${icon.name}×2`);
+    assert.ok(rendered.includes(`src="${icon.image}"`), id);
+    assert.equal(rendered.replace(/<[^>]*>/g, ''), `${icon.name}×2`);
+    assert.ok(!rendered.includes('data-open-entry'), id);
+    assert.equal(state.entries[id], undefined, 'original materials do not create Wiki entries');
+  }
+  for (const entry of Object.values(state.entries)) {
+    if (!entry.recipe) continue;
+    const rendered = App.Recipe.toHtml(entry.recipe);
+    const expected = entry.recipe.replace(/\[([^\[\]]+)\]/g, (_, id) => state.entries[id].name || state.entries[id].title || id);
+    assert.equal(rendered.replace(/<[^>]*>/g, ''), expected, entry.id);
+    assert.equal((rendered.match(/data-open-entry=/g) || []).length, [...entry.recipe.matchAll(/\[[^\[\]]+\]/g)].length, entry.id);
+  }
+  for (const name of ['金色羽毛', '草', '活木', '伏特羊奶', '鱼肉']) assert.ok(App.Recipe.toHtml(`${name}×1`).includes('recipe-token--vanilla'), name);
+  assert.ok(!App.Recipe.toHtml('理智×50；水果度≥2；不能加入蜂蜜').includes('<img'));
+  assert.ok(!App.Recipe.toHtml('冰鲷鱼鳞×1').includes('<img'), 'partial names must not match');
+  assert.equal(App.Recipe.toHtml('<script>×1'), '&lt;script&gt;×1');
+});
+check('制作站显示原版图标，配方已包含的科技条件不重复，额外限制仍保留', () => {
+  App.Modal.open('bb_hhlct');
+  const recipe = node('modal-root').innerHTML.split('<section class="recipe-row detail-block">')[1].split('</section>')[0];
+  assert.equal((recipe.match(/炼金引擎/g) || []).length, 1);
+  assert.ok(recipe.includes('src="assets/img/inventoryimages3/researchlab2.png"'));
+  assert.ok(recipe.includes('烹饪指南×1'));
+  for (const entry of Object.values(state.entries).filter(entry => entry.recipe?.includes('炼金引擎'))) {
+    assert.ok(App.Recipe.toBlockHtml(entry.recipe).includes('src="assets/img/inventoryimages3/researchlab2.png"'), entry.id);
+  }
+  assert.equal(App.Recipe.techToHtml('炼金引擎；高脚鸟制作', '炼金引擎：活木×3'), '高脚鸟制作');
+  assert.equal(App.Recipe.techToHtml('炼金引擎；高脚鸟制作 / 金企鹅兑换', '炼金引擎；高脚鸟制作：活木×3；金企鹅兑换：[bighead_qbi]×49'), '');
+  assert.ok(App.Linkify.textToHtml('在科学机器或炼金引擎制作').includes('src="assets/img/inventoryimages3/researchlab.png"'));
+});
+check('替代配方逐组显示，材料与条件横排，保留取得方式、数量和材料跳转', () => {
+  App.Modal.open('bighead_mwgt');
+  const output = node('modal-root').innerHTML;
+  const options = [...output.matchAll(/<li class="recipe-option">([\s\S]*?)<\/ul>/g)];
+  assert.equal(options.length, 4);
+  const expected = [
+    ['牛肉×2', '铥矿×1', '肉×2', '高脚鸟蛋×1'],
+    ['羊肉×1', '鱼肉×3', '铥矿×1', '高脚鸟蛋×1'],
+    ['鸟腿×5', '铥矿×1', '小肉×5', '鸟蛋×3'],
+    ['鱼肉×3', '无花果×2', '铥矿×1', '藤壶×3'],
+  ];
+  options.forEach((option, index) => {
+    const text = option[1].replace(/<[^>]*>/g, '');
+    for (const material of expected[index]) assert.ok(text.includes(material), material);
+    assert.equal((option[1].match(/class="recipe-ingredient"/g) || []).length, 4);
+  });
+  assert.ok(output.includes('任选一组'));
+  for (const id of ['bighead_nr', 'bighead_yr']) assert.ok(options.some(option => option[1].includes(`data-open-entry="${id}"`)));
+  App.Modal.open('jq_dong');
+  const winter = node('modal-root').innerHTML;
+  assert.equal((winter.match(/class="recipe-option"/g) || []).length, 2);
+  assert.ok(winter.includes('金企鹅兑换'));
+  assert.ok(winter.includes('冰鲷鱼×6'));
+  assert.ok(winter.includes('data-open-entry="bighead_qbi"'));
+  App.Modal.open('bighead_cmgt');
+  assert.ok(node('modal-root').innerHTML.includes('蜂蜜×至少1'));
+  const conditions = App.Recipe.toBlockHtml('烹饪条件：蜂蜜×至少1；水果度≥2；不能加入蜂蜜');
+  assert.ok(conditions.includes('水果度≥2') && conditions.includes('不能加入蜂蜜'));
+  assert.ok(App.Recipe.toBlockHtml('<script>×1').includes('&lt;script&gt;×1'));
+});
+check('所有金企鹅兑换入口可查看召唤步骤，区分金块与Q币并说明限时库存', () => {
+  for (const entry of Object.values(state.entries)) {
+    if (!entry.recipe?.includes('金企鹅兑换')) continue;
+    App.Modal.open(entry.id);
+    const recipe = node('modal-root').innerHTML.split('<section class="recipe-row detail-block">')[1]?.split('</section>')[0];
+    assert.ok(recipe?.includes('data-open-entry="mech_gold_penguin"'), entry.id);
+  }
+  const target = {
+    closest: selector => selector === '[data-open-entry]' ? { dataset: { openEntry: 'mech_gold_penguin' } } : null,
+    matches: () => false,
+  };
+  for (const listener of documentListeners.get('click') || []) listener({ target });
+  assert.equal(App.route.read().detailId, 'mech_gold_penguin');
+  const plain = node('modal-root').innerHTML.replace(/<[^>]*>/g, '');
+  for (const text of ['同一只', '10块', '冬天', '480秒', '不是给10枚Q币', '不会定时自动刷新']) assert.ok(plain.includes(text), text);
+  assert.equal(state.nameToId['金企鹅'], 'mech_gold_penguin');
+  App.ui.q = '金企鹅';
+  assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'mech_gold_penguin'));
+  App.ui.q = '';
+  App.Modal.open('bighead_qbi');
+  assert.ok(node('modal-root').innerHTML.includes('data-open-entry="mech_gold_penguin"'));
+});
+check('27款外观全部在对应物品中横向展示，支持查看、返回、搜索和旧链接', () => {
+  for (const item of state.items) {
+    App.Modal.open(item.id);
+    const output = node('modal-root').innerHTML;
+    const expected = state.skins.filter(skin => skin.item_id === item.id);
+    const gallery = output.split('class="item-appearances__grid">')[1]?.split('</section>')[0] || '';
+    const targets = [...gallery.matchAll(/data-open-entry="([^"]+)"/g)].map(match => match[1]);
+    assert.deepEqual(targets, Array.from(expected, skin => skin.id), item.id);
+    for (const skin of expected) assert.ok(gallery.includes(`src="${skin.display_image}"`), skin.id);
+  }
+  for (const skin of state.skins) {
+    App.Modal.open(skin.id);
+    assert.equal(App.ui.section, 'items');
+    const output = node('modal-root').innerHTML;
+    assert.ok(output.includes(`class="modal-card__hero" src="${skin.display_image}"`), skin.id);
+    assert.ok(output.includes(`data-open-entry="${skin.item_id}">← 返回`), skin.id);
+    assert.ok(state.entries[skin.item_id].searchText.includes(skin.name), skin.id);
+    assert.equal(App.route.read(`#skins/${skin.id}`).detailId, skin.id);
+    assert.equal(App.route.read(`#skins/${skin.id}`).section, 'items');
+  }
+  assert.equal(App.route.read('#skins').section, 'items');
+  App.ui.q = '万籁华光';
+  assert.ok(App.Filter.getFilteredItems().some(item => item.id === 'bighead_buran'));
+  App.ui.q = '';
+});
+check('每件物品详情均能显示使用步骤与效果，且概要不重复为正文', () => {
+  for (const item of state.items) {
+    App.Modal.open(item.id);
+    const output = node('modal-root').innerHTML;
+    assert.ok(output.includes('<h3>怎么使用</h3>'), item.id);
+    assert.ok(/<h3>(?:效果与限制|基础效果)<\/h3>/.test(output), item.id);
+    assert.equal(output.split(item.summary).length - 1, 1, item.id);
+  }
+});
+check('获取状态在卡片和详情显式显示并可搜索，芙蓉保留已接入的特殊获取方式', () => {
+  App.Render.renderItems();
+  const cards = node('items-root').innerHTML;
+  const flower = cards.match(/<article[^>]*data-entry-target="bb_gaojiaoniao_fr"[\s\S]*?<\/article>/)?.[0];
+  assert.ok(flower?.includes('class="availability-badge">特殊获取'));
+  App.Modal.open('bb_gaojiaoniao_fr');
+  const output = node('modal-root').innerHTML;
+  const plain = output.replace(/<[^>]*>/g, '');
+  assert.ok(output.includes('class="availability-badge">特殊获取'));
+  for (const text of ['10%', '暗影心房', '枯萎', '失败会消耗心房']) assert.ok(plain.includes(text), text);
+  assert.ok(!plain.includes('未找到启用'));
+  App.ui.q = '特殊获取';
+  assert.ok(App.Filter.getFilteredItems().some(item => item.id === 'bb_gaojiaoniao_fr'));
+  App.ui.q = '';
+  App.Modal.open('bighead_spear');
+  assert.ok(!node('modal-root').innerHTML.includes('class="availability-badge"'));
+  // Exercise both real templates for future entries explicitly marked unimplemented.
+  const item = { id: 'preview-unimplemented', title: '未开放物品', name_html: '未开放物品', availability: '未实装' };
+  for (const [template, view] of [['tpl-items', { items: [item] }], ['tpl-modal-generic', item]]) {
+    const html = sandbox.window.Mustache.render(node(template).innerHTML, view);
+    assert.ok(html.includes('class="availability-badge">未实装'), template);
+  }
+});
+check('灵气详情先解释被动与技能用途，区分当前值、上限和主动补充条件', () => {
+  App.Modal.open('mech_lingqi');
+  const output = node('modal-root').innerHTML;
+  const plain = output.replace(/<[^>]*>/g, '');
+  assert.ok(plain.indexOf('灵气到底有什么用') < plain.indexOf('基础灵气'));
+  for (const text of ['至少10点', '照明', '至少50点', '踏水', '溺水', '至少100点', '50%', '食用灵魂', '当前灵气', '不是灵气上限', '严格大于75点', '75点整仍是5%', '102点', '剩98点', '每次消耗1个', '回复50点']) {
+    assert.ok(plain.includes(text), text);
+  }
+  for (const id of ['bighead_spear', 'bighead_buran', 'bighead_fanhua', 'bighead_ygxlfw', 'jq_chun', 'bighead_qyq', 'mech_spirits']) {
+    assert.ok(output.includes(`data-open-entry="${id}"`), id);
+  }
+  assert.equal((output.match(/class="detail-table"/g) || []).length, 3);
+  App.ui.q = '踏水';
+  assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'mech_lingqi'));
+  App.ui.q = '';
+});
+check('无小标题的详情段落不继承整页标题，机制概要只出现一次', () => {
+  for (const id of ['mech_lingqi', 'config_bighead_speed_bonus']) {
+    App.Modal.open(id);
+    const output = node('modal-root').innerHTML;
+    const sections = [...output.matchAll(/<section class="detail-block[^\"]*">([\s\S]*?)<\/section>/g)];
+    const titles = sections.flatMap(section => [...section[1].matchAll(/<h3>(.*?)<\/h3>/g)].map(match => match[1]));
+    assert.deepEqual(titles, Array.from(state.entries[id].detail_blocks.filter(block => block.title).map(block => block.title)));
+    assert.equal(output.split(state.entries[id].summary).length - 1, 1);
+  }
+});
+check('五道条件与概率分表，圆满属性独立展示，技能图标仍横向分组', () => {
+  App.Modal.open('mech_wudao');
+  const output = node('modal-root').innerHTML;
+  assert.equal((output.match(/<table class="detail-table">/g) || []).length, 2);
+  for (const text of ['神道', '人道', '畜生道', '恶鬼道', '地狱道', '50%', '20%', '5%', '0.1%']) assert.ok(output.includes(text), text);
+  for (const value of ['200', '150', '250']) assert.ok(output.includes(`<dd>${value}</dd>`), value);
+  assert.ok(output.includes('detail-block--note'));
+  assert.ok(output.includes('data-open-entry="mech_shixin"'));
+  App.Modal.open('mech_gardening');
+  const garden = node('modal-root').innerHTML;
+  assert.equal((garden.match(/detail-block--image/g) || []).length, 4);
+  assert.ok(garden.includes('detail-list'));
+  assert.ok(garden.includes('detail-table'));
+});
+check('表格与列表文字参与搜索，数字强调不破坏链接与比较符号', () => {
+  App.ui.q = '钢羊';
+  assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'mech_wudao'));
+  App.ui.q = '';
+  const rich = App.Linkify.textToHtml('噬心>25，[[冬季(10级)]]，50% & 0.1%', { emphasizeNumbers: true });
+  assert.ok(rich.includes('&gt;<strong class="detail-value">25</strong>'));
+  assert.ok(rich.includes('data-open-entry="jq_dong10">冬季(10级)</button>'));
+  assert.ok(rich.includes('<strong class="detail-value">50%</strong> &amp; <strong class="detail-value">0.1%</strong>'));
+});
+check('节气详情展示实际用途，机制页提供装配与升级指引', () => {
+  for (const entry of state.seasons) {
+    App.Modal.open(entry.id);
+    const output = node('modal-root').innerHTML;
+    assert.ok(output.includes('<h3>怎么使用</h3>'), entry.id);
+    assert.ok(output.includes('<h3>效果与限制</h3>'), entry.id);
+    assert.ok(output.includes('琦玉器'), entry.id);
+  }
+  App.Modal.open('mech_jieqi');
+  const output = node('modal-root').innerHTML;
+  assert.ok(output.includes('<h3>如何生效</h3>'));
+  assert.ok(output.includes('<h3>怎样升级</h3>'));
+  assert.ok(!/<h3>节气<\/h3>|STRINGS\.|包内动画|包内字符串/.test(output));
+  assert.equal(output.split(state.entries.mech_jieqi.summary).length - 1, 1);
+});
+check('正文物品使用对应小图标，长名称完整匹配且保留原有关联目标', () => {
+  const render = text => App.Linkify.textToHtml(text, { emphasizeNumbers: true });
+  const products = render('[[四季之灵]]10枚，草制缚灵网4枚、缚灵网16枚、[[琦玉器]]10枚、[[月饼盒子]]49枚');
+  assert.equal((products.match(/class="inline-item__icon"/g) || []).length, 5);
+  assert.equal((products.match(/data-open-entry=/g) || []).length, 3);
+  for (const name of ['草制缚灵网', '缚灵网', '琦玉器', '月饼盒子']) {
+    const item = state.items.find(item => item.name === name);
+    assert.ok(products.includes(`src="${item.image}"`), name);
+  }
+  assert.ok(products.includes('<strong class="detail-value">49</strong>枚'));
+  const materials = render('金块6枚，冰淇淋与草莓罐头');
+  assert.ok(materials.includes('src="assets/img/inventoryimages2/goldnugget.png"'));
+  const jam = state.items.find(item => item.name === '草莓罐头');
+  assert.ok(materials.includes(`src="${jam.image}"`));
+  assert.equal((materials.match(/class="inline-item__icon"/g) || []).length, 2);
+  const safe = render('<img src="x" onerror="x">金块 & [[琦玉器]]');
+  assert.ok(safe.includes('&lt;img src=&quot;x&quot; onerror=&quot;x&quot;&gt;'));
+  assert.ok(safe.includes('&amp;'));
+});
+check('通过实际用途能搜到物品及其制作喂养链', () => {
+  for (const [query, expected] of [['踏水', 'bb_gaojiaoniao_cmyh'], ['范围耕地', 'bighead_ylry'],
+    ['饥饿消耗', 'bighead_ywyb'], ['何三宝', 'bighead_mwgt'], ['2肉度', 'bighead_nr']]) {
+    App.ui.q = query;
+    assert.ok(App.Filter.getSearchResults().some(e => e.id === expected), `${query}: ${expected}`);
+  }
+  App.ui.q = '';
+});
+check('全文关联词和配方引用均生成可点击的正确目标，筛选不会阻止详情跳转', () => {
+  let characterOpened = '';
+  App.CharPopup = { openForCharacter(id) { characterOpened = id; } };
+  App.ui.q = '不会命中任何物品的筛选词';
+  App.Render.renderItems();
+  assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, 0);
+  let inline = 0;
+  let recipe = 0;
+  function click(id) {
+    const target = {
+      closest: selector => selector === '[data-open-entry]' ? { dataset: { openEntry: id } } : null,
+      matches: () => false,
+    };
+    for (const listener of documentListeners.get('click') || []) listener({ target });
+    assert.equal(App.route.read().detailId, id);
+    if (state.entries[id].type === 'characters') {
+      assert.equal(characterOpened, id);
+    } else {
+      assert.equal(node('modal-root').hidden, false);
+      assert.ok(node('modal-root').innerHTML.includes(`data-copy-link="${id}"`));
+    }
+  }
+  for (const entry of Object.values(state.entries)) {
+    const blockTexts = value => typeof value === 'string' ? [value]
+      : Array.isArray(value) ? value.flatMap(blockTexts)
+      : value && typeof value === 'object' ? Object.values(value).flatMap(blockTexts) : [];
+    const texts = [entry.summary || '', entry.subtitle || '', ...(entry.setting || []),
+      ...(entry.exclusive_intro || []), ...(entry.changes || []),
+      ...blockTexts(entry.detail_blocks || [])];
+    for (const text of texts) {
+      const rendered = App.Linkify.textToHtml(text);
+      const matches = [...text.matchAll(/\[\[([^\[\]]+)\]\]/g)];
+      assert.equal((rendered.match(/data-open-entry=/g) || []).length, matches.length, entry.id);
+      for (const match of matches) {
+        const id = state.nameToId[match[1]];
+        assert.ok(state.entries[id], `${entry.id}: ${match[1]}`);
+        assert.ok(rendered.includes(`data-open-entry="${id}"`));
+        click(id);
+        inline++;
+      }
+    }
+    for (const match of (entry.recipe || '').matchAll(/\[([^\[\]]+)\]/g)) {
+      const id = match[1];
+      const rendered = App.Recipe.toHtml(entry.recipe);
+      assert.ok(rendered.includes(`data-open-entry="${id}"`), `${entry.id}: ${id}`);
+      click(id);
+      recipe++;
+    }
+  }
+  assert.ok(inline >= 354);
+  assert.ok(recipe >= 88);
+  App.ui.q = '';
+});
+check('所有详情的关联按钮指向存在的条目，地点互通且装备与外观可双向访问', () => {
+  for (const entry of Object.values(state.entries)) {
+    assert.equal(new Set(entry.related || []).size, (entry.related || []).length, entry.id);
+    for (const id of entry.related || []) assert.ok(state.entries[id], `${entry.id}: ${id}`);
+    if (['characters', 'changelog'].includes(entry.type)) continue;
+    App.Modal.open(entry.id);
+    const related = node('modal-root').innerHTML.split('<div class="related-row">')[1] || '';
+    const targets = [...related.matchAll(/data-open-entry="([^"]+)"/g)].map(match => match[1]);
+    const expected = (entry.related || []).filter(id => !(entry.type === 'items' && state.entries[id].type === 'skins' && state.entries[id].item_id === entry.id));
+    assert.deepEqual(targets, Array.from(expected), entry.id);
+  }
+  for (const id of ['loc_foyer', 'loc_hall', 'loc_bedroom', 'loc_bedroom_right']) {
+    assert.ok(state.entries[id].related.includes('loc_qingxuan'));
+    assert.ok(state.entries.loc_qingxuan.related.includes(id));
+  }
+  for (const skin of state.skins) {
+    for (const id of skin.related) assert.ok(state.entries[id].related.includes(skin.id));
+  }
+});
+check('关联按实际制作与技能整理，不混入同类物品或通用食物的虚假专属关系', () => {
+  const absent = {
+    bb_hhlct: ['bb_cct'], bighead_hy: ['pangtouyu', 'bighead_xqlj'],
+    bighead_xqlj: ['bighead_hy', 'pangtouyu'], bighead_sucookpot_item: ['pangtouyu', 'bighead_hy'],
+    bighead_spear: ['bighead_armor'], bighead_armor: ['bighead_spear'],
+    bighead_ylss: ['mech_lingqi', 'pangtouyu'], bighead_ygxlfw: ['bighead_wcs'],
+    bb_gaojiaoniao_cmyh: ['bb_gaojiaoniao_fh'], bb_gaojiaoniao_fr: ['bb_gaojiaoniao_fh'],
+    bb_gaojiaoniao_lh: ['bb_gaojiaoniao_fh', 'mech_shixin'],
+    bb_gaojiaoniao_gjsh: ['bb_gaojiaoniao_lh', 'mech_wudao', 'mech_shixin'],
+    bb_gaojiaoniao_cs: ['mech_wudao'], bighead_qbi: ['pangtouyu'],
+  };
+  for (const [from, targets] of Object.entries(absent)) {
+    for (const to of targets) assert.ok(!state.entries[from].related.includes(to), `${from} -> ${to}`);
+  }
+  for (const food of state.items.filter(item => item.category === 'food' && item.owner === 'common' && item.id !== 'bighead_cmklb')) {
+    assert.ok(!food.related.includes('pangtouyu'), food.id);
+  }
+  for (const [from, to] of [['bb_gaojiaoniao_fqh', 'bb_gaojiaoniao_cmyh'], ['bb_gaojiaoniao_cmyh', 'bb_gaojiaoniao_fqh'],
+    ['bb_cct', 'bighead_fanhua'], ['bighead_fanhua', 'bb_cct'], ['bb_gaojiaoniao_gjsh', 'bb_gaojiaoniao_fh'],
+    ['bb_gaojiaoniao_fh', 'bb_gaojiaoniao_gjsh'], ['bighead_ylss', 'bighead_ylry']]) {
+    assert.ok(state.entries[from].related.includes(to), `${from} -> ${to}`);
+  }
+  for (const entry of state.items.filter(item => item.recipe?.includes('金企鹅兑换'))) {
+    assert.ok(entry.related.includes('mech_gold_penguin'), entry.id);
+  }
+  assert.equal(state.entries.bighead_wcs.owner, 'gaojiaoniao');
+  App.Modal.open('bb_hhlct');
+  assert.ok(!node('modal-root').innerHTML.includes('class="related-row"'), '无直接关联时隐藏空关联栏');
+});
+const labelFixture = JSON.parse(JSON.stringify(sandbox.window.SITE_DATA));
+labelFixture.relations.bighead_spear = '测试用展示名';
+const aliasSandbox = { window: { SITE_DATA: labelFixture, location: { hash: '' } }, URLSearchParams };
+vm.createContext(aliasSandbox);
+vm.runInContext(readFileSync(join(root, 'assets/js/data.js'), 'utf8'), aliasSandbox);
+await aliasSandbox.window.App.Data.load();
+check('别称与自定义展示名保留正式名称跳转，未知词与特殊字符安全显示', () => {
+  for (const [name, id] of [['貔貅', 'bb_gaojiaoniao_px_builder'], ['三宝', 'bighead_sanbao_builder'],
+    ['节气系统', 'mech_jieqi'], ['太极清玄阁', 'loc_qingxuan']]) {
+    assert.equal(state.nameToId[name], id);
+    assert.ok(App.Linkify.textToHtml(`[[${name}]]`).includes(`data-open-entry="${id}"`));
+  }
+  const fresh = aliasSandbox.window.App.STATE;
+  assert.equal(fresh.relations.bighead_spear, '测试用展示名');
+  assert.equal(fresh.nameToId['测试用展示名'], 'bighead_spear');
+  assert.equal(fresh.nameToId['避尘'], 'bighead_spear');
+  assert.ok(!App.Linkify.textToHtml('[[不存在的词]]').includes('data-open-entry'));
+  assert.equal(App.Linkify.textToHtml('<b>未知 & 文本</b>'), '&lt;b&gt;未知 &amp; 文本&lt;/b&gt;');
+});
+check('点击弹窗外空白、遮罩或关闭按钮可关闭，点击内容不会误关闭', () => {
+  const click = (surface) => {
+    const target = {
+      matches: selector => selector === '.modal-shell' && surface === 'shell',
+      closest: selector => selector === '[data-modal-close]' && ['backdrop', 'close'].includes(surface) ? {} : null,
+    };
+    for (const listener of documentListeners.get('click') || []) listener({ target });
+  };
+  for (const surface of ['shell', 'backdrop', 'close']) {
+    App.Modal.open('jq_cf', { fromHash: true });
+    click('content');
+    assert.equal(node('modal-root').hidden, false, '弹窗正文保持打开');
+    click(surface);
+    assert.equal(node('modal-root').hidden, true, surface);
+    assert.equal(App.route.read().detailId, '', surface);
+  }
+  App.Modal.open('jq_cf', { fromHash: true });
+  for (const listener of documentListeners.get('keydown') || []) listener({ key: 'Escape' });
+  assert.equal(node('modal-root').hidden, true, 'Escape');
 });
 check('角色搜索结果进入角色面板，深链刷新仍可打开', () => {
   let opened = '';

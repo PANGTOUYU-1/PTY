@@ -3,6 +3,12 @@
 
   App.Motion = {
     init: function () {
+      if (typeof IntersectionObserver === "undefined") {
+        document.querySelectorAll(".reveal, .brush-line").forEach(function (node) {
+          node.classList.add("in");
+        });
+        return;
+      }
       if (App.Motion.started) {
         document.querySelectorAll(".reveal, .brush-line").forEach(function (node) {
           if (!node.dataset.motionBound) {
@@ -21,8 +27,8 @@
           });
         },
         {
-          rootMargin: "0px 0px -15% 0px",
-          threshold: 0.1
+          rootMargin: "0px",
+          threshold: 0
         }
       );
 

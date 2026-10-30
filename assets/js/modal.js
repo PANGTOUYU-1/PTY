@@ -4,7 +4,7 @@
   let openedFromHash = false;
 
   function sectionForEntry(entry) {
-    return entry.type === "characters" ? "intro" : entry.type;
+    return entry.type === "characters" ? "intro" : entry.type === "skins" ? "items" : entry.type;
   }
 
   function live(message) {
@@ -30,24 +30,52 @@
   function genericView(entry) {
     const title = entry.name || entry.title || entry.version;
     const paragraphs = [];
-    if (entry.summary) {
-      paragraphs.push(App.Linkify.textToHtml(entry.summary));
-    }
     (entry.changes || []).forEach(function (line) {
       paragraphs.push(App.Linkify.textToHtml(line));
     });
     const detailBlocks = (entry.detail_blocks || []).map(function (block) {
+      const readingHtml = function (text) {
+        return App.Linkify.textToHtml(text || "", { emphasizeNumbers: true });
+      };
       return {
         ...block,
-        is_text: block.type === "text",
+        // Explicitly shadow the page title so untitled blocks stay untitled in Mustache.
+        title: block.title || "",
+        is_text: !block.type || block.type === "text",
         is_image: block.type === "image",
-        content_html: App.Linkify.textToHtml(block.content || "")
+        is_list: block.type === "list",
+        list_is_grid: block.type === "list" && block.layout === "grid",
+        is_table: block.type === "table",
+        is_stats: block.type === "stats",
+        is_note: block.tone === "note",
+        text_paragraphs: (block.content || "").split(/\n+/).filter(Boolean).map(function (text) {
+          return { html: readingHtml(text) };
+        }),
+        list_items: (block.items || []).map(function (text) { return { html: readingHtml(text) }; }),
+        table_label: block.title || "数据明细",
+        table_headers: (block.columns || []).map(function (label) { return { label: label }; }),
+        table_rows: (block.rows || []).map(function (row) {
+          return {
+            label_html: readingHtml(row[0]),
+            cells: row.slice(1).map(function (text) { return { html: readingHtml(text) }; })
+          };
+        })
       };
     });
-    const related = relatedList(entry.related);
+    const skins = (App.STATE.skins || []).filter(function (skin) {
+      return skin.item_id === entry.id;
+    }).map(function (skin) {
+      return { id: skin.id, name: skin.name.split(" · ")[0], image: skin.display_image };
+    });
+    const related = relatedList((entry.related || []).filter(function (id) {
+      return !skins.some(function (skin) { return skin.id === id; });
+    }));
+    const parent = entry.type === "skins" && App.STATE.entries[entry.item_id];
     return {
       id: entry.id,
       title: title,
+      title_note: entry.title_note || "",
+      availability: entry.availability || "",
       subtitle: entry.summary || entry.subtitle || entry.date || "",
       eyebrow: {
         items: "物品",
@@ -58,12 +86,27 @@
         settings: "模组设置",
         changelog: entry.version || "更新"
       }[entry.type],
-      image: entry.image || entry.illustration || "",
+      image: entry.display_image || entry.illustration || "",
+      display_poster: entry.display_poster || "",
+      icon: entry.image || "",
+      preview_caption: entry.preview_caption || "",
+      scene_hotspots: (entry.scene_hotspots || []).map(function (hotspot) {
+        return {
+          ...hotspot,
+          position: 'left:' + Number(hotspot.x) + '%;top:' + Number(hotspot.y) + '%;width:' + Number(hotspot.width) + '%;height:' + Number(hotspot.height) + '%'
+        };
+      }),
+      has_scene_hotspots: !!(entry.scene_hotspots || []).length,
+      scene_hint: entry.scene_hint || "",
       paragraphs: paragraphs.map(function (p) { return { html: p }; }),
       detail_blocks: detailBlocks,
       has_detail_blocks: detailBlocks.length > 0,
-      recipe_html: entry.recipe ? App.Recipe.toHtml(entry.recipe) : "",
-      tech: entry.tech || "",
+      recipe_html: entry.recipe ? App.Recipe.toBlockHtml(entry.recipe) : "",
+      tech_html: App.Recipe.techToHtml(entry.tech, entry.recipe),
+      skins: skins,
+      has_skins: skins.length > 0,
+      skin_count: skins.length,
+      parent_item: parent ? { id: parent.id, name: parent.name } : null,
       related: related,
       has_related: related.length > 0
     };
@@ -193,18 +236,21 @@
       document.addEventListener("click", function (event) {
         const openButton = event.target.closest("[data-open-entry]");
         const closeButton = event.target.closest("[data-modal-close]");
+        // The full-screen shell covers the backdrop; its empty area also closes the dialog.
+        const outsideCard = event.target.matches(".modal-shell");
         const copyButton = event.target.closest("[data-copy-link]");
 
         if (openButton) {
           App.Modal.open(openButton.dataset.openEntry);
         }
 
-        if (closeButton) {
+        if (closeButton || outsideCard) {
           closeModal({ updateHash: true });
         }
 
         if (copyButton) {
-          const url = window.location.origin + window.location.pathname + "#" + App.ui.section + "/" + copyButton.dataset.copyLink;
+          const id = copyButton.dataset.copyLink;
+          const url = window.location.origin + window.location.pathname + "#" + sectionForEntry(App.STATE.entries[id]) + "/" + id;
           navigator.clipboard.writeText(url).then(function () {
             live("已复制条目链接");
           });
