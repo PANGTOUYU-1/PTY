@@ -218,11 +218,7 @@
             profile_quote: String(view.quote).replace(/^[“"]|[”"]$/g, ''),
             traits: (character.setting || []).slice(1).map(function (text) {
               return { html: App.Linkify.textToHtml(text, { emphasizeNumbers: true }) };
-            }),
-            primary_items: view.featured_items.slice(0, 4),
-            more_items: view.featured_items.slice(4),
-            more_count: Math.max(0, view.featured_items.length - 4),
-            has_more_items: view.featured_items.length > 4
+            })
           };
         })
       });

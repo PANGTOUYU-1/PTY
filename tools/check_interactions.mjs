@@ -161,14 +161,24 @@ check('人物页使用独立分栏模板，属性、特点和全部专属物品�
   assert.ok(output.includes('class="character-columns"'));
   assert.ok(!output.includes('duo__portrait-trigger'));
   assert.ok(!node('hero-root').innerHTML.includes('id="characters"'));
+  assert.ok(!node('hero-root').innerHTML.includes('data-panel="setting"'));
+  assert.ok(!output.includes('character-profile__more') && !output.includes('character-profile__item-art'));
   for (const character of state.characters) {
     const profile = output.match(new RegExp(`<article class="character-profile" data-char="${character.id}"[\\s\\S]*?<\\/article>`))?.[0];
     assert.ok(profile, character.id);
     for (const stat of Object.values(character.stats)) assert.ok(profile.includes(`<dd>${stat}</dd>`));
     assert.equal((profile.match(/data-profile-skin=/g) || []).length, character.appearances.length);
     assert.equal((profile.match(/aria-pressed="true"/g) || []).length, 1);
+    const abilities = profile.split('class="character-profile__abilities"')[1].split('</section>')[0];
+    for (const text of character.setting.slice(1)) {
+      assert.ok(abilities.includes(App.Linkify.textToHtml(text, { emphasizeNumbers: true })), character.id);
+    }
+    const exclusive = profile.split('class="character-profile__item-links"')[1].split('</div>')[0];
+    assert.equal((exclusive.match(/data-open-entry=/g) || []).length, state.items.filter(item => item.owner === character.id).length);
     for (const item of state.items.filter(item => item.owner === character.id)) {
-      assert.ok(profile.includes(`data-open-entry="${item.id}"`), item.id);
+      assert.ok(exclusive.includes(`data-open-entry="${item.id}"`), item.id);
+      assert.ok(exclusive.includes(`src="${item.image}"`), item.id);
+      assert.ok(!exclusive.includes(`src="${item.display_image}"`), item.id);
     }
   }
 });

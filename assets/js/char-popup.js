@@ -1,7 +1,6 @@
 (function () {
   const App = window.App;
   const PANEL_TITLES = {
-    setting: "设定",
     exclusive: "专属"
   };
 
@@ -30,17 +29,6 @@
     const character = getCharacter(charId);
     if (!character) {
       return "<p>资料未补</p>";
-    }
-
-    if (panelKey === "setting") {
-      const setting = Array.isArray(character.setting)
-        ? character.setting
-        : [];
-      return '<p class="popup-stats">' + character.epithet + ' · ' + character.stats_line + '</p>' + (setting.length ? setting : ["未着墨"])
-        .map(function (line) {
-          return "<p>" + App.Linkify.textToHtml(line) + "</p>";
-        })
-        .join("");
     }
 
     if (panelKey === "exclusive") {
@@ -410,7 +398,7 @@
       item.classList.toggle("is-active", item === field);
     });
 
-    elements.popup.querySelector(".duo-popup__title").textContent = PANEL_TITLES[panelKey] || "设定";
+    elements.popup.querySelector(".duo-popup__title").textContent = PANEL_TITLES[panelKey] || "专属";
     elements.popup.querySelector(".duo-popup__body").innerHTML = getPanelContent(charId, panelKey);
     elements.popup.setAttribute("aria-hidden", "false");
     requestAnimationFrame(function () {
@@ -435,10 +423,10 @@
         }
         return;
       }
-      const field = document.querySelector('.duo-field[data-char="' + charId + '"][data-panel="' + (panelKey || "setting") + '"]') ||
+      const field = document.querySelector('.duo-field[data-char="' + charId + '"][data-panel="' + (panelKey || "exclusive") + '"]') ||
         document.querySelector('.duo-field[data-char="' + charId + '"]');
       if (field) {
-        openPopup(charId, field.dataset.panel || "setting", field);
+        openPopup(charId, field.dataset.panel || "exclusive", field);
       }
     },
 

@@ -158,9 +158,6 @@
           </div>
         </div>
         <nav class="duo__fields duo__fields--bottom" aria-label="胖头鱼字段">
-          <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="setting">
-            <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
-          </button>
           <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="exclusive">
             <img class="duo-field__img" src="assets/img/ui/zhuanshu.png" alt="专属" loading="lazy" onerror="window.App.onImageError(this)">
           </button>
@@ -169,9 +166,6 @@
 
       <article class="duo__char duo__char--right" data-char="{{character_b.id}}" data-entry-target="{{character_b.id}}">
         <nav class="duo__fields duo__fields--top" aria-label="高脚鸟字段">
-          <button class="duo-field" type="button" data-char="{{character_b.id}}" data-panel="setting">
-            <img class="duo-field__img" src="assets/img/ui/sheding.png" alt="设定" loading="lazy" onerror="window.App.onImageError(this)">
-          </button>
           <button class="duo-field" type="button" data-char="{{character_b.id}}" data-panel="exclusive">
             <img class="duo-field__img" src="assets/img/ui/zhuanshu.png" alt="专属" loading="lazy" onerror="window.App.onImageError(this)">
           </button>
@@ -242,9 +236,7 @@
         </div>
         <section class="character-appearances" aria-label="{{name}}皮肤选择"><h3>人物皮肤 <span>点击切换模型</span></h3><div class="character-appearances__options" role="group" aria-label="{{name}}外观">{{#appearances}}<button class="duo-skin" type="button" data-profile-skin="{{id}}" aria-pressed="{{selected}}" aria-label="{{name}}" title="{{name}}"><img src="{{poster}}" alt="" width="{{width}}" height="{{height}}" loading="lazy" onerror="window.App.onImageError(this)"><span>{{label}}</span></button>{{/appearances}}</div></section>
         <section class="character-profile__abilities"><h3>角色特点</h3><ul>{{#traits}}<li>{{{html}}}</li>{{/traits}}</ul></section>
-        <section class="character-profile__exclusive"><h3>专属物品 <span>{{exclusive_count}} 件</span></h3><div class="character-profile__items">{{#primary_items}}<button type="button" data-open-entry="{{id}}"><span class="character-profile__item-art"><img src="{{display_image}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span><span>{{name}}</span></button>{{/primary_items}}</div>
-          {{#has_more_items}}<details class="character-profile__more"><summary>其余专属物品 <span>{{more_count}} 件</span></summary><div class="character-profile__item-links">{{#more_items}}<button type="button" data-open-entry="{{id}}"><img src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{name}}</button>{{/more_items}}</div></details>{{/has_more_items}}
-        </section>
+        <section class="character-profile__exclusive"><h3>专属物品 <span>{{exclusive_count}} 件</span></h3><div class="character-profile__item-links">{{#featured_items}}<button type="button" data-open-entry="{{id}}"><img src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)"><span>{{name}}</span></button>{{/featured_items}}</div></section>
       </article>
       {{/characters}}
     </div>
