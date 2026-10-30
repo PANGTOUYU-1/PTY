@@ -106,10 +106,41 @@
     if (!stage || !stage.offsetWidth || gearCharacter) return;
     // Offset geometry stays at the compact size throughout the scale animation.
     const visuals = Array.from(duo.querySelectorAll('.duo__portrait, .duo__name'));
-    const left = Math.min(...visuals.map(function (node) { return node.offsetLeft; }));
-    const right = Math.max(...visuals.map(function (node) { return node.offsetLeft + node.offsetWidth; }));
-    const top = Math.min(...visuals.map(function (node) { return node.offsetTop; }));
-    const bottom = Math.max(...visuals.map(function (node) { return node.offsetTop + node.offsetHeight; }));
+    const bounds = [];
+    if (window.innerWidth > 900) {
+      const characters = Array.from(duo.querySelectorAll('.duo__char'));
+      const portraits = characters.map(function (character) { return character.querySelector('.duo__portrait'); });
+      const portraitWidth = portraits[0].offsetWidth;
+      const middle = duo.clientWidth / 2;
+      characters.forEach(function (character, index) {
+        const portrait = portraits[index];
+        const name = character.querySelector('.duo__name');
+        const x = middle + (index ? -.08 : -.92) * portraitWidth;
+        const y = index ? portrait.offsetHeight * .10 : 0;
+        const position = function (node, left, top, degrees) {
+          node.style.setProperty('--rest-x', (left - node.offsetLeft) + 'px');
+          node.style.setProperty('--rest-y', (top - node.offsetTop) + 'px');
+          node.style.setProperty('--rest-angle', degrees + 'deg');
+          const angle = degrees * Math.PI / 180;
+          [[0, 0], [node.offsetWidth, 0], [0, node.offsetHeight], [node.offsetWidth, node.offsetHeight]].forEach(function (point) {
+            bounds.push({ x: left + point[0] * Math.cos(angle) - point[1] * Math.sin(angle),
+              y: top + point[0] * Math.sin(angle) + point[1] * Math.cos(angle) });
+          });
+        };
+        position(portrait, x, y, index ? 6 : -4);
+        position(name, index ? x + portraitWidth + 12 : x - name.offsetWidth - 12,
+          y + (portrait.offsetHeight - name.offsetHeight) / 2, 0);
+      });
+    } else {
+      visuals.forEach(function (node) {
+        bounds.push({ x: node.offsetLeft, y: node.offsetTop },
+          { x: node.offsetLeft + node.offsetWidth, y: node.offsetTop + node.offsetHeight });
+      });
+    }
+    const left = Math.min(...bounds.map(function (point) { return point.x; }));
+    const right = Math.max(...bounds.map(function (point) { return point.x; }));
+    const top = Math.min(...bounds.map(function (point) { return point.y; }));
+    const bottom = Math.max(...bounds.map(function (point) { return point.y; }));
     if (right <= left || bottom <= top) return;
     const height = stage.clientHeight;
     const scale = Math.min((stage.clientWidth - 24) / (right - left), Math.max(1, height - 16) / (bottom - top));
@@ -163,6 +194,34 @@
 
   function layoutGear(character) {
     const panel = character.querySelector(".duo-gear");
+    if (window.innerWidth > 900 && character === gearCharacter) {
+      const items = Array.from(panel.querySelectorAll('.duo-gear__item'));
+      const shared = panel.querySelector('.duo-gear__shared');
+      const height = Math.max(300, gearArea(character).clientHeight - 24);
+      panel.style.setProperty('--collection-height', height + 'px');
+      const columns = items.length > 12 && panel.clientWidth >= 480 ? 5 : 4;
+      const rows = Math.ceil(items.length / columns);
+      const counts = Array(rows).fill(Math.floor(items.length / rows));
+      for (let i = 0; i < items.length % rows; i++) {
+        counts[i % 2 ? rows - 1 - Math.floor(i / 2) : Math.floor(i / 2)]++;
+      }
+      const rowHeight = (height - 40 - (shared ? shared.offsetHeight + 16 : 0)) / rows;
+      let index = 0;
+      counts.forEach(function (count, row) {
+        // Alternate the inset and rhythm, without letting neighboring hit areas overlap.
+        const inset = panel.clientWidth * (row % 2 ? .07 : .025);
+        const cell = (panel.clientWidth - inset * 2) / count;
+        for (let col = 0; col < count; col++, index++) {
+          const item = items[index];
+          const drift = [.02, .12, -.02, .08, .03][(col + row * 2) % 5];
+          const icon = Math.min(index < 3 ? 88 : 72, cell * .66, Math.max(18, rowHeight * .80 - 30));
+          item.style.setProperty('--collection-x', (inset + cell * (col + .5) + (col % 2 ? -1 : 1) * cell * .035) + 'px');
+          item.style.setProperty('--collection-y', (32 + rowHeight * (row + drift)) + 'px');
+          item.style.setProperty('--collection-item-width', Math.min(112, cell * .88) + 'px');
+          item.style.setProperty('--collection-icon-size', icon + 'px');
+        }
+      });
+    }
     return panel.offsetWidth ? panel.offsetHeight : 0;
   }
 
@@ -208,7 +267,7 @@
     const portrait = gearCharacter.querySelector('.duo__portrait');
     const skins = gearCharacter.querySelector('.duo-skins');
     const portraitWidth = Math.min(300, width * .24,
-      portrait.offsetWidth * Math.max(140, availableHeight - skins.offsetHeight - 80) / portrait.offsetHeight);
+      portrait.offsetWidth * Math.max(140, availableHeight - skins.offsetHeight - 48) / portrait.offsetHeight);
     const portraitHeight = portrait.offsetHeight * portraitWidth / portrait.offsetWidth;
     const name = gearCharacter.querySelector('.duo__name');
     const nameScale = Math.min(.85, portraitHeight * .62 / name.offsetHeight);
