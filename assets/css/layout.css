@@ -10,6 +10,7 @@
 
 #terrains {
   padding-top: 24px;
+  padding-bottom: 32px;
   scroll-margin-top: var(--header-h);
 }
 
