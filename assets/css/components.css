@@ -1290,7 +1290,6 @@
 #buildings { padding-block: 16px; }
 #buildings .section-head { margin-bottom: 16px; }
 #buildings .items-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-top: 0;
 }

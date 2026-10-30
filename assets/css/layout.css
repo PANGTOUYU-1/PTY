@@ -218,7 +218,7 @@ html[data-active-section="buildings"] #main-content { min-height: 0; }
 
 .items-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--sp-4);
   margin-top: var(--sp-5);
 }
@@ -286,6 +286,12 @@ html[data-active-section="intro"] body {
 html[data-active-section="intro"] .topbar,
 html[data-active-section="intro"] .site-footer { flex-shrink: 0; }
 html[data-active-section="intro"] #main-content { flex: 1; }
+
+@media (max-width: 1199px) {
+  .items-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
 
 @media (max-width: 1023px) {
   .items-grid {
