@@ -224,6 +224,10 @@
           return {
             ...view,
             profile_quote: String(view.quote).replace(/^[“"]|[”"]$/g, ''),
+            core_mechanics: (character.core_mechanics || []).map(function (mechanic) {
+              const entry = state.entries[mechanic.id];
+              return entry ? { id: entry.id, name: entry.title, icon: entry.image, summary: mechanic.summary } : null;
+            }).filter(Boolean),
             traits: (character.setting || []).slice(1).map(function (text) {
               return { html: App.Linkify.textToHtml(text, { emphasizeNumbers: true }) };
             })
