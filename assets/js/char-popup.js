@@ -79,6 +79,7 @@
   let gearCloseTimer = null;
   let gearFrame = null;
   let activeGearItem = null;
+  let hoverArmed = true;
 
   function setGearItem(item) {
     if (activeGearItem === item) return;
@@ -104,6 +105,34 @@
     gearCharacter.querySelector(".duo__name").removeAttribute("aria-hidden");
     delete duo.dataset.gearFocus;
     gearCharacter = null;
+    layoutRestingPortraits();
+  }
+
+  function gearArea(character) {
+    return character.closest('.duo-stage') || character.closest('.duo');
+  }
+
+  function layoutRestingPortraits() {
+    const duo = document.querySelector('.duo');
+    const stage = duo && duo.closest('.duo-stage');
+    if (!stage || window.innerWidth <= 900 || !stage.offsetWidth) return;
+    // Offset geometry stays at the compact size throughout the scale animation.
+    const visuals = Array.from(duo.querySelectorAll('.duo__portrait, .duo__name'));
+    const left = Math.min(...visuals.map(function (node) { return node.offsetLeft; }));
+    const right = Math.max(...visuals.map(function (node) { return node.offsetLeft + node.offsetWidth; }));
+    const top = Math.min(...visuals.map(function (node) { return node.offsetTop; }));
+    const bottom = Math.max(...visuals.map(function (node) { return node.offsetTop + node.offsetHeight; }));
+    if (right <= left || bottom <= top) return;
+    const footer = document.querySelector('.site-footer');
+    const hero = document.getElementById('intro');
+    const available = window.innerHeight - (stage.getBoundingClientRect().top + window.scrollY)
+      - (footer ? footer.offsetHeight : 0) - parseFloat(getComputedStyle(hero).paddingBottom) - 12;
+    const height = Math.max(bottom - top + 20, available);
+    const scale = Math.max(1, Math.min((stage.clientWidth - 32) / (right - left), (height - 20) / (bottom - top)));
+    stage.style.setProperty('--duo-stage-height', height + 'px');
+    duo.style.setProperty('--duo-rest-scale', scale);
+    duo.style.setProperty('--duo-rest-x', ((duo.clientWidth / 2 - (left + right) / 2) * scale) + 'px');
+    duo.style.setProperty('--duo-rest-y', ((height - (bottom - top) * scale) / 2 - top * scale) + 'px');
   }
 
   function drawGearLines() {
@@ -267,6 +296,7 @@
     const duo = document.querySelector(".duo");
     height = Math.max(height, layoutCharacterModels());
     if (duo) duo.style.setProperty("--gear-height", height + "px");
+    layoutRestingPortraits();
   }
 
   function openGear(character) {
@@ -425,17 +455,24 @@
       document.addEventListener("pointerover", function (event) {
         if (event.pointerType === "touch") return;
         const trigger = event.target.closest(".duo__portrait-trigger");
-        if (trigger) openGear(trigger.closest(".duo__char"));
+        if (trigger && hoverArmed) openGear(trigger.closest(".duo__char"));
         const item = event.target.closest(".duo-gear__item, .duo-gear__craft");
         if (gearCharacter && item && gearCharacter.contains(item)) setGearItem(item);
-        if (gearCharacter && gearCharacter.closest(".duo").contains(event.target)) clearTimeout(gearCloseTimer);
+        if (gearCharacter && gearArea(gearCharacter).contains(event.target)) clearTimeout(gearCloseTimer);
+      });
+      document.addEventListener('pointermove', function (event) {
+        if (!hoverArmed && event.pointerType !== 'touch' && (event.movementX || event.movementY)) {
+          hoverArmed = true;
+          const trigger = event.target.closest('.duo__portrait-trigger');
+          if (trigger) openGear(trigger.closest('.duo__char'));
+        }
       });
       document.addEventListener("pointerout", function (event) {
         if (activeGearItem && activeGearItem.contains(event.target) && !activeGearItem.contains(event.relatedTarget)) setGearItem(null);
         // Keep the expansion open while moving across the model or towards
         // the other portrait, including the space created by its slide.
-        if (gearCharacter && gearCharacter.closest(".duo").contains(event.target)
-            && !gearCharacter.closest(".duo").contains(event.relatedTarget)) scheduleGearClose();
+        if (gearCharacter && gearArea(gearCharacter).contains(event.target)
+            && !gearArea(gearCharacter).contains(event.relatedTarget)) scheduleGearClose();
       });
       document.addEventListener("focusin", function (event) {
         const trigger = event.target.closest(".duo__portrait-trigger");
@@ -502,6 +539,7 @@
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
+          hoverArmed = false;
           if (gearCharacter && gearCharacter.querySelector(".duo-gear").contains(document.activeElement)) {
             gearCharacter.querySelector(".duo__portrait-trigger").focus();
           }
@@ -522,10 +560,15 @@
           drawLine(activeField);
         }
       });
+      const duo = document.querySelector('.duo');
+      if (duo) duo.addEventListener('transitionend', function (event) {
+        if (event.target === duo && event.propertyName === 'transform') queueGearLines();
+      });
       // Portrait dimensions can settle after the first interaction on a slow connection.
-      document.querySelectorAll(".duo__portrait img").forEach(function (img) {
+      document.querySelectorAll(".duo__portrait img, .duo__name img").forEach(function (img) {
         img.addEventListener("load", function () { layoutAllGear(); queueGearLines(); });
       });
+      if (document.fonts) document.fonts.ready.then(layoutAllGear);
       layoutAllGear();
     }
   };

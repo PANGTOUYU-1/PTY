@@ -733,6 +733,16 @@
 }
 
 @media (min-width: 901px) {
+  .duo-stage { min-height: var(--duo-stage-height, 0px); }
+  .duo-stage:not(:has(.duo[data-gear-focus])):not(:has(.duo[data-focus])) { overflow: clip; }
+  .duo-stage > .duo {
+    transform-origin: 50% 0;
+    transform: translate(0, 0) scale(1);
+    transition: transform 480ms var(--ease);
+  }
+  .duo-stage > .duo:not([data-gear-focus]):not([data-focus]) {
+    transform: translate(var(--duo-rest-x, 0px), var(--duo-rest-y, 0px)) scale(var(--duo-rest-scale, 1));
+  }
   /* Mirror exclusive items along the outer edge of each portrait. */
   .duo__char { position: static; align-self: start; margin-top: 8px; }
   .duo__portrait { width: clamp(200px, calc(50svh - 140px), 280px); }
