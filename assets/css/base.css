@@ -52,7 +52,7 @@ body,
 body {
   margin: 0;
   background: var(--paper);
-  background-image: url("../img/ui/ink-paper.webp");
+  background-image: url("../img/ui/ink-paper.webp?v=stronger-20261031");
   background-position: center;
   background-size: cover;
   background-attachment: fixed;

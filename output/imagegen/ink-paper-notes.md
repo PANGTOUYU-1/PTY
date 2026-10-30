@@ -2,4 +2,4 @@ Generated with personal-draw: built-in image generation unavailable; Image 2.5 r
 
 The deployed asset is assets/img/ui/ink-paper.webp. The generated source is ink-paper.jpg and the prompt is ink-paper-prompt.txt.
 
-Processing: warm paper #f3ecdf, ink #3e453c, alpha=max(0,245-luminance)*0.33; compressed WebP.
+Processing: warm paper #f3ecdf, ink #3e453c, alpha=max(0,245-luminance)*0.48; compressed WebP.
