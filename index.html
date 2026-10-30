@@ -579,6 +579,13 @@
         {{#preview_caption}}<p class="scene-preview-caption">{{preview_caption}}</p>{{/preview_caption}}
         {{#scene_hint}}<p class="scene-preview-hint">{{scene_hint}}</p>{{/scene_hint}}
         </div>
+        {{#recipe_html}}
+        <section class="recipe-row detail-block">
+          <h3>制作与获取</h3>
+          {{#tech_html}}<p class="recipe-tech">{{{tech_html}}}</p>{{/tech_html}}
+          <div>{{{recipe_html}}}</div>
+        </section>
+        {{/recipe_html}}
         <div class="modal-card__content prose">
           {{#paragraphs}}
           <p>{{{html}}}</p>
@@ -621,13 +628,6 @@
           {{/detail_blocks}}
         </div>
         {{/has_detail_blocks}}
-        {{#recipe_html}}
-        <section class="recipe-row detail-block">
-          <h3>制作与获取</h3>
-          {{#tech_html}}<p class="recipe-tech">{{{tech_html}}}</p>{{/tech_html}}
-          <div>{{{recipe_html}}}</div>
-        </section>
-        {{/recipe_html}}
         {{#has_skins}}
         <section class="item-appearances detail-block" aria-labelledby="item-appearances-title">
           <h3 id="item-appearances-title">物品外观 <span class="item-appearances__count">{{skin_count}} 款</span></h3>
