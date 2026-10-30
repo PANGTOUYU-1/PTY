@@ -26,7 +26,8 @@
 [data-section][hidden] { display: none !important; }
 #main-content { min-height: calc(100svh - var(--header-h)); }
 html[data-active-section="intro"] #main-content,
-html[data-active-section="terrains"] #main-content { min-height: 0; }
+html[data-active-section="terrains"] #main-content,
+html[data-active-section="buildings"] #main-content { min-height: 0; }
 #intro { scroll-margin-top: var(--header-h); }
 .hero[data-character-page] .hero__head { display: none; }
 .hero[data-character-page] { padding-top: calc(var(--header-h) + 16px); }
