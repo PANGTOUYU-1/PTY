@@ -281,11 +281,18 @@
         const groups = mainIds.map(function (id, index) {
           const main = data.find(function (entry) { return entry.id === id; });
           if (!main) return null;
+          const level10 = (main.detail_blocks || []).find(function (block) {
+            return block.title === "10级主动效果";
+          });
           return {
             id: id,
             season: ["spring", "summer", "autumn", "winter"][index],
             symbol: ["春", "夏", "秋", "冬"][index],
             main: compactEntryCardView(main, "四季主物品 · 可升至10级"),
+            level10: level10 ? {
+              ...compactEntryCardView(main, "10级效果"),
+              effect: level10.content
+            } : null,
             terms: data.filter(function (entry) {
               return !mainIds.includes(entry.id) && entry.id !== "jq_dong10" && (entry.related || []).includes(id);
             }).map(function (entry, termIndex) {
@@ -293,7 +300,7 @@
             }),
             special: id === "jq_dong" ? data.filter(function (entry) {
               return entry.id === "jq_dong10";
-            }).map(function (entry) { return compactEntryCardView(entry, "直接获得10级冬季"); }) : []
+            }).map(function (entry) { return compactEntryCardView(entry, "金企鹅兑换 · 9 Q币"); }) : []
           };
         }).filter(Boolean);
         renderTo(sec.rootId, "tpl-seasons", { groups: groups });

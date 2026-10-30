@@ -68,11 +68,11 @@ check('真实渲染模块生成设置与节气卡片', () => {
     const config = App.sections.find(s => s.id === id);
     App.Render.renderGenericSection(config);
     const output = node(config.rootId).innerHTML;
-    assert.equal((output.match(/data-open-entry=/g) || []).length, state[id].length);
+    assert.equal((output.match(/data-open-entry=/g) || []).length, state[id].length + (id === 'seasons' ? 4 : 0));
     assert.ok(output.includes(state[id][0].name || state[id][0].title));
   }
 });
-check('节气按四季分组，主物品与六节气分层且每件仅出现一次', () => {
+check('节气按四季分组，每季均展示真实满级效果，冬季另列满级兑换', () => {
   const config = App.sections.find(s => s.id === 'seasons');
   App.Render.renderGenericSection(config);
   const output = node(config.rootId).innerHTML;
@@ -84,11 +84,16 @@ check('节气按四季分组，主物品与六节气分层且每件仅出现一�
     assert.equal((content.match(/class="season-term"/g) || []).length, 6);
     assert.ok(content.includes(`data-open-entry="${id}"`));
     for (const term of terms) assert.ok(content.includes(`data-open-entry="${term.id}"`));
+    const effect = state.entries[id].detail_blocks.find(block => block.title === '10级主动效果');
+    assert.ok(effect, id);
+    assert.ok(content.includes('class="season-level"'));
+    assert.ok(content.includes(effect.content));
   }
   for (const entry of state.seasons) {
-    assert.equal(output.split(`data-open-entry="${entry.id}"`).length - 1, 1, entry.id);
+    assert.equal(output.split(`data-open-entry="${entry.id}"`).length - 1, ['jq_chun', 'jq_xia', 'jq_qiu', 'jq_dong'].includes(entry.id) ? 2 : 1, entry.id);
   }
   assert.ok(groups[3][2].includes('class="season-special"'));
+  assert.ok(groups[3][2].includes('金企鹅兑换 · 9 Q币'));
 });
 check('首页立绘完整展示角色专属，专属制作的共用物品使用小图标单列', () => {
   const getElementById = sandbox.document.getElementById;

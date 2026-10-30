@@ -1345,6 +1345,14 @@
 .season-term .entry-title { gap: 5px; font-size: 15px; }
 .season-term .entry-icon { width: 22px; height: 22px; }
 .season-term__arrow { margin-left: auto; color: var(--ink-3); font: 12px var(--ff-sans); }
+.season-level { margin-top: 16px; padding-top: 16px; border-top: var(--bd); }
+.season-level__button { display: flex; align-items: flex-start; gap: 10px; width: 100%; text-align: left; }
+.season-level__icon { flex: 0 0 32px; width: 32px; height: 32px; object-fit: contain; }
+.season-level__body { display: grid; gap: 6px; min-width: 0; }
+.season-level__body > strong { font-size: 14px; line-height: 1.6; }
+.season-level__effect { font-size: 13px; line-height: 1.8; color: var(--ink-2); }
+.season-level__arrow { margin-left: auto; color: var(--season-color); }
+.season-level__button:hover strong { color: var(--cinnabar); }
 .season-special { margin-top: 16px; padding-top: 12px; border-top: var(--bd); }
 .season-special button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; font-size: 13px; }
 .season-special__label { margin-left: auto; color: var(--ink-3); font-size: 12px; }

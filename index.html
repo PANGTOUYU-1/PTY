@@ -339,6 +339,15 @@
             </button>
           </article>
           {{/main}}
+          {{#level10}}
+          <div class="season-level">
+            <button class="season-level__button" type="button" data-open-entry="{{id}}" aria-label="查看{{name}}10级效果">
+              {{#icon}}<img class="season-level__icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}
+              <span class="season-level__body"><strong>{{name}}（10级）</strong><span class="season-level__effect">{{effect}}</span></span>
+              <span class="season-level__arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          {{/level10}}
           {{#special}}
           <article class="season-special" data-entry-target="{{id}}">
             <button type="button" data-open-entry="{{id}}"><span class="season-special__art"><img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">{{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}</span>{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" loading="lazy" onerror="window.App.onImageError(this)">{{/icon}}<strong>{{name}}</strong><span class="season-special__label">{{category_label}} ↗</span></button>
