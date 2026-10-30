@@ -18,18 +18,16 @@
         addIssue({ type: "占位", location: character.name, summary: "角色名称或称号仍是占位", target: character.id });
       }
     });
-    ["items", "mechanics", "terrains", "changelog"].forEach(function (group) {
-      state[group].forEach(function (entry) {
-        const title = entry.name || entry.title || entry.version;
-        const text = JSON.stringify(entry);
-        if (textPattern.test(text)) {
-          addIssue({ type: "占位", location: title, summary: "存在占位文案", target: entry.id });
+    Object.values(state.entries).forEach(function (entry) {
+      const title = entry.name || entry.title || entry.version;
+      const text = JSON.stringify(entry);
+      if (textPattern.test(text)) {
+        addIssue({ type: "占位", location: title, summary: "存在占位文案", target: entry.id });
+      }
+      (entry.related || []).forEach(function (relatedId) {
+        if (!state.relations[relatedId]) {
+          addIssue({ type: "死链", location: title, summary: "related 指向不存在的条目", target: entry.id });
         }
-        (entry.related || []).forEach(function (relatedId) {
-          if (!state.relations[relatedId]) {
-            addIssue({ type: "死链", location: title, summary: "related 指向不存在的条目", target: entry.id });
-          }
-        });
       });
     });
   }

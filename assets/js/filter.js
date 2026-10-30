@@ -60,8 +60,9 @@
       const query = normalizeText(App.ui.q);
       return App.STATE.items.filter(function (item) {
         const categoryPass = App.ui.cats.length === 0 || App.ui.cats.indexOf(item.category) > -1;
+        const ownerPass = App.ui.owner === "all" || item.owner === App.ui.owner;
         const queryPass = !query || normalizeText(App.STATE.entries[item.id].searchText).indexOf(query) > -1;
-        return categoryPass && queryPass;
+        return categoryPass && ownerPass && queryPass;
       });
     },
 
@@ -77,17 +78,19 @@
         .filter(function (entry) {
           return normalizeText(entry.searchText).indexOf(query) > -1;
         })
-        .slice(0, 24)
         .map(function (entry) {
           const title = entry.name || entry.title || entry.version;
           const excerpt = entry.summary || entry.subtitle || entry.epithet || entry.searchText.slice(0, 72);
           return {
             id: entry.id,
             type_label: {
-              character: "角色",
-              item: "物品",
-              mechanic: "机制",
-              terrain: "地形",
+              characters: "角色",
+              items: "物品",
+              mechanics: "机制",
+              terrains: "地点",
+              seasons: "节气",
+              skins: "外观",
+              settings: "设置",
               changelog: "更新"
             }[entry.type],
             title_html: App.Filter.highlight(title, App.ui.q),

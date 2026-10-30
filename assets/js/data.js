@@ -140,7 +140,7 @@
 
   function buildSearchText(entry) {
     const parts = [];
-    ["name", "title", "summary", "epithet", "version", "date"].forEach(function (key) {
+    ["name", "title", "summary", "epithet", "version", "date", "tech"].forEach(function (key) {
       if (entry[key]) {
         parts.push(entry[key]);
       }
@@ -194,7 +194,7 @@
     (raw.changelog || []).forEach(function (l) { if (l.title) { relations[l.id] = l.title; } });
 
     // 自动发现 site-data.js 中的未知数据键（如 seasons），统一添加到 relations 和 entries
-    var knownKeys = ["meta", "characters", "items", "mechanics", "terrains", "changelog", "relations", "posters", "loadFailures"];
+    var knownKeys = ["meta", "categories", "sections", "characters", "items", "mechanics", "terrains", "changelog", "relations", "posters", "loadFailures"];
     var extra = {};
     Object.keys(raw).forEach(function (key) {
       if (knownKeys.indexOf(key) === -1 && Array.isArray(raw[key])) {

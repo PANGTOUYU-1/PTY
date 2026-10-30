@@ -36,7 +36,7 @@
       const setting = Array.isArray(character.setting)
         ? character.setting
         : [];
-      return (setting.length ? setting : ["未着墨"])
+      return '<p class="popup-stats">' + character.epithet + ' · ' + character.stats_line + '</p>' + (setting.length ? setting : ["未着墨"])
         .map(function (line) {
           return "<p>" + App.Linkify.textToHtml(line) + "</p>";
         })

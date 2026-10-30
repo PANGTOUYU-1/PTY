@@ -64,6 +64,8 @@
         const id = rawId === "序" ? "intro" : rawId;
         if (id) {
           event.preventDefault();
+          App.Modal.close({ updateHash: false });
+          if (App.CharPopup) { App.CharPopup.closeAll(); }
           App.route.sync({ section: id, detailId: "" }, { replace: true });
           scrollToSection(id);
           const mobileNav = document.getElementById("mobile-nav");

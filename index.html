@@ -369,7 +369,8 @@
         {{/has_detail_blocks}}
         {{#recipe_html}}
         <div class="recipe-row">
-          <h3>配方</h3>
+          <h3>制作与获取</h3>
+          {{#tech}}<p class="recipe-tech">{{tech}}</p>{{/tech}}
           <div>{{{recipe_html}}}</div>
         </div>
         {{/recipe_html}}

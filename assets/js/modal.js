@@ -4,13 +4,7 @@
   let openedFromHash = false;
 
   function sectionForEntry(entry) {
-    return {
-      character: "intro",
-      item: "items",
-      mechanic: "mechanics",
-      terrain: "terrains",
-      changelog: "changelog"
-    }[entry.type] || "intro";
+    return entry.type === "characters" ? "intro" : entry.type;
   }
 
   function live(message) {
@@ -56,9 +50,12 @@
       title: title,
       subtitle: entry.summary || entry.subtitle || entry.date || "",
       eyebrow: {
-        item: "物品",
-        mechanic: "机制",
-        terrain: "地形",
+        items: "物品",
+        mechanics: "机制",
+        terrains: "地点",
+        seasons: "节气",
+        skins: "外观",
+        settings: "模组设置",
         changelog: entry.version || "更新"
       }[entry.type],
       image: entry.image || entry.illustration || "",
@@ -66,6 +63,7 @@
       detail_blocks: detailBlocks,
       has_detail_blocks: detailBlocks.length > 0,
       recipe_html: entry.recipe ? App.Recipe.toHtml(entry.recipe) : "",
+      tech: entry.tech || "",
       related: related,
       has_related: related.length > 0
     };
@@ -149,9 +147,11 @@
         return;
       }
 
-      if (entry.type === "character") {
+      if (entry.type === "characters") {
         closeModal({ updateHash: false });
-        App.route.sync({ section: "intro", detailId: entryId });
+        if (!(options && options.skipHash)) {
+          App.route.sync({ section: "intro", detailId: entryId });
+        }
         const hero = document.getElementById("intro");
         if (hero) {
           hero.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -174,7 +174,7 @@
     syncFromRoute: function () {
       if (App.ui.detailId && App.STATE.entries[App.ui.detailId]) {
         const entry = App.STATE.entries[App.ui.detailId];
-        if (entry.type === "character") {
+        if (entry.type === "characters") {
           closeModal({ updateHash: false });
           if (App.CharPopup) {
             App.CharPopup.openForCharacter(entry.id, "profile");

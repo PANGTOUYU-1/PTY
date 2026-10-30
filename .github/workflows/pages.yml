@@ -24,6 +24,17 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v4
 
+      - name: 准备校验环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 校验内容与交互
+        run: |
+          node tools/check_data.mjs --strict
+          node tools/check_render.mjs
+          node tools/check_interactions.mjs
+
       - name: 整理要发布的静态文件
         run: |
           mkdir -p dist
