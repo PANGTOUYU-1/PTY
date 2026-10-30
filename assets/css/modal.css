@@ -58,10 +58,13 @@
   animation: panel-in 320ms var(--ease) forwards;
 }
 
-.modal-close {
+.modal-card__tools {
   position: absolute;
   top: var(--sp-3);
   right: var(--sp-3);
+  display: grid;
+  gap: 8px;
+  z-index: 2;
 }
 
 .modal-card__head,
@@ -276,7 +279,7 @@
 .modal-card__overview {
   display: grid;
   gap: var(--sp-4);
-  padding: 4px 24px 24px 0;
+  padding: 4px 40px 24px 0;
   margin-bottom: 28px;
   border-bottom: var(--bd);
 }
@@ -780,7 +783,6 @@
 
   .modal-card__overview {
     gap: 16px;
-    padding-right: 16px;
   }
 
   .modal-card__overview--illustrated {

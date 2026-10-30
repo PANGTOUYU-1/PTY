@@ -410,11 +410,21 @@
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-shell" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-card">
-        <button class="icon-button modal-close" type="button" data-modal-close aria-label="关闭详情">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18"></path>
-          </svg>
-        </button>
+        <div class="modal-card__tools">
+          <button class="icon-button modal-close" type="button" data-modal-close aria-label="关闭详情">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18"></path>
+            </svg>
+          </button>
+          <button class="icon-button modal-share" type="button" data-copy-link="{{id}}" aria-label="分享链接（复制）" title="复制链接以分享">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"></path>
+            </svg>
+          </button>
+        </div>
         <div class="modal-card__overview{{#image}} modal-card__overview--illustrated{{/image}}{{#preview_caption}} modal-card__overview--scene{{/preview_caption}}">
         <div class="modal-card__head">
           {{#parent_item}}<button class="button button--ghost" type="button" data-open-entry="{{id}}">← 返回{{name}}</button>{{/parent_item}}
@@ -424,7 +434,6 @@
             <h2 id="modal-title" class="entry-title">{{#icon}}<img class="entry-icon" src="{{icon}}" alt="" onerror="window.App.onImageError(this)">{{/icon}}<span>{{title}}{{#title_note}}<small class="entry-title__note">{{title_note}}</small>{{/title_note}}</span></h2>
             <p>{{subtitle}}</p>
           </div>
-          <button class="button button--ghost" type="button" data-copy-link="{{id}}">复制链接</button>
         </div>
         {{#image}}
         <div class="modal-card__visual{{#owner_stamp}} modal-card__visual--owned{{/owner_stamp}}{{#has_scene_hotspots}} scene-preview{{/has_scene_hotspots}}">
