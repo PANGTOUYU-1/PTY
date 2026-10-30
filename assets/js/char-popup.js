@@ -75,7 +75,7 @@
     queueGearLines();
   }
 
-  function closeGear() {
+  function closeGear(keepLayout) {
     clearTimeout(gearCloseTimer);
     if (!gearCharacter) return;
     activeGearItem = null;
@@ -91,9 +91,9 @@
     skins.inert = true;
     const duo = gearCharacter.closest(".duo");
     duo.querySelectorAll('.duo__name').forEach(function (name) { name.removeAttribute('aria-hidden'); });
-    delete duo.dataset.gearFocus;
+    if (!keepLayout) delete duo.dataset.gearFocus;
     gearCharacter = null;
-    layoutAllGear();
+    if (!keepLayout) layoutAllGear();
   }
 
   function gearArea(character) {
@@ -277,7 +277,7 @@
   function openGear(character) {
     clearTimeout(gearCloseTimer);
     if (gearCharacter === character) return;
-    closeGear();
+    closeGear(true);
     closePopup();
     gearCharacter = character;
     character.classList.add("is-showing-gear");

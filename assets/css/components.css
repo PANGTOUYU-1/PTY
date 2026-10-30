@@ -758,8 +758,20 @@
   }
   .duo__char--right .duo-gear { left: 0; right: auto; }
   .duo[data-gear-focus] .duo__char { z-index: auto; }
-  .duo[data-gear-focus] .duo__portrait { z-index: 2; }
+  .duo[data-gear-focus] .duo__portrait { z-index: 2; transition-duration: 220ms; pointer-events: none; }
   .duo[data-gear-focus] .is-showing-gear > .duo__portrait { z-index: 3; }
+  .duo[data-gear-focus] .duo__portrait-trigger { position: relative; pointer-events: none; }
+  .duo[data-gear-focus] .duo__portrait-trigger::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+  }
+  /* Only the front portrait's painted body catches the pointer; its transparent
+     corners let the exposed rear portrait receive clicks. Artwork stays whole. */
+  .duo[data-gear-focus] .is-showing-gear .duo__portrait-trigger::after {
+    clip-path: polygon(50% 9%, 69% 15%, 79% 22%, 87% 32%, 89% 49%, 87% 63%, 82% 75%, 72% 84%, 62% 90%, 50% 92%, 35% 90%, 22% 84%, 14% 74%, 10% 60%, 9% 42%, 11% 30%, 19% 21%, 27% 15%);
+  }
   .duo[data-gear-focus] .duo__name { visibility: hidden; z-index: 4; }
   .duo[data-gear-focus] .is-showing-gear > .duo__name { visibility: visible; }
 }
