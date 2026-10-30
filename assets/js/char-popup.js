@@ -145,6 +145,49 @@
     gearFrame = requestAnimationFrame(drawGearLines);
   }
 
+  function layoutGear(character) {
+    const panel = character.querySelector(".duo-gear");
+    const width = panel.getBoundingClientRect().width;
+    if (!width) return 0;
+    const columns = width >= 320 ? 3 : 2;
+    const itemWidth = Math.min(90, (width - 32) / columns);
+    const step = (width - itemWidth - 20) / (columns - 1);
+    const mirror = character.classList.contains("duo__char--right");
+    const items = panel.querySelectorAll(".duo-gear__item");
+    const scattered = [[0, 72], [.5, 40], [1, 100], [.02, 206], [.5, 190],
+      [1, 300], [0, 350], [.5, 360], [1, 442], [.04, 486], [.5, 506]];
+    let bottom = 0;
+    panel.style.setProperty("--gear-item-width", itemWidth + "px");
+    items.forEach(function (item, index) {
+      const column = index % columns;
+      const row = Math.floor(index / columns);
+      const point = columns === 3 && scattered[index];
+      const x = itemWidth / 2 + 10 + (point ? point[0] * (width - itemWidth - 20) : step * column + (row % 2 ? -3 : 3));
+      // Extra entries continue below the freeform cluster instead of wrapping
+      // onto an occupied position. Narrow panels use a staggered pair of lanes.
+      const y = point ? point[1] : columns === 3
+        ? 680 + Math.floor((index - scattered.length) / columns) * 128 + [24, 0, 16][column]
+        : 50 + row * 128 + [24, 0][column];
+      item.style.setProperty("--gear-x", (mirror ? width - x : x) + "px");
+      item.style.setProperty("--gear-y", (y + Math.random() * 8 - 4) + "px");
+      bottom = Math.max(bottom, y + item.offsetHeight + 8);
+    });
+    panel.style.setProperty("--gear-shared-top", (bottom + 12) + "px");
+    const shared = panel.querySelector(".duo-gear__shared");
+    const height = bottom + (shared ? shared.getBoundingClientRect().height + 24 : 12);
+    panel.style.height = height + "px";
+    return height;
+  }
+
+  function layoutAllGear() {
+    let height = 480;
+    document.querySelectorAll(".duo__char").forEach(function (character) {
+      height = Math.max(height, layoutGear(character) + 32);
+    });
+    const duo = document.querySelector(".duo");
+    if (duo) duo.style.setProperty("--gear-height", height + "px");
+  }
+
   function openGear(character) {
     clearTimeout(gearCloseTimer);
     if (gearCharacter === character) return;
@@ -157,14 +200,7 @@
     character.querySelector(".duo__name").setAttribute("aria-hidden", "true");
     character.querySelector(".duo__portrait-trigger").setAttribute("aria-expanded", "true");
     const panel = character.querySelector(".duo-gear");
-    const positions = character.classList.contains("duo__char--left")
-      ? [[22, 52], [78, 118], [29, 222], [73, 302]]
-      : [[76, 48], [23, 124], [69, 220], [25, 300]];
-    panel.querySelectorAll(".duo-gear__item").forEach(function (item, index) {
-      const position = positions[index % positions.length];
-      item.style.setProperty("--gear-x", (position[0] + Math.random() * 4 - 2) + "%");
-      item.style.setProperty("--gear-y", (position[1] + Math.random() * 16 - 8) + "px");
-    });
+    layoutGear(character);
     panel.inert = false;
     panel.setAttribute("aria-hidden", "false");
     queueGearLines();
@@ -266,7 +302,7 @@
         if (event.pointerType === "touch") return;
         const trigger = event.target.closest(".duo__portrait-trigger");
         if (trigger) openGear(trigger.closest(".duo__char"));
-        const item = event.target.closest(".duo-gear__item");
+        const item = event.target.closest(".duo-gear__item, .duo-gear__craft");
         if (gearCharacter && item && gearCharacter.contains(item)) setGearItem(item);
         if (gearCharacter && gearCharacter.contains(event.target)) clearTimeout(gearCloseTimer);
       });
@@ -277,7 +313,7 @@
       document.addEventListener("focusin", function (event) {
         const trigger = event.target.closest(".duo__portrait-trigger");
         if (trigger && trigger.matches(":focus-visible")) openGear(trigger.closest(".duo__char"));
-        const item = event.target.closest(".duo-gear__item");
+        const item = event.target.closest(".duo-gear__item, .duo-gear__craft");
         if (item && item.matches(":focus-visible") && gearCharacter && gearCharacter.contains(item)) setGearItem(item);
         if (gearCharacter && gearCharacter.contains(event.target)) clearTimeout(gearCloseTimer);
       });
@@ -338,6 +374,7 @@
       });
 
       window.addEventListener("resize", function () {
+        layoutAllGear();
         queueGearLines();
         const elements = popupElements();
         if (!elements.popup || elements.popup.getAttribute("aria-hidden") !== "false") {
@@ -352,6 +389,7 @@
       document.querySelectorAll(".duo__portrait img").forEach(function (img) {
         img.addEventListener("load", queueGearLines);
       });
+      layoutAllGear();
     }
   };
 })();

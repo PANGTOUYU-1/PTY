@@ -70,6 +70,7 @@ window.SITE_DATA = {
       "epithet": "鸿元净莲",
       "portrait": "assets/img/characters/pangtouyu_head.png",
       "featured_items": ["bighead_spear", "bighead_fanhua", "bighead_armor", "bighead_back"],
+      "shared_crafts": ["bighead_ruyi", "bighead_scrolls", "dug_bb_cmbush", "bighead_mwgt"],
       "stats": {
         "hp": 150,
         "san": 150,
@@ -96,6 +97,7 @@ window.SITE_DATA = {
       "epithet": "上古魔龙",
       "portrait": "assets/img/characters/gaojiaoniao_head.png",
       "featured_items": ["bb_gaojiaoniao_cs", "bb_gaojiaoniao_fqh", "bb_gaojiaoniao_fh", "bb_gaojiaoniao_cmyh"],
+      "shared_crafts": ["bighead_ybhz"],
       "stats": {
         "hp": 150,
         "san": 100,

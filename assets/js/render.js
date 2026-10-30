@@ -109,14 +109,23 @@
 
   function heroCharacter(character) {
     character = character || {};
+    const priority = character.featured_items || [];
+    const items = (App.STATE.items || []).filter(function (item) {
+      return item.owner === character.id && item.display_image;
+    }).sort(function (a, b) {
+      const order = function (item) { const index = priority.indexOf(item.id); return index < 0 ? priority.length : index; };
+      return order(a) - order(b);
+    });
+    const sharedCrafts = (character.shared_crafts || []).map(function (id) {
+      return App.STATE.entries[id];
+    }).filter(function (item) { return item && item.type === "items" && item.owner === "common"; });
     return {
       ...character,
       quote: heroQuote(character),
-      featured_items: (character.featured_items || []).map(function (id) {
-        return (App.STATE.items || []).find(function (item) {
-          return item.id === id && item.owner === character.id && item.display_image;
-        });
-      }).filter(Boolean).map(function (item, index) {
+      exclusive_count: items.length,
+      shared_crafts: sharedCrafts,
+      has_shared_crafts: sharedCrafts.length > 0,
+      featured_items: items.map(function (item, index) {
         return { id: item.id, name: item.name, display_image: item.display_image, order: index, ...App.Data.ownerView(item) };
       })
     };

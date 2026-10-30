@@ -72,26 +72,34 @@ check('真实渲染模块生成设置与节气卡片', () => {
     assert.ok(output.includes(state[id][0].name || state[id][0].title));
   }
 });
-check('首页立绘展示各自四件专属，使用高清落地图并跳转到对应物品', () => {
+check('首页立绘完整展示角色专属，专属制作的共用物品使用小图标单列', () => {
   const getElementById = sandbox.document.getElementById;
   sandbox.document.getElementById = id => id === 'sections-root' ? null : getElementById(id);
   try { App.Render.renderAll(); }
   finally { sandbox.document.getElementById = getElementById; }
   const hero = node('hero-root').innerHTML;
-  assert.equal((hero.match(/class="duo-gear__item"/g) || []).length, 8);
+  assert.equal((hero.match(/class="duo-gear__item"/g) || []).length, state.items.filter(item => ['pangtouyu', 'gaojiaoniao'].includes(item.owner)).length);
   for (const character of state.characters) {
-    assert.equal(character.featured_items.length, 4);
-    assert.equal(new Set(character.featured_items).size, 4);
-    const panel = hero.match(new RegExp(`<div class="duo-gear" id="gear-${character.id}"[\\s\\S]*?</div>`))?.[0];
+    const expected = state.items.filter(item => item.owner === character.id);
+    const panel = hero.match(new RegExp(`<div class="duo-gear" id="gear-${character.id}"[\\s\\S]*?</article>`))?.[0];
     assert.ok(panel, character.id);
     assert.ok(panel.includes('aria-hidden="true" inert'));
-    for (const id of character.featured_items) {
+    assert.equal((panel.match(/class="duo-gear__item"/g) || []).length, expected.length);
+    for (const source of expected) {
+      const id = source.id;
       const item = state.entries[id];
       assert.equal(item.type, 'items');
       assert.equal(item.owner, character.id);
       assert.ok(panel.includes(`data-open-entry="${id}"`));
       assert.ok(panel.includes(`src="${item.display_image}"`));
       assert.ok(!panel.includes(`src="${item.image}"`));
+    }
+    assert.ok(panel.includes('其他角色也可使用'));
+    assert.equal((panel.match(/class="duo-gear__craft"/g) || []).length, character.shared_crafts.length);
+    for (const id of character.shared_crafts) {
+      assert.equal(state.entries[id].owner, 'common');
+      assert.ok(panel.includes(`src="${state.entries[id].image}"`));
+      assert.ok(panel.includes(`data-open-entry="${id}"`));
     }
   }
 });

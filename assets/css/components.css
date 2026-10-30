@@ -250,9 +250,9 @@
 .duo {
   position: relative;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
-  min-height: 480px;
+  min-height: var(--gear-height, 640px);
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -477,7 +477,8 @@
 }
 
 .duo__portrait-trigger:focus-visible,
-.duo-gear__item:focus-visible {
+.duo-gear__item:focus-visible,
+.duo-gear__craft:focus-visible {
   outline: 2px solid var(--cinnabar);
   outline-offset: 6px;
 }
@@ -516,7 +517,7 @@
   position: absolute;
   left: var(--gear-x, 25%);
   top: var(--gear-y, 52px);
-  width: min(38%, 112px);
+  width: var(--gear-item-width, 90px);
   translate: -50% 0;
   border: 0;
   background: transparent;
@@ -527,7 +528,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   border-radius: 12px;
   opacity: 0;
   transform: translateY(12px) scale(.94);
@@ -535,8 +536,8 @@
 }
 
 .duo-gear__item img {
-  width: 88px;
-  height: 96px;
+  width: min(68px, 100%);
+  height: 68px;
   object-fit: contain;
   filter: drop-shadow(0 4px 4px #3a342e18);
   transition: transform 200ms var(--ease);
@@ -547,17 +548,24 @@
   display: grid;
   place-items: center;
   width: 100%;
-  height: 96px;
+  height: 68px;
 }
 
-.duo-gear__item span { font-size: 14px; letter-spacing: .16em; }
+.duo-gear__item > span { font-size: 12px; line-height: 1.5; letter-spacing: .03em; overflow-wrap: anywhere; }
+.duo-gear__shared { position: absolute; top: var(--gear-shared-top, 500px); inset-inline: 0; border-top: var(--bd); padding-top: 12px; }
+.duo-gear__shared > p { margin: 0 0 10px; font-size: 12px; color: var(--ink-2); }
+.duo-gear__shared > p span { margin-left: 8px; color: var(--ink-3); font-size: 10px; }
+.duo-gear__crafts { display: flex; flex-wrap: wrap; gap: 6px 12px; }
+.duo-gear__craft { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; padding: 2px 0; font-size: 12px; color: var(--ink-2); }
+.duo-gear__craft img { width: 24px; height: 24px; object-fit: contain; }
+.duo-gear__craft:hover { color: var(--cinnabar); }
 .duo-gear__item:hover img { transform: translateY(-4px); }
 .is-showing-gear > .duo-gear { visibility: visible; pointer-events: auto; }
 .is-showing-gear .duo-gear__heading { opacity: 1; }
 .is-showing-gear .duo-gear__item {
   opacity: 1;
   transform: none;
-  transition-delay: calc(var(--gear-order) * 55ms), calc(var(--gear-order) * 55ms), 0ms;
+  transition-delay: calc(var(--gear-order) * 25ms), calc(var(--gear-order) * 25ms), 0ms;
 }
 
 .duo-gear-lines {
@@ -578,10 +586,10 @@
 
 @media (min-width: 901px) {
   /* Mirror exclusive items along the outer edge of each portrait. */
-  .duo__char.is-showing-gear { position: static; }
+  .duo__char { position: static; align-self: start; margin-top: 80px; }
   .duo__char .duo-gear {
-    top: 28px;
-    width: min(260px, calc(50% - 264px));
+    top: 16px;
+    width: min(390px, calc(50% - 252px));
   }
   .duo__char--left .duo-gear {
     left: 0;
