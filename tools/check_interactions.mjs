@@ -374,8 +374,12 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   const vines = hall.furnishings.filter(part => part.prefab === 'bighead_men2');
   assert.deepEqual(vines.map(part => part.target), ['loc_bedroom', 'loc_bedroom_right']);
   assert.ok(!vines[0].mirror_x && vines[1].mirror_x);
-  assert.ok(vines[0].bounds[0] < hall.floor.quad[3][0], '左侧灵藤应靠外侧楼梯');
-  assert.ok(vines[1].bounds[0] + vines[1].bounds[2] > hall.floor.quad[2][0], '右侧灵藤应靠外侧楼梯');
+  assert.ok(vines[0].bounds[0] > hall.floor.quad[3][0]
+    && vines[0].bounds[0] + vines[0].bounds[2] < hall.floor.quad[0][0],
+    '左侧灵藤应贴近侧梯内沿，不能落在最外侧栏杆');
+  assert.ok(vines[1].bounds[0] > hall.floor.quad[1][0]
+    && vines[1].bounds[0] + vines[1].bounds[2] < hall.floor.quad[2][0],
+    '右侧灵藤应贴近侧梯内沿，不能落在最外侧栏杆');
   for (const vine of vines) {
     assert.ok(vine.bounds[1] + vine.bounds[3] < hall.floor.quad[2][1] * .8,
       '灵藤应上移到侧梯中上段');

@@ -35,7 +35,7 @@ FLOOR_QUADS = {
 
 # Separate prefabs spawned by bighead_door_exit.lua, not baked into the walls.
 # World positions are (x, z) relative to each house centre. Preview offsets
-# align the vines with the side stairs and doors with the front wall openings; they are
+# align the vines with the inner edge of the side stairs and doors with the front wall openings; they are
 # image-space calibration, not changes to the mod's world coordinates.
 # preview_scale also calibrates the cutaway composition: foreground doors and
 # steps must remain readable beside the separately projected floor and walls.
@@ -55,13 +55,13 @@ FURNISHINGS = {
          'world_position': (-15.3, 0)},
         {'prefab': 'bighead_men2', 'animation': 'men2',
          'preview_scale': 1.5,
-         'world_position': (1.65, -15), 'preview_offset': (-140, 100),
+         'world_position': (1.65, -15), 'preview_offset': (-40, 20),
          'target': 'loc_bedroom', 'label': '引霄灵藤（左侧）',
          'hint': '进入左侧卧房', 'hint_align': 'start'},
         {'prefab': 'bighead_men2', 'animation': 'men2',
          'preview_scale': 1.5,
          'world_position': (1.65, 15), 'mirror_x': True,
-         'preview_offset': (140, 100),
+         'preview_offset': (40, 20),
          'target': 'loc_bedroom_right', 'label': '引霄灵藤（右侧）',
          'hint': '进入右侧卧房', 'hint_align': 'end'},
         {'prefab': 'bighead_door_exit', 'source': 'bighead_door_exit',

@@ -142,8 +142,8 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            41,
-            279,
+            141,
+            199,
             234,
             488
           ],
@@ -154,8 +154,8 @@
             -15
           ],
           "preview_offset": [
-            -140,
-            100
+            -40,
+            20
           ],
           "preview_scale": 1.5,
           "label": "引霄灵藤（左侧）",
@@ -168,8 +168,8 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            1341,
-            279,
+            1241,
+            199,
             234,
             488
           ],
@@ -181,8 +181,8 @@
           ],
           "mirror_x": true,
           "preview_offset": [
-            140,
-            100
+            40,
+            20
           ],
           "preview_scale": 1.5,
           "label": "引霄灵藤（右侧）",

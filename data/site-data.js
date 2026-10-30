@@ -3837,8 +3837,8 @@ window.SITE_DATA = {
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
       "scene_hotspots": [
-        {"label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 9.7772, "y": 46.0793, "width": 14.4802, "height": 42.9956, "hint": "进入左侧卧房", "hint_align": "start"},
-        {"label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 90.2228, "y": 46.0793, "width": 14.4802, "height": 42.9956, "hint": "进入右侧卧房", "hint_align": "end"},
+        {"label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 15.9653, "y": 39.0308, "width": 14.4802, "height": 42.9956, "hint": "进入左侧卧房", "hint_align": "start"},
+        {"label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 84.0347, "y": 39.0308, "width": 14.4802, "height": 42.9956, "hint": "进入右侧卧房", "hint_align": "end"},
         {"label": "青石楼梯", "target": "loc_foyer", "x": 49.6287, "y": 94.5374, "width": 21.0396, "height": 8.1057, "hint": "返回前室"}
       ],
       "scene_hint": "点击图中引霄灵藤（左侧）、引霄灵藤（右侧）、青石楼梯，前往对应位置。",
