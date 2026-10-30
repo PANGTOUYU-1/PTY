@@ -164,7 +164,11 @@
   width: 100%;
   max-width: 960px;
   text-align: center;
-  margin: 0 0 48px;
+  margin: 0 auto 48px;
+}
+
+.hero__head > p {
+  max-width: none;
 }
 
 #hero-root {
