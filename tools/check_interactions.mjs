@@ -243,6 +243,24 @@ check('物品列表与分类不再重复收录食物和建筑，所有内容仍�
   assert.equal(App.Filter.getFilteredItems().length, state.items.filter(e => e.category === 'food').length);
   App.ui.cats = [];
 });
+check('鱼专属与鸟专属按实际使用归属单选筛选，通用物品不混入', () => {
+  const previous = { ...App.ui };
+  for (const [owner, label] of [['pangtouyu', '鱼专属'], ['gaojiaoniao', '鸟专属']]) {
+    App.route.sync({ section: 'items', cats: [owner], q: '' });
+    const options = App.Filter.categoryOptions();
+    assert.equal(options.filter(option => option.active).length, 1);
+    assert.equal(options.find(option => option.active).label, label);
+    const filtered = App.Filter.getFilteredItems();
+    const expected = standaloneItems.filter(item => item.owner === owner);
+    assert.deepEqual(Array.from(filtered, item => item.id), Array.from(expected, item => item.id));
+    assert.ok(filtered.length > 0);
+    assert.ok(!filtered.some(item => item.id === 'bighead_ybhz'));
+    App.Render.renderItems();
+    assert.ok(node('items-root').innerHTML.includes(`共 ${expected.length} 项 · ${label}`));
+    assert.equal(App.route.read(App.route.build(App.ui)).cats[0], owner);
+  }
+  App.ui = previous;
+});
 check('月饼盒子作为随身工具收录，旧建筑链接也回到物品栏目', () => {
   const previous = { ...App.ui };
   const box = state.entries.bighead_ybhz;

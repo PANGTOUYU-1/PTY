@@ -1002,7 +1002,7 @@
   #items-root .filters-summary { white-space: nowrap; }
   #items-root .filters-summary { max-width: 170px; overflow: hidden; text-overflow: ellipsis; }
   #items-root .chip-row { flex-wrap: nowrap; overflow-x: auto; min-width: 0; }
-  #items-root .chip { flex-shrink: 0; }
+  #items-root .chip { flex-shrink: 0; padding-inline: 12px; }
 }
 
 .chip-row {
