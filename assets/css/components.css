@@ -1569,6 +1569,35 @@
 .building-entry__rules .building-entry__sections { margin-top: 8px; gap: 20px; }
 .building-entry__rules .building-entry__more { margin-top: 16px; margin-bottom: 16px; }
 
+@media (min-width: 901px) and (max-height: 950px) {
+  #terrains {
+    --building-scene-max: max(200px, calc(100svh - var(--header-h) - 300px));
+    padding-block: 16px;
+  }
+  .building-list { gap: 16px; }
+  .building-entry { padding-top: 16px; }
+  .building-entry__visual {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 16px;
+  }
+  .building-entry__image {
+    grid-column: 1 / -1;
+    max-width: var(--building-scene-max);
+    justify-self: center;
+  }
+  .building-entry__caption { margin-top: 8px; }
+  .building-route { margin-top: 8px; }
+  .building-route ol { justify-content: end; }
+  .building-entry__exits { grid-column: 1 / -1; margin-top: 8px; }
+  .building-entry__body { max-height: var(--building-scene-max); }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) and (max-height: 950px) {
+  #terrains { --building-scene-max: max(200px, calc(100svh - var(--header-h) - 380px)); }
+}
+
 @media (max-width: 900px) {
   .building-list { gap: 20px; }
   .building-entry { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-top: 24px; }
@@ -1576,7 +1605,8 @@
   .building-entry__body { aspect-ratio: auto; contain: none; overflow: visible; scrollbar-gutter: auto; padding-block: 0; }
 }
 
-@media (min-width: 901px) and (max-width: 1100px) {
+@media (min-width: 901px) and (max-width: 1100px),
+       (min-width: 901px) and (max-height: 950px) {
   .building-entry--overview .building-entry__title { margin-bottom: 12px; }
   .building-entry--overview .building-entry__summary { font-size: 14px; line-height: 1.75; }
   .building-overview { margin-top: 16px; }
