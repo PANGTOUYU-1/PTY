@@ -204,9 +204,10 @@
     const width = duo.clientWidth;
     const stage = duo.closest('.duo-stage');
     const availableHeight = stage.clientHeight;
-    const gearWidth = Math.min(390, Math.max(320, width * .30));
+    const gearWidth = Math.min(560, Math.max(320, width * .43));
     const modelWidth = Math.min(180, Math.max(96, width * .13));
     duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
+    duo.style.setProperty('--gear-spread', gearWidth / 384);
     duo.style.setProperty('--model-height', Math.min(240, modelWidth / aspect) + 'px');
     let bottom = 0;
     characters.forEach(function (character) {
@@ -218,12 +219,12 @@
       const right = Math.max(...others.map(function (node) { return node.offsetLeft + node.offsetWidth; }));
       const top = Math.min(...others.map(function (node) { return node.offsetTop; }));
       const baseBottom = Math.max(...others.map(function (node) { return node.offsetTop + node.offsetHeight; }));
-      let otherWidth = Math.min(right - left, Math.max(132, width - gearWidth - portrait.offsetWidth - modelWidth - 64));
+      let otherWidth = Math.min(right - left, Math.max(88, width - gearWidth - portrait.offsetWidth - modelWidth - 64));
       const skins = character.querySelector('.duo-skins');
       const portraitHeightLimit = Math.max(140, availableHeight - skins.offsetHeight - 60);
       const portraitWidth = Math.min(portrait.offsetWidth, width - gearWidth - otherWidth - modelWidth - 64,
         portrait.offsetWidth * portraitHeightLimit / portrait.offsetHeight);
-      otherWidth = Math.min(otherWidth, (right - left) * portrait.offsetHeight * portraitWidth / portrait.offsetWidth * .8 / (baseBottom - top));
+      otherWidth = Math.min(otherWidth, (right - left) * portrait.offsetHeight * portraitWidth / portrait.offsetWidth * .45 / (baseBottom - top));
       const gap = (width - gearWidth - portraitWidth - modelWidth - otherWidth) / 4;
       const mirror = character.dataset.char === 'gaojiaoniao';
       const position = function (x, size) { return mirror ? width - x - size : x; };

@@ -783,15 +783,15 @@
   .duo-gear__item {
     width: min(76px, 100%);
     justify-self: center;
-    translate: calc(var(--scatter-x, 0px) * var(--scatter-direction, 1)) calc(var(--scatter-y, 0px) * var(--scatter-space, 1));
+    translate: calc(var(--scatter-x, 0px) * var(--scatter-direction, 1) * var(--gear-spread, 1)) calc(var(--scatter-y, 0px) * var(--scatter-space, 1));
   }
   .duo__char--right .duo-gear { --scatter-direction: -1; }
-  .duo-gear__item:nth-child(6n + 1) { --scatter-x: -14px; --scatter-y: 12px; }
-  .duo-gear__item:nth-child(6n + 2) { --scatter-x: 6px; --scatter-y: -4px; }
+  .duo-gear__item:nth-child(6n + 1) { --scatter-x: -24px; --scatter-y: 12px; }
+  .duo-gear__item:nth-child(6n + 2) { --scatter-x: 12px; --scatter-y: -4px; }
   .duo-gear__item:nth-child(6n + 3) { --scatter-x: 14px; --scatter-y: 20px; }
-  .duo-gear__item:nth-child(6n + 4) { --scatter-x: 10px; --scatter-y: 4px; }
-  .duo-gear__item:nth-child(6n + 5) { --scatter-x: -12px; --scatter-y: 22px; }
-  .duo-gear__item:nth-child(6n + 6) { --scatter-x: 2px; --scatter-y: 8px; }
+  .duo-gear__item:nth-child(6n + 4) { --scatter-x: 24px; --scatter-y: 4px; }
+  .duo-gear__item:nth-child(6n + 5) { --scatter-x: -22px; --scatter-y: 22px; }
+  .duo-gear__item:nth-child(6n + 6) { --scatter-x: -10px; --scatter-y: 8px; }
   .duo-gear__group[data-gear-group="crafts"] .duo-gear__grid { padding-inline: 20px 4px; }
   .duo-gear__group[data-gear-group="crafts"] .duo-gear__item:nth-child(2) { --scatter-y: 24px; }
   .duo-gear__group[data-gear-group="crafts"] .duo-gear__item:nth-child(3) { --scatter-x: 0px; --scatter-y: 2px; }
