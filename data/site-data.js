@@ -128,7 +128,7 @@ window.SITE_DATA = {
         }
       ],
       "featured_items": ["bighead_spear", "bighead_fanhua", "bighead_armor", "bighead_back"],
-      "shared_crafts": ["bighead_ruyi", "bighead_scrolls", "dug_bb_cmbush", "bighead_mwgt"],
+      "shared_crafts": ["bighead_ruyi", "bighead_scrolls", "bighead_mwgt"],
       "stats": {
         "hp": 150,
         "san": 150,
@@ -2125,14 +2125,14 @@ window.SITE_DATA = {
       "id": "dug_bb_cmbush",
       "name": "草莓丛",
       "category": "crop",
-      "owner": "common",
+      "owner": "pangtouyu",
       "image": "assets/img/items/dug_bb_cmbush.png",
       "recipe": "无需科技；胖头鱼制作：便便桶×1 + 松果×1",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "胖头鱼可制作根株，再部署在地面；成熟后采摘[[草莓]]。用铲子挖回根株可搬家。"
+          "content": "只能由胖头鱼制作根株，其他角色也能种植、采摘。将根株部署在地面，成熟后采摘[[草莓]]；用铲子挖回根株可搬家。"
         },
         {
           "type": "text",
@@ -2151,7 +2151,7 @@ window.SITE_DATA = {
       ],
       "tech": "无需科技；胖头鱼制作",
       "source": "v4.8",
-      "summary": "可移植的草莓作物，种下后反复收获草莓；每次成熟产3颗。",
+      "summary": "胖头鱼专属制作的草莓作物，其他角色也能种植、采摘；每次成熟产3颗。",
       "display_image": "assets/img/displays/bb_cmbush.png"
     },
     {
