@@ -10,6 +10,7 @@
 
 #items,
 #mechanics,
+#settings,
 #changelog,
 #terrains,
 #buildings {
@@ -20,6 +21,7 @@
 
 #items .section-head,
 #mechanics .section-head,
+#settings .section-head,
 #changelog .section-head { margin-bottom: 16px; }
 #items .section-head--split { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
 
@@ -48,6 +50,14 @@
 .section-head--split {
   grid-template-columns: 1fr auto;
   align-items: end;
+}
+
+.section-head__description {
+  max-width: none;
+  margin-top: 12px;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .section-head__eyebrow {

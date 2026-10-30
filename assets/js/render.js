@@ -85,6 +85,12 @@
     const title = document.createElement("h2");
     title.textContent = config.title;
     titleWrap.append(title);
+    if (config.description) {
+      const description = document.createElement("p");
+      description.className = "section-head__description";
+      description.textContent = config.description;
+      titleWrap.append(description);
+    }
     head.append(titleWrap);
 
     if (config.filterButton) {

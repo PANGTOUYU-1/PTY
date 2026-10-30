@@ -5077,6 +5077,7 @@ window.SITE_DATA = {
     {
       "id": "settings",
       "title": "设置",
+      "description": "创建世界时，或启动已有存档前，由房主在「模组」→《我们饥佬是这样的》→「配置」中修改，保存后启动世界。本页展示各选项的默认值与可选值。",
       "themeClass": "section--paper",
       "rootId": "settings-root"
     },
