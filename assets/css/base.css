@@ -9,6 +9,22 @@ html {
   scrollbar-width: none;
 }
 
+/* Native image cursors keep the weapon tip aligned with the click target. */
+@media (pointer: fine) {
+  html {
+    --cursor-default: url("../img/ui/cursor-buran.png") 7 6, auto;
+    --cursor-pointer: url("../img/ui/cursor-buran.png") 7 6, pointer;
+    cursor: var(--cursor-default);
+  }
+
+  a,
+  select,
+  summary,
+  [role="button"] {
+    cursor: var(--cursor-pointer);
+  }
+}
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
 .modal-card::-webkit-scrollbar,
@@ -63,7 +79,7 @@ button {
   padding: 0;
   border: 0;
   background: none;
-  cursor: pointer;
+  cursor: var(--cursor-pointer, pointer);
 }
 
 a {
