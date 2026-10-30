@@ -8,6 +8,11 @@
   padding-block: var(--sp-9);
 }
 
+[data-section][hidden] { display: none !important; }
+#main-content { min-height: calc(100svh - var(--header-h)); }
+.hero[data-character-page] .hero__head { display: none; }
+.hero[data-character-page] { padding-top: 32px; }
+
 .section--paper {
   background: var(--paper);
   color: var(--ink);

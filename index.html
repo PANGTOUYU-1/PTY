@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="assets/css/motion.css">
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">跳到当前栏目内容</a>
 
   <header class="topbar" id="top">
     <div class="topbar__left">
@@ -49,7 +49,7 @@
     </nav>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <section class="hero" id="intro" data-section="intro">
       <div id="hero-root"></div>
     </section>
@@ -111,7 +111,7 @@
       <p class="hero__subtitle">{{subtitle_latin}}</p>
       <p class="hero__meta">{{version}} · {{author}} · <a href="{{workshop_url}}" target="_blank" rel="noreferrer">创意工坊 ↗</a>{{#qq_group_url}} · <a class="hero__join" href="{{qq_group_url}}" target="_blank" rel="noopener noreferrer" aria-label="加入《我们饥佬是这样的》mod交流群">加入交流群 <span aria-hidden="true">↗</span></a>{{/qq_group_url}}</p>
     </div>
-    <div class="duo reveal in" id="characters" data-section="characters" role="region" aria-label="人物" data-entry-target="hero-duo">
+    <div class="duo reveal in" id="characters" role="region" aria-label="人物" data-entry-target="hero-duo">
       <article class="duo__char duo__char--left" data-char="{{character_a.id}}" data-entry-target="{{character_a.id}}">
         <div class="duo__name duo__name--left">
           <img src="assets/img/ui/pangtouyu.png" alt="胖头鱼" loading="eager" onerror="window.App.onImageError(this)">

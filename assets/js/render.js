@@ -48,6 +48,7 @@
     section.className = "section " + config.themeClass;
     section.id = config.id;
     section.dataset.section = config.id;
+    section.hidden = config.id !== App.ui.section;
 
     const shell = document.createElement("div");
     shell.className = "shell";

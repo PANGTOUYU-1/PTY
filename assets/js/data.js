@@ -248,6 +248,7 @@
     read: readHash,
     build: buildHash,
     sync: function (patch, options) {
+      const previousSection = App.ui.section;
       const next = {
         ...App.ui,
         ...patch
@@ -257,9 +258,12 @@
       const hash = buildHash(next);
       if ((options && options.replace) || window.location.hash === hash) {
         history.replaceState(null, "", hash);
-        return;
+      } else {
+        history.pushState(null, "", hash);
       }
-      history.pushState(null, "", hash);
+      if (App.Navigation && App.Navigation.ready) {
+        App.Navigation.sync({ resetScroll: previousSection !== next.section });
+      }
     }
   };
 

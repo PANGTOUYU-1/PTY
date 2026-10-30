@@ -21,12 +21,37 @@
     });
   }
 
-  function scrollToSection(id) {
-    const target = document.getElementById(id === "序" ? "intro" : id);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+  App.Navigation = {
+    ready: false,
+    hasSection: function (id) {
+      return id === "intro" || id === "characters" || (App.sections || []).some(function (section) { return section.id === id; });
+    },
+    sync: function (options) {
+      if (!App.Navigation.ready) return;
+      const current = App.Navigation.hasSection(App.ui.section) ? App.ui.section : "intro";
+      if (App.ui.section !== current) {
+        App.route.sync({ section: current, detailId: "" }, { replace: true });
+        return;
+      }
+      const changed = document.documentElement.dataset.activeSection !== current;
+      if (changed && App.CharPopup) App.CharPopup.closeAll();
+      document.documentElement.dataset.activeSection = current;
+      document.querySelectorAll("[data-section]").forEach(function (section) {
+        section.hidden = section.id !== (current === "characters" ? "intro" : current);
+      });
+      const hero = document.getElementById("intro");
+      if (hero) {
+        if (current === "characters") hero.dataset.characterPage = "";
+        else delete hero.dataset.characterPage;
+      }
+      if ((current === "intro" || current === "characters") && App.CharPopup && App.CharPopup.refreshLayout) {
+        App.CharPopup.refreshLayout();
+      }
+      if (options && options.resetScroll) window.scrollTo({ top: 0, behavior: "instant" });
+      updateActiveNav();
+      syncBackToTop();
     }
-  }
+  };
 
   function syncProgress() {
     const strip = document.querySelector("[data-terrain-strip]");
@@ -40,18 +65,7 @@
   }
 
   function updateActiveNav() {
-    const sections = ["intro", "characters"].concat((App.sections || []).map(function (s) { return s.id; }));
-    let current = App.ui.section || "intro";
-    sections.forEach(function (id) {
-      const node = document.getElementById(id);
-      if (!node) {
-        return;
-      }
-      const rect = node.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.32 && rect.bottom >= window.innerHeight * 0.2) {
-        current = id;
-      }
-    });
+    const current = App.ui.section || "intro";
     document.querySelectorAll(".topbar__nav a, .mobile-nav a").forEach(function (link) {
       const route = App.route.read(link.getAttribute("href"));
       const foodSelected = App.ui.cats.length === 1 && App.ui.cats[0] === "food";
@@ -79,6 +93,13 @@
       const backToTop = event.target.closest("[data-back-to-top]");
       const buildingRoom = event.target.closest("[data-building-room]");
 
+      if (anchor && anchor.classList.contains("skip-link")) {
+        event.preventDefault();
+        document.getElementById("main-content").focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: "instant" });
+        return;
+      }
+
       if (buildingRoom) {
         App.Render.selectBuilding(buildingRoom.dataset.buildingRoom, { focus: true });
         return;
@@ -86,7 +107,6 @@
 
       if (backToTop) {
         if (App.CharPopup) App.CharPopup.closeAll();
-        App.route.sync({ section: "intro", detailId: "" }, { replace: true });
         if (document.activeElement === backToTop) {
           document.querySelector(".site-mark").focus({ preventScroll: true });
         }
@@ -97,7 +117,7 @@
       if (anchor && !anchor.closest("[data-search-panel]")) {
         const route = App.route.read(anchor.getAttribute("href"));
         const id = route.section;
-        if (id) {
+        if (App.Navigation.hasSection(id)) {
           event.preventDefault();
           App.Modal.close({ updateHash: false });
           if (App.CharPopup) { App.CharPopup.closeAll(); }
@@ -111,12 +131,17 @@
           App.route.sync({
             section: id, detailId: "",
             ...(itemNav ? { cats: route.cats, q: "" } : {})
-          }, { replace: true });
+          });
           if (itemNav) {
             App.Render.renderItems();
             App.bindInteractive();
           }
-          scrollToSection(id);
+          window.scrollTo({ top: 0, behavior: "instant" });
+          const target = document.querySelector(id === "intro" ? "#intro h1" : id === "characters" ? "#characters" : "#" + id + " h2");
+          if (target && anchor.closest(".topbar__nav, .mobile-nav")) {
+            if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+            target.focus({ preventScroll: true });
+          }
           updateActiveNav();
         }
       }
@@ -153,10 +178,12 @@
     });
 
     window.addEventListener("hashchange", function () {
+      const previousSection = App.ui.section;
       App.ui = {
         ...App.ui,
         ...App.route.read()
       };
+      App.Navigation.sync({ resetScroll: previousSection !== App.ui.section });
       App.Render.renderItems();
       App.Render.renderSearchResults();
       App.Modal.syncFromRoute();
@@ -168,7 +195,6 @@
       "scroll",
       function () {
         syncProgress();
-        updateActiveNav();
         syncBackToTop();
       },
       { passive: true }
@@ -179,6 +205,7 @@
     App.Carousel.init(document);
     App.Render.renderSearchResults();
     App.Motion.init();
+    App.Navigation.sync();
     if (App.CharPopup) {
       App.CharPopup.init();
     }
@@ -197,12 +224,11 @@
     App.Data.load().then(function () {
       renderNav();
       App.Render.renderAll();
+      App.Navigation.ready = true;
+      App.Navigation.sync({ resetScroll: true });
       App.Modal.syncFromRoute();
       App.Editor.init();
       App.bindInteractive();
-      if (App.ui.section && App.ui.section !== "intro") {
-        scrollToSection(App.ui.section);
-      }
     });
   });
 })();

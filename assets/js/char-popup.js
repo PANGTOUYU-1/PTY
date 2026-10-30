@@ -292,6 +292,8 @@
 
     closeAll: function () { closeGear(); closePopup(); },
 
+    refreshLayout: function () { layoutAllGear(); queueGearLines(); },
+
     init: function () {
       if (App.CharPopup.ready) {
         return;
