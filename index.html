@@ -284,6 +284,7 @@
       <article class="building-entry{{#has_building_highlights}} building-entry--overview{{/has_building_highlights}}" data-entry-target="{{id}}"{{^selected}} hidden{{/selected}}>
         <div class="building-entry__visual">
           <div class="building-entry__image{{#is_interior}} building-entry__image--interior{{/is_interior}}">
+            <div class="building-entry__scene">
             <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
             {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
             {{#building_entry}}
@@ -293,6 +294,7 @@
             </button>
             {{/building_entry}}
             {{#scene_hotspots}}<button class="scene-hotspot" type="button" style="{{position}}" data-building-room="{{target}}" data-hint-align="{{hint_align}}" aria-label="{{label}}：{{hint}}"><span class="scene-hotspot__hint">{{label}} · {{hint}} →</span></button>{{/scene_hotspots}}
+            </div>
           </div>
           <p class="building-entry__caption"><span>{{number}}</span> {{#preview_caption}}{{preview_caption}}{{/preview_caption}}{{^preview_caption}}屋外入口{{/preview_caption}}</p>
           <nav class="building-route" aria-label="入阁路线">
