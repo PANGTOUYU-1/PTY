@@ -35,7 +35,32 @@
             241,
             166
           ],
-          "target": "loc_hall"
+          "target": "loc_hall",
+          "world_position": [
+            -14,
+            0
+          ],
+          "label": "鎏金太极铃",
+          "hint": "进入厅堂"
+        },
+        {
+          "prefab": "bighead_door_exit",
+          "source": "bighead_door_exit",
+          "animation": "idle",
+          "frame": 1,
+          "bounds": [
+            730,
+            1180,
+            143,
+            38
+          ],
+          "target": "loc_qingxuan",
+          "world_position": [
+            14,
+            -0.15
+          ],
+          "label": "青石楼梯",
+          "hint": "回到屋外"
         }
       ],
       "floor": {
@@ -110,8 +135,8 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            222,
-            340,
+            332,
+            455,
             156,
             325
           ],
@@ -119,7 +144,14 @@
           "world_position": [
             1.65,
             -15
-          ]
+          ],
+          "preview_offset": [
+            110,
+            115
+          ],
+          "label": "引霄灵藤（左侧）",
+          "hint": "进入左侧卧房",
+          "hint_align": "start"
         },
         {
           "prefab": "bighead_men2",
@@ -127,8 +159,8 @@
           "animation": "men2",
           "frame": 1,
           "bounds": [
-            1238,
-            340,
+            1128,
+            455,
             156,
             325
           ],
@@ -137,7 +169,33 @@
             1.65,
             15
           ],
-          "mirror_x": true
+          "mirror_x": true,
+          "preview_offset": [
+            -110,
+            115
+          ],
+          "label": "引霄灵藤（右侧）",
+          "hint": "进入右侧卧房",
+          "hint_align": "end"
+        },
+        {
+          "prefab": "bighead_door_exit",
+          "source": "bighead_door_exit",
+          "animation": "idle",
+          "frame": 1,
+          "bounds": [
+            736,
+            951,
+            131,
+            35
+          ],
+          "target": "loc_foyer",
+          "world_position": [
+            14,
+            -0.15
+          ],
+          "label": "青石楼梯",
+          "hint": "返回前室"
         }
       ],
       "floor": {
@@ -189,7 +247,28 @@
         1616,
         1263
       ],
-      "furnishings": [],
+      "furnishings": [
+        {
+          "prefab": "bighead_men3",
+          "source": "bighead_men",
+          "animation": "men3",
+          "frame": 1,
+          "bounds": [
+            1332,
+            890,
+            200,
+            290
+          ],
+          "target": "loc_hall",
+          "world_position": [
+            14,
+            14
+          ],
+          "label": "鎏角青玄门",
+          "hint": "返回厅堂",
+          "hint_align": "end"
+        }
+      ],
       "floor": {
         "source": "bighead_floor2",
         "animation": "idle",
@@ -239,7 +318,28 @@
         1616,
         1263
       ],
-      "furnishings": [],
+      "furnishings": [
+        {
+          "prefab": "bighead_men4",
+          "source": "bighead_men",
+          "animation": "men4",
+          "frame": 1,
+          "bounds": [
+            83,
+            888,
+            200,
+            290
+          ],
+          "target": "loc_hall",
+          "world_position": [
+            14,
+            -14
+          ],
+          "label": "银翘古木门",
+          "hint": "返回厅堂",
+          "hint_align": "start"
+        }
+      ],
       "floor": {
         "source": "bighead_floor3",
         "animation": "idle",

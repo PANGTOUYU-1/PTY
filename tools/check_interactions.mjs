@@ -245,6 +245,19 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
     assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], asset.display_size);
     assert.ok(asset.display_size[0] > 1000);
     assert.equal(asset.scale, 1);
+    const furnishings = asset.furnishings.filter(part => part.target);
+    assert.equal(entry.scene_hotspots.length, furnishings.length, asset.id);
+    for (const part of furnishings) {
+      const hit = entry.scene_hotspots.find(hit => hit.target === part.target);
+      assert.ok(hit, part.prefab);
+      const [left, top, width, height] = part.bounds;
+      assert.ok(left >= 0 && top >= 0 && left + width <= asset.display_size[0] && top + height <= asset.display_size[1]);
+      assert.ok(Math.abs((left + width / 2) / asset.display_size[0] * 100 - hit.x) < .01);
+      assert.ok(Math.abs((top + height / 2) / asset.display_size[1] * 100 - hit.y) < .01);
+      assert.ok(Math.abs(width / asset.display_size[0] * 100 - hit.width) < .01);
+      assert.ok(Math.abs(height / asset.display_size[1] * 100 - hit.height) < .01);
+      assert.equal(hit.label, part.label);
+    }
   }
   assert.equal(state.nameToId['阁主卧房'], 'loc_bedroom');
   for (const id of Object.keys(roomSources)) {
@@ -270,7 +283,20 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.ok(Math.abs((x + width / 2) / 1616 * 100 - hotspot.x) < 0.1);
   assert.ok(Math.abs((y + height / 2) / 1285 * 100 - hotspot.y) < 0.1);
   const hall = manifest.assets.find(asset => asset.id === 'loc_hall');
-  assert.equal(hall.furnishings.length, 3);
+  assert.equal(hall.furnishings.length, 4);
+  for (const id of ['loc_foyer', 'loc_hall']) {
+    const stair = manifest.assets.find(asset => asset.id === id).furnishings.find(part => part.prefab === 'bighead_door_exit');
+    assert.ok(stair);
+    assert.equal(stair.source, 'bighead_door_exit');
+    assert.equal(stair.animation, 'idle');
+    assert.equal(stair.target, id === 'loc_foyer' ? 'loc_qingxuan' : 'loc_foyer');
+  }
+  for (const [id, prefab, animation] of [['loc_bedroom', 'bighead_men3', 'men3'], ['loc_bedroom_right', 'bighead_men4', 'men4']]) {
+    const door = manifest.assets.find(asset => asset.id === id).furnishings[0];
+    assert.equal(door.prefab, prefab);
+    assert.equal(door.animation, animation);
+    assert.equal(door.target, 'loc_hall');
+  }
   assert.ok(hall.furnishings.some(part => part.prefab === 'bighead_yizi' && part.animation === 'yizi'));
   const vines = hall.furnishings.filter(part => part.prefab === 'bighead_men2');
   assert.deepEqual(vines.map(part => part.target), ['loc_bedroom', 'loc_bedroom_right']);
@@ -290,7 +316,7 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   for (const vine of vines) assert.ok(node('modal-root').innerHTML.includes(`data-open-entry="${vine.target}"`));
   App.Modal.open('loc_bedroom_right');
   assert.match(node('modal-root').innerHTML, /银翘古木门/);
-  assert.ok(!node('modal-root').innerHTML.includes('class="scene-hotspot"'));
+  assert.match(node('modal-root').innerHTML, /class="scene-hotspot"[^>]+data-open-entry="loc_hall"/);
 });
 check('建筑大图原地进屋，铃铛和出口同步切换场景、说明、导览与焦点', () => {
   const config = App.sections.find(section => section.id === 'terrains');

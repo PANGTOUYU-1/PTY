@@ -3680,9 +3680,10 @@ window.SITE_DATA = {
       "illustration": "assets/img/terrains/loc_foyer.png",
       "preview_caption": "前室内景预览",
       "scene_hotspots": [
-        { "label": "鎏金太极铃", "target": "loc_hall", "x": 50, "y": 30.74, "width": 15, "height": 13, "hint": "进入厅堂" }
+        {"label": "鎏金太极铃", "target": "loc_hall", "x": 50.0309, "y": 30.7393, "width": 14.9134, "height": 12.9183, "hint": "进入厅堂"},
+        {"label": "青石楼梯", "target": "loc_qingxuan", "x": 49.5978, "y": 93.3074, "width": 8.849, "height": 2.9572, "hint": "回到屋外"}
       ],
-      "scene_hint": "点击图中的鎏金太极铃，进入厅堂。",
+      "scene_hint": "点击图中鎏金太极铃、青石楼梯，前往对应位置。",
       "summary": "进门后首先到达的房间：青石楼梯回屋外，鎏金太极铃通厅堂。入内即享有青玄阁的避难与温控保护。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": ["loc_qingxuan", "loc_hall"],
@@ -3716,10 +3717,11 @@ window.SITE_DATA = {
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
       "scene_hotspots": [
-        { "label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 18.5644, "y": 47.9943, "width": 9.6535, "height": 31.0411, "hint": "进入左侧卧房", "hint_align": "start" },
-        { "label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 81.4356, "y": 47.9943, "width": 9.6535, "height": 31.0411, "hint": "进入右侧卧房", "hint_align": "end" }
+        {"label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 25.3713, "y": 58.978, "width": 9.6535, "height": 31.0411, "hint": "进入左侧卧房", "hint_align": "start"},
+        {"label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 74.6287, "y": 58.978, "width": 9.6535, "height": 31.0411, "hint": "进入右侧卧房", "hint_align": "end"},
+        {"label": "青石楼梯", "target": "loc_foyer", "x": 49.5978, "y": 92.5024, "width": 8.1064, "height": 3.3429, "hint": "返回前室"}
       ],
-      "scene_hint": "点击两侧的引霄灵藤，进入对应卧房。",
+      "scene_hint": "点击图中引霄灵藤（左侧）、引霄灵藤（右侧）、青石楼梯，前往对应位置。",
       "summary": "青玄阁内连接两间卧房的厅堂，共用防猎犬生成、恒温、避雨与夜间照明。太极莲尊是陈设。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": [
@@ -3757,7 +3759,11 @@ window.SITE_DATA = {
       "title": "阁主卧房（左侧）",
       "aliases": ["阁主卧房", "左侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom.png",
+      "scene_hotspots": [
+        {"label": "鎏角青玄门", "target": "loc_hall", "x": 88.6139, "y": 81.9477, "width": 12.3762, "height": 22.9612, "hint": "返回厅堂", "hint_align": "end"}
+      ],
       "preview_caption": "左侧卧房内景预览",
+      "scene_hint": "点击图中鎏角青玄门，前往对应位置。",
       "summary": "由厅堂左侧引霄灵藤进入，鎏角青玄门返回厅堂。共用青玄阁的室内保护，没有自带睡眠或恢复效果。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": [
@@ -3794,7 +3800,11 @@ window.SITE_DATA = {
       "title": "阁主卧房（右侧）",
       "aliases": ["右侧卧房"],
       "illustration": "assets/img/terrains/loc_bedroom_right.png",
+      "scene_hotspots": [
+        {"label": "银翘古木门", "target": "loc_hall", "x": 11.3243, "y": 81.7894, "width": 12.3762, "height": 22.9612, "hint": "返回厅堂", "hint_align": "start"}
+      ],
       "preview_caption": "右侧卧房内景预览",
+      "scene_hint": "点击图中银翘古木门，前往对应位置。",
       "summary": "由厅堂右侧引霄灵藤进入，银翘古木门返回厅堂。与左侧卧房是不同房间，墙景独立，保护效果相同。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": ["loc_qingxuan", "loc_hall"],
