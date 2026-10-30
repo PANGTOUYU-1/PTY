@@ -31,7 +31,7 @@
     },
     {
       id: "terrains",
-      title: "地形",
+      title: "建筑",
       themeClass: "section--paper",
       rootId: "terrains-root"
     },
@@ -216,10 +216,32 @@
 
     renderGenericSection: function (sec) {
       var data = App.STATE[sec.id] || [];
-      var entries = data.map(function (entry) {
-        return compactEntryCardView(entry, sec.title);
+      var entries = data.map(function (entry, index) {
+        const view = compactEntryCardView(entry, sec.title);
+        if (sec.id !== "terrains") return view;
+        return {
+          ...view,
+          number: String(index + 1).padStart(2, "0"),
+          building_sections: (entry.detail_blocks || []).filter(function (block) {
+            return !/台词|陈设/.test(block.title || "") && block.title;
+          }).slice(0, 3).map(function (block) {
+            const html = function (text) { return App.Linkify.textToHtml(text || "", { emphasizeNumbers: true }); };
+            return {
+              title: block.title,
+              is_note: block.tone === "note",
+              paragraphs: block.type === "text" ? (block.content || "").split(/\n+/).filter(Boolean).map(function (text) { return { html: html(text) }; }) : [],
+              list_items: (block.items || []).map(function (text) { return { html: html(text) }; }),
+              has_list: block.type === "list",
+              has_table: block.type === "table",
+              headers: (block.columns || []).map(function (text) { return { text: text }; }),
+              rows: (block.rows || []).map(function (row) {
+                return { label: html(row[0]), cells: row.slice(1).map(function (text) { return { html: html(text) }; }) };
+              })
+            };
+          })
+        };
       });
-      renderTo(sec.rootId, "tpl-section-cards", { entries: entries });
+      renderTo(sec.rootId, sec.id === "terrains" ? "tpl-buildings" : "tpl-section-cards", { entries: entries });
     },
 
     renderChangelog: function () {

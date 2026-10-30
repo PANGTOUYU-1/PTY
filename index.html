@@ -79,7 +79,7 @@
       </div>
       <label class="search-field">
         <span class="sr-only">输入关键词</span>
-        <input type="search" placeholder="检索角色、物品、机制、地形、更新" data-global-search-input>
+        <input type="search" placeholder="检索角色、物品、机制、建筑、更新" data-global-search-input>
       </label>
       <div class="search-panel__results" id="search-results-root"></div>
     </div>
@@ -222,7 +222,7 @@
     </div>
   </script>
 
-  <!-- 通用分区卡片模板，mechanics / terrains / 新增分区共用 -->
+  <!-- 通用分区卡片模板，mechanics / 新增分区共用 -->
   <script id="tpl-section-cards" type="x-tmpl-mustache">
     <div class="items-grid">
       {{#entries}}
@@ -244,6 +244,42 @@
           </span>
           {{^owner_stamp}}{{#owner_label}}<span class="item-card__owner">{{owner_label}}</span>{{/owner_label}}{{/owner_stamp}}
         </button>
+      </article>
+      {{/entries}}
+    </div>
+  </script>
+
+  <script id="tpl-buildings" type="x-tmpl-mustache">
+    <div class="building-list">
+      {{#entries}}
+      <article class="building-entry" data-entry-target="{{id}}">
+        <div class="building-entry__visual">
+          <button class="building-entry__image" type="button" data-open-entry="{{id}}" aria-label="查看{{name}}大图与完整详情">
+            <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="window.App.onImageError(this)">
+            {{#owner_stamp}}<span class="owner-stamp" role="img" aria-label="{{owner_label}}" title="{{owner_label}}">{{owner_stamp}}</span>{{/owner_stamp}}
+            <span class="building-entry__zoom" aria-hidden="true">查看大图 ↗</span>
+          </button>
+          <p class="building-entry__caption"><span>{{number}}</span> {{#preview_caption}}{{preview_caption}}{{/preview_caption}}{{^preview_caption}}屋外入口{{/preview_caption}}</p>
+        </div>
+        <div class="building-entry__body">
+          <p class="building-entry__eyebrow">{{category_label}}{{#owner_label}} · {{owner_label}}{{/owner_label}}</p>
+          <h3 class="building-entry__title">{{name}}</h3>
+          <p class="building-entry__summary">{{summary}}</p>
+          <div class="building-entry__sections">
+            {{#building_sections}}
+            <section class="building-detail{{#is_note}} building-detail--note{{/is_note}}">
+              <h4>{{title}}</h4>
+              {{#paragraphs}}<p>{{{html}}}</p>{{/paragraphs}}
+              {{#has_list}}<ul>{{#list_items}}<li>{{{html}}}</li>{{/list_items}}</ul>{{/has_list}}
+              {{#has_table}}<div class="building-detail__table"><table>
+                <thead><tr>{{#headers}}<th scope="col">{{text}}</th>{{/headers}}</tr></thead>
+                <tbody>{{#rows}}<tr><th scope="row">{{{label}}}</th>{{#cells}}<td>{{{html}}}</td>{{/cells}}</tr>{{/rows}}</tbody>
+              </table></div>{{/has_table}}
+            </section>
+            {{/building_sections}}
+          </div>
+          <button class="building-entry__more" type="button" data-open-entry="{{id}}">完整规则与路线 <span aria-hidden="true">↗</span></button>
+        </div>
       </article>
       {{/entries}}
     </div>
@@ -302,11 +338,11 @@
             <img src="{{image}}" alt="{{title}}" loading="lazy" onerror="window.App.onImageError(this)">
           </span>
           <span class="item-card__meta">
-            <span class="item-card__topline">地形</span>
+            <span class="item-card__topline">建筑</span>
             <strong>{{title}}</strong>
             <span>{{summary}}</span>
           </span>
-          <span class="item-card__owner">地形</span>
+          <span class="item-card__owner">建筑</span>
         </button>
       </article>
       {{/terrains}}

@@ -197,8 +197,15 @@ check('各分区、详情与外观统一显示专属印章，通用内容不误�
 });
 check('屋外入口和四间独立房间均可查看，内景匹配各自墙面、地板与门的连接', () => {
   const config = App.sections.find(section => section.id === 'terrains');
+  assert.equal(config.title, '建筑');
   App.Render.renderGenericSection(config);
   const cards = node(config.rootId).innerHTML;
+  assert.ok(cards.includes('class="building-list"'));
+  assert.ok(!cards.includes('class="items-grid"'));
+  assert.ok(cards.includes('室内有什么用'));
+  assert.ok(cards.includes('房间中心'));
+  assert.ok(cards.includes('怎么进去、怎么回来'));
+  assert.ok(cards.includes('能直接睡觉回血吗？'));
   const manifest = JSON.parse(readFileSync(join(root, 'data/terrain-previews.json'), 'utf8'));
   assert.equal(manifest.kind, 'original_room_composite');
   const roomSources = { loc_foyer: 'bighead_wall', loc_hall: 'bighead_wall1', loc_bedroom: 'bighead_wall2', loc_bedroom_right: 'bighead_wall3' };
@@ -211,7 +218,10 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
     const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${entry.id}"[\\s\\S]*?<\\/article>`))?.[0];
     assert.ok(card.includes(`src="${image}"`), entry.id);
     assert.ok(!card.includes('card-link--text'), entry.id);
+    assert.ok(card.includes('class="building-entry__body"'), entry.id);
+    assert.ok(card.includes('完整规则与路线'), entry.id);
     App.Modal.open(entry.id);
+    assert.ok(node('modal-root').innerHTML.includes('>建筑</p>'));
     assert.ok(node('modal-root').innerHTML.includes(`class="modal-card__hero" src="${image}"`));
   }
   for (const asset of manifest.assets) {

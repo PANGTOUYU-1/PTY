@@ -88,7 +88,7 @@
               characters: "角色",
               items: "物品",
               mechanics: "机制",
-              terrains: "地点",
+              terrains: "建筑",
               seasons: "节气",
               skins: "外观",
               settings: "设置",

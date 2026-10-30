@@ -4882,7 +4882,7 @@ window.SITE_DATA = {
     },
     {
       "id": "terrains",
-      "title": "地点",
+      "title": "建筑",
       "themeClass": "section--paper",
       "rootId": "terrains-root"
     },

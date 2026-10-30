@@ -13,7 +13,7 @@
 
 - 所有内容都写在 **一个文件** 里：`data/site-data.js`
 - 页面由 Mustache 模板在浏览器里实时渲染
-- 分区：序 → 物品 → 机制 → 地点 → 节气 → 设置 → 更新；外观合并到对应物品详情
+- 分区：序 → 人物 → 物品 → 食物 → 机制 → 建筑 → 节气 → 设置 → 更新；外观合并到对应物品详情
 - 自带全局搜索、分类筛选、详情弹窗、站内 `[[双链]]` 跳转
 - 收录 69 项物品、29 项节气、8 项机制、27 款装备外观及 12 项模组设置
 - 物品卡片直接说明用途，详情按「怎么使用」「效果与限制」「升级／维护」组织；检查台词放在末尾
@@ -136,7 +136,7 @@ dao-yinyang-site/
 | 两个角色的立绘、属性、设定、专属 | `site-data.js` → `characters` |
 | 物品（图标、简介、配方、科技、详情） | `site-data.js` → `items` |
 | 机制 | `site-data.js` → `mechanics` |
-| 地形 | `site-data.js` → `terrains` |
+| 建筑 | `site-data.js` → `terrains` |
 | 季节 | `site-data.js` → `seasons` |
 | 更新日志 | `site-data.js` → `changelog` |
 | 首页海报轮播 | `site-data.js` → `posters` |
