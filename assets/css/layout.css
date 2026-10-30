@@ -9,6 +9,8 @@
 }
 
 #items,
+#mechanics,
+#changelog,
 #terrains,
 #buildings {
   padding-top: 24px;
@@ -16,7 +18,9 @@
   scroll-margin-top: var(--header-h);
 }
 
-#items .section-head { margin-bottom: 16px; }
+#items .section-head,
+#mechanics .section-head,
+#changelog .section-head { margin-bottom: 16px; }
 #items .section-head--split { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
 
 [data-section][hidden] { display: none !important; }

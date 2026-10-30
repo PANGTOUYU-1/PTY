@@ -5036,7 +5036,7 @@ window.SITE_DATA = {
     {
       "id": "mechanics",
       "title": "机制",
-      "themeClass": "section--ink",
+      "themeClass": "section--paper",
       "rootId": "mechanics-root"
     },
     {
@@ -5068,7 +5068,7 @@ window.SITE_DATA = {
     {
       "id": "changelog",
       "title": "更新",
-      "themeClass": "section--ink",
+      "themeClass": "section--paper",
       "rootId": "changelog-root"
     }
   ],
