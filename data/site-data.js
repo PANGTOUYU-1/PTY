@@ -2767,27 +2767,27 @@ window.SITE_DATA = {
     },
     {
       "id": "bb_gaojiaoniao_px_builder",
-      "name": "貔貅（莲令）",
+      "name": "貔貅",
       "category": "misc",
       "owner": "gaojiaoniao",
-      "image": "assets/img/items/bb_gaojiaoniao_px_builder.png",
-      "summary": "高脚鸟召回貔貅的指令，貔貅能骑乘赶路，并把有金价的物品兑换成金块。",
-      "recipe": "无需科技；高脚鸟制作：理智×50",
+      "image": "assets/img/items/bb_gaojiaoniao_px.png",
+      "summary": "高脚鸟的专属坐骑，可骑乘赶路、踏水，并将有金价的物品兑换成金块。",
+      "recipe": "无需科技；高脚鸟召唤：理智×50",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "在高脚鸟专属制作栏花费50理智执行“莲令”，让貔貅来到身边。骑上貔貅赶路，打开它的容器放入有金价的物品进行兑换。"
+          "content": "高脚鸟在专属制作栏花费50理智使用“莲令”，即可召唤貔貅。貔貅在场且无人骑乘时，再次使用“莲令”可将它收回。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "容器接收金块和有金价的可交易物。投入的物品会被消耗，按金价与数量产出金块；放入金块本身不会重复兑换。骑乘时有踏水能力，骑乘速度受模组设置影响。"
+          "content": "召唤后会跟随高脚鸟，仅主人可以骑乘。骑乘时可以踏水，移动速度可在模组设置中调整。"
         },
         {
           "type": "text",
-          "title": "物品形态",
-          "content": "这是制作栏里的召宠动作图标，实际操作对象是召出的貔貅，不是可反复右键的背包道具。"
+          "title": "兑换金块",
+          "content": "胖头鱼和高脚鸟都能打开貔貅的容器。放入有金价的物品后，物品会被消耗，并按金价与数量换成金块。容器也能放金块，但金块不会再次兑换。"
         }
       ],
       "related": [
@@ -2800,12 +2800,13 @@ window.SITE_DATA = {
         "貔貅",
         "莲"
       ],
-      "tech": "无需科技；高脚鸟制作",
+      "tech": "无需科技；高脚鸟召唤",
       "source": "v4.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_px.png",
       "aliases": [
-        "貔貅",
-        "莲令"
+        "莲令",
+        "麒麟",
+        "貔貅（莲令）"
       ]
     },
     {
@@ -5315,20 +5316,16 @@ window.SITE_DATA = {
     {
       "id": "bb_gaojiaoniao_px_skin1",
       "item_id": "bb_gaojiaoniao_px_builder",
-      "name": "玉桂狗 · 莲令",
-      "image": "assets/img/items/bb_gaojiaoniao_px_builder.png",
-      "summary": "莲令的装备外观。",
+      "name": "玉桂狗 · 貔貅",
+      "image": "assets/img/items/bb_gaojiaoniao_px.png",
+      "summary": "貔貅的玉桂狗外观。",
       "related": [
         "bb_gaojiaoniao_px_builder"
       ],
       "detail_blocks": [
         {
           "type": "text",
-          "content": "对应装备：[[莲令]]。"
-        },
-        {
-          "type": "text",
-          "content": "展示图为该外观的实际落地形态；名称旁的小图标沿用对应召唤物品的图标。"
+          "content": "对应生物：[[貔貅]]。"
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_px_skin1.png"
