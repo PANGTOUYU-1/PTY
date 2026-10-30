@@ -157,19 +157,9 @@
             {{#character_a.appearances}}<button class="duo-skin" type="button" data-character-skin="{{id}}" aria-pressed="{{selected}}" aria-label="{{name}}" title="{{name}}"><img src="{{poster}}" alt="" width="{{width}}" height="{{height}}" loading="lazy" onerror="window.App.onImageError(this)"><span>{{label}}</span></button>{{/character_a.appearances}}
           </div>
         </div>
-        <nav class="duo__fields duo__fields--bottom" aria-label="胖头鱼字段">
-          <button class="duo-field" type="button" data-char="{{character_a.id}}" data-panel="exclusive">
-            <img class="duo-field__img" src="assets/img/ui/zhuanshu.png" alt="专属" loading="lazy" onerror="window.App.onImageError(this)">
-          </button>
-        </nav>
       </article>
 
       <article class="duo__char duo__char--right" data-char="{{character_b.id}}" data-entry-target="{{character_b.id}}">
-        <nav class="duo__fields duo__fields--top" aria-label="高脚鸟字段">
-          <button class="duo-field" type="button" data-char="{{character_b.id}}" data-panel="exclusive">
-            <img class="duo-field__img" src="assets/img/ui/zhuanshu.png" alt="专属" loading="lazy" onerror="window.App.onImageError(this)">
-          </button>
-        </nav>
         <figure class="duo__portrait">
           <button class="duo__portrait-trigger" type="button" aria-label="查看{{character_b.name}}的专属物品" aria-expanded="false" aria-controls="gear-{{character_b.id}}">
           <img src="{{character_b.portrait}}" alt="{{character_b.name}} 立绘" loading="eager" fetchpriority="high" onerror="window.App.onImageError(this)">
