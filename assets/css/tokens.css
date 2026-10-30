@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "PTY Quote Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../fonts/quote-serif-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "PTY Quote Serif";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("../fonts/quote-serif-500.woff2") format("woff2");
+}
+
 :root {
   --ink: #1c1916;
   --ink-2: #3a342e;
@@ -14,6 +30,7 @@
   --fs-small: 13px;
   --fs-mono: 13px;
   --ff-serif: "Noto Serif SC", "Source Han Serif SC", "霞鹜文楷", "FangSong", serif;
+  --ff-quote: "PTY Quote Serif", var(--ff-serif);
   --ff-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --ff-mono: "JetBrains Mono", "Menlo", monospace;
   --sp-1: 4px;
