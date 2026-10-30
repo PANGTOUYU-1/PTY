@@ -4777,29 +4777,35 @@ window.SITE_DATA = {
   "changelog": [
     {
       "id": "log_4800",
-      "title": "v4.8 资料同步",
+      "title": "v4.8 · 新增玩法设置",
       "version": "v4.8",
-      "date": "2026-10-30",
       "image": "assets/img/items/bighead_fanhua.png",
       "related": [
-        "mech_lingqi",
-        "mech_shixin",
-        "mech_wudao",
-        "mech_gardening"
+        "config_bb_gaojiaoniao_demon_damage",
+        "config_bb_gaojiaoniao_shadow_damage",
+        "config_bighead_speed_bonus",
+        "config_bb_gaojiaoniao_speed_bonus",
+        "config_bb_gaojiaoniao_magma_regen",
+        "config_bb_gaojiaoniao_px_speed",
+        "config_bighead_seasons",
+        "config_bighead_ruyi_catch_spirits",
+        "config_bighead_daily_gift",
+        "config_bighead_graft_limit"
       ],
       "changes": [
-        "依据 v4.8 模组包更新角色称号、基础三维、装备属性、制作条件与食物回复。",
-        "补充[[噬心]]、[[五道]]、[[繁花园艺]]及灵气成长规则，增加12项模组设置与装备外观图鉴。",
-        "重新转换物品、节气、机制与外观贴图，修正图片上下方向。",
-        "本日期为 Wiki 资料同步日期；旧版记录保留在下方。"
+        "新增10项玩法设置，可在模组配置中调整伤害、移速、回复及部分玩法开关。",
+        "高脚鸟心魔伤害可设为噬心值的50%、100%或200%；分身伤害可设为世界天数的50%、100%或200%。",
+        "胖头鱼与高脚鸟的移速加成可分别选择50%或100%；[[貔貅]]移速可选择原速的50%、100%或150%。",
+        "高脚鸟岩浆泡澡回复可选择无加成，或每秒恢复生命、理智、饥饿各1点或2点。",
+        "增加四季相关内容、[[蕴灵如意]]捕捉[[四季之灵]]、高脚鸟每日投喂三个独立开关。",
+        "[[繁花]]同株嫁接上限可选择50、99或999株；降低上限不会削减已有嫁接。"
       ]
     },
     {
       "id": "log_4400",
-      "title": "v4.4：站点按包内实装内容建立",
+      "title": "v4.4 · 角色与四季玩法",
       "image": "assets/img/items/bighead_spear.png",
       "version": "v4.4",
-      "date": "2026-10-18",
       "related": [
         "pangtouyu",
         "gaojiaoniao",
@@ -4807,14 +4813,11 @@ window.SITE_DATA = {
         "mech_lingqi"
       ],
       "changes": [
-        "本条目依据模组包 bighead (38).zip 整理，包内 modinfo.lua 的 version = 4.4。",
-        "两名角色：[[胖头鱼]]、[[高脚鸟]]（modinfo 署名「作者-胖头鱼，高脚鸟（后者是个不干活的）」）。",
-        "收录 66 项物品，图标全部由包内 KTEX 贴图转成 PNG，文案取自 strings.lua 原文。",
-        "新增机制条目：[[灵气]]、[[节气]]、[[四季之灵]]、[[寄生灵]]、[[不染与月台]]。",
-        "制作栏新增「节气」分类，24 节气与四季共 29 项，每条都带三候原文。",
-        "包内规模：动画 224 个、贴图 191 个；人物皮肤胖头鱼 6 套、高脚鸟 5 套（按 anim 文件名统计）。",
-        "包内署名：参与美术 胖头鱼、魂姆、杰克天、喵大仙；人物动画 老张；装备动画 胖头鱼；代码 花花。",
-        "配方、数值与技能说明位于加密脚本（modmain0/1、modworldgenmain0/1 及大部分 prefabs），本站暂不收录。"
+        "包含[[胖头鱼]]、[[高脚鸟]]两名角色及各自专属装备。",
+        "包含[[灵气]]、[[节气]]、[[四季之灵]]、[[寄生灵]]与[[不染与月台]]相关玩法。",
+        "制作栏设有「节气」分类，包含24节气和四季相关物品。",
+        "可设置是否在月台附近生成[[不染]]，每个世界只生成一次。",
+        "胖头鱼灵气上限由100提升至200所需的累计存活天数，可选择10、25、50或100天。"
       ]
     }
   ],

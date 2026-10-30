@@ -323,7 +323,7 @@
         <div class="timeline-entry__body">
           <button class="timeline-entry__header" type="button" data-open-entry="{{id}}">
             <h3>{{title}}</h3>
-            <p>{{date}}</p>
+            {{#date}}<p>{{date}}</p>{{/date}}
           </button>
           <ul class="dash-list">
             {{#changes}}
