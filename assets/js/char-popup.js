@@ -93,7 +93,7 @@
     gearCharacter.querySelector(".duo__name").removeAttribute("aria-hidden");
     delete duo.dataset.gearFocus;
     gearCharacter = null;
-    layoutRestingPortraits();
+    layoutAllGear();
   }
 
   function gearArea(character) {
@@ -103,7 +103,7 @@
   function layoutRestingPortraits() {
     const duo = document.querySelector('.duo');
     const stage = duo && duo.closest('.duo-stage');
-    if (!stage || window.innerWidth <= 900 || !stage.offsetWidth) return;
+    if (!stage || !stage.offsetWidth || gearCharacter) return;
     // Offset geometry stays at the compact size throughout the scale animation.
     const visuals = Array.from(duo.querySelectorAll('.duo__portrait, .duo__name'));
     const left = Math.min(...visuals.map(function (node) { return node.offsetLeft; }));
@@ -111,13 +111,8 @@
     const top = Math.min(...visuals.map(function (node) { return node.offsetTop; }));
     const bottom = Math.max(...visuals.map(function (node) { return node.offsetTop + node.offsetHeight; }));
     if (right <= left || bottom <= top) return;
-    const footer = document.querySelector('.site-footer');
-    const hero = document.getElementById('intro');
-    const available = window.innerHeight - (stage.getBoundingClientRect().top + window.scrollY)
-      - (footer ? footer.offsetHeight : 0) - parseFloat(getComputedStyle(hero).paddingBottom) - 12;
-    const height = Math.max(bottom - top + 20, available);
-    const scale = Math.max(1, Math.min((stage.clientWidth - 32) / (right - left), (height - 20) / (bottom - top)));
-    stage.style.setProperty('--duo-stage-height', height + 'px');
+    const height = stage.clientHeight;
+    const scale = Math.min((stage.clientWidth - 24) / (right - left), Math.max(1, height - 16) / (bottom - top));
     duo.style.setProperty('--duo-rest-scale', scale);
     duo.style.setProperty('--duo-rest-x', ((duo.clientWidth / 2 - (left + right) / 2) * scale) + 'px');
     duo.style.setProperty('--duo-rest-y', ((height - (bottom - top) * scale) / 2 - top * scale) + 'px');
@@ -130,15 +125,16 @@
     svg.replaceChildren();
     if (!activeGearItem || !character.contains(activeGearItem)) return;
     const base = svg.getBoundingClientRect();
+    const coordinateScale = base.width ? svg.clientWidth / base.width : 1;
     const portrait = character.querySelector(".duo__portrait").getBoundingClientRect();
     const wide = window.innerWidth > 900;
     const itemsOnLeft = character.classList.contains("duo__char--left");
-    const x = (wide ? (itemsOnLeft ? portrait.left + 28 : portrait.right - 28) : portrait.left + portrait.width / 2) - base.left;
-    const y = (wide ? portrait.top + portrait.height * .42 : portrait.bottom + 4) - base.top;
+    const x = ((wide ? (itemsOnLeft ? portrait.left + 28 : portrait.right - 28) : portrait.left + portrait.width / 2) - base.left) * coordinateScale;
+    const y = ((wide ? portrait.top + portrait.height * .42 : portrait.bottom + 4) - base.top) * coordinateScale;
     [activeGearItem].forEach(function (item) {
       const icon = item.querySelector("img").getBoundingClientRect();
-      const endX = (wide ? (itemsOnLeft ? icon.right + 8 : icon.left - 8) : icon.left + icon.width / 2) - base.left;
-      const endY = (wide ? icon.top + icon.height / 2 : icon.top - 8) - base.top;
+      const endX = ((wide ? (itemsOnLeft ? icon.right + 8 : icon.left - 8) : icon.left + icon.width / 2) - base.left) * coordinateScale;
+      const endY = ((wide ? icon.top + icon.height / 2 : icon.top - 8) - base.top) * coordinateScale;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       if (wide) {
         const bend = (endX - x) * .5;
@@ -178,15 +174,36 @@
       return (character.appearances || []).map(function (skin) { return skin.width / skin.height; });
     }));
     if (window.innerWidth <= 900) {
-      duo.style.setProperty("--model-height", (180 / aspect) + "px");
-      return 0;
+      const landscape = window.innerWidth >= 600 && window.innerHeight <= 500;
+      duo.style.setProperty("--model-height", ((landscape ? 44 : duo.clientWidth * .30) / aspect) + "px");
+      if (!gearCharacter) return 0;
+      const width = duo.clientWidth;
+      const characters = Array.from(duo.querySelectorAll('.duo__char'));
+      characters.forEach(function (character) {
+        const selected = character === gearCharacter;
+        const portrait = character.querySelector('.duo__portrait');
+        const targetWidth = landscape ? (selected ? 60 : 32) : width * (selected ? .30 : .15);
+        portrait.style.setProperty('--focus-x', (landscape && selected ? width * .67 : width - targetWidth) + 'px');
+        portrait.style.setProperty('--focus-y', (selected && !landscape ? 92 : 4) + 'px');
+        portrait.style.setProperty('--focus-scale', targetWidth / portrait.offsetWidth);
+        const name = character.querySelector('.duo__name');
+        name.style.setProperty('--focus-x', (landscape ? width - 54 : width * .66) + 'px');
+        name.style.setProperty('--focus-y', '4px');
+        name.style.setProperty('--focus-scale', landscape ? '.4' : '.65');
+      });
+      const portrait = gearCharacter.querySelector('.duo__portrait');
+      const model = gearCharacter.querySelector('.duo-model');
+      const modelTop = landscape ? 8 : 92 + portrait.offsetHeight * width * .30 / portrait.offsetWidth + 12;
+      model.style.top = modelTop + 'px';
+      const skins = gearCharacter.querySelector('.duo-skins');
+      const skinsTop = landscape ? 110 : Math.max(layoutGear(gearCharacter) + 16, modelTop + model.offsetHeight + 12);
+      skins.style.setProperty('--skins-top', skinsTop + 'px');
+      return skinsTop + skins.offsetHeight + 8;
     }
     const characters = Array.from(duo.querySelectorAll(".duo__char"));
     const width = duo.clientWidth;
     const stage = duo.closest('.duo-stage');
-    const footer = document.querySelector('.site-footer');
-    const availableHeight = Math.max(300, window.innerHeight - (stage.getBoundingClientRect().top + window.scrollY)
-      - footer.offsetHeight - 24);
+    const availableHeight = stage.clientHeight;
     const gearWidth = Math.min(390, Math.max(320, width * .30));
     const modelWidth = Math.min(180, Math.max(96, width * .13));
     duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
@@ -235,12 +252,14 @@
         });
       }
       const model = character.querySelector('.duo-model');
+      model.style.removeProperty('top');
       model.style.setProperty('--model-left', (position(gearWidth + portraitWidth + gap * 2, modelWidth) + modelWidth / 2) + 'px');
       model.style.setProperty('--model-width', modelWidth + 'px');
-      model.style.setProperty('--model-top', centerY + 'px');
+      const modelCenterY = Math.max(centerY, model.offsetHeight / 2 + 8);
+      model.style.setProperty('--model-top', modelCenterY + 'px');
       const skinsWidth = Math.min(420, width - gearWidth - gap * 2);
       const skinsLeft = position(gearWidth + gap + (width - gearWidth - gap * 2 - skinsWidth) / 2, skinsWidth);
-      const skinsTop = Math.max(portraitTop + portraitHeight, centerY + model.offsetHeight / 2) + 16;
+      const skinsTop = Math.max(portraitTop + portraitHeight, modelCenterY + model.offsetHeight / 2) + 16;
       skins.style.setProperty('--skins-left', skinsLeft + 'px');
       skins.style.setProperty('--skins-top', skinsTop + 'px');
       skins.style.setProperty('--skins-width', skinsWidth + 'px');
@@ -250,13 +269,19 @@
   }
 
   function layoutAllGear() {
+    const duo = document.querySelector('.duo');
+    if (!duo || !duo.offsetWidth) return;
     let height = layoutCharacterModels();
     document.querySelectorAll(".duo__char").forEach(function (character) {
       const panelHeight = layoutGear(character);
       if (character === gearCharacter) height = Math.max(height, panelHeight + 20);
     });
-    const duo = document.querySelector(".duo");
-    if (duo) duo.style.setProperty("--gear-height", height + "px");
+    duo.style.setProperty("--gear-height", height + "px");
+    const stage = duo.closest('.duo-stage');
+    const fit = duo.closest('.duo-fit');
+    const scale = gearCharacter ? Math.min(1, stage.clientHeight / Math.max(1, height)) : 1;
+    fit.style.setProperty('--home-fit', scale);
+    fit.style.height = (gearCharacter ? height : stage.clientHeight) + 'px';
     layoutRestingPortraits();
   }
 

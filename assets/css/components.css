@@ -731,14 +731,13 @@
 }
 
 @media (min-width: 901px) {
-  .duo-stage { min-height: var(--duo-stage-height, 0px); }
   .duo-stage:not(:has(.duo[data-gear-focus])):not(:has(.duo[data-focus])) { overflow: clip; }
-  .duo-stage > .duo {
+  .duo-fit > .duo {
     transform-origin: 50% 0;
     transform: translate(0, 0) scale(1);
     transition: transform 480ms var(--ease);
   }
-  .duo-stage > .duo:not([data-gear-focus]):not([data-focus]) {
+  .duo-fit > .duo:not([data-gear-focus]):not([data-focus]) {
     transform: translate(var(--duo-rest-x, 0px), var(--duo-rest-y, 0px)) scale(var(--duo-rest-scale, 1));
   }
   /* Mirror exclusive items along the outer edge of each portrait. */
@@ -1993,6 +1992,80 @@
     transition: opacity 320ms var(--ease), transform 320ms var(--ease);
   }
 
+}
+
+@media (max-width: 900px) {
+  #intro { padding: 8px 12px; }
+  #intro .hero__head { margin-bottom: 6px; }
+  #intro .hero__title { font-size: clamp(24px, 4vw, 36px); }
+  #intro .hero__meta { font-size: 10px; line-height: 1.5; }
+  #intro .duo-quotes { gap: 12px; margin: 4px auto 8px; }
+  #intro .duo-quote { padding: 2px 0 2px 10px; }
+  #intro .duo-quote::before { left: 0; top: 4px; bottom: 4px; }
+  #intro .duo-quote figcaption { font-size: 10px; }
+  #intro .duo-quote figcaption > span { display: inline; margin-left: 4px; font-size: 9px; }
+  #intro .duo-quote blockquote { margin: 2px 0; font-size: 13px; line-height: 1.4; }
+  #intro .duo-quote > p { font-size: 9px; }
+  #intro .duo { max-width: 620px; grid-template-columns: 1fr 1fr; gap: 12px; }
+  #intro .duo__char { position: static; gap: 6px; align-self: start; }
+  #intro .duo__portrait { width: clamp(90px, 30vw, 200px); }
+  #intro .duo__name img { max-height: 64px; }
+  #intro .duo__name { padding: 0; }
+  #intro .duo__portrait,
+  #intro .duo__name { transform-origin: top left; }
+  #intro .duo:not([data-gear-focus]) { transform-origin: 50% 0; transform: translate(var(--duo-rest-x, 0px), var(--duo-rest-y, 0px)) scale(var(--duo-rest-scale, 1)); }
+  #intro .duo[data-gear-focus] .duo__portrait,
+  #intro .duo[data-gear-focus] .duo__name { position: absolute; grid-area: auto; top: 0; left: 0; transform: translate(var(--focus-x, 0px), var(--focus-y, 0px)) scale(var(--focus-scale, 1)); }
+  #intro .duo__char .duo-gear { --gear-icon-size: 28px; position: absolute; grid-area: auto; top: 8px; left: 0; width: 64%; margin: 0; }
+  #intro .duo-gear__heading { margin-bottom: 6px; font-size: 11px; }
+  #intro .duo-gear__heading span { font-size: 9px; }
+  #intro .duo-gear__group { margin-bottom: 6px; }
+  #intro .duo-gear__group h4 { font-size: 10px; margin-bottom: 2px; }
+  #intro .duo-gear__grid { gap: 2px; }
+  #intro .duo-gear__image { width: 44px; }
+  #intro .duo-gear__item > span { font-size: 10px; }
+  #intro .duo-gear__image .owner-stamp { width: 13px; font-size: 9px; border-width: 1px; }
+  #intro .duo-gear__image .type-stamp { top: 15px; width: 11px; font-size: 8px; border-width: 1px; }
+  #intro .duo-gear__shared { margin-top: 6px; padding-top: 6px; }
+  #intro .duo-gear__shared > p { margin-bottom: 4px; font-size: 10px; }
+  #intro .duo-gear__shared > p span { margin-left: 4px; font-size: 9px; }
+  #intro .duo-gear__crafts { gap: 2px 8px; }
+  #intro .duo-gear__craft { min-height: 22px; font-size: 10px; }
+  #intro .duo-gear__craft img { width: 16px; height: 16px; }
+  #intro .duo-model { position: absolute; grid-area: auto; left: 83%; top: 240px; width: 30%; transform: translateX(-50%); }
+  #intro .duo-model figcaption { font-size: 9px; line-height: 1.4; }
+  #intro .duo-skins { position: absolute; grid-area: auto; left: 0; top: var(--skins-top); width: 100%; margin: 0; }
+  #intro .duo-skins > p { margin-bottom: 4px; font-size: 10px; }
+  #intro .duo-skins > p span { font-size: 9px; }
+  #intro .duo-skins__options { gap: 2px; }
+  #intro .duo-skin { grid-template-rows: 38px auto; padding: 3px 0; gap: 2px; }
+  #intro .duo-skin img { height: 38px; }
+  #intro .duo-skin span { font-size: 9px; }
+}
+
+@media (min-width: 600px) and (max-width: 900px) and (max-height: 500px) {
+  #hero-root { display: grid; grid-template-columns: 40% minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 8px; }
+  #intro .hero__head { align-self: center; margin: 0; }
+  #intro .hero__title { font-size: 22px; line-height: 1.3; }
+  #intro .hero__meta { margin-top: 4px; font-size: 9px; }
+  #intro .hero__join { padding: 2px 4px; }
+  #intro .duo-quotes { margin: 0; }
+  #intro .duo-quote blockquote { font-size: 11px; }
+  #intro .duo-stage { grid-column: 1 / -1; height: 100%; }
+  #intro .duo__char .duo-gear { --gear-icon-size: 20px; width: 65%; }
+  #intro .duo-gear__group h4 { font-size: 9px; margin: 0; }
+  #intro .duo-gear__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  #intro .duo-gear__group[data-gear-group="spirits"] .duo-gear__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  #intro .duo-gear__item > span { font-size: 9px; }
+  #intro .duo-gear__heading { margin-bottom: 2px; }
+  #intro .duo-gear__shared { margin-top: 2px; padding-top: 2px; }
+  #intro .duo-model { left: 83%; width: 44px; }
+  #intro .duo-model figcaption { margin-top: 4px; font-size: 8px; }
+  #intro .duo-skins { left: 67%; width: 33%; }
+  #intro .duo-skins__options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #intro .duo-skins > p span { display: none; }
+  #intro .duo-skin { grid-template-rows: 24px auto; }
+  #intro .duo-skin img { height: 24px; }
 }
 
 @media (max-width: 767px) {

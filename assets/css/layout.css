@@ -211,6 +211,16 @@
   width: 100%;
 }
 
+html[data-active-section="intro"],
+html[data-active-section="intro"] body { height: 100dvh; overflow: clip; }
+html[data-active-section="intro"] #main-content { flex: 1 1 0; min-height: 0; }
+#intro { height: 100%; min-height: 0; }
+#hero-root { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+#hero-root > .hero__head,
+#hero-root > .duo-quotes { flex: none; }
+#intro .duo-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+.duo-fit { position: absolute; inset: 0 0 auto; transform: scale(var(--home-fit, 1)); transform-origin: top center; }
+
 #characters {
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
