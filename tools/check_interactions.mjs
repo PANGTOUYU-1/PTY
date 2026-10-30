@@ -330,13 +330,14 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.match(foyerHtml, /class="[^"]*\bscene-preview\b[^"]*"/);
   assert.match(foyerHtml, /class="scene-hotspot"[^>]+data-open-entry="loc_hall"[^>]+aria-label="鎏金太极铃：进入厅堂"/);
   const bell = manifest.assets.find(asset => asset.id === 'loc_foyer').furnishings[0];
+  const foyer = manifest.assets.find(asset => asset.id === 'loc_foyer');
   assert.equal(bell.prefab, 'bighead_men1');
   assert.equal(bell.animation, 'men1');
   assert.equal(bell.target, 'loc_hall');
   const hotspot = state.entries.loc_foyer.scene_hotspots[0];
   const [x, y, width, height] = bell.bounds;
   assert.ok(Math.abs((x + width / 2) / 1616 * 100 - hotspot.x) < 0.1);
-  assert.ok(Math.abs((y + height / 2) / 1285 * 100 - hotspot.y) < 0.1);
+  assert.ok(Math.abs((y + height / 2) / foyer.display_size[1] * 100 - hotspot.y) < 0.1);
   const hall = manifest.assets.find(asset => asset.id === 'loc_hall');
   assert.equal(hall.furnishings.length, 4);
   const hallSteps = hall.furnishings.find(part => part.prefab === 'bighead_door_exit');
@@ -346,11 +347,19 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.ok(hallSteps.bounds[1] + hallSteps.bounds[3] <= hall.display_size[1] - 8,
     '台阶必须完整显示，底部保留透明边距');
   for (const id of ['loc_foyer', 'loc_hall']) {
-    const stair = manifest.assets.find(asset => asset.id === id).furnishings.find(part => part.prefab === 'bighead_door_exit');
+    const room = manifest.assets.find(asset => asset.id === id);
+    const stair = room.furnishings.find(part => part.prefab === 'bighead_door_exit');
     assert.ok(stair);
     assert.equal(stair.source, 'bighead_door_exit');
     assert.equal(stair.animation, 'idle');
     assert.equal(stair.target, id === 'loc_foyer' ? 'loc_qingxuan' : 'loc_foyer');
+    assert.ok(Math.abs(stair.bounds[1] - room.floor.quad[2][1]) <= 16,
+      '出口台阶上沿应贴近前侧地板边缘，主体位于地板下方');
+  }
+  for (const room of manifest.assets) {
+    for (const part of room.furnishings.filter(part => part.target)) {
+      assert.ok(part.outline_width > 0, `${room.id} ${part.label} 应有白色轮廓`);
+    }
   }
   for (const [id, prefab, animation] of [['loc_bedroom', 'bighead_men3', 'men3'], ['loc_bedroom_right', 'bighead_men4', 'men4']]) {
     const door = manifest.assets.find(asset => asset.id === id).furnishings[0];
@@ -368,6 +377,8 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.ok(vines[0].bounds[0] < hall.floor.quad[3][0], '左侧灵藤应靠外侧楼梯');
   assert.ok(vines[1].bounds[0] + vines[1].bounds[2] > hall.floor.quad[2][0], '右侧灵藤应靠外侧楼梯');
   for (const vine of vines) {
+    assert.ok(vine.bounds[1] + vine.bounds[3] < hall.floor.quad[2][1] * .8,
+      '灵藤应上移到侧梯中上段');
     const hit = state.entries.loc_hall.scene_hotspots.find(part => part.target === vine.target);
     assert.ok(hit, vine.target);
     const [left, top, width, height] = vine.bounds;

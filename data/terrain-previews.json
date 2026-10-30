@@ -21,7 +21,7 @@
       ],
       "display_size": [
         1616,
-        1285
+        1381
       ],
       "furnishings": [
         {
@@ -35,6 +35,7 @@
             241,
             166
           ],
+          "outline_width": 8,
           "target": "loc_hall",
           "world_position": [
             -14,
@@ -50,14 +51,19 @@
           "frame": 1,
           "bounds": [
             616,
-            1149,
+            1265,
             371,
             100
           ],
+          "outline_width": 8,
           "target": "loc_qingxuan",
           "world_position": [
             14,
             -0.15
+          ],
+          "preview_offset": [
+            0,
+            116
           ],
           "preview_scale": 2.6,
           "label": "青石楼梯",
@@ -111,7 +117,7 @@
       ],
       "display_size": [
         1616,
-        1102
+        1135
       ],
       "furnishings": [
         {
@@ -137,10 +143,11 @@
           "frame": 1,
           "bounds": [
             41,
-            449,
+            279,
             234,
             488
           ],
+          "outline_width": 8,
           "target": "loc_bedroom",
           "world_position": [
             1.65,
@@ -148,7 +155,7 @@
           ],
           "preview_offset": [
             -140,
-            270
+            100
           ],
           "preview_scale": 1.5,
           "label": "引霄灵藤（左侧）",
@@ -162,10 +169,11 @@
           "frame": 1,
           "bounds": [
             1341,
-            449,
+            279,
             234,
             488
           ],
+          "outline_width": 8,
           "target": "loc_bedroom_right",
           "world_position": [
             1.65,
@@ -174,7 +182,7 @@
           "mirror_x": true,
           "preview_offset": [
             140,
-            270
+            100
           ],
           "preview_scale": 1.5,
           "label": "引霄灵藤（右侧）",
@@ -188,10 +196,11 @@
           "frame": 1,
           "bounds": [
             632,
-            1002,
+            1027,
             340,
             92
           ],
+          "outline_width": 8,
           "target": "loc_foyer",
           "world_position": [
             14,
@@ -199,7 +208,7 @@
           ],
           "preview_offset": [
             0,
-            80
+            105
           ],
           "preview_scale": 2.6,
           "label": "青石楼梯",
@@ -253,7 +262,7 @@
       ],
       "display_size": [
         1616,
-        1263
+        1271
       ],
       "furnishings": [
         {
@@ -267,6 +276,7 @@
             320,
             464
           ],
+          "outline_width": 8,
           "target": "loc_hall",
           "world_position": [
             14,
@@ -329,7 +339,7 @@
       ],
       "display_size": [
         1616,
-        1263
+        1271
       ],
       "furnishings": [
         {
@@ -343,6 +353,7 @@
             320,
             464
           ],
+          "outline_width": 8,
           "target": "loc_hall",
           "world_position": [
             14,

@@ -1246,6 +1246,11 @@
   transition: transform var(--dur) var(--ease);
 }
 
+.building-entry__image:not(.building-entry__image--interior) .building-entry__scene > img {
+  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+    drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff);
+}
+
 /* Keep hotspots relative to the fitted image, excluding the square's padding. */
 .building-entry__image--interior .building-entry__scene,
 .building-entry__image--interior .building-entry__scene > img { height: auto; }

@@ -13,7 +13,7 @@ import tempfile
 from pathlib import Path
 from zipfile import ZipFile
 
-from PIL import Image, ImageOps
+from PIL import Image, ImageChops, ImageFilter, ImageOps
 from export_mod_displays import lua_string, request
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -47,6 +47,7 @@ FURNISHINGS = {
          'label': '鎏金太极铃', 'hint': '进入厅堂'},
         {'prefab': 'bighead_door_exit', 'source': 'bighead_door_exit',
          'animation': 'idle', 'world_position': (14, -.15), 'preview_scale': 2.6,
+         'preview_offset': (0, 116),
          'target': 'loc_qingxuan', 'label': '青石楼梯', 'hint': '回到屋外'},
     ],
     'loc_hall': [
@@ -54,18 +55,18 @@ FURNISHINGS = {
          'world_position': (-15.3, 0)},
         {'prefab': 'bighead_men2', 'animation': 'men2',
          'preview_scale': 1.5,
-         'world_position': (1.65, -15), 'preview_offset': (-140, 270),
+         'world_position': (1.65, -15), 'preview_offset': (-140, 100),
          'target': 'loc_bedroom', 'label': '引霄灵藤（左侧）',
          'hint': '进入左侧卧房', 'hint_align': 'start'},
         {'prefab': 'bighead_men2', 'animation': 'men2',
          'preview_scale': 1.5,
          'world_position': (1.65, 15), 'mirror_x': True,
-         'preview_offset': (140, 270),
+         'preview_offset': (140, 100),
          'target': 'loc_bedroom_right', 'label': '引霄灵藤（右侧）',
          'hint': '进入右侧卧房', 'hint_align': 'end'},
         {'prefab': 'bighead_door_exit', 'source': 'bighead_door_exit',
          'animation': 'idle', 'world_position': (14, -.15), 'preview_scale': 2.6,
-         'preview_offset': (0, 80),
+         'preview_offset': (0, 105),
          'target': 'loc_foyer', 'label': '青石楼梯', 'hint': '返回前室'},
     ],
     'loc_bedroom': [
@@ -164,16 +165,30 @@ def composite_furnishings(scene, entry_id, ratio, scratch, frames):
         position = (position[0] + dx, position[1] + dy)
         # Front steps extend beyond the floor edge. Preserve their entire sprite
         # by adding transparent canvas below, without moving or scaling the room.
-        required_height = max(scene.height, position[1] + sprite.height + 8)
+        # Trace only traversable sprites, so entrances stay recognizable in both
+        # the building explorer and detail preview, without outlining furniture.
+        outline_width = 8 if furnishing.get('target') else 0
+        required_height = max(scene.height, position[1] + sprite.height + outline_width + 8)
         if required_height > scene.height:
             extended = Image.new('RGBA', (scene.width, required_height))
             extended.alpha_composite(scene)
             scene = extended
+        if outline_width:
+            padded_sprite = ImageOps.expand(sprite, outline_width)
+            # Ignore soft shadows and preserve translucent details inside the
+            # art: white belongs only to the edge around its solid silhouette.
+            solid = padded_sprite.getchannel('A').point(lambda alpha: 255 if alpha >= 128 else 0)
+            mask = ImageChops.subtract(solid.filter(ImageFilter.MaxFilter(outline_width * 2 + 1)), solid)
+            outline = Image.new('RGBA', padded_sprite.size, 'white')
+            outline.putalpha(mask)
+            scene.alpha_composite(outline, (position[0] - outline_width, position[1] - outline_width))
         scene.alpha_composite(sprite, position)
         record = {'prefab': furnishing['prefab'],
                   'source': furnishing.get('source', 'bighead_men'),
                   'animation': animation, 'frame': 1,
                   'bounds': [*position, *sprite.size]}
+        if outline_width:
+            record['outline_width'] = outline_width
         for key in ('target', 'world_position', 'mirror_x', 'preview_offset', 'preview_scale',
                     'label', 'hint', 'hint_align'):
             if key in furnishing:
