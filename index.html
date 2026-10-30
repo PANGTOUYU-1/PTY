@@ -228,7 +228,7 @@
     <div class="character-columns">
       {{#characters}}
       <article class="character-profile" data-char="{{id}}" data-entry-target="{{id}}" aria-labelledby="profile-{{id}}">
-        <header class="character-profile__heading"><div><p>{{epithet}}</p><h2 id="profile-{{id}}" tabindex="-1">{{name}}</h2></div><span class="character-profile__quote">“{{profile_quote}}”</span></header>
+        <header class="character-profile__heading"><p>{{epithet}}</p><div class="character-profile__title"><h2 id="profile-{{id}}" tabindex="-1">{{name}}</h2><span class="character-profile__quote">“{{profile_quote}}”</span></div></header>
         <dl class="character-stats"><div><dt>生命</dt><dd>{{stats.hp}}</dd></div><div><dt>理智</dt><dd>{{stats.san}}</dd></div><div><dt>饥饿</dt><dd>{{stats.hunger}}</dd></div></dl>
         <div class="character-profile__stage">
           <figure class="character-profile__portrait"><img src="{{portrait}}" alt="{{name}}立绘" loading="eager" onerror="window.App.onImageError(this)"></figure>
