@@ -227,7 +227,7 @@ check('屋外入口和四间独立房间均可查看，内景匹配各自墙面�
   assert.ok(cards.includes('室内有什么用'));
   assert.ok(cards.includes('房间中心'));
   assert.ok(cards.includes('怎么进去、怎么回来'));
-  assert.ok(cards.includes('能直接睡觉回血吗？'));
+  assert.ok(cards.includes('休息与回复'));
   const manifest = JSON.parse(readFileSync(join(root, 'data/terrain-previews.json'), 'utf8'));
   assert.equal(manifest.kind, 'original_room_composite');
   const roomSources = { loc_foyer: 'bighead_wall', loc_hall: 'bighead_wall1', loc_bedroom: 'bighead_wall2', loc_bedroom_right: 'bighead_wall3' };

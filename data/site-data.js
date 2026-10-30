@@ -3739,7 +3739,7 @@ window.SITE_DATA = {
         {"label": "青石楼梯", "target": "loc_foyer", "x": 49.6287, "y": 92.4546, "width": 21.0396, "height": 8.787, "hint": "返回前室"}
       ],
       "scene_hint": "点击图中引霄灵藤（左侧）、引霄灵藤（右侧）、青石楼梯，前往对应位置。",
-      "summary": "青玄阁内连接两间卧房的厅堂，共用防猎犬生成、恒温、避雨与夜间照明。太极莲尊是陈设。",
+      "summary": "青玄阁内连接两间卧房的厅堂，共用防猎犬生成、恒温、避雨与夜间照明。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": [
         "loc_qingxuan",
@@ -3755,8 +3755,8 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "title": "太极莲尊能回血吗？",
-          "content": "太极莲尊是厅堂陈设，可以检查，但不能坐下、睡觉，也不会恢复生命或理智。"
+          "title": "太极莲尊",
+          "content": "厅堂内的装饰座椅，无生命或理智回复效果。"
         },
         {
           "type": "text",
@@ -3795,8 +3795,8 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
-          "title": "能直接睡觉回血吗？",
-          "content": "房间本身没有睡眠、自动回血或回理智机制。名称、墙景与检查诗句属于房间主题，不能据此当作床或帐篷使用。",
+          "title": "休息与回复",
+          "content": "卧房不提供睡觉、生命回复或理智回复功能。",
           "tone": "note"
         },
         {
