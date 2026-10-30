@@ -272,17 +272,25 @@
     const name = gearCharacter.querySelector('.duo__name');
     const nameScale = Math.min(.85, portraitHeight * .62 / name.offsetHeight);
     const nameWidth = name.offsetWidth * nameScale;
-    const modelWidth = Math.min(156, Math.max(88, width * .115));
+    const modelWidth = Math.min(270, width * .20);
     const gap = Math.min(24, width * .018);
     const rearOffset = portraitWidth * .38;
     const stackWidth = portraitWidth * 1.30;
-    const gearWidth = width - modelWidth - stackWidth - nameWidth - gap * 4;
+    const gearWidth = width - modelWidth - stackWidth - gap * 3;
     duo.style.setProperty('--focus-gear-width', gearWidth + 'px');
     duo.style.setProperty('--gear-spread', gearWidth / 480);
-    duo.style.setProperty('--model-height', Math.min(240, modelWidth / aspect) + 'px');
-    const portraitLeft = gearWidth + modelWidth + gap * 2;
+    duo.style.setProperty('--model-height', Math.min(260, availableHeight * .48, (modelWidth - 12) / aspect) + 'px');
+    const portraitLeft = gearWidth + gap;
     const portraitTop = 20;
-    const centerY = portraitTop + portraitHeight / 2;
+    const modelLeft = portraitLeft + stackWidth + gap;
+    const model = gearCharacter.querySelector('.duo-model');
+    model.style.removeProperty('top');
+    model.style.setProperty('--model-left', (modelLeft + modelWidth / 2) + 'px');
+    model.style.setProperty('--model-width', modelWidth + 'px');
+    const nameHeight = name.offsetHeight * nameScale;
+    const modelTop = Math.max(portraitTop + nameHeight + 20, availableHeight - model.offsetHeight - 16);
+    model.style.setProperty('--model-top', (modelTop + model.offsetHeight / 2) + 'px');
+    const nameTop = portraitTop + Math.max(0, (modelTop - portraitTop - nameHeight - 20) / 2);
     const move = function (node, x, y, scale, angle) {
       node.style.setProperty('--focus-x', (x - node.offsetLeft) + 'px');
       node.style.setProperty('--focus-y', (y - node.offsetTop) + 'px');
@@ -297,23 +305,17 @@
       const targetWidth = portraitWidth * (selected ? 1 : .92);
       move(image, portraitLeft + (selected ? 0 : rearOffset), portraitTop + (selected ? 0 : 16),
         targetWidth / image.offsetWidth, selected ? 0 : 8);
-      if (selected) move(label, portraitLeft + stackWidth + gap, centerY - label.offsetHeight * nameScale / 2, nameScale);
+      if (selected) move(label, modelLeft + (modelWidth - nameWidth) / 2, nameTop, nameScale);
     });
-    const model = gearCharacter.querySelector('.duo-model');
-    model.style.removeProperty('top');
-    model.style.setProperty('--model-left', (gearWidth + gap + modelWidth / 2) + 'px');
-    model.style.setProperty('--model-width', modelWidth + 'px');
-    const modelCenterY = Math.max(centerY, model.offsetHeight / 2 + 8);
-    model.style.setProperty('--model-top', modelCenterY + 'px');
     const rear = characters.find(function (character) { return character !== gearCharacter; }).querySelector('.duo__portrait');
     const rearHeight = rear.offsetHeight * portraitWidth * .92 / rear.offsetWidth;
     const rearBottom = portraitTop + 16 + rearHeight * Math.cos(Math.PI * 8 / 180) + portraitWidth * .92 * Math.sin(Math.PI * 8 / 180);
-    const skinsTop = Math.max(portraitTop + portraitHeight, rearBottom, modelCenterY + model.offsetHeight / 2) + 20;
-    const skinsWidth = Math.min(480, width - gearWidth - gap);
+    const skinsTop = Math.max(portraitTop + portraitHeight, rearBottom) + 20;
+    const skinsWidth = stackWidth;
     skins.style.setProperty('--skins-left', (gearWidth + gap) + 'px');
     skins.style.setProperty('--skins-top', skinsTop + 'px');
     skins.style.setProperty('--skins-width', skinsWidth + 'px');
-    return skinsTop + skins.offsetHeight + 12;
+    return Math.max(skinsTop + skins.offsetHeight + 12, modelTop + model.offsetHeight + 12);
   }
 
   function layoutAllGear() {
