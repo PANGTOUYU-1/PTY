@@ -385,10 +385,10 @@ check('食物使用独立的单选分类，清空和详情返回不会混入物�
     assert.ok(App.Filter.getFilteredItems().every(item => item.owner === 'pangtouyu'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
-check('127张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
+check('125张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/display-assets.json'), 'utf8'));
   const assets = new Map(manifest.assets.map(asset => [asset.source, asset]));
-  assert.equal(assets.size, 127);
+  assert.equal(assets.size, 125);
   for (const asset of assets.values()) {
     const png = readFileSync(join(root, asset.path));
     assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', asset.source);
@@ -771,7 +771,7 @@ check('真实详情模块显示配方、科技与正确的分区链接', () => {
 });
 check('原版材料使用新目录内24px图标，保留配方文字数量且不生成无效链接', () => {
   const icons = sandbox.window.VANILLA_ICONS;
-  assert.equal(Object.keys(icons).length, 71);
+  assert.equal(Object.keys(icons).length, 77);
   for (const [id, icon] of Object.entries(icons)) {
     const png = readFileSync(join(root, icon.image));
     assert.match(icon.image, /^assets\/img\/inventoryimages[1-4]\//);
@@ -831,7 +831,7 @@ check('替代配方逐组显示，材料与条件横排，保留取得方式、�
   assert.ok(winter.includes('金企鹅兑换'));
   assert.ok(winter.includes('冰鲷鱼×6'));
   assert.ok(winter.includes('data-open-entry="bighead_qbi"'));
-  App.Modal.open('bighead_cmgt');
+  App.Modal.open('bighead_tzg');
   assert.ok(node('modal-root').innerHTML.includes('蜂蜜×至少1'));
   const conditions = App.Recipe.toBlockHtml('烹饪条件：蜂蜜×至少1；水果度≥2；不能加入蜂蜜');
   assert.ok(conditions.includes('水果度≥2') && conditions.includes('不能加入蜂蜜'));
@@ -859,7 +859,7 @@ check('所有金企鹅兑换入口可查看召唤步骤，区分金块与Q币并
   App.Modal.open('bighead_qbi');
   assert.ok(node('modal-root').innerHTML.includes('data-open-entry="mech_gold_penguin"'));
 });
-check('27款外观全部在对应物品中横向展示，支持查看、返回、搜索和旧链接', () => {
+check('28款外观全部在对应物品中横向展示，支持查看、返回、搜索和旧链接', () => {
   for (const item of state.items) {
     App.Modal.open(item.id);
     const output = node('modal-root').innerHTML;
@@ -924,7 +924,7 @@ check('灵气详情先解释被动与技能用途，区分当前值、上限和�
   const output = node('modal-root').innerHTML;
   const plain = output.replace(/<[^>]*>/g, '');
   assert.ok(plain.indexOf('灵气到底有什么用') < plain.indexOf('基础灵气'));
-  for (const text of ['至少10点', '照明', '至少50点', '踏水', '溺水', '至少100点', '50%', '食用灵魂', '当前灵气', '不是灵气上限', '严格大于75点', '75点整仍是5%', '102点', '剩98点', '每次消耗1个', '回复50点']) {
+  for (const text of ['至少10点', '照明', '至少50点', '踏水', '溺水', '至少100点', '30%', '食用灵魂', '当前灵气', '不是灵气上限', '严格大于75点', '75点整仍是5%', '102点', '剩98点', '每次消耗1个', '回复50点']) {
     assert.ok(plain.includes(text), text);
   }
   for (const id of ['bighead_spear', 'bighead_buran', 'bighead_fanhua', 'bighead_ygxlfw', 'jq_chun', 'bighead_qyq', 'mech_spirits']) {
@@ -949,7 +949,7 @@ check('五道条件与概率分表，圆满属性独立展示，技能图标仍�
   App.Modal.open('mech_wudao');
   const output = node('modal-root').innerHTML;
   assert.equal((output.match(/<table class="detail-table">/g) || []).length, 2);
-  for (const text of ['神道', '人道', '畜生道', '恶鬼道', '地狱道', '50%', '20%', '5%', '0.1%']) assert.ok(output.includes(text), text);
+  for (const text of ['神道', '人道', '畜生道', '饿鬼道', '地狱道', '50%', '20%', '5%', '0.1%']) assert.ok(output.includes(text), text);
   for (const value of ['200', '150', '250']) assert.ok(output.includes(`<dd>${value}</dd>`), value);
   assert.ok(output.includes('detail-block--note'));
   assert.ok(output.includes('data-open-entry="mech_shixin"'));
@@ -993,9 +993,9 @@ check('正文物品使用对应小图标，长名称完整匹配且保留原有�
     assert.ok(products.includes(`src="${item.image}"`), name);
   }
   assert.ok(products.includes('<strong class="detail-value">49</strong>枚'));
-  const materials = render('金块6枚，冰淇淋与草莓罐头');
+  const materials = render('金块6枚，冰淇淋与果味加浓');
   assert.ok(materials.includes('src="assets/img/inventoryimages2/goldnugget.png"'));
-  const jam = state.items.find(item => item.name === '草莓罐头');
+  const jam = state.items.find(item => item.name === '果味加浓');
   assert.ok(materials.includes(`src="${jam.image}"`));
   assert.equal((materials.match(/class="inline-item__icon"/g) || []).length, 2);
   const safe = render('<img src="x" onerror="x">金块 & [[琦玉器]]');
@@ -1090,13 +1090,13 @@ check('关联按实际制作与技能整理，不混入同类物品或通用食�
     bighead_ylss: ['mech_lingqi', 'pangtouyu'], bighead_ygxlfw: ['bighead_wcs'],
     bb_gaojiaoniao_cmyh: ['bb_gaojiaoniao_fh'], bb_gaojiaoniao_fr: ['bb_gaojiaoniao_fh'],
     bb_gaojiaoniao_lh: ['bb_gaojiaoniao_fh', 'mech_shixin'],
-    bb_gaojiaoniao_gjsh: ['bb_gaojiaoniao_lh', 'mech_wudao', 'mech_shixin'],
+    bb_gaojiaoniao_gjsh: ['bb_gaojiaoniao_lh', 'mech_wudao'],
     bb_gaojiaoniao_cs: ['mech_wudao'], bighead_qbi: ['pangtouyu'],
   };
   for (const [from, targets] of Object.entries(absent)) {
     for (const to of targets) assert.ok(!state.entries[from].related.includes(to), `${from} -> ${to}`);
   }
-  for (const food of state.items.filter(item => item.category === 'food' && item.owner === 'common' && item.id !== 'bighead_cmklb')) {
+  for (const food of state.items.filter(item => item.category === 'food' && item.owner === 'common' && item.id !== 'bighead_gwjn')) {
     assert.ok(!food.related.includes('pangtouyu'), food.id);
   }
   for (const [from, to] of [['bb_gaojiaoniao_fqh', 'bb_gaojiaoniao_cmyh'], ['bb_gaojiaoniao_cmyh', 'bb_gaojiaoniao_fqh'],
@@ -1165,8 +1165,33 @@ check('校阅覆盖新增分区且当前无内容问题', () => {
   App.Editor.init();
   assert.equal(App.issues.length, 0);
 });
-check('v4.8 基础属性与数据版本一致', () => {
-  assert.equal(state.meta.version, 'v4.8');
+check('v5.1停用料理只在更新中说明，新料理可搜索、筛选并打开五格配方', () => {
+  const retired = ['bighead_cmgt', 'bighead_cmklb', 'bighead_cmrl', 'bighead_fmss', 'bighead_sgbql',
+    'bighead_sgdg', 'bighead_snbql', 'bighead_ths', 'bighead_xgss', 'bighead_xrzslz'];
+  for (const id of retired) assert.equal(state.entries[id], undefined, id);
+  const current = Object.values(state.entries).filter(entry => entry.type !== 'changelog');
+  assert.ok(!JSON.stringify(current).includes('旧存档加载时直接清除'));
+  assert.ok(state.changelog[0].changes.some(change => change.includes('调味版') && change.includes('旧存档加载时直接清除')));
+  const previous = App.ui;
+  const hash = sandbox.window.location.hash;
+  try {
+    App.ui = { section: 'items', detailId: '', cats: ['food'], foodKind: 'cooked', q: '' };
+    const ids = ['bighead_cjs', 'bighead_mjgz', 'bighead_tzg', 'bighead_gwjn', 'bighead_yyxsl', 'bighead_xdlm', 'bighead_tmfb'];
+    assert.deepEqual(Array.from(App.Filter.getFilteredItems(), item => item.id), ids);
+    for (const id of ids) {
+      App.ui.q = state.entries[id].name;
+      assert.ok(App.Filter.getSearchResults().some(entry => entry.id === id), id);
+      App.Modal.open(id);
+      const output = node('modal-root').innerHTML;
+      assert.ok(output.includes('红锅五格配方') && output.includes('五个原料格'), id);
+      assert.ok(output.includes('data-open-entry="bighead_sucookpot_item"'), id);
+    }
+    App.Modal.open('bighead_fanhua');
+    assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bighead_fanhua_skin2"'));
+  } finally { App.ui = previous; sandbox.window.location.hash = hash; }
+});
+check('v5.1 基础属性与数据版本一致', () => {
+  assert.equal(state.meta.version, 'v5.1');
   assert.deepEqual(JSON.parse(JSON.stringify(state.characters[0].stats)), { hp: 150, san: 150, hunger: 150 });
   assert.deepEqual(JSON.parse(JSON.stringify(state.characters[1].stats)), { hp: 150, san: 100, hunger: 200 });
 });

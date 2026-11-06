@@ -1,5 +1,5 @@
 /**
- * 我们饥佬是这样的 Wiki · v4.8
+ * 我们饥佬是这样的 Wiki · v5.1
  * 内容依据 bighead.zip 内 modinfo.lua、scripts/main/recipes.lua、strings.lua、
  * bighead_food.lua、角色/装备 prefab 与机制组件整理；基础值与成长效果分开说明。
  * 小图标由模组 KTEX 转换并校正上下方向；展示图由 DST Mod Tool 原生渲染。
@@ -10,7 +10,7 @@ window.SITE_DATA = {
     "site_title": "我们饥佬是这样的",
     "subtitle_latin": "",
     "author": "胖头鱼",
-    "version": "v4.8",
+    "version": "v5.1",
     "workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3627920230",
     "qq_group_url": "https://qm.qq.com/q/119CtJwiP8",
     "manifesto": "超级超级喜欢玩饥荒，搞了这个mod，哈哈哈哈，怎么方便怎么变态怎么来！",
@@ -21,11 +21,11 @@ window.SITE_DATA = {
       }
     ],
     "copyright": "© 2026 我们饥佬是这样的",
-    "source_version": "4.8",
+    "source_version": "5.1",
     "source": {
       "archive": "bighead.zip",
-      "version": "4.8",
-      "updated": "2026-10-30"
+      "version": "5.1",
+      "updated": "2026-11-06"
     }
   },
   "categories": [
@@ -127,8 +127,17 @@ window.SITE_DATA = {
           "height": 350
         }
       ],
-      "featured_items": ["bighead_spear", "bighead_fanhua", "bighead_armor", "bighead_back"],
-      "shared_crafts": ["bighead_ruyi", "bighead_scrolls", "bighead_mwgt"],
+      "featured_items": [
+        "bighead_spear",
+        "bighead_fanhua",
+        "bighead_armor",
+        "bighead_back"
+      ],
+      "shared_crafts": [
+        "bighead_ruyi",
+        "bighead_scrolls",
+        "bighead_mwgt"
+      ],
       "stats": {
         "hp": 150,
         "san": 150,
@@ -137,13 +146,13 @@ window.SITE_DATA = {
       "setting": [
         "鸿元净莲。基础属性：生命150、理智150、饥饿150。",
         "默认移速为普通角色的2倍，可在模组设置中改为1.5倍；基础攻击倍率为1.5，灵气耗尽时降为0.5。",
-        "初始携带[[避尘]]与两份[[草莓可丽饼]]。",
+        "初始携带[[避尘]]与一份[[果味加浓]]。",
         "使用[[繁花]]照料植物，也能进入[[太极青玄阁]]。"
       ],
       "core_mechanics": [
         {
           "id": "mech_lingqi",
-          "summary": "初始10点，初始上限100点。达到10点自带照明，50点可以踏水，100点额外吸收50%普通伤害；装备技能和园艺会消耗灵气。"
+          "summary": "初始10点，初始上限100点。达到10点自带照明，50点可以踏水，100点在其他减伤后再减免30%伤害；装备技能和园艺会消耗灵气。"
         },
         {
           "id": "mech_jieqi",
@@ -214,8 +223,15 @@ window.SITE_DATA = {
           "height": 398
         }
       ],
-      "featured_items": ["bb_gaojiaoniao_cs", "bb_gaojiaoniao_fqh", "bb_gaojiaoniao_fh", "bb_gaojiaoniao_cmyh"],
-      "shared_crafts": ["bighead_ybhz"],
+      "featured_items": [
+        "bb_gaojiaoniao_cs",
+        "bb_gaojiaoniao_fqh",
+        "bb_gaojiaoniao_fh",
+        "bb_gaojiaoniao_cmyh"
+      ],
+      "shared_crafts": [
+        "bighead_ybhz"
+      ],
       "stats": {
         "hp": 150,
         "san": 100,
@@ -224,16 +240,16 @@ window.SITE_DATA = {
       "setting": [
         "上古魔龙。基础属性：生命150、理智100、饥饿200。",
         "默认移速为普通角色的2倍，可在模组设置中改为1.5倍。",
-        "初始携带[[除祟]]与两份[[草莓可丽饼]]。"
+        "初始携带[[除祟]]与一份[[果味加浓]]。"
       ],
       "core_mechanics": [
         {
           "id": "mech_shixin",
-          "summary": "初始1点，上限100点，随生存天数增长。超过25点开始持续损血；五道圆满后解除惩罚，心魔转而攻击敌人。"
+          "summary": "初始1点，上限100点，随生存天数增长，也可食用纯粹恐惧提高。超过25点开始持续损血；五道圆满后解除惩罚，友方心魔可为主人吸血。"
         },
         {
           "id": "mech_wudao",
-          "summary": "通过参悟、击杀、饥饿死亡等条件领悟。五道圆满后，生命、理智、饥饿上限分别达到200、150、250。"
+          "summary": "通过参悟、击杀、饥饿死亡等条件领悟。五道圆满后三维上限为生命200、理智150、饥饿250，并免疫冻结、受击硬直和击退。"
         }
       ],
       "exclusive_intro": [
@@ -288,7 +304,7 @@ window.SITE_DATA = {
         "剑"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_spear.png"
     },
     {
@@ -315,6 +331,7 @@ window.SITE_DATA = {
         "pangtouyu",
         "mech_gardening",
         "bighead_fanhua_skin1",
+        "bighead_fanhua_skin2",
         "mech_lingqi",
         "bb_cct"
       ],
@@ -323,7 +340,7 @@ window.SITE_DATA = {
         "繁花"
       ],
       "tech": "炼金引擎；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_fanhua.png"
     },
     {
@@ -367,7 +384,7 @@ window.SITE_DATA = {
         "万箭"
       ],
       "tech": "蓝图或指定制作站；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh.png"
     },
     {
@@ -377,7 +394,7 @@ window.SITE_DATA = {
       "owner": "gaojiaoniao",
       "image": "assets/img/items/bb_gaojiaoniao_fh.png",
       "summary": "高脚鸟的近战剑，攻击时驱使五柄飞剑追击；封印成长会提高飞剑位面伤害。",
-      "recipe": "远古伪科学站；高脚鸟制作：铥矿棒×5 + 传送魔杖×1 + 暗影香炉×1",
+      "recipe": "远古伪科学站；高脚鸟制作：铥矿棒×5 + 懒人魔杖×1 + 暗影香炉×1",
       "detail_blocks": [
         {
           "type": "text",
@@ -406,7 +423,7 @@ window.SITE_DATA = {
         "剑"
       ],
       "tech": "远古伪科学站；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fh.png"
     },
     {
@@ -445,7 +462,7 @@ window.SITE_DATA = {
         "护甲"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_armor.png"
     },
     {
@@ -479,7 +496,7 @@ window.SITE_DATA = {
         "背部"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_back.png"
     },
     {
@@ -488,36 +505,75 @@ window.SITE_DATA = {
       "category": "weapon",
       "owner": "gaojiaoniao",
       "image": "assets/img/items/bb_gaojiaoniao_cs.png",
-      "summary": "高脚鸟的近战清怪武器，对暗影类敌人加伤，命中还会附带小范围位面攻击。",
+      "summary": "可用月岩、大理石和海象牙强化的近战武器，消耗30饥饿发动诛邪范围真实伤害。",
       "recipe": "科学机器；高脚鸟制作：噩梦燃料×10 + 石头×10",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "高脚鸟装备在手部后普攻。耐久不足时给予噩梦燃料修理；[[噬心]]高于25时，攻击改为耗理智而不耗使用次数。"
+          "content": "高脚鸟装备在手部后普攻。基础攻击68，攻击距离2，耐久500次；对暗影、梦魇类目标的普通伤害翻倍。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础攻击68、距离2、初始100次使用；对暗影、梦魇类目标的普通伤害翻倍。命中触发目标附近3距离的20点位面范围攻击，可使能惊慌的目标惊慌2秒。噬心>25时每次攻击扣2理智。"
+          "content": "命中在目标附近3距离附带20点位面范围攻击，并可使能惊慌的目标惊慌2秒。[[噬心]]高于25时，攻击不消耗耐久，每次扣2理智。"
+        },
+        {
+          "type": "list",
+          "title": "主动技能 · 诛邪",
+          "items": [
+            "手持除祟，在物品上使用「诛邪」进入准备状态；再次使用「收起诛邪」可取消。饥饿低于30时无法准备。",
+            "准备后下一次攻击消耗30饥饿，对角色周围半径两块地皮内可攻击的敌人造成真实伤害；施放后退出准备状态。卸下或损坏也会取消准备。",
+            "伤害＝施放时当前理智×当前噬心×[[诛邪伤害倍率]]，再乘人物攻击倍率与其他攻击修正；如[[心冻了莓]]提供的×3攻击修正。"
+          ]
+        },
+        {
+          "type": "table",
+          "title": "给予材料强化",
+          "columns": [
+            "材料",
+            "每级效果",
+            "上限"
+          ],
+          "rows": [
+            [
+              "月岩",
+              "基础攻击+2",
+              "50级；基础攻击最高168"
+            ],
+            [
+              "大理石",
+              "攻击附加1%减速，持续5秒，不影响玩家",
+              "50级；最高减速50%"
+            ],
+            [
+              "海象牙",
+              "手持移速+5%",
+              "5级；最高+25%"
+            ]
+          ]
         },
         {
           "type": "text",
           "title": "维护",
-          "content": "每份噩梦燃料修复10次使用，损坏后可修复再装备。"
+          "content": "每份噩梦燃料修复10次使用，可批量给予。损坏后修复即可重新装备；强化等级会保留。"
         }
       ],
       "related": [
         "gaojiaoniao",
         "mech_shixin",
-        "bb_gaojiaoniao_cs_skin1"
+        "bb_gaojiaoniao_cs_skin1",
+        "config_bighead_zhuxie_mult",
+        "bighead_xdlm"
       ],
       "tags": [
-        "护具",
-        "护符"
+        "武器",
+        "近战",
+        "诛邪",
+        "强化"
       ],
       "tech": "科学机器；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_cs.png"
     },
     {
@@ -555,7 +611,7 @@ window.SITE_DATA = {
         "如意"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ruyi.png"
     },
     {
@@ -564,18 +620,23 @@ window.SITE_DATA = {
       "category": "tool",
       "owner": "common",
       "image": "assets/img/items/bighead_ylry.png",
-      "summary": "玉如意的升级版：高效砍挖、范围开田、批量采集和直接捕捞海鱼。",
+      "summary": "高效砍挖、范围开田、采集、捕鱼，也能对目标施放小旋风的如意。",
       "recipe": "将[bighead_ylss]×1给予[bighead_ruyi]，升级后获得",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由[[玉如意]]接受一颗[[蕴灵神石]]升级得到。装备后右键打开轮盘，选择范围耕地、范围采集或范围捕鱼，再点选位置。"
+          "content": "由[[玉如意]]接受一颗[[蕴灵神石]]升级得到。装备后右键打开轮盘，选择范围耕地、范围采集、范围捕鱼或小旋风；范围技能点选位置，小旋风右键指定目标。"
         },
         {
           "type": "text",
           "title": "效果与限制",
           "content": "基础攻击10、移速×1.5，砍树、挖矿、铲挖、锤拆工作效率20；可捕虫、池塘钓鱼。施法最远8距离，采集与捕鱼半径8；采集会收获成熟植物并收取散落物，捕鱼将范围内海鱼转为背包里的活鱼。\n范围耕地尝试改造5×5地块，每块生成3×3土堆，受地形条件限制。 开启“[[蕴灵如意捕捉四季灵]]”设置时，也可用捕虫动作捕捉[[寄生灵]]释放的游离灵体。"
+        },
+        {
+          "type": "text",
+          "title": "小旋风",
+          "content": "在轮盘选择「小旋风（右键目标）」，再右键指定可攻击或可工作的目标，召出追踪目标的龙卷风。无需先给予风向标强化。"
         },
         {
           "type": "text",
@@ -594,9 +655,10 @@ window.SITE_DATA = {
         "工具",
         "如意",
         "收纳",
-        "捕鱼"
+        "捕鱼",
+        "旋风"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ylry.png"
     },
     {
@@ -632,7 +694,7 @@ window.SITE_DATA = {
         "雨具"
       ],
       "tech": "炼金引擎；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_umbrella.png"
     },
     {
@@ -673,7 +735,7 @@ window.SITE_DATA = {
         "缚灵网"
       ],
       "tech": "金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_flw.png"
     },
     {
@@ -714,7 +776,7 @@ window.SITE_DATA = {
         "缚灵网"
       ],
       "tech": "金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_czflw.png"
     },
     {
@@ -760,7 +822,7 @@ window.SITE_DATA = {
         "琦玉器"
       ],
       "tech": "辉煌铁匠铺 / 金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_qyq.png"
     },
     {
@@ -797,7 +859,7 @@ window.SITE_DATA = {
         "卷轴"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_scrolls.png"
     },
     {
@@ -826,7 +888,7 @@ window.SITE_DATA = {
         "照明"
       ],
       "tech": "无需科技",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_hy.png"
     },
     {
@@ -863,7 +925,7 @@ window.SITE_DATA = {
         "容器"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_llxz.png"
     },
     {
@@ -896,7 +958,7 @@ window.SITE_DATA = {
         "亭台"
       ],
       "tech": "炼金引擎",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_cct.png"
     },
     {
@@ -931,7 +993,7 @@ window.SITE_DATA = {
         "食物"
       ],
       "tech": "炼金引擎",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_hhlct.png"
     },
     {
@@ -940,17 +1002,31 @@ window.SITE_DATA = {
       "category": "structure",
       "owner": "common",
       "image": "assets/img/items/bighead_sucookpot_item.png",
-      "recipe": "无需科技：红宝石×1 + 月亮碎片×6",
+      "recipe": "无需科技：彩虹宝石×1 + 红宝石×3 + 月亮碎片×10",
       "detail_blocks": [
         {
-          "type": "text",
+          "type": "list",
           "title": "怎么使用",
-          "content": "先把物品部署到地上，打开锅放入四份食材并烹饪；取菜后可通过收起动作重新装回背包。"
+          "items": [
+            "把炉子部署到地上，打开容器：上方15格放成品，底部5格放原料。",
+            "五个原料格都放入食材，可分别堆叠；按下烹饪后，每轮从每格各消耗1份，1秒后将料理存入成品区。",
+            "配方有效且原料充足时连续烹饪。原料不足会停止，补齐后重新按烹饪；成品区装满时暂停，取出料理后自动继续。",
+            "使用收起动作装回背包；收起或锤毁时，锅内物品和本轮料理掉落到地上。"
+          ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "可制作当前世界的普通烹饪锅料理，放好食材后点击烹饪即可完成，无需等待。收起时，锅内食材和已做好的料理会掉落在地上；食谱仍须满足材料条件，不能用它直接煮出月饼。"
+          "content": "[[红锅出锅数量]]默认双倍，每轮产出2份；改为正常后每轮产出1份，五格原料的消耗不变。"
+        },
+        {
+          "type": "list",
+          "title": "能做哪些料理",
+          "items": [
+            "[[此间山]]、[[莓酱果子]]、[[糖渍果]]、[[果味加浓]]、[[月圆血石榴]]、[[心冻了莓]]、[[甜蜜风暴]]。",
+            "五份原料须满足对应配方；不匹配时无法开锅，不消耗原料。若同时满足多个食谱，按料理优先级决定产物。",
+            "月饼由[[月饼盒子]]在满月时产出。"
+          ]
         },
         {
           "type": "text",
@@ -959,18 +1035,23 @@ window.SITE_DATA = {
         }
       ],
       "related": [
-        "bighead_cmgt",
-        "bighead_cmklb",
-        "bighead_cmrl"
+        "bighead_cjs",
+        "bighead_mjgz",
+        "bighead_tzg",
+        "bighead_gwjn",
+        "bighead_yyxsl",
+        "bighead_xdlm",
+        "bighead_tmfb",
+        "config_bighead_pot_yield"
       ],
       "tags": [
         "建筑",
         "锅具",
         "食物"
       ],
-      "summary": "可携带、可收起的瞬间烹饪锅，使用普通烹饪锅配方。",
+      "summary": "五格原料自动批量烹饪、十五格收纳成品的便携红锅，默认每轮出2份。",
       "tech": "无需科技",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_sucookpot.png"
     },
     {
@@ -1047,7 +1128,7 @@ window.SITE_DATA = {
         "月饼"
       ],
       "tech": "炼金引擎；高脚鸟制作 / 金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ybhz.png"
     },
     {
@@ -1085,7 +1166,7 @@ window.SITE_DATA = {
         "器物"
       ],
       "tech": "天体祭坛",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_xqlj.png"
     },
     {
@@ -1100,7 +1181,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "采收[[草莓丛]]获得，直接食用或放进烹饪锅当食材；入锅提供0.5水果度。"
+          "content": "采收[[草莓丛]]获得，直接食用或放进烹饪锅当食材；入锅提供0.5水果度。在[[芙蓉石蟠螭耳盖炉]]中，可制作[[莓酱果子]]、[[糖渍果]]、[[心冻了莓]]或[[甜蜜风暴]]。"
         },
         {
           "type": "text",
@@ -1115,443 +1196,508 @@ window.SITE_DATA = {
       ],
       "related": [
         "dug_bb_cmbush",
-        "bighead_cmgt",
-        "bighead_cmklb",
-        "bighead_cmrl"
+        "bighead_mjgz",
+        "bighead_tzg",
+        "bighead_xdlm",
+        "bighead_tmfb",
+        "bighead_sucookpot_item"
       ],
       "tags": [
         "食物",
         "草莓",
         "水果"
       ],
-      "source": "v4.8",
-      "summary": "草莓丛产出的水果，能直接吃，也能制作草莓罐头、可丽饼和软酪。",
+      "source": "v5.1",
+      "summary": "草莓丛产出的水果，可直接吃，也可在红锅制作莓酱果子、糖渍果等料理。",
       "display_image": "assets/img/displays/bb_cm.png"
     },
     {
-      "id": "bighead_cmgt",
-      "name": "草莓罐头",
+      "id": "bighead_cjs",
+      "name": "此间山",
       "category": "food",
       "food_category": "cooked",
       "owner": "common",
-      "image": "assets/img/items/bighead_cmgt.png",
-      "recipe": "烹饪条件：[bb_cm]×至少1；蜂蜜×至少1；冰×至少2",
+      "image": "assets/img/items/bighead_cjs.png",
+      "summary": "体温上限65℃，每2秒恢复1理智，持续1天的清凉料理。",
+      "recipe": "红锅五格配方：冰×至少2；奶制品度≥1；肉度、鱼度、蔬菜度均为0；共5份食材",
+      "tech": "芙蓉石蟠螭耳盖炉",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "一锅示例",
+          "content": "冰×2 + 伏特羊奶×1 + 蜂蜜×2"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+80",
+              "+150",
+              "+80"
+            ]
+          ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+50、饥饿+30、理智+0。没有额外的专属增益，适合用草莓、蜂蜜和冰制作回血食品。"
+          "content": "食用后体温上限为65℃，每2秒恢复1理智，持续1游戏天（480秒）。它限制体温上限，不会提高低温时的体温。"
         },
         {
           "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
+          "title": "增益显示与刷新",
+          "content": "食用后在状态栏显示增益图标和剩余时间，悬停可查看效果。同一种增益再次食用会刷新持续时间，死亡后移除。"
         },
         {
           "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
+          "title": "保存",
+          "content": "基础保质期4游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
+        },
+        {
+          "type": "text",
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。"
         }
       ],
       "related": [
-        "bb_cm",
-        "bighead_sucookpot_item"
+        "bighead_sucookpot_item",
+        "config_bighead_pot_yield"
       ],
       "tags": [
         "食物",
-        "草莓"
+        "料理",
+        "红锅"
       ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "以草莓制作的补血料理，基础回复50生命。",
-      "display_image": "assets/img/displays/bighead_cmgt.png"
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_cjs.png"
     },
     {
-      "id": "bighead_cmklb",
-      "name": "草莓可丽饼",
+      "id": "bighead_mjgz",
+      "name": "莓酱果子",
       "category": "food",
       "food_category": "cooked",
       "owner": "common",
-      "image": "assets/img/items/bighead_cmklb.png",
-      "recipe": "烹饪条件：[bb_cm]×至少1；黄油×至少1；蜂蜜×至少1；伏特羊奶×至少1",
+      "image": "assets/img/items/bighead_mjgz.png",
+      "summary": "降低30%饥饿消耗，持续2天的草莓料理。",
+      "recipe": "红锅五格配方：黄油×至少1；蛋度≥1；[bb_cm]×至少1；伏特羊奶×至少1；肉度、鱼度均为0；共5份食材",
+      "tech": "芙蓉石蟠螭耳盖炉",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "一锅示例",
+          "content": "黄油×1 + 鸟蛋×1 + [[草莓]]×1 + 伏特羊奶×1 + 冰×1"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+100",
+              "+100",
+              "+150"
+            ]
+          ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+150、饥饿+100、理智+150。胖头鱼与高脚鸟开局各带两份；也可用草莓、黄油、蜂蜜、伏特羊奶各1份烹饪。"
+          "content": "食用后饥饿消耗降低30%，持续2游戏天（960秒）。"
         },
         {
           "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
+          "title": "增益显示与刷新",
+          "content": "食用后在状态栏显示增益图标和剩余时间，悬停可查看效果。同一种增益再次食用会刷新持续时间，死亡后移除。"
         },
         {
           "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
+          "title": "保存",
+          "content": "基础保质期12游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
+        },
+        {
+          "type": "text",
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。"
         }
       ],
       "related": [
+        "bighead_sucookpot_item",
+        "bb_cm",
+        "config_bighead_pot_yield"
+      ],
+      "tags": [
+        "食物",
+        "料理",
+        "红锅"
+      ],
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_mjgz.png"
+    },
+    {
+      "id": "bighead_tzg",
+      "name": "糖渍果",
+      "category": "food",
+      "food_category": "cooked",
+      "owner": "common",
+      "image": "assets/img/items/bighead_tzg.png",
+      "summary": "草莓与蜂蜜制作的料理，保质期18天。",
+      "recipe": "红锅五格配方：蜂蜜×至少1；[bb_cm]×至少2；肉度、鱼度、蔬菜度均为0；共5份食材",
+      "tech": "芙蓉石蟠螭耳盖炉",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "一锅示例",
+          "content": "[[草莓]]×2 + 蜂蜜×3"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+30",
+              "+80",
+              "+70"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "没有额外的持续增益。"
+        },
+        {
+          "type": "text",
+          "title": "保存",
+          "content": "基础保质期18游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
+        },
+        {
+          "type": "text",
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。"
+        }
+      ],
+      "related": [
+        "bighead_sucookpot_item",
+        "bb_cm",
+        "config_bighead_pot_yield"
+      ],
+      "tags": [
+        "食物",
+        "料理",
+        "红锅"
+      ],
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_tzg.png"
+    },
+    {
+      "id": "bighead_gwjn",
+      "name": "果味加浓",
+      "category": "food",
+      "food_category": "cooked",
+      "owner": "common",
+      "image": "assets/img/items/bighead_gwjn.png",
+      "summary": "五种水果融合的料理，每秒恢复1生命，持续2天。",
+      "recipe": "红锅五格配方：火龙果×1 + 无花果×1 + 石榴×1 + 西瓜×1 + 香蕉×1",
+      "tech": "芙蓉石蟠螭耳盖炉",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "材料要求",
+          "content": "五种水果各占一格，使用原材料；肉度、鱼度、蔬菜度和冰度均须为0。"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+200",
+              "+150",
+              "+150"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "食用后每秒恢复1生命，持续2游戏天（960秒），不超过生命上限。两名角色初始各携带1份；开启每日投喂时，这也是高脚鸟可能抽到的奖励之一，每次2份。"
+        },
+        {
+          "type": "text",
+          "title": "增益显示与刷新",
+          "content": "食用后在状态栏显示增益图标和剩余时间，悬停可查看效果。同一种增益再次食用会刷新持续时间，死亡后移除。"
+        },
+        {
+          "type": "text",
+          "title": "保存",
+          "content": "基础保质期12游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
+        },
+        {
+          "type": "text",
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。这时每秒回血效果也暂停。"
+        }
+      ],
+      "related": [
+        "bighead_sucookpot_item",
         "pangtouyu",
-        "bb_cm",
         "gaojiaoniao",
-        "bighead_sucookpot_item"
+        "config_bighead_daily_gift",
+        "config_bighead_pot_yield"
       ],
       "tags": [
         "食物",
-        "草莓"
+        "料理",
+        "红锅"
       ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "高回复甜点，一次补充150生命、100饥饿和150理智。",
-      "display_image": "assets/img/displays/bighead_cmklb.png"
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_gwjn.png"
     },
     {
-      "id": "bighead_cmrl",
-      "name": "草莓软酪",
+      "id": "bighead_yyxsl",
+      "name": "月圆血石榴",
       "category": "food",
       "food_category": "cooked",
       "owner": "common",
-      "image": "assets/img/items/bighead_cmrl.png",
-      "recipe": "烹饪条件：[bb_cm]×至少1；黄油×至少2；不能加入蜂蜜",
+      "image": "assets/img/items/bighead_yyxsl.png",
+      "summary": "格罗姆翅膀等五种指定材料制作，基础恢复500生命。",
+      "recipe": "红锅五格配方：格罗姆翅膀×1 + 格罗姆的黏液×1 + 石榴×1 + 蚊子血囊×1 + 蜘蛛腺×1",
+      "tech": "芙蓉石蟠螭耳盖炉",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "材料要求",
+          "content": "五种指定材料各占一格，格罗姆翅膀、格罗姆的黏液、蚊子血囊和蜘蛛腺均可放入红锅原料格。"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+500",
+              "+200",
+              "+80"
+            ]
+          ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+200、饥饿+100、理智+150。要至少2份黄油，且不能加蜂蜜；还回复100饥饿和150理智。"
+          "content": "没有额外的持续增益，基础生命回复较高，实际回复不超过角色当前上限。"
         },
         {
           "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
+          "title": "保存",
+          "content": "基础保质期5游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
         },
         {
           "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。"
         }
       ],
       "related": [
+        "bighead_sucookpot_item",
+        "config_bighead_pot_yield"
+      ],
+      "tags": [
+        "食物",
+        "料理",
+        "红锅"
+      ],
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_yyxsl.png"
+    },
+    {
+      "id": "bighead_xdlm",
+      "name": "心冻了莓",
+      "category": "food",
+      "food_category": "cooked",
+      "owner": "common",
+      "image": "assets/img/items/bighead_xdlm.png",
+      "summary": "提供×3攻击倍率，持续2天的战斗料理。",
+      "recipe": "红锅五格配方：蛞蝓龟黏液×至少1；格罗姆的黏液×至少1；脓鼻涕×至少1；[bb_cm]×至少1；补齐至5份食材",
+      "tech": "芙蓉石蟠螭耳盖炉",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "一锅示例",
+          "content": "蛞蝓龟黏液×1 + 格罗姆的黏液×1 + 脓鼻涕×1 + [[草莓]]×1 + 冰×1"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+100",
+              "+100",
+              "+60"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "食用后提供×3的攻击倍率修正，持续2游戏天（960秒），可影响[[除祟]]的诛邪伤害。"
+        },
+        {
+          "type": "text",
+          "title": "增益显示与刷新",
+          "content": "食用后在状态栏显示增益图标和剩余时间，悬停可查看效果。同一种增益再次食用会刷新持续时间，死亡后移除。"
+        },
+        {
+          "type": "text",
+          "title": "保存",
+          "content": "基础保质期10游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
+        },
+        {
+          "type": "text",
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。"
+        }
+      ],
+      "related": [
+        "bighead_sucookpot_item",
         "bb_cm",
-        "bighead_sucookpot_item"
+        "bb_gaojiaoniao_cs",
+        "config_bighead_pot_yield"
       ],
       "tags": [
         "食物",
-        "草莓"
+        "料理",
+        "红锅"
       ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "以草莓和黄油制作的高额补血甜点，基础回复200生命。",
-      "display_image": "assets/img/displays/bighead_cmrl.png"
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_xdlm.png"
     },
     {
-      "id": "bighead_fmss",
-      "name": "蜂蜜酥山",
+      "id": "bighead_tmfb",
+      "name": "甜蜜风暴",
       "category": "food",
       "food_category": "cooked",
       "owner": "common",
-      "image": "assets/img/items/bighead_fmss.png",
-      "recipe": "烹饪条件：蜂蜜×至少2；冰×至少2",
+      "image": "assets/img/items/bighead_tmfb.png",
+      "summary": "提供90%减伤修正，持续2天的防护料理。",
+      "recipe": "红锅五格配方：乳白物×至少1；[bb_cm]×至少1；肉度、鱼度、蔬菜度均为0；共5份食材",
+      "tech": "芙蓉石蟠螭耳盖炉",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
+          "content": "将五份原料放入[[芙蓉石蟠螭耳盖炉]]底部的五个原料格，按下烹饪。每轮1秒，默认产出2份，可通过[[红锅出锅数量]]改为1份。"
+        },
+        {
+          "type": "text",
+          "title": "一锅示例",
+          "content": "乳白物×1 + [[草莓]]×1 + 冰×3"
+        },
+        {
+          "type": "table",
+          "title": "基础回复",
+          "columns": [
+            "生命",
+            "理智",
+            "饥饿"
+          ],
+          "rows": [
+            [
+              "+150",
+              "+100",
+              "+60"
+            ]
+          ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "基础回复：生命+15、饥饿+40、理智+30。提供原版冷食降温效果，温度影响持续60秒。"
+          "content": "食用后提供90%的减伤修正，持续2游戏天（960秒）；实际伤害还受装备、其他效果以及攻击是否忽略减伤影响。"
         },
         {
           "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
+          "title": "增益显示与刷新",
+          "content": "食用后在状态栏显示增益图标和剩余时间，悬停可查看效果。同一种增益再次食用会刷新持续时间，死亡后移除。"
         },
         {
           "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
+          "title": "保存",
+          "content": "基础保质期2游戏天。三维回复受新鲜度、角色食性和食物倍率影响，不超过角色当前上限。"
+        },
+        {
+          "type": "text",
+          "title": "高脚鸟食用",
+          "content": "[[噬心]]高于50且[[五道]]未圆满时，直接食用的生命回复为0。"
         }
       ],
       "related": [
-        "bighead_sucookpot_item"
+        "bighead_sucookpot_item",
+        "bb_cm",
+        "config_bighead_pot_yield"
       ],
       "tags": [
         "食物",
-        "甜点"
+        "料理",
+        "红锅"
       ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "蜂蜜与冰制作的降温甜点，兼顾饥饿与理智回复。",
-      "display_image": "assets/img/displays/bighead_fmss.png"
-    },
-    {
-      "id": "bighead_sgbql",
-      "name": "双果冰淇淋",
-      "category": "food",
-      "food_category": "cooked",
-      "owner": "common",
-      "image": "assets/img/items/bighead_sgbql.png",
-      "recipe": "烹饪条件：火龙果×至少1；无花果×至少1；冰×至少2",
-      "detail_blocks": [
-        {
-          "type": "text",
-          "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
-        },
-        {
-          "type": "text",
-          "title": "效果与限制",
-          "content": "基础回复：生命+50、饥饿+60、理智+50。提供原版冷食降温效果，温度影响持续60秒。"
-        },
-        {
-          "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
-        },
-        {
-          "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
-        }
-      ],
-      "related": [
-        "bighead_sucookpot_item"
-      ],
-      "tags": [
-        "食物",
-        "冰淇淋"
-      ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "火龙果与无花果制作的降温冰淇淋，同时回复三维。",
-      "display_image": "assets/img/displays/bighead_sgbql.png"
-    },
-    {
-      "id": "bighead_sgdg",
-      "name": "水果蛋糕",
-      "category": "food",
-      "food_category": "cooked",
-      "owner": "common",
-      "image": "assets/img/items/bighead_sgdg.png",
-      "recipe": "烹饪条件：水果度≥2；蛋度≥1；蔬菜度≥1",
-      "detail_blocks": [
-        {
-          "type": "text",
-          "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
-        },
-        {
-          "type": "text",
-          "title": "效果与限制",
-          "content": "基础回复：生命+60、饥饿+100、理智+40。配方按水果度、蛋度、蔬菜度计算；还回复40理智。"
-        },
-        {
-          "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
-        },
-        {
-          "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
-        }
-      ],
-      "related": [
-        "bighead_sucookpot_item"
-      ],
-      "tags": [
-        "食物",
-        "蛋糕"
-      ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "偏重饱食的水果料理，基础回复100饥饿、60生命。",
-      "display_image": "assets/img/displays/bighead_sgdg.png"
-    },
-    {
-      "id": "bighead_snbql",
-      "name": "酸奶冰淇淋",
-      "category": "food",
-      "food_category": "cooked",
-      "owner": "common",
-      "image": "assets/img/items/bighead_snbql.png",
-      "recipe": "烹饪条件：伏特羊奶×至少1；冰×至少3",
-      "detail_blocks": [
-        {
-          "type": "text",
-          "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
-        },
-        {
-          "type": "text",
-          "title": "效果与限制",
-          "content": "基础回复：生命+20、饥饿+40、理智+40。温度效果为-60，影响持续120秒，寒冷时吃也会降温。"
-        },
-        {
-          "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
-        },
-        {
-          "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
-        }
-      ],
-      "related": [
-        "bighead_sucookpot_item"
-      ],
-      "tags": [
-        "食物",
-        "冰淇淋"
-      ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "伏特羊奶配三份冰的降温甜点，适合炎热天气。",
-      "display_image": "assets/img/displays/bighead_snbql.png"
-    },
-    {
-      "id": "bighead_ths",
-      "name": "桃花酥",
-      "category": "food",
-      "food_category": "cooked",
-      "owner": "common",
-      "image": "assets/img/items/bighead_ths.png",
-      "recipe": "烹饪条件：蔬菜度≥2；花瓣×至少2",
-      "detail_blocks": [
-        {
-          "type": "text",
-          "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
-        },
-        {
-          "type": "text",
-          "title": "效果与限制",
-          "content": "基础回复：生命+20、饥饿+70、理智+30。配方至少2蔬菜度与2花瓣；没有额外专属增益。"
-        },
-        {
-          "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
-        },
-        {
-          "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
-        }
-      ],
-      "related": [
-        "bighead_sucookpot_item"
-      ],
-      "tags": [
-        "食物",
-        "甜点"
-      ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "花瓣和蔬菜制作的饱食点心，基础回复70饥饿。",
-      "display_image": "assets/img/displays/bighead_ths.png"
-    },
-    {
-      "id": "bighead_xgss",
-      "name": "西瓜酥山",
-      "category": "food",
-      "food_category": "cooked",
-      "owner": "common",
-      "image": "assets/img/items/bighead_xgss.png",
-      "recipe": "烹饪条件：西瓜×至少2；冰×至少2",
-      "detail_blocks": [
-        {
-          "type": "text",
-          "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
-        },
-        {
-          "type": "text",
-          "title": "效果与限制",
-          "content": "基础回复：生命+40、饥饿+50、理智+50。温度效果为-60，影响持续120秒，寒冷时吃也会降温。"
-        },
-        {
-          "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
-        },
-        {
-          "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
-        }
-      ],
-      "related": [
-        "bighead_sucookpot_item"
-      ],
-      "tags": [
-        "食物",
-        "甜点"
-      ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "两份西瓜配两份冰的降温甜点，兼有补血和回理智。",
-      "display_image": "assets/img/displays/bighead_xgss.png"
-    },
-    {
-      "id": "bighead_xrzslz",
-      "name": "仙人掌石榴汁",
-      "category": "food",
-      "food_category": "cooked",
-      "owner": "common",
-      "image": "assets/img/items/bighead_xrzslz.png",
-      "recipe": "烹饪条件：石榴×至少2；冰×至少1；仙人掌肉×至少1",
-      "detail_blocks": [
-        {
-          "type": "text",
-          "title": "怎么使用",
-          "content": "按下方烹饪条件放入四份食材，使用普通烹饪锅或[[芙蓉石蟠螭耳盖炉]]做成后直接食用。"
-        },
-        {
-          "type": "text",
-          "title": "效果与限制",
-          "content": "基础回复：生命+60、饥饿+60、理智+40。移速×1.3的增益持续180秒；另有-60温度效果，温度影响持续120秒。再次饮用刷新加速时长。"
-        },
-        {
-          "type": "text",
-          "title": "食用与保存",
-          "content": "这些是基础回复值，受新鲜度、角色食性与食物倍率影响，回复不超过角色当前上限。料理会腐败，可放入保鲜容器保存。"
-        },
-        {
-          "type": "text",
-          "title": "特殊情况",
-          "content": "高脚鸟：[[噬心]]高于50且[[五道]]未圆满时，食物的生命回复为0。"
-        }
-      ],
-      "related": [
-        "bighead_sucookpot_item"
-      ],
-      "tags": [
-        "食物",
-        "饮品"
-      ],
-      "source": "v4.8",
-      "tech": "烹饪锅",
-      "summary": "兼具降温和加速的果汁，食用后移速提高30%，持续180秒。",
-      "display_image": "assets/img/displays/bighead_xrzslz.png"
+      "source": "v5.1",
+      "display_image": "assets/img/displays/bighead_tmfb.png"
     },
     {
       "id": "bighead_ywyb",
@@ -1597,7 +1743,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ywyb.png"
     },
     {
@@ -1644,7 +1790,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_jlyb.png"
     },
     {
@@ -1691,7 +1837,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_gwyb.png"
     },
     {
@@ -1738,7 +1884,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_xgyb.png"
     },
     {
@@ -1785,7 +1931,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_fgyb.png"
     },
     {
@@ -1832,7 +1978,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ymyb.png"
     },
     {
@@ -1879,7 +2025,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_xjyb.png"
     },
     {
@@ -1926,7 +2072,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_cmyb.png"
     },
     {
@@ -1974,7 +2120,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ptyyb.png"
     },
     {
@@ -2022,7 +2168,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_gjnyb.png"
     },
     {
@@ -2070,7 +2216,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_lblyb.png"
     },
     {
@@ -2118,7 +2264,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_mdxyb.png"
     },
     {
@@ -2150,7 +2296,7 @@ window.SITE_DATA = {
         "草莓"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "summary": "胖头鱼专属制作的草莓作物，其他角色也能种植、采摘；每次成熟产3颗。",
       "display_image": "assets/img/displays/bb_cmbush.png"
     },
@@ -2183,7 +2329,7 @@ window.SITE_DATA = {
         "七彩石"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_wcs.png"
     },
     {
@@ -2206,10 +2352,19 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "击杀掉落",
-          "columns": ["生物生命上限", "掉落"],
+          "columns": [
+            "生物生命上限",
+            "掉落"
+          ],
           "rows": [
-            ["≥10000", "必掉1颗"],
-            ["≥3000且<10000", "5%概率掉1颗"]
+            [
+              "≥10000",
+              "必掉1颗"
+            ],
+            [
+              "≥3000且<10000",
+              "5%概率掉1颗"
+            ]
           ]
         }
       ],
@@ -2223,7 +2378,7 @@ window.SITE_DATA = {
         "材料",
         "灵石"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "summary": "装备强化与制作材料。",
       "display_image": "assets/img/displays/bighead_ylss.png"
     },
@@ -2261,7 +2416,7 @@ window.SITE_DATA = {
         "材料",
         "莲子"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ymlx.png"
     },
     {
@@ -2313,7 +2468,7 @@ window.SITE_DATA = {
         "材料",
         "符文"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_ygxlfw.png"
     },
     {
@@ -2343,7 +2498,7 @@ window.SITE_DATA = {
         "材料",
         "魂魄"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "summary": "胖头鱼收集的魂魄：可用于季节鱼制作，也能释放在地上治疗附近玩家。",
       "display_image": "assets/img/displays/bighead_soul_ball.png"
     },
@@ -2373,7 +2528,7 @@ window.SITE_DATA = {
         "材料",
         "玉佩"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "summary": "随身打开连理木箱共享库存的钥匙，无需回到箱子旁。",
       "display_image": "assets/img/displays/bighead_llxz_xz.png"
     },
@@ -2409,13 +2564,31 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "常见商品的单件售价",
-          "columns": ["商品", "买1件需支付"],
+          "columns": [
+            "商品",
+            "买1件需支付"
+          ],
           "rows": [
-            ["[[四季之灵]]（每种）", "10枚Q币"],
-            ["[[草制缚灵网]]", "4枚Q币"],
-            ["[[缚灵网]]", "16枚Q币"],
-            ["[[琦玉器]]", "10枚Q币"],
-            ["[[月饼盒子]]", "49枚Q币"]
+            [
+              "[[四季之灵]]（每种）",
+              "10枚Q币"
+            ],
+            [
+              "[[草制缚灵网]]",
+              "4枚Q币"
+            ],
+            [
+              "[[缚灵网]]",
+              "16枚Q币"
+            ],
+            [
+              "[[琦玉器]]",
+              "10枚Q币"
+            ],
+            [
+              "[[月饼盒子]]",
+              "49枚Q币"
+            ]
           ]
         },
         {
@@ -2434,7 +2607,7 @@ window.SITE_DATA = {
         "企鹅"
       ],
       "tech": "无需科技",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_qbi.png"
     },
     {
@@ -2477,7 +2650,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_spring_spirit.png"
     },
     {
@@ -2520,7 +2693,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_summer_spirit.png"
     },
     {
@@ -2563,7 +2736,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_autumn_spirit.png"
     },
     {
@@ -2606,7 +2779,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_winter_spirit.png"
     },
     {
@@ -2640,7 +2813,7 @@ window.SITE_DATA = {
         "蛋"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fhd.png"
     },
     {
@@ -2665,14 +2838,35 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "六种月眼的附加效果",
-          "columns": ["月眼", "装入后的效果"],
+          "columns": [
+            "月眼",
+            "装入后的效果"
+          ],
           "rows": [
-            ["红色月眼", "提供500隔热，延缓高温环境下体温上升；并非高温免疫。"],
-            ["蓝色月眼", "提供500保暖，延缓低温环境下体温下降；并非低温免疫。"],
-            ["橙色月眼", "装备移速由×1.3提高至×1.5，也就是相对原始移速增加50%；不会与原来的×1.3再相乘。"],
-            ["黄色月眼", "获得随身照明，光源半径为4，可照亮身边区域。"],
-            ["绿色月眼", "采集、收获和制作使用更短的动作，加快这些操作；不提供砍树、采矿的效率倍率。翻找类采集及有专用制作动作的配方仍使用原动作。"],
-            ["紫色月眼", "攻击时在目标附近召唤暗影触手协助攻击。目标需有效且存活，通常不对建筑、墙体触发；附近还需有可放置触手的位置。"]
+            [
+              "红色月眼",
+              "提供500隔热，延缓高温环境下体温上升；并非高温免疫。"
+            ],
+            [
+              "蓝色月眼",
+              "提供500保暖，延缓低温环境下体温下降；并非低温免疫。"
+            ],
+            [
+              "橙色月眼",
+              "装备移速由×1.3提高至×1.5，也就是相对原始移速增加50%；不会与原来的×1.3再相乘。"
+            ],
+            [
+              "黄色月眼",
+              "获得随身照明，光源半径为4，可照亮身边区域。"
+            ],
+            [
+              "绿色月眼",
+              "采集、收获和制作使用更短的动作，加快这些操作；不提供砍树、采矿的效率倍率。翻找类采集及有专用制作动作的配方仍使用原动作。"
+            ],
+            [
+              "紫色月眼",
+              "攻击时在目标附近召唤暗影触手协助攻击。目标需有效且存活，通常不对建筑、墙体触发；附近还需有可放置触手的位置。"
+            ]
           ]
         },
         {
@@ -2700,7 +2894,7 @@ window.SITE_DATA = {
         "遗骨"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_cmyh.png"
     },
     {
@@ -2731,7 +2925,7 @@ window.SITE_DATA = {
         "遗骨"
       ],
       "summary": "制作重明遗骨的素材，攒够8个交由高脚鸟制作。",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_bzmgt.png"
     },
     {
@@ -2746,7 +2940,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "胖头鱼装备在手部攻击；打开武器容器放入不同配件，最多3种、同种不能重复。将蕴灵神石或风向标给予武器则用于永久升级。"
+          "content": "胖头鱼装备在手部攻击；打开武器容器放入不同配件，最多3种、同种不能重复。将[[蕴灵神石]]给予武器可永久增加基础位面伤害。"
         },
         {
           "type": "text",
@@ -2756,7 +2950,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "升级",
-          "content": "每颗[[蕴灵神石]]增加5基础位面伤害；给予1个风向标后，解锁对目标施放龙卷风。未设置普通攻击次数耐久。"
+          "content": "每颗[[蕴灵神石]]增加5基础位面伤害，未设置普通攻击次数耐久。"
         },
         {
           "type": "text",
@@ -2783,7 +2977,7 @@ window.SITE_DATA = {
         "月台"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_buran.png"
     },
     {
@@ -2822,7 +3016,7 @@ window.SITE_DATA = {
         "莲"
       ],
       "tech": "无需科技；高脚鸟召唤",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_px.png",
       "aliases": [
         "莲令",
@@ -2868,7 +3062,7 @@ window.SITE_DATA = {
         "三宝"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_sanbao.png",
       "aliases": [
         "三宝"
@@ -2907,7 +3101,7 @@ window.SITE_DATA = {
         "蝴蝶",
         "春望"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_cwd.png"
     },
     {
@@ -2948,7 +3142,7 @@ window.SITE_DATA = {
         "芙蓉",
         "冥火"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fr.png"
     },
     {
@@ -2987,7 +3181,7 @@ window.SITE_DATA = {
         "轮回"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_lh.png"
     },
     {
@@ -2996,7 +3190,7 @@ window.SITE_DATA = {
       "category": "armor",
       "owner": "gaojiaoniao",
       "image": "assets/img/items/bb_gaojiaoniao_gjsh.png",
-      "summary": "高脚鸟的头部装备，提供照明、阵营增伤和集血灵治疗，还能收纳封魂驱使飞剑。",
+      "summary": "高脚鸟的头部装备，提供阵营增伤、集血灵治疗，阻止噬心下降，并可收纳封魂驱使飞剑。",
       "recipe": "",
       "detail_blocks": [
         {
@@ -3011,6 +3205,11 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
+          "title": "噬心保护",
+          "content": "佩戴时[[噬心]]不会下降，包括[[五道]]圆满后每60秒减少2点的自然衰减；增加噬心仍会生效。"
+        },
+        {
+          "type": "text",
           "title": "获得与搭配",
           "content": "击败天体英雄第三阶段，原启迪碎片掉落有10%概率被替换为古祭神辉。收纳封魂保留其封印成长和皮肤；同一角色同时只能召出一组飞剑，不能靠头部与手部重复叠出两组。"
         }
@@ -3018,14 +3217,15 @@ window.SITE_DATA = {
       "related": [
         "gaojiaoniao",
         "bb_gaojiaoniao_fh",
-        "bb_gaojiaoniao_gjsh_skin1"
+        "bb_gaojiaoniao_gjsh_skin1",
+        "mech_shixin"
       ],
       "tags": [
         "其他",
         "五灵",
         "祭祀"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
     },
     {
@@ -3039,7 +3239,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "胖头鱼通过专属制作栏合成。胖头鱼或高脚鸟拿着罐头喂给[[何三宝]]，不能把“[[草莓罐头]]”当成这种专用饲料。"
+          "content": "胖头鱼通过专属制作栏合成。胖头鱼或高脚鸟拿着罐头喂给[[何三宝]]，用作宠物的专用饲料。"
         },
         {
           "type": "text",
@@ -3055,7 +3255,7 @@ window.SITE_DATA = {
         "bb_gaojiaoniao_px_builder"
       ],
       "recipe": "胖头鱼专属制作，任选一组：[bighead_nr]×2 + 铥矿×1 + 肉×2 + 高脚鸟蛋×1；或[bighead_yr]×1 + 鱼肉×3 + 铥矿×1 + 高脚鸟蛋×1；或鸟腿×5 + 铥矿×1 + 小肉×5 + 鸟蛋×3；或鱼肉×3 + 无花果×2 + 铥矿×1 + 藤壶×3",
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_mwgt.png"
     },
     {
@@ -3082,7 +3282,7 @@ window.SITE_DATA = {
         "bighead_mwgt",
         "bb_gaojiaoniao_px_builder"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_nr.png"
     },
     {
@@ -3109,7 +3309,7 @@ window.SITE_DATA = {
         "bighead_mwgt",
         "bb_gaojiaoniao_px_builder"
       ],
-      "source": "v4.8",
+      "source": "v5.1",
       "display_image": "assets/img/displays/bighead_yr.png"
     }
   ],
@@ -3118,7 +3318,10 @@ window.SITE_DATA = {
       "id": "mech_gold_penguin",
       "owner": "common",
       "title": "金企鹅兑换",
-      "aliases": ["金企鹅", "金企鹅商店"],
+      "aliases": [
+        "金企鹅",
+        "金企鹅商店"
+      ],
       "summary": "冬天给同一只普通企鹅10金块，在原地召出限时商人；再用Q币兑换随机库存商品。",
       "image": "assets/img/items/bighead_qbi.png",
       "display_image": "assets/img/displays/bighead_gold_penguin.webp",
@@ -3145,18 +3348,62 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "可能出现的商品与价格",
-          "columns": ["商品", "单件售价（Q币）", "出现条件"],
+          "columns": [
+            "商品",
+            "单件售价（Q币）",
+            "出现条件"
+          ],
           "rows": [
-            ["冰鲷鱼、甜味鱼", "各1枚", "随机商品池"],
-            ["出逃腿靴", "3枚", "随机商品池"],
-            ["曼德拉草", "5枚", "随机商品池"],
-            ["珍珠的珍珠", "99枚", "随机商品池"],
-            ["[[四季之灵]]", "每种10枚", "开启节气系统；分别抽选"],
-            ["[[草制缚灵网]] / [[缚灵网]]", "4枚 / 16枚", "开启节气系统；分别抽选"],
-            ["[[冬季]]主物品", "50枚", "开启节气系统；随机抽选"],
-            ["[[冬季(10级)]]", "9枚", "开启节气系统；随机抽选"],
-            ["[[琦玉器]]", "10枚", "开启节气系统；可能追加1份"],
-            ["[[月饼盒子]]", "49枚", "可能追加1份"]
+            [
+              "冰鲷鱼、甜味鱼",
+              "各1枚",
+              "随机商品池"
+            ],
+            [
+              "出逃腿靴",
+              "3枚",
+              "随机商品池"
+            ],
+            [
+              "曼德拉草",
+              "5枚",
+              "随机商品池"
+            ],
+            [
+              "珍珠的珍珠",
+              "99枚",
+              "随机商品池"
+            ],
+            [
+              "[[四季之灵]]",
+              "每种10枚",
+              "开启节气系统；分别抽选"
+            ],
+            [
+              "[[草制缚灵网]] / [[缚灵网]]",
+              "4枚 / 16枚",
+              "开启节气系统；分别抽选"
+            ],
+            [
+              "[[冬季]]主物品",
+              "50枚",
+              "开启节气系统；随机抽选"
+            ],
+            [
+              "[[冬季(10级)]]",
+              "9枚",
+              "开启节气系统；随机抽选"
+            ],
+            [
+              "[[琦玉器]]",
+              "10枚",
+              "开启节气系统；可能追加1份"
+            ],
+            [
+              "[[月饼盒子]]",
+              "49枚",
+              "可能追加1份"
+            ]
           ]
         },
         {
@@ -3166,7 +3413,14 @@ window.SITE_DATA = {
           "content": "商品不是全部同时出售，库存售完也不会自动补满；节气系统关闭时，四季之灵、节气、缚灵网和琦玉器不会上架。商品价格与召唤商人花费分开计算。"
         }
       ],
-      "related": ["bighead_qbi", "bighead_qyq", "bighead_ybhz", "bighead_flw", "bighead_czflw", "config_bighead_seasons"]
+      "related": [
+        "bighead_qbi",
+        "bighead_qyq",
+        "bighead_ybhz",
+        "bighead_flw",
+        "bighead_czflw",
+        "config_bighead_seasons"
+      ]
     },
     {
       "id": "mech_lingqi",
@@ -3183,26 +3437,65 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "存着灵气，就有什么能力",
-          "columns": ["当前灵气", "自动生效的能力"],
+          "columns": [
+            "当前灵气",
+            "自动生效的能力"
+          ],
           "rows": [
-            ["0点", "人物攻击倍率降为0.5；恢复到至少1点后，恢复正常倍率。"],
-            ["至少1点", "恢复人物正常攻击倍率，基础为1.5；不会仅因继续攒灵气而无限提高普攻倍率。"],
-            ["至少10点", "开启人物自带照明；低于10点关闭。"],
-            ["至少50点", "可以直接在水面行走，并穿过原本会挡路的物体；低于50点后失去这些能力，在水上可能溺水。"],
-            ["至少100点", "额外获得50%的普通伤害吸收，并获得食用灵魂的能力；食用灵魂每次回复1点灵气。低于100点时，这两项能力移除。"]
+            [
+              "0点",
+              "人物攻击倍率降为0.5；恢复到至少1点后，恢复正常倍率。"
+            ],
+            [
+              "至少1点",
+              "恢复人物正常攻击倍率，基础为1.5；不会仅因继续攒灵气而无限提高普攻倍率。"
+            ],
+            [
+              "至少10点",
+              "开启人物自带照明；低于10点关闭。"
+            ],
+            [
+              "至少50点",
+              "可以直接在水面行走，并穿过原本会挡路的物体；低于50点后失去这些能力，在水上可能溺水。"
+            ],
+            [
+              "至少100点",
+              "在装备与料理等其他减伤结算后，将剩余伤害再乘0.7（额外减伤30%）；忽略减伤的伤害不享受此效果。同时获得食用灵魂的能力，每次回复1点灵气。低于100点时移除这两项能力。"
+            ]
           ]
         },
         {
           "type": "table",
           "title": "哪些技能会用到灵气",
-          "columns": ["技能与消耗", "实际用途与效果"],
+          "columns": [
+            "技能与消耗",
+            "实际用途与效果"
+          ],
           "rows": [
-            ["[[避尘]] · 惊鸿（每次2点）", "右键选落点施放。落点范围伤害为扣费后当前灵气×15；剑影命中伤害为命中时当前灵气×25，同一目标每次施法最多中一次剑影。灵气越多，这两段伤害越高。"],
-            ["[[不染]] · 冰圈（不扣灵气）", "攻击触发概率平时为5%；当前灵气严格大于75点时，提高为20%，75点整仍是5%。"],
-            ["[[不染]] + [[远古星雷符文]]（雷击每次1点）", "命中仍存活的暗影阵营等适用目标时，追加扣费前当前灵气×50的直接伤害；不是装上配件后对所有目标都扣灵气。"],
-            ["[[不染]] + 破裂珍珠（不扣灵气）", "攻击有5%概率追加当前灵气×1000的普通攻击伤害；需要已插入对应配件。"],
-            ["[[繁花]] · 施肥10点 / 催熟5点", "施肥补充范围内植物肥力、农田养分与水分；催熟补满[[春朝亭]]或普通蜂箱产量，不会直接催熟所有普通作物。范围采集不消耗这两项灵气费用。"],
-            ["[[春季]] · 10级主动（每次5点）", "促进周围40范围内符合条件的农作物生长；这是四季主物品的主动技能，与繁花的范围催熟不同。"]
+            [
+              "[[避尘]] · 惊鸿（每次2点）",
+              "右键选落点施放。落点范围伤害为扣费后当前灵气×15；剑影命中伤害为命中时当前灵气×25，同一目标每次施法最多中一次剑影。灵气越多，这两段伤害越高。"
+            ],
+            [
+              "[[不染]] · 冰圈（不扣灵气）",
+              "攻击触发概率平时为5%；当前灵气严格大于75点时，提高为20%，75点整仍是5%。"
+            ],
+            [
+              "[[不染]] + [[远古星雷符文]]（雷击每次1点）",
+              "命中仍存活的暗影阵营等适用目标时，追加扣费前当前灵气×50的直接伤害；不是装上配件后对所有目标都扣灵气。"
+            ],
+            [
+              "[[不染]] + 破裂珍珠（不扣灵气）",
+              "攻击有5%概率追加当前灵气×1000的普通攻击伤害；需要已插入对应配件。"
+            ],
+            [
+              "[[繁花]] · 施肥10点 / 催熟5点",
+              "施肥补充范围内植物肥力、农田养分与水分；催熟补满[[春朝亭]]或普通蜂箱产量，不会直接催熟所有普通作物。范围采集不消耗这两项灵气费用。"
+            ],
+            [
+              "[[春季]] · 10级主动（每次5点）",
+              "促进周围40范围内符合条件的农作物生长；这是四季主物品的主动技能，与繁花的范围催熟不同。"
+            ]
           ]
         },
         {
@@ -3210,7 +3503,7 @@ window.SITE_DATA = {
           "title": "实战怎么留灵气",
           "items": [
             "跨海前至少攒到50点；踏水期间避免施法把灵气扣到50以下，以免失去踏水能力而溺水。",
-            "需要减伤时尽量保留100点以上。例如100点施放一次避尘后剩98点，会失去50%的额外伤害吸收；102点施放后剩100点，仍保留这项能力。",
+            "需要减伤时尽量保留100点以上。例如100点施放一次避尘后剩98点，会失去这层30%减伤；102点施放后剩100点，仍保留效果。",
             "提高上限只是扩大储量，不会自动把当前灵气补满。想同时保住被动能力和连续施法，先提高上限，再补充当前灵气。"
           ]
         },
@@ -3485,7 +3778,7 @@ window.SITE_DATA = {
       "id": "mech_shixin",
       "owner": "gaojiaoniao",
       "title": "噬心",
-      "summary": "高脚鸟的成长与风险机制：天数、理智、死亡及战斗都会改变体验。",
+      "summary": "高脚鸟的噬心资源：可食用纯粹恐惧提高，五道圆满后召出友方心魔并吸血。",
       "image": "assets/img/items/bb_gaojiaoniao_gjsh.png",
       "detail_blocks": [
         {
@@ -3529,8 +3822,21 @@ window.SITE_DATA = {
             [
               "死亡，噬心达到76且五道未圆满",
               "−2"
+            ],
+            [
+              "食用1个纯粹恐惧",
+              "+1"
+            ],
+            [
+              "五道圆满且存活，每60秒",
+              "−2；佩戴古祭神辉时不会降低"
             ]
           ]
+        },
+        {
+          "type": "text",
+          "title": "怎么食用纯粹恐惧",
+          "content": "由高脚鸟将纯粹恐惧放在自己的物品栏中，使用「食用」动作，每次消耗1个并增加1点噬心，不超过100。"
         },
         {
           "type": "table",
@@ -3570,15 +3876,21 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "五道圆满后",
-          "content": "[[五道]]圆满后，心魔转而攻击敌人；持续损血、食物治疗限制与移速惩罚解除。",
+          "content": "[[五道]]圆满后解除持续损血、食物治疗限制与移速惩罚，噬心每60秒降低2。触发友方心魔时一次召出1～3个，转而攻击敌人，并按各自实际造成伤害的5%为主人恢复生命。佩戴[[古祭神辉]]可阻止噬心下降。",
           "tone": "note"
+        },
+        {
+          "type": "text",
+          "title": "状态栏操作",
+          "content": "噬心图标与五道圆环可分别右键拖动，位置会保存；按住Alt右键单击可恢复默认位置。"
         }
       ],
       "related": [
         "gaojiaoniao",
         "mech_wudao",
         "config_bb_gaojiaoniao_demon_damage",
-        "config_bb_gaojiaoniao_shadow_damage"
+        "config_bb_gaojiaoniao_shadow_damage",
+        "bb_gaojiaoniao_gjsh"
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
     },
@@ -3586,7 +3898,7 @@ window.SITE_DATA = {
       "id": "mech_wudao",
       "owner": "gaojiaoniao",
       "title": "五道",
-      "summary": "神道、人道、畜生道、恶鬼道、地狱道，解锁后提升角色能力。",
+      "summary": "神道、人道、畜生道、饿鬼道、地狱道；圆满后免疫冻结、受击硬直和击退。",
       "image": "assets/img/items/bb_gaojiaoniao_lh.png",
       "detail_blocks": [
         {
@@ -3614,7 +3926,7 @@ window.SITE_DATA = {
               "生命上限 +50"
             ],
             [
-              "恶鬼道",
+              "饿鬼道",
               "通过饥饿死亡领悟。",
               "饥饿上限 +50"
             ],
@@ -3672,14 +3984,20 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "圆满后有什么变化",
-          "content": "解除噬心的持续损血、食物治疗限制与移速惩罚，并改变心魔的攻击目标。",
+          "content": "解除[[噬心]]的持续损血、食物治疗限制与移速惩罚；免疫冻结、受击硬直和击退，仍会正常受到伤害。触发友方心魔时召出1～3个，并为主人吸血。噬心每60秒降低2，佩戴[[古祭神辉]]时不下降。",
           "tone": "note"
+        },
+        {
+          "type": "text",
+          "title": "五道圆环",
+          "content": "状态栏新增独立五道圆环，分别显示五道是否领悟；悬停查看条件和效果。圆环支持右键拖动，按住Alt右键单击复位。"
         }
       ],
       "related": [
         "gaojiaoniao",
         "mech_shixin",
-        "bb_gaojiaoniao_lh"
+        "bb_gaojiaoniao_lh",
+        "bb_gaojiaoniao_gjsh"
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_lh.png"
     },
@@ -5001,6 +5319,38 @@ window.SITE_DATA = {
   ],
   "changelog": [
     {
+      "id": "log_5100",
+      "title": "v5.1 · 料理与战斗调整",
+      "version": "v5.1",
+      "image": "assets/img/items/bighead_gwjn.png",
+      "related": [
+        "bighead_sucookpot_item",
+        "bb_gaojiaoniao_cs",
+        "mech_wudao",
+        "mech_shixin",
+        "mech_lingqi",
+        "bighead_ylry",
+        "bighead_fanhua_skin2",
+        "config_bighead_pot_yield",
+        "config_bighead_zhuxie_mult"
+      ],
+      "changes": [
+        "本条汇总v4.8至v5.1的累计玩法变化。",
+        "[[芙蓉石蟠螭耳盖炉]]改为5格原料、15格成品的批量红锅，每轮1秒；默认出2份，可通过[[红锅出锅数量]]改为1份。制作材料改为彩虹宝石×1、红宝石×3、月亮碎片×10。",
+        "新增七道红锅料理：[[此间山]]、[[莓酱果子]]、[[糖渍果]]、[[果味加浓]]、[[月圆血石榴]]、[[心冻了莓]]、[[甜蜜风暴]]。新增料理增益图标、效果说明与剩余时间。",
+        "停用草莓罐头、草莓可丽饼、草莓软酪、蜂蜜酥山、双果冰淇淋、水果蛋糕、酸奶冰淇淋、桃花酥、西瓜酥山、仙人掌石榴汁。这十道旧料理及其调味版会在旧存档加载时直接清除。",
+        "两名角色的初始料理改为1份[[果味加浓]]；高脚鸟每日投喂中原有的两份草莓软酪也改为两份果味加浓。",
+        "[[除祟]]耐久由100提高至500；新增月岩强化攻击、大理石强化减速、海象牙强化移速，支持批量交付升级和修理。",
+        "除祟新增主动诛邪：消耗30饥饿，对周围敌人造成以当前理智和噬心计算的范围真实伤害；新增[[诛邪伤害倍率]]设置。",
+        "[[五道]]圆满后免疫冻结、受击硬直和击退；友方心魔每次召出1～3个，并按实际造成伤害的5%为主人回血。修正五道三维上限与当前值的读档恢复。",
+        "高脚鸟可食用纯粹恐惧，每个增加1点[[噬心]]；五道圆满后每60秒降低2点，佩戴[[古祭神辉]]时阻止噬心下降。新增可拖动的五道圆环，并调整噬心图标拖动操作。",
+        "胖头鱼灵气达到100时，减伤改为在其他减伤后再减免30%，替代原有的50%普通伤害吸收。",
+        "不染移除风向标强化与龙卷风施法；[[蕴灵如意]]新增小旋风，可右键指定目标施放。",
+        "[[封魂]]配方中的传送魔杖改为懒人魔杖。移除秋季向猪王投喂料理换取秋之灵、曼德拉草或便便的额外奖励。",
+        "[[繁花]]新增「[[爱慕 · 繁花]]」外观，调整手持动画、命中特效和皮肤切换显示。"
+      ]
+    },
+    {
       "id": "log_4800",
       "title": "v4.8 · 新增玩法设置",
       "version": "v4.8",
@@ -5139,6 +5489,24 @@ window.SITE_DATA = {
         }
       ],
       "display_image": "assets/img/displays/bighead_fanhua_skin1.png"
+    },
+    {
+      "id": "bighead_fanhua_skin2",
+      "item_id": "bighead_fanhua",
+      "name": "爱慕 · 繁花",
+      "image": "assets/img/skins/bighead_fanhua_skin2.png",
+      "summary": "一枝繁花，满心爱慕。繁花的装备外观。",
+      "related": [
+        "bighead_fanhua"
+      ],
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "对应装备",
+          "content": "[[繁花]]的「爱慕」外观，具有独立的手持动画和命中特效。"
+        }
+      ],
+      "display_image": "assets/img/displays/bighead_fanhua_skin2.png"
     },
     {
       "id": "bighead_buran_skin1",
@@ -5575,6 +5943,59 @@ window.SITE_DATA = {
   ],
   "settings": [
     {
+      "id": "config_bighead_pot_yield",
+      "title": "红锅出锅数量",
+      "summary": "默认：双倍（每轮2份）",
+      "image": "assets/img/items/bighead_sucookpot_item.png",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "作用",
+          "content": "调整[[芙蓉石蟠螭耳盖炉]]每轮的料理产出。每轮仍从五个原料格各消耗1份食材，耗时1秒。"
+        },
+        {
+          "type": "text",
+          "title": "可选值",
+          "content": "正常：1份；双倍：2份。"
+        },
+        {
+          "type": "text",
+          "title": "默认值",
+          "content": "双倍：2份。"
+        }
+      ],
+      "related": [
+        "bighead_sucookpot_item"
+      ]
+    },
+    {
+      "id": "config_bighead_zhuxie_mult",
+      "title": "诛邪伤害倍率",
+      "summary": "默认：1倍",
+      "image": "assets/img/items/bb_gaojiaoniao_cs.png",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "作用",
+          "content": "调整[[除祟]]主动技能诛邪的伤害。基础公式为当前理智×当前[[噬心]]×所选倍率，再乘角色与其他攻击修正。"
+        },
+        {
+          "type": "text",
+          "title": "可选值",
+          "content": "0.2倍 / 0.5倍 / 1倍。"
+        },
+        {
+          "type": "text",
+          "title": "默认值",
+          "content": "1倍。"
+        }
+      ],
+      "related": [
+        "bb_gaojiaoniao_cs",
+        "mech_shixin"
+      ]
+    },
+    {
       "id": "config_bb_gaojiaoniao_demon_damage",
       "title": "高脚鸟心魔伤害",
       "summary": "默认：噬心值的100%",
@@ -5765,10 +6186,16 @@ window.SITE_DATA = {
         {
           "type": "text",
           "content": "默认：有"
+        },
+        {
+          "type": "text",
+          "title": "果味加浓",
+          "content": "开启后，每日随机投喂可能获得两份[[果味加浓]]，并非每天固定发放这道料理。"
         }
       ],
       "related": [
-        "gaojiaoniao"
+        "gaojiaoniao",
+        "bighead_gwjn"
       ]
     },
     {

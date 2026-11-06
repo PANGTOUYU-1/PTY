@@ -45,9 +45,9 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages1/butterflywings.png",
     "aliases": []
   },
-  "cactus_meat": {
-    "name": "仙人掌肉",
-    "image": "assets/img/inventoryimages1/cactus_meat.png",
+  "cave_banana": {
+    "name": "香蕉",
+    "image": "assets/img/inventoryimages1/cave_banana.png",
     "aliases": []
   },
   "charcoal": {
@@ -58,11 +58,6 @@ window.VANILLA_ICONS = {
   "cookbook": {
     "name": "烹饪指南",
     "image": "assets/img/inventoryimages1/cookbook.png",
-    "aliases": []
-  },
-  "cookpot": {
-    "name": "烹饪锅",
-    "image": "assets/img/inventoryimages1/cookpot.png",
     "aliases": []
   },
   "cutgrass": {
@@ -120,6 +115,16 @@ window.VANILLA_ICONS = {
     "aliases": [
       "鱼肉"
     ]
+  },
+  "glommerfuel": {
+    "name": "格罗姆的黏液",
+    "image": "assets/img/inventoryimages2/glommerfuel.png",
+    "aliases": []
+  },
+  "glommerwings": {
+    "name": "格罗姆翅膀",
+    "image": "assets/img/inventoryimages2/glommerwings.png",
+    "aliases": []
   },
   "goatmilk": {
     "name": "带电的羊奶",
@@ -190,6 +195,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages2/meat.png",
     "aliases": []
   },
+  "milkywhites": {
+    "name": "乳白物",
+    "image": "assets/img/inventoryimages2/milkywhites.png",
+    "aliases": []
+  },
   "moonglass": {
     "name": "月亮碎片",
     "image": "assets/img/inventoryimages2/moonglass.png",
@@ -198,6 +208,11 @@ window.VANILLA_ICONS = {
   "moonglassaxe": {
     "name": "月光玻璃斧",
     "image": "assets/img/inventoryimages2/moonglassaxe.png",
+    "aliases": []
+  },
+  "mosquitosack": {
+    "name": "蚊子血囊",
+    "image": "assets/img/inventoryimages2/mosquitosack.png",
     "aliases": []
   },
   "nightmarefuel": {
@@ -240,6 +255,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages2/orangemooneye.png",
     "aliases": []
   },
+  "orangestaff": {
+    "name": "懒人魔杖",
+    "image": "assets/img/inventoryimages2/orangestaff.png",
+    "aliases": []
+  },
   "papyrus": {
     "name": "莎草纸",
     "image": "assets/img/inventoryimages2/papyrus.png",
@@ -248,6 +268,11 @@ window.VANILLA_ICONS = {
   "petals": {
     "name": "花瓣",
     "image": "assets/img/inventoryimages2/petals.png",
+    "aliases": []
+  },
+  "phlegm": {
+    "name": "脓鼻涕",
+    "image": "assets/img/inventoryimages2/phlegm.png",
     "aliases": []
   },
   "pinecone": {
@@ -310,9 +335,19 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages3/silk.png",
     "aliases": []
   },
+  "slurtleslime": {
+    "name": "蛞蝓龟黏液",
+    "image": "assets/img/inventoryimages3/slurtleslime.png",
+    "aliases": []
+  },
   "smallmeat": {
     "name": "小肉",
     "image": "assets/img/inventoryimages3/smallmeat.png",
+    "aliases": []
+  },
+  "spidergland": {
+    "name": "蜘蛛腺",
+    "image": "assets/img/inventoryimages3/spidergland.png",
     "aliases": []
   },
   "staff_lunarplant": {
@@ -323,11 +358,6 @@ window.VANILLA_ICONS = {
   "tallbirdegg": {
     "name": "高脚鸟蛋",
     "image": "assets/img/inventoryimages3/tallbirdegg.png",
-    "aliases": []
-  },
-  "telestaff": {
-    "name": "传送魔杖",
-    "image": "assets/img/inventoryimages3/telestaff.png",
     "aliases": []
   },
   "thulecite": {

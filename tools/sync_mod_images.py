@@ -13,6 +13,7 @@ from tex_to_png import to_png_image
 
 ROOT = Path(__file__).resolve().parent.parent
 SPECIAL = {
+    'assets/img/items/bb_gaojiaoniao_px.png': 'images/inventoryimages/bb_gaojiaoniao_px_builder.tex',
     'assets/img/mechanics/jieqi_tab.png': 'images/bighead_jq_tab.tex',
     'assets/img/mechanics/jisheng_taoling.png': 'images/map_icons/bighead_jisheng_taoling_planted.tex',
     'assets/img/terrains/bighead_fishhouse.png': 'images/map_icons/bighead_fishhouse.tex',
