@@ -53,6 +53,16 @@ def prepare_image(source, target):
     return output.size
 
 
+def prepare_thumbnail(source, target, max_size):
+    """Create a separate small icon from a native display, keeping its ratio."""
+    with Image.open(source) as original:
+        image = original.convert('RGBA')
+    image.thumbnail(tuple(max_size), Image.Resampling.LANCZOS)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    image.save(target, optimize=True)
+    return image.size
+
+
 def export(args, manifest, scratch):
     assets = manifest['assets']
     with ZipFile(args.mod) as archive:
@@ -116,6 +126,11 @@ def main():
             size = prepare_image(source, target)
             if tuple(asset['display_size']) != size:
                 raise ValueError(f'Unexpected dimensions for {source}: {size}')
+            if asset.get('thumbnail_path'):
+                thumbnail = ROOT / asset['thumbnail_path']
+                thumbnail_size = prepare_thumbnail(target, thumbnail, asset['thumbnail_max_size'])
+                if tuple(asset['thumbnail_size']) != thumbnail_size:
+                    raise ValueError(f'Unexpected thumbnail dimensions for {thumbnail}: {thumbnail_size}')
             if asset.get('icon_symbol'):
                 icon_source = native / (asset['source'] + '-icon.png')
                 with Image.open(icon_source) as icon:

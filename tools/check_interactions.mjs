@@ -385,15 +385,21 @@ check('食物使用独立的单选分类，清空和详情返回不会混入物�
     assert.ok(App.Filter.getFilteredItems().every(item => item.owner === 'pangtouyu'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
-check('125张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
+check('126张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/display-assets.json'), 'utf8'));
   const assets = new Map(manifest.assets.map(asset => [asset.source, asset]));
-  assert.equal(assets.size, 125);
+  assert.equal(assets.size, 126);
   for (const asset of assets.values()) {
     const png = readFileSync(join(root, asset.path));
     assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', asset.source);
     assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], asset.display_size, asset.source);
     assert.equal(asset.scale, 1);
+    if (asset.thumbnail_path) {
+      const thumbnail = readFileSync(join(root, asset.thumbnail_path));
+      const size = [thumbnail.readUInt32BE(16), thumbnail.readUInt32BE(20)];
+      assert.deepEqual(size, asset.thumbnail_size, asset.source);
+      assert.ok(size.every((dimension, index) => dimension <= asset.thumbnail_max_size[index]));
+    }
     if (asset.icon_path) {
       const pngIcon = readFileSync(join(root, asset.icon_path));
       assert.deepEqual([pngIcon.readUInt32BE(16), pngIcon.readUInt32BE(20)], asset.icon_size);
@@ -410,6 +416,40 @@ check('125张原生展示PNG与清单尺寸相符，物品、节气和外观全�
     assert.ok(entry.display_image?.startsWith('assets/img/displays/'), entry.id);
     assert.notEqual(entry.display_image, entry.image, entry.id);
   }
+});
+check('不染详情直接说明三格容量、六种配件与神石给予操作', () => {
+  App.Modal.open('bighead_buran');
+  const output = node('modal-root').innerHTML;
+  const text = output.replace(/<[^>]*>/g, '');
+  for (const description of ['3格配件容器', '每格只能放1件', '同种配件不能重复放入', '蕴灵神石要用「给予」']) {
+    assert.ok(text.includes(description), description);
+  }
+  for (const name of ['月冕莲心', '远古星雷符文', '注能暗影心房', '月岩雕像', '珍珠', '破裂珍珠']) {
+    assert.ok(text.includes(name), name);
+  }
+  assert.ok(text.includes('配件效果'));
+  assert.ok(!text.includes('完整配件说明见'));
+});
+check('溟羽及冥羽均可搜索，芙蓉与人物页能够进入伙伴详情并返回召唤物', () => {
+  const previous = { ...App.ui };
+  try {
+    for (const query of ['溟羽', '冥羽']) {
+      assert.equal(state.nameToId[query], 'bb_gaojiaoniao_my');
+      App.ui.q = query;
+      assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'bb_gaojiaoniao_my'));
+    }
+    assert.ok(node('characters-root').innerHTML.includes('data-open-entry="bb_gaojiaoniao_my"'));
+    App.Modal.open('bb_gaojiaoniao_fr');
+    assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bb_gaojiaoniao_my"'));
+    App.Modal.open('bb_gaojiaoniao_my');
+    const output = node('modal-root').innerHTML;
+    const text = output.replace(/<[^>]*>/g, '');
+    for (const description of ['召唤', '激怒', '安慰', '返回', '羁绊与生命上限', '随昼夜变化的基础攻击']) {
+      assert.ok(text.includes(description), description);
+    }
+    assert.ok(output.includes('data-open-entry="bb_gaojiaoniao_fr"'));
+    assert.ok(output.includes('src="assets/img/displays/bb_gaojiaoniao_my.png"'));
+  } finally { App.ui = previous; }
 });
 check('实际卡片和详情使用落地图，名称前和配方仍使用原始小图标', () => {
   App.Render.renderItems();

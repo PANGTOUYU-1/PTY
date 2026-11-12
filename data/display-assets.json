@@ -2764,6 +2764,39 @@
         223,
         360
       ]
+    },
+    {
+      "source": "bb_gaojiaoniao_my",
+      "bank": "shadow_thrall_wings",
+      "build": "bb_gaojiaoniao_my",
+      "animation": "idle_down",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [
+        "shadow_thrall_wings.zip"
+      ],
+      "width": 1024,
+      "height": 595,
+      "alpha_bounds": [
+        73,
+        9,
+        951,
+        570
+      ],
+      "display_size": [
+        894,
+        577
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_my.png",
+      "thumbnail_path": "assets/img/mechanics/mingyu.png",
+      "thumbnail_max_size": [
+        96,
+        96
+      ],
+      "thumbnail_size": [
+        96,
+        62
+      ]
     }
   ],
   "bindings": [
@@ -3426,6 +3459,11 @@
       "id": "bighead_fanhua_skin2",
       "group": "skins",
       "source": "bighead_fanhua_skin2"
+    },
+    {
+      "id": "bb_gaojiaoniao_my",
+      "group": "items",
+      "source": "bb_gaojiaoniao_my"
     }
   ]
 }
