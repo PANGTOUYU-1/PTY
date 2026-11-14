@@ -330,6 +330,16 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages3/ruins_bat.png",
     "aliases": []
   },
+  "shadowheart": {
+    "name": "暗影心房",
+    "image": "assets/img/inventoryimages3/shadowheart.png",
+    "aliases": []
+  },
+  "shroom_skin": {
+    "name": "蘑菇皮",
+    "image": "assets/img/inventoryimages3/shroom_skin.png",
+    "aliases": []
+  },
   "silk": {
     "name": "蜘蛛丝",
     "image": "assets/img/inventoryimages3/silk.png",
@@ -348,6 +358,11 @@ window.VANILLA_ICONS = {
   "spidergland": {
     "name": "蜘蛛腺",
     "image": "assets/img/inventoryimages3/spidergland.png",
+    "aliases": []
+  },
+  "spoiled_food": {
+    "name": "腐烂物",
+    "image": "assets/img/inventoryimages3/spoiled_food.png",
     "aliases": []
   },
   "staff_lunarplant": {

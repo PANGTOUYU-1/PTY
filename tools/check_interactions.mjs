@@ -385,10 +385,10 @@ check('食物使用独立的单选分类，清空和详情返回不会混入物�
     assert.ok(App.Filter.getFilteredItems().every(item => item.owner === 'pangtouyu'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
-check('126张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
+check('133张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/display-assets.json'), 'utf8'));
   const assets = new Map(manifest.assets.map(asset => [asset.source, asset]));
-  assert.equal(assets.size, 126);
+  assert.equal(assets.size, 133);
   for (const asset of assets.values()) {
     const png = readFileSync(join(root, asset.path));
     assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', asset.source);
@@ -513,7 +513,7 @@ check('各分区、详情与外观统一显示专属印章，通用内容不误�
   for (const id of ['mech_gold_penguin', 'mech_spirits', 'mech_parasite', 'loc_foyer']) {
     assert.equal(state.entries[id].owner, 'common', id);
   }
-  assert.ok(state.seasons.every(entry => entry.owner === 'pangtouyu'));
+  assert.ok(state.seasons.every(entry => entry.owner === 'common'));
   assert.equal(state.entries.mech_shixin.owner, 'gaojiaoniao');
   assert.equal(state.entries.mech_wudao.owner, 'gaojiaoniao');
 });
@@ -811,7 +811,7 @@ check('真实详情模块显示配方、科技与正确的分区链接', () => {
 });
 check('原版材料使用新目录内24px图标，保留配方文字数量且不生成无效链接', () => {
   const icons = sandbox.window.VANILLA_ICONS;
-  assert.equal(Object.keys(icons).length, 77);
+  assert.equal(Object.keys(icons).length, 80);
   for (const [id, icon] of Object.entries(icons)) {
     const png = readFileSync(join(root, icon.image));
     assert.match(icon.image, /^assets\/img\/inventoryimages[1-4]\//);
@@ -899,7 +899,7 @@ check('所有金企鹅兑换入口可查看召唤步骤，区分金块与Q币并
   App.Modal.open('bighead_qbi');
   assert.ok(node('modal-root').innerHTML.includes('data-open-entry="mech_gold_penguin"'));
 });
-check('28款外观全部在对应物品中横向展示，支持查看、返回、搜索和旧链接', () => {
+check('31款外观全部在对应物品中横向展示，支持查看、返回、搜索和旧链接', () => {
   for (const item of state.items) {
     App.Modal.open(item.id);
     const output = node('modal-root').innerHTML;
@@ -945,7 +945,7 @@ check('获取状态在卡片和详情显式显示并可搜索，芙蓉保留已�
   const output = node('modal-root').innerHTML;
   const plain = output.replace(/<[^>]*>/g, '');
   assert.ok(output.includes('class="availability-badge">特殊获取'));
-  for (const text of ['10%', '暗影心房', '枯萎', '失败会消耗心房']) assert.ok(plain.includes(text), text);
+  for (const text of ['高级耕作先驱帽', '暗影心房', '花种', '新月', '祭眼']) assert.ok(plain.includes(text), text);
   assert.ok(!plain.includes('未找到启用'));
   App.ui.q = '特殊获取';
   assert.ok(App.Filter.getFilteredItems().some(item => item.id === 'bb_gaojiaoniao_fr'));
@@ -1211,7 +1211,7 @@ check('v5.1停用料理只在更新中说明，新料理可搜索、筛选并打
   for (const id of retired) assert.equal(state.entries[id], undefined, id);
   const current = Object.values(state.entries).filter(entry => entry.type !== 'changelog');
   assert.ok(!JSON.stringify(current).includes('旧存档加载时直接清除'));
-  assert.ok(state.changelog[0].changes.some(change => change.includes('调味版') && change.includes('旧存档加载时直接清除')));
+  assert.ok(state.changelog.find(log => log.id === 'log_5100').changes.some(change => change.includes('调味版') && change.includes('旧存档加载时直接清除')));
   const previous = App.ui;
   const hash = sandbox.window.location.hash;
   try {
@@ -1230,9 +1230,67 @@ check('v5.1停用料理只在更新中说明，新料理可搜索、筛选并打
     assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bighead_fanhua_skin2"'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
-check('v5.1 基础属性与数据版本一致', () => {
-  assert.equal(state.meta.version, 'v5.1');
+check('v5.6 基础属性与数据版本一致', () => {
+  assert.equal(state.meta.version, 'v5.6');
   assert.deepEqual(JSON.parse(JSON.stringify(state.characters[0].stats)), { hp: 150, san: 150, hunger: 150 });
   assert.deepEqual(JSON.parse(JSON.stringify(state.characters[1].stats)), { hp: 150, san: 100, hunger: 200 });
+});
+check('花种仪式能够逐步进入材料、祭眼、芙蓉和溟羽，旧获取方式只留在更新', () => {
+  const previous = { ...App.ui };
+  try {
+    App.Modal.open('mech_seed_ritual');
+    let output = node('modal-root').innerHTML;
+    for (const id of ['bighead_flowerseed', 'bighead_rotten_flowerseed', 'bighead_ritual_eye', 'bb_gaojiaoniao_fr', 'bb_gaojiaoniao_my']) {
+      assert.ok(output.includes(`data-open-entry="${id}"`), id);
+      App.ui.q = state.entries[id].name;
+      assert.ok(App.Filter.getSearchResults().some(entry => entry.id === id), id);
+      App.Modal.open(id);
+      assert.ok(node('modal-root').innerHTML.includes('<h3>怎么使用</h3>'), id);
+    }
+    App.Modal.open('bb_gaojiaoniao_fr');
+    output = node('modal-root').innerHTML.replace(/<[^>]*>/g, '');
+    assert.ok(output.includes('50℃') && output.includes('3个游戏天') && output.includes('新月'));
+    assert.ok(!output.includes('10%概率') && !output.includes('枯萎'));
+    assert.ok(state.changelog.find(log => log.id === 'log_5600').changes.some(change => change.includes('枯萎格罗姆花')));
+    App.Modal.open('bighead_ritual_eye');
+    assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bb_gaojiaoniao_fr"'));
+  } finally { App.ui = previous; }
+});
+check('万象玑详情渲染七法术、完整宝石配方与充弦材料链接', () => {
+  App.Modal.open('bighead_wanxiangji');
+  const output = node('modal-root').innerHTML;
+  const plain = output.replace(/<[^>]*>/g, '');
+  for (const word of ['传', '缚', '新', '血', '盈', '雨', '召', '初始0弦', '20弦', '1000', '同一地表或洞穴世界']) assert.ok(plain.includes(word), word);
+  for (const name of ['红宝石', '蓝宝石', '紫宝石', '橙宝石', '黄宝石', '绿宝石', '彩虹宝石']) assert.ok(plain.includes(`${name}×9`), name);
+  for (const id of ['bighead_ylss', 'bighead_wcs']) assert.ok(output.includes(`data-open-entry="${id}"`), id);
+});
+check('新装备外观从对应物品进入并显示账号限制，爱慕同步说明限制', () => {
+  for (const id of ['bb_gaojiaoniao_cs_skin2', 'bighead_spear_skin3', 'bb_gaojiaoniao_fh_skin3', 'bighead_fanhua_skin2']) {
+    const skin = state.entries[id];
+    App.Modal.open(skin.item_id);
+    assert.ok(node('modal-root').innerHTML.includes(`data-open-entry="${id}"`), id);
+    App.Modal.open(id);
+    const output = node('modal-root').innerHTML;
+    assert.ok(output.includes('仅获授权的账号可使用'), id);
+    assert.ok(output.includes(`data-open-entry="${skin.item_id}"`), id);
+  }
+});
+check('通用节气装配与角色主动限制分别说明，新区域可搜索且不混入室内房间', () => {
+  assert.equal(state.entries.mech_jieqi.owner, 'common');
+  for (const entry of state.seasons) {
+    App.Modal.open(entry.id);
+    assert.ok(node('modal-root').innerHTML.includes('任意角色装备'), entry.id);
+    assert.ok(!JSON.stringify(entry).includes('胖头鱼移速'), entry.id);
+  }
+  App.Modal.open('bighead_qyq');
+  assert.ok(node('modal-root').innerHTML.includes('主动使用仍限胖头鱼'));
+  assert.ok(!state.terrains.some(entry => entry.id === 'mech_mist_forest'));
+  const previous = App.ui.q;
+  try {
+    App.ui.q = '雾气桦树林';
+    assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'mech_mist_forest'));
+    App.Modal.open('mech_mist_forest');
+    assert.ok(node('modal-root').innerHTML.includes('已有存档不会自动补入'));
+  } finally { App.ui.q = previous; }
 });
 console.log(`\n交互模块检查：${passed} 通过。`);

@@ -1,6 +1,6 @@
 {
   "generator": "DST Mod Tool 1.1.13 official Lua API",
-  "mod_version": "5.1",
+  "mod_version": "5.6",
   "processing": "Native scale 1; alpha crop and 8px transparent padding; no resizing or vertical flip.",
   "assets": [
     {
@@ -2797,6 +2797,169 @@
         96,
         62
       ]
+    },
+    {
+      "source": "bighead_wanxiangji",
+      "bank": "bighead_wanxiangji",
+      "build": "bighead_wanxiangji",
+      "animation": "inactive",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 135,
+      "height": 170,
+      "alpha_bounds": [
+        2,
+        6,
+        134,
+        166
+      ],
+      "display_size": [
+        148,
+        176
+      ],
+      "path": "assets/img/displays/bighead_wanxiangji.png"
+    },
+    {
+      "source": "bighead_flowerseed",
+      "bank": "bighead_flowerseed",
+      "build": "bighead_flowerseed",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 154,
+      "height": 150,
+      "alpha_bounds": [
+        0,
+        0,
+        152,
+        150
+      ],
+      "display_size": [
+        168,
+        166
+      ],
+      "path": "assets/img/displays/bighead_flowerseed.png"
+    },
+    {
+      "source": "bighead_rotten_flowerseed",
+      "bank": "bighead_rotten_flowerseed",
+      "build": "bighead_rotten_flowerseed",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 154,
+      "height": 150,
+      "alpha_bounds": [
+        3,
+        0,
+        149,
+        150
+      ],
+      "display_size": [
+        162,
+        166
+      ],
+      "path": "assets/img/displays/bighead_rotten_flowerseed.png"
+    },
+    {
+      "source": "bighead_ritual_eye",
+      "bank": "bighead_ritual_eye",
+      "build": "bighead_ritual_eye",
+      "animation": "in_idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 1185,
+      "height": 1200,
+      "alpha_bounds": [
+        5,
+        6,
+        1180,
+        1199
+      ],
+      "display_size": [
+        1191,
+        1209
+      ],
+      "path": "assets/img/displays/bighead_ritual_eye.png",
+      "thumbnail_path": "assets/img/mechanics/ritual_eye.png",
+      "thumbnail_max_size": [
+        96,
+        96
+      ],
+      "thumbnail_size": [
+        95,
+        96
+      ]
+    },
+    {
+      "source": "bb_gaojiaoniao_cs_skin2",
+      "bank": "bb_gaojiaoniao_cs_skin2",
+      "build": "bb_gaojiaoniao_cs_skin2",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 202,
+      "height": 446,
+      "alpha_bounds": [
+        5,
+        1,
+        202,
+        446
+      ],
+      "display_size": [
+        213,
+        461
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_cs_skin2.png"
+    },
+    {
+      "source": "bighead_spear_skin3",
+      "bank": "bighead_spear_skin3",
+      "build": "bighead_spear_skin3",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 202,
+      "height": 446,
+      "alpha_bounds": [
+        5,
+        1,
+        202,
+        446
+      ],
+      "display_size": [
+        213,
+        461
+      ],
+      "path": "assets/img/displays/bighead_spear_skin3.png"
+    },
+    {
+      "source": "bb_gaojiaoniao_fh_skin3",
+      "bank": "bb_gaojiaoniao_fh_skin3",
+      "build": "bb_gaojiaoniao_fh_skin3",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 130,
+      "height": 561,
+      "alpha_bounds": [
+        1,
+        2,
+        129,
+        560
+      ],
+      "display_size": [
+        144,
+        574
+      ],
+      "path": "assets/img/displays/bb_gaojiaoniao_fh_skin3.png"
     }
   ],
   "bindings": [
@@ -3464,6 +3627,38 @@
       "id": "bb_gaojiaoniao_my",
       "group": "items",
       "source": "bb_gaojiaoniao_my"
+    },
+    {
+      "id": "bighead_wanxiangji",
+      "source": "bighead_wanxiangji"
+    },
+    {
+      "id": "bighead_flowerseed",
+      "source": "bighead_flowerseed"
+    },
+    {
+      "id": "bighead_rotten_flowerseed",
+      "source": "bighead_rotten_flowerseed"
+    },
+    {
+      "id": "bighead_ritual_eye",
+      "source": "bighead_ritual_eye"
+    },
+    {
+      "id": "bb_gaojiaoniao_cs_skin2",
+      "source": "bb_gaojiaoniao_cs_skin2"
+    },
+    {
+      "id": "bighead_spear_skin3",
+      "source": "bighead_spear_skin3"
+    },
+    {
+      "id": "bb_gaojiaoniao_fh_skin3",
+      "source": "bb_gaojiaoniao_fh_skin3"
+    },
+    {
+      "id": "mech_seed_ritual",
+      "source": "bighead_ritual_eye"
     }
   ]
 }

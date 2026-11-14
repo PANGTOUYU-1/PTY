@@ -1,6 +1,6 @@
 /**
- * 我们饥佬是这样的 Wiki · v5.1
- * 内容依据 bighead.zip 内 modinfo.lua、scripts/main/recipes.lua、strings.lua、
+ * 我们饥佬是这样的 Wiki · v5.6
+ * 内容依据 bighead11-14.zip 内 modinfo.lua、scripts/main/recipes.lua、strings.lua、
  * bighead_food.lua、角色/装备 prefab 与机制组件整理；基础值与成长效果分开说明。
  * 小图标由模组 KTEX 转换并校正上下方向；展示图由 DST Mod Tool 原生渲染。
  * 修改内容后执行 node tools/check_data.mjs --strict 与 node tools/check_render.mjs。
@@ -10,7 +10,7 @@ window.SITE_DATA = {
     "site_title": "我们饥佬是这样的",
     "subtitle_latin": "",
     "author": "胖头鱼",
-    "version": "v5.1",
+    "version": "v5.6",
     "workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3627920230",
     "qq_group_url": "https://qm.qq.com/q/119CtJwiP8",
     "manifesto": "超级超级喜欢玩饥荒，搞了这个mod，哈哈哈哈，怎么方便怎么变态怎么来！",
@@ -21,11 +21,11 @@ window.SITE_DATA = {
       }
     ],
     "copyright": "© 2026 我们饥佬是这样的",
-    "source_version": "5.1",
+    "source_version": "5.6",
     "source": {
-      "archive": "bighead.zip",
-      "version": "5.1",
-      "updated": "2026-11-12"
+      "archive": "bighead11-14.zip",
+      "version": "5.6",
+      "updated": "2026-11-14"
     }
   },
   "categories": [
@@ -147,7 +147,8 @@ window.SITE_DATA = {
         "鸿元净莲。基础属性：生命150、理智150、饥饿150。",
         "默认移速为普通角色的2倍，可在模组设置中改为1.5倍；基础攻击倍率为1.5，灵气耗尽时降为0.5。",
         "初始携带[[避尘]]与一份[[果味加浓]]。",
-        "使用[[繁花]]照料植物，也能进入[[太极青玄阁]]。"
+        "使用[[繁花]]照料植物，也能进入[[太极青玄阁]]。",
+        "空手对池塘使用捕鱼动作时，至少需要10饥饿；成功捕到鱼后消耗10饥饿。"
       ],
       "core_mechanics": [
         {
@@ -240,7 +241,7 @@ window.SITE_DATA = {
       "setting": [
         "上古魔龙。基础属性：生命150、理智100、饥饿200。",
         "默认移速为普通角色的2倍，可在模组设置中改为1.5倍。",
-        "初始携带[[除祟]]与一份[[果味加浓]]。",
+        "初始携带[[除祟]]、一份[[果味加浓]]与20弦的[[万象玑]]；新生时自动装备万象玑。",
         "获得[[芙蓉]]后可召唤专属伙伴[[溟羽]]，并切换激怒或安慰模式。"
       ],
       "core_mechanics": [
@@ -254,7 +255,7 @@ window.SITE_DATA = {
         }
       ],
       "exclusive_intro": [
-        "他的制作栏物件：[[凤求凰]]（动作名「万箭」）、[[封魂]]（「驱邪魂为己用，以怨念化剑锋。」）、[[除祟]]、[[轮回]]、[[芙蓉]]、[[古祭神辉]]、[[重明遗骨]]。",
+        "他的装备包括[[凤求凰]]（动作名「万箭」）、[[封魂]]、[[除祟]]、[[轮回]]、[[古祭神辉]]、[[重明遗骨]]和[[万象玑]]；[[芙蓉]]要通过[[花种祭眼仪式]]取得。",
         "对四季之灵的检查台词是「啧，还是问问她吧！」——包内胖头鱼、高脚鸟互相评价的句子基本都成对出现。",
         "以他命名的[[高脚鸟月饼]]，检查台词为「鸟弟联名款！」。",
         "人物外观：萧诧、玉桂狗、2026情人节-高脚鸟、富贵王爷。"
@@ -298,14 +299,15 @@ window.SITE_DATA = {
         "pangtouyu",
         "mech_lingqi",
         "bighead_spear_skin1",
-        "bighead_spear_skin2"
+        "bighead_spear_skin2",
+        "bighead_spear_skin3"
       ],
       "tags": [
         "武器",
         "剑"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_spear.png"
     },
     {
@@ -341,7 +343,7 @@ window.SITE_DATA = {
         "繁花"
       ],
       "tech": "炼金引擎；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_fanhua.png"
     },
     {
@@ -385,7 +387,7 @@ window.SITE_DATA = {
         "万箭"
       ],
       "tech": "蓝图或指定制作站；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh.png"
     },
     {
@@ -417,14 +419,15 @@ window.SITE_DATA = {
         "gaojiaoniao",
         "bb_gaojiaoniao_gjsh",
         "bb_gaojiaoniao_fh_skin1",
-        "bb_gaojiaoniao_fh_skin2"
+        "bb_gaojiaoniao_fh_skin2",
+        "bb_gaojiaoniao_fh_skin3"
       ],
       "tags": [
         "武器",
         "剑"
       ],
       "tech": "远古伪科学站；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fh.png"
     },
     {
@@ -463,7 +466,7 @@ window.SITE_DATA = {
         "护甲"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_armor.png"
     },
     {
@@ -497,7 +500,7 @@ window.SITE_DATA = {
         "背部"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_back.png"
     },
     {
@@ -565,7 +568,8 @@ window.SITE_DATA = {
         "mech_shixin",
         "bb_gaojiaoniao_cs_skin1",
         "config_bighead_zhuxie_mult",
-        "bighead_xdlm"
+        "bighead_xdlm",
+        "bb_gaojiaoniao_cs_skin2"
       ],
       "tags": [
         "武器",
@@ -574,7 +578,7 @@ window.SITE_DATA = {
         "强化"
       ],
       "tech": "科学机器；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_cs.png"
     },
     {
@@ -612,7 +616,7 @@ window.SITE_DATA = {
         "如意"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ruyi.png"
     },
     {
@@ -659,7 +663,7 @@ window.SITE_DATA = {
         "捕鱼",
         "旋风"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ylry.png"
     },
     {
@@ -695,7 +699,7 @@ window.SITE_DATA = {
         "雨具"
       ],
       "tech": "炼金引擎；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_umbrella.png"
     },
     {
@@ -736,7 +740,7 @@ window.SITE_DATA = {
         "缚灵网"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_flw.png"
     },
     {
@@ -777,7 +781,7 @@ window.SITE_DATA = {
         "缚灵网"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_czflw.png"
     },
     {
@@ -786,18 +790,18 @@ window.SITE_DATA = {
       "category": "tool",
       "owner": "common",
       "image": "assets/img/items/bighead_qyq.png",
-      "summary": "四格节气饰品容器，供胖头鱼激活节气效果，并为四季主物品培养等级。",
+      "summary": "任何角色均可使用的四格节气容器，激活四季加成，并为四季主物品培养等级。",
       "recipe": "辉煌铁匠铺：月亮碎片×10 + [bighead_ylss]×2；金企鹅兑换：[bighead_qbi]×10",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "装备后把春、夏、秋、冬对应的节气物品放入四个季节槽。需要开启“节气系统”；任何角色都能装备，但只有胖头鱼能获得装入节气后的效果与攻击联动。"
+          "content": "任何角色装备后，都可将春、夏、秋、冬对应的节气物品放入四个季节槽，激活其被动和攻击联动。需要开启“节气系统”。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "放入的物品决定实际效果，详见各[[节气]]条目。四季齐全时，攻击会随机触发其中一件物品的攻击效果。收获巨大作物时，当季主物品获得10经验，最高10级。"
+          "content": "放入的物品决定实际效果，详见各[[节气]]条目。四季齐全时，攻击会随机触发其中一件物品的攻击效果。收获巨大作物时，当季主物品获得10经验，最高10级。 灵气上限、回复及消耗灵气的主动能力仍要求角色具有相应能力；四季主物品的10级主动使用仍限胖头鱼。"
         },
         {
           "type": "text",
@@ -823,7 +827,7 @@ window.SITE_DATA = {
         "琦玉器"
       ],
       "tech": "辉煌铁匠铺 / 金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_qyq.png"
     },
     {
@@ -860,7 +864,7 @@ window.SITE_DATA = {
         "卷轴"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_scrolls.png"
     },
     {
@@ -889,7 +893,7 @@ window.SITE_DATA = {
         "照明"
       ],
       "tech": "无需科技",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_hy.png"
     },
     {
@@ -926,7 +930,7 @@ window.SITE_DATA = {
         "容器"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_llxz.png"
     },
     {
@@ -959,7 +963,7 @@ window.SITE_DATA = {
         "亭台"
       ],
       "tech": "炼金引擎",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_cct.png"
     },
     {
@@ -994,7 +998,7 @@ window.SITE_DATA = {
         "食物"
       ],
       "tech": "炼金引擎",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_hhlct.png"
     },
     {
@@ -1052,7 +1056,7 @@ window.SITE_DATA = {
       ],
       "summary": "五格原料自动批量烹饪、十五格收纳成品的便携红锅，默认每轮出2份。",
       "tech": "无需科技",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_sucookpot.png"
     },
     {
@@ -1129,7 +1133,7 @@ window.SITE_DATA = {
         "月饼"
       ],
       "tech": "炼金引擎；高脚鸟制作 / 金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ybhz.png"
     },
     {
@@ -1149,7 +1153,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "每次成功搜寻消耗1颗对应宝石，优先标记已有的当季[[寄生灵]]，没有时尝试在地图生成一只，并揭示其位置与方向。完成后收回为可携带的灵鉴，不会因为一次搜寻而永久消失。"
+          "content": "每次成功搜寻消耗1颗对应宝石，优先标记已有的当季[[寄生灵]]；没有时尝试生成，原有位置不安全时会尝试迁移。落点须为地表主大陆或月岛上的安全陆地，排除船、海面、洞边和其他离岛；找不到合适位置则提示失败。成功后揭示位置与方向，并收回为可携带的灵鉴。"
         },
         {
           "type": "text",
@@ -1167,7 +1171,7 @@ window.SITE_DATA = {
         "器物"
       ],
       "tech": "天体祭坛",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_xqlj.png"
     },
     {
@@ -1208,7 +1212,7 @@ window.SITE_DATA = {
         "草莓",
         "水果"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "summary": "草莓丛产出的水果，可直接吃，也可在红锅制作莓酱果子、糖渍果等料理。",
       "display_image": "assets/img/displays/bb_cm.png"
     },
@@ -1279,7 +1283,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_cjs.png"
     },
     {
@@ -1350,7 +1354,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_mjgz.png"
     },
     {
@@ -1416,7 +1420,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_tzg.png"
     },
     {
@@ -1489,7 +1493,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_gwjn.png"
     },
     {
@@ -1554,7 +1558,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_yyxsl.png"
     },
     {
@@ -1626,7 +1630,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_xdlm.png"
     },
     {
@@ -1697,7 +1701,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_tmfb.png"
     },
     {
@@ -1744,7 +1748,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ywyb.png"
     },
     {
@@ -1791,7 +1795,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_jlyb.png"
     },
     {
@@ -1838,7 +1842,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_gwyb.png"
     },
     {
@@ -1885,7 +1889,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_xgyb.png"
     },
     {
@@ -1932,7 +1936,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_fgyb.png"
     },
     {
@@ -1979,7 +1983,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ymyb.png"
     },
     {
@@ -2026,7 +2030,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_xjyb.png"
     },
     {
@@ -2073,7 +2077,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_cmyb.png"
     },
     {
@@ -2121,7 +2125,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ptyyb.png"
     },
     {
@@ -2169,7 +2173,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_gjnyb.png"
     },
     {
@@ -2217,7 +2221,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_lblyb.png"
     },
     {
@@ -2265,7 +2269,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_mdxyb.png"
     },
     {
@@ -2297,7 +2301,7 @@ window.SITE_DATA = {
         "草莓"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "summary": "胖头鱼专属制作的草莓作物，其他角色也能种植、采摘；每次成熟产3颗。",
       "display_image": "assets/img/displays/bb_cmbush.png"
     },
@@ -2330,7 +2334,7 @@ window.SITE_DATA = {
         "七彩石"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_wcs.png"
     },
     {
@@ -2379,7 +2383,7 @@ window.SITE_DATA = {
         "材料",
         "灵石"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "summary": "装备强化与制作材料。",
       "display_image": "assets/img/displays/bighead_ylss.png"
     },
@@ -2417,7 +2421,7 @@ window.SITE_DATA = {
         "材料",
         "莲子"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ymlx.png"
     },
     {
@@ -2469,7 +2473,7 @@ window.SITE_DATA = {
         "材料",
         "符文"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_ygxlfw.png"
     },
     {
@@ -2499,7 +2503,7 @@ window.SITE_DATA = {
         "材料",
         "魂魄"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "summary": "胖头鱼收集的魂魄：可用于季节鱼制作，也能释放在地上治疗附近玩家。",
       "display_image": "assets/img/displays/bighead_soul_ball.png"
     },
@@ -2529,7 +2533,7 @@ window.SITE_DATA = {
         "材料",
         "玉佩"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "summary": "随身打开连理木箱共享库存的钥匙，无需回到箱子旁。",
       "display_image": "assets/img/displays/bighead_llxz_xz.png"
     },
@@ -2540,12 +2544,12 @@ window.SITE_DATA = {
       "owner": "common",
       "image": "assets/img/items/bighead_qbi.png",
       "summary": "金企鹅商店货币，6金块制1枚；冬天先给同一只普通企鹅10金块召出商人，再用Q币购物。",
-      "recipe": "无需科技：金块×6",
+      "recipe": "无需科技：金块×6→1枚；金块×60→10枚；金块×240→40枚",
       "detail_blocks": [
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "用6金块制作1枚Q币。[[金企鹅]]不是固定地点的商店：冬天找到普通企鹅，先用金块将它变成商人，再带Q币靠近它，在制作栏的金企鹅兑换页购买当前有库存的商品。"
+          "content": "可用6金块制作1枚Q币，也可用60金块批量制作10枚、240金块制作40枚，兑换比均为6:1。[[金企鹅]]不是固定地点的商店：冬天找到普通企鹅，先用金块将它变成商人，再带Q币靠近它，在制作栏的金企鹅兑换页购买当前有库存的商品。"
         },
         {
           "type": "list",
@@ -2608,7 +2612,7 @@ window.SITE_DATA = {
         "企鹅"
       ],
       "tech": "无需科技",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_qbi.png"
     },
     {
@@ -2651,7 +2655,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_spring_spirit.png"
     },
     {
@@ -2694,7 +2698,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_summer_spirit.png"
     },
     {
@@ -2737,7 +2741,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_autumn_spirit.png"
     },
     {
@@ -2780,7 +2784,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_winter_spirit.png"
     },
     {
@@ -2814,7 +2818,7 @@ window.SITE_DATA = {
         "蛋"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fhd.png"
     },
     {
@@ -2895,7 +2899,7 @@ window.SITE_DATA = {
         "遗骨"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_cmyh.png"
     },
     {
@@ -2926,7 +2930,7 @@ window.SITE_DATA = {
         "遗骨"
       ],
       "summary": "制作重明遗骨的素材，攒够8个交由高脚鸟制作。",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_bzmgt.png"
     },
     {
@@ -2955,7 +2959,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "初始普通攻击1、位面伤害0，攻击/命中距离8/10，移速×1.5；能以5工作效率砍树、挖矿。命中有5%概率触发冰圈，[[灵气]]>75时提高为20%。"
+          "content": "初始普通攻击1、位面伤害0，攻击/命中距离8/10，移速×1.5；能以5工作效率砍树、挖矿。命中有5%概率触发冰圈，[[灵气]]>75时提高为20%。 非PVP世界中，弹体命中其他玩家时仅击退，不结算此次伤害与配件命中效果；冰圈也不会伤害其他玩家。"
         },
         {
           "type": "text",
@@ -2992,7 +2996,7 @@ window.SITE_DATA = {
             ],
             [
               "破裂珍珠",
-              "命中仍存活的目标时，有5%概率追加1000×当前灵气的普通攻击伤害，不消耗灵气。"
+              "命中仍存活的目标时，有1%概率追加1000×当前灵气的普通攻击伤害，不消耗灵气。"
             ]
           ]
         }
@@ -3016,7 +3020,7 @@ window.SITE_DATA = {
         "月台"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_buran.png"
     },
     {
@@ -3055,7 +3059,7 @@ window.SITE_DATA = {
         "莲"
       ],
       "tech": "无需科技；高脚鸟召唤",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_px.png",
       "aliases": [
         "莲令",
@@ -3080,7 +3084,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "三宝有20格储物空间。攻击随等级分档提高：0～10级50、11～50级100、51～99级200、100级300；会在主人附近帮助攻击。满级再喂罐头触发随机寻宝，寻宝冷却5秒。"
+          "content": "三宝有20格储物空间。攻击随等级分档提高：0～10级50、11～50级100、51～99级200、100级300；会在主人附近帮助攻击。满级再喂罐头触发随机寻宝，寻宝冷却5秒。 生命上限9999，普通伤害吸收99%，每秒恢复2生命。阵亡时关闭仓库、掉出全部储物，并清除待发放的寻宝奖励。"
         },
         {
           "type": "text",
@@ -3101,7 +3105,7 @@ window.SITE_DATA = {
         "三宝"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_sanbao.png",
       "aliases": [
         "三宝"
@@ -3140,7 +3144,7 @@ window.SITE_DATA = {
         "蝴蝶",
         "春望"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_cwd.png"
     },
     {
@@ -3150,16 +3154,16 @@ window.SITE_DATA = {
       "category": "tool",
       "owner": "gaojiaoniao",
       "image": "assets/img/items/bb_gaojiaoniao_fr.png",
-      "summary": "高脚鸟用于召唤、指挥溟羽及施放冥火、桎梏的花，以暗影心房给予枯萎的格罗姆花有10%概率获得。",
+      "summary": "高脚鸟召唤、指挥溟羽及施放冥火、桎梏的花，通过花种培育和新月夜祭眼仪式取得。",
       "recipe": "",
       "detail_blocks": [
         {
           "type": "list",
           "title": "特殊获取方式",
           "items": [
-            "取得格罗姆花，等其关联的格罗姆死亡、花朵变为枯萎状态后再使用；正常盛开的花不满足条件。",
-            "拿起暗影心房，对枯萎的格罗姆花执行「给予」。每次消耗1个暗影心房，有10%概率将花替换成芙蓉。",
-            "失败会消耗心房，花仍保留，可以继续尝试；成功后原花被替换。没有普通制作配方，也不需要通过制作栏合成。"
+            "由高脚鸟戴上高级耕作先驱帽，用1张蘑菇皮开启打包。放入暗影心房×1、格罗姆翅膀×2、腐烂物×10、花瓣×20，完成后得到[[花种]]。",
+            "使花种自身温度连续保持至少50℃，持续3个游戏天，得到[[腐烂花种]]；低于50℃会清零培育计时。",
+            "在新月的夜晚前往月台，找到附近生成的[[祭眼]]，给予腐烂花种即可取得芙蓉。完整准备和注意事项见[[花种祭眼仪式]]。"
           ]
         },
         {
@@ -3172,19 +3176,65 @@ window.SITE_DATA = {
           "title": "召唤与指挥溟羽",
           "items": [
             "由高脚鸟对物品栏中的芙蓉使用「召唤」，叫出专属伙伴[[溟羽]]。",
-            "溟羽出场后，对芙蓉使用「激怒」或「安慰」，在主动进攻和防御跟随之间切换。",
+            "溟羽出场后，对芙蓉使用「激怒」或「安慰」，在激怒战斗和防御跟随之间切换。",
             "想收回时，拿起芙蓉，对自己的溟羽执行「返回」。召唤、收回和切换模式不会消耗芙蓉。"
           ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "施法最远14距离，两种技能分别冷却60秒。冥火生成持续480秒的照明光源，并将半径16内的温度维持为32℃；高脚鸟不受其理智光环影响，其他角色在光环内每分钟损失800理智。桎梏在落点周围生成多圈藤蔓陷阱，用于控制敌人。"
+          "content": "施法最远14距离，两种技能分别冷却60秒，骑乘时禁用。冥火持续480秒，提供照明并将半径16内温度维持为32℃；高脚鸟免受其理智光环影响，其他角色在光环内每分钟损失800理智。"
+        },
+        {
+          "type": "text",
+          "title": "冥火与噬心",
+          "content": "高脚鸟在冥火半径16内连续停留，每累计60秒增加1点[[噬心]]。中途离开会中断，重新进入后重新累计；多个冥火重叠不会同时重复累计。"
+        },
+        {
+          "type": "table",
+          "title": "桎梏的四圈藤蔓",
+          "columns": [
+            "圈数",
+            "距落点半径",
+            "陷阱数"
+          ],
+          "rows": [
+            [
+              "第一圈",
+              "2",
+              "6"
+            ],
+            [
+              "第二圈",
+              "4.8",
+              "16"
+            ],
+            [
+              "第三圈",
+              "7.4",
+              "24"
+            ],
+            [
+              "第四圈",
+              "10",
+              "32"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "藤蔓伤害",
+          "content": "每个陷阱作用半径2，范围内有效敌人每秒直接损失最大生命的1%，站立不动也会受伤。同一目标共享1秒结算间隔，多个陷阱重叠不会加快此扣血频率。"
         }
       ],
       "related": [
         "gaojiaoniao",
-        "bb_gaojiaoniao_my"
+        "bb_gaojiaoniao_my",
+        "bighead_flowerseed",
+        "bighead_rotten_flowerseed",
+        "bighead_ritual_eye",
+        "mech_seed_ritual",
+        "mech_shixin"
       ],
       "tags": [
         "其他",
@@ -3193,7 +3243,7 @@ window.SITE_DATA = {
         "召唤",
         "溟羽"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fr.png"
     },
     {
@@ -3206,21 +3256,21 @@ window.SITE_DATA = {
       "owner": "gaojiaoniao",
       "availability": "特殊获取",
       "image": "assets/img/mechanics/mingyu.png",
-      "summary": "由芙蓉召唤的高脚鸟专属战斗伙伴，生命随羁绊成长，夜晚攻击最高。",
+      "summary": "芙蓉召唤的高脚鸟专属伙伴，以直线冥焰作战，可喂材料提升减伤，夜晚伤害800。",
       "detail_blocks": [
         {
           "type": "list",
           "title": "怎么使用",
           "items": [
             "先取得[[芙蓉]]，由[[高脚鸟]]在其物品动作中选择「召唤」。溟羽没有独立的制作配方。",
-            "出场默认防御模式，在主人附近协助攻击正在交战的敌人；对芙蓉使用「激怒」后，会主动寻找附近可攻击的目标。",
+            "出场默认防御模式，在主人附近协助交战；对芙蓉使用「激怒」切换模式。激怒时会寻找正与主人或溟羽交战的目标，或主人当前的战斗目标。",
             "再对芙蓉使用「安慰」可回到防御模式。拿起芙蓉，对自己的溟羽执行「返回」可收回伙伴。"
           ]
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "溟羽会飞行跟随主人，可跨海移动，移动速度8，每秒自动恢复1生命。它使用远程弹幕攻击，攻击距离8，攻击间隔设为4秒；每轮向目标点及周围发射共6枚弹体，在落点附近造成范围伤害，同一目标在一轮弹幕中最多结算1次命中。"
+          "content": "溟羽飞行跟随主人，可跨海移动，移动速度8。攻击距离8，攻击间隔设为4秒；朝目标方向释放直线冥焰，对路径内有效敌人直接扣血。火线长度随目标距离在6～16之间调整，左右各约2距离，并计入目标体型。"
         },
         {
           "type": "table",
@@ -3258,22 +3308,53 @@ window.SITE_DATA = {
           "rows": [
             [
               "白天",
-              "100"
+              "300"
             ],
             [
               "黄昏",
-              "200"
+              "500"
             ],
             [
               "夜晚",
-              "400"
+              "800"
             ]
           ]
         },
         {
           "type": "text",
           "title": "恢复与死亡",
-          "content": "生命成长看羁绊等级，攻击变化看昼夜时段。溟羽阵亡后羁绊重置为1级；高脚鸟死亡时会收回溟羽并暂停羁绊成长，复活后从1级继续成长。溟羽不接受普通物品喂食，也不能使用幽灵药剂。"
+          "content": "有主人链接、溟羽在场且没有战斗目标时，每秒恢复1生命。生命成长取决于羁绊，攻击取决于昼夜。溟羽阵亡后羁绊重置为1级；高脚鸟死亡时会收回溟羽并暂停羁绊成长，复活后从1级继续成长。不能使用幽灵药剂；只接受指定的减伤升级材料。"
+        },
+        {
+          "type": "table",
+          "title": "防御与喂养升级",
+          "columns": [
+            "项目",
+            "效果"
+          ],
+          "rows": [
+            [
+              "自带位面防御",
+              "40"
+            ],
+            [
+              "给予[[不知名骨头]]",
+              "每个增加5个百分点普通伤害吸收"
+            ],
+            [
+              "给予邪天翁羽毛",
+              "每根增加0.5个百分点普通伤害吸收"
+            ],
+            [
+              "升级上限",
+              "普通伤害吸收最多80%；支持堆叠交付，进度保存"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "命中后的额外掉落",
+          "content": "冥焰或攻击命中存活目标后会为其挂上奖励标记。该目标之后死亡，额外掉落1个纯粹恐惧；若目标是石虾，还额外掉落1个绝望石。无需由溟羽完成最后一击，同一目标的奖励不会重复领取。"
         },
         {
           "type": "text",
@@ -3283,7 +3364,9 @@ window.SITE_DATA = {
       ],
       "related": [
         "gaojiaoniao",
-        "bb_gaojiaoniao_fr"
+        "bb_gaojiaoniao_fr",
+        "bb_gaojiaoniao_bzmgt",
+        "mech_shixin"
       ],
       "tags": [
         "生物",
@@ -3291,7 +3374,7 @@ window.SITE_DATA = {
         "召唤",
         "羁绊"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_my.png"
     },
     {
@@ -3330,7 +3413,7 @@ window.SITE_DATA = {
         "轮回"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_lh.png"
     },
     {
@@ -3367,14 +3450,15 @@ window.SITE_DATA = {
         "gaojiaoniao",
         "bb_gaojiaoniao_fh",
         "bb_gaojiaoniao_gjsh_skin1",
-        "mech_shixin"
+        "mech_shixin",
+        "bb_gaojiaoniao_fh_skin3"
       ],
       "tags": [
         "其他",
         "五灵",
         "祭祀"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
     },
     {
@@ -3404,7 +3488,7 @@ window.SITE_DATA = {
         "bb_gaojiaoniao_px_builder"
       ],
       "recipe": "胖头鱼专属制作，任选一组：[bighead_nr]×2 + 铥矿×1 + 肉×2 + 高脚鸟蛋×1；或[bighead_yr]×1 + 鱼肉×3 + 铥矿×1 + 高脚鸟蛋×1；或鸟腿×5 + 铥矿×1 + 小肉×5 + 鸟蛋×3；或鱼肉×3 + 无花果×2 + 铥矿×1 + 藤壶×3",
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_mwgt.png"
     },
     {
@@ -3431,7 +3515,7 @@ window.SITE_DATA = {
         "bighead_mwgt",
         "bb_gaojiaoniao_px_builder"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_nr.png"
     },
     {
@@ -3458,8 +3542,249 @@ window.SITE_DATA = {
         "bighead_mwgt",
         "bb_gaojiaoniao_px_builder"
       ],
-      "source": "v5.1",
+      "source": "v5.6",
       "display_image": "assets/img/displays/bighead_yr.png"
+    },
+    {
+      "id": "bighead_wanxiangji",
+      "name": "万象玑",
+      "category": "tool",
+      "owner": "gaojiaoniao",
+      "image": "assets/img/items/bighead_wanxiangji.png",
+      "summary": "高脚鸟专用七法术饰品，以弦传送、束缚、治疗、改月相、切换降水和召唤仆从。",
+      "recipe": "无需科技：红宝石×9 + 蓝宝石×9 + 紫宝石×9 + 橙宝石×9 + 黄宝石×9 + 绿宝石×9 + 彩虹宝石×9",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "高脚鸟装备万象玑后，打开法术轮盘并选择技能。「传」还需选择另一名玩家。优先占护符或颈部装备位，未扩展装备位时占身体位。"
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "弦上限1000；高脚鸟新生自带并自动装备的一件有20弦，另外制作的初始0弦。七宝石配方不限制制作者角色，但装备施法限高脚鸟。法术成功后才扣弦，弦不足不能施放。"
+        },
+        {
+          "type": "table",
+          "title": "七项法术",
+          "columns": [
+            "法术与弦消耗",
+            "效果"
+          ],
+          "rows": [
+            [
+              "传 · 2弦",
+              "传送到所选存活玩家附近的可行走落点；目标须在同一地表或洞穴世界，无法跨世界传送。"
+            ],
+            [
+              "缚 · 2弦",
+              "在周围24距离内有效敌人身旁生成暗影柱束缚。"
+            ],
+            [
+              "新 · 20弦",
+              "将世界月相改为新月。"
+            ],
+            [
+              "血 · 5弦",
+              "使周围24距离内存活玩家恢复至满生命。"
+            ],
+            [
+              "盈 · 20弦",
+              "将世界月相改为满月。"
+            ],
+            [
+              "雨 · 2弦",
+              "切换世界降水开关。"
+            ],
+            [
+              "召 · 5弦",
+              "补充暗影仆从至最多4个；仆从会跟随、工作，持续1个游戏天，数量受附近可用落点限制。"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "如何充弦",
+          "content": "拿起下表材料，对万象玑执行「给予」。支持堆叠交付，按缺额限制消耗数量；最后一份材料仍整件消耗，超出1000上限的部分不会保留。"
+        },
+        {
+          "type": "table",
+          "title": "每件材料可充多少弦",
+          "columns": [
+            "充弦量",
+            "可给予材料"
+          ],
+          "rows": [
+            [
+              "+2弦",
+              "牛角、伏特羊角、齿轮、废料、钢丝绵、麋鹿鹅羽毛、邪天翁羽毛、触手皮、啜食者皮、兔绒、黄色羽毛、鳞片"
+            ],
+            [
+              "+20弦",
+              "邪天翁喙、守护者之角、独眼巨鹿眼球、熊皮、蘑菇皮、蜘蛛帽、蜘蛛卵、[[蕴灵神石]]"
+            ],
+            [
+              "+40弦",
+              "岩浆虫卵、冷冻虫卵"
+            ],
+            [
+              "+100弦",
+              "[[七彩石]]（三种物品形态均可）"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "检查台词",
+          "content": "通用检查：「一色化千彩。」"
+        }
+      ],
+      "related": [
+        "gaojiaoniao",
+        "bighead_ylss",
+        "bighead_wcs",
+        "mech_seed_ritual"
+      ],
+      "tags": [
+        "万象玑"
+      ],
+      "source": "v5.6",
+      "display_image": "assets/img/displays/bighead_wanxiangji.png",
+      "tech": "无需科技；高脚鸟施法"
+    },
+    {
+      "id": "bighead_flowerseed",
+      "name": "花种",
+      "category": "material",
+      "owner": "gaojiaoniao",
+      "image": "assets/img/items/bighead_flowerseed.png",
+      "summary": "高脚鸟以指定材料打包取得的仪式种子，连续高温培育后变成腐烂花种。",
+      "recipe": "仪式打包：蘑菇皮×1 + 暗影心房×1 + 格罗姆翅膀×2 + 腐烂物×10 + 花瓣×20",
+      "detail_blocks": [
+        {
+          "type": "list",
+          "title": "怎么使用",
+          "items": [
+            "由高脚鸟戴高级耕作先驱帽，拿1张蘑菇皮开启打包，蘑菇皮会在开始时消耗。",
+            "四格中放入暗影心房×1、格罗姆翅膀×2、腐烂物×10、花瓣×20。只能含这四种材料，数量须足够；完成时只消耗所需数量，多余材料退回。",
+            "完成打包取得花种，再保持花种自身温度至少50℃以培育。"
+          ]
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "温度连续至少50℃、持续3个游戏天，转为[[腐烂花种]]。任何时候低于50℃都会将累计时间清零；培育进度可随存档保存。判断花种自身温度，不是只看角色或季节温度。"
+        },
+        {
+          "type": "text",
+          "title": "下一步",
+          "content": "新月夜将腐烂花种给予月台旁的[[祭眼]]，即可取得[[芙蓉]]。完整步骤见[[花种祭眼仪式]]。"
+        }
+      ],
+      "related": [
+        "bighead_rotten_flowerseed",
+        "bighead_ritual_eye",
+        "bb_gaojiaoniao_fr",
+        "mech_seed_ritual"
+      ],
+      "tags": [
+        "花种"
+      ],
+      "source": "v5.6",
+      "display_image": "assets/img/displays/bighead_flowerseed.png",
+      "availability": "特殊获取"
+    },
+    {
+      "id": "bighead_rotten_flowerseed",
+      "name": "腐烂花种",
+      "category": "material",
+      "owner": "gaojiaoniao",
+      "image": "assets/img/items/bighead_rotten_flowerseed.png",
+      "summary": "花种连续高温培育3个游戏天的产物，在新月夜交给祭眼换取芙蓉。",
+      "recipe": "",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "使[[花种]]自身温度连续保持至少50℃满3个游戏天，得到本物。等到新月夜，在月台附近找到[[祭眼]]，拿起腐烂花种执行「给予」。"
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "祭眼接受后交付[[芙蓉]]，并改变自身外观。祭眼只在新月夜出现，白天或不再满足月相、夜晚条件时会移除；提前准备好材料再前往。"
+        }
+      ],
+      "related": [
+        "bighead_flowerseed",
+        "bighead_ritual_eye",
+        "bb_gaojiaoniao_fr",
+        "mech_seed_ritual"
+      ],
+      "tags": [
+        "腐烂花种"
+      ],
+      "source": "v5.6",
+      "display_image": "assets/img/displays/bighead_rotten_flowerseed.png",
+      "availability": "特殊获取"
+    },
+    {
+      "id": "bighead_ritual_eye",
+      "name": "祭眼",
+      "category": "structure",
+      "owner": "common",
+      "image": "assets/img/mechanics/ritual_eye.png",
+      "summary": "新月夜出现在月台附近的仪式对象，接受腐烂花种换芙蓉，或接受告密的心召唤Boss。",
+      "recipe": "",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "在新月的夜晚前往月台，祭眼会尝试在月台附近约6距离的可行走位置出现。将[[腐烂花种]]给予它可取得[[芙蓉]]；给予告密的心则尝试召唤随机Boss组合。"
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "祭眼是临时场景对象，没有制作配方，不能作为普通物品携带。进入白天或不满足新月夜条件时移除。告密的心召唤要求候选Boss已在当前游戏注册，且存在合适落点；水生Boss会寻找海面落点，有些组合一次召出多只。"
+        },
+        {
+          "type": "table",
+          "title": "Boss抽选规则",
+          "columns": [
+            "先抽中的档位",
+            "候选示例"
+          ],
+          "rows": [
+            [
+              "50%",
+              "蜘蛛女王、果蝇王、树精守卫、大座狼、暗影三基佬、邪天翁等"
+            ],
+            [
+              "30%",
+              "独眼巨鹿、熊獾、麋鹿鹅、蚁狮、远古守护者、毒菌蟾蜍、恐怖之眼等"
+            ],
+            [
+              "20%",
+              "龙蝇、蜂王、克劳斯、悲惨的毒菌蟾蜍、远古织影者、帝王蟹、天体英雄等"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "概率怎么理解",
+          "content": "先按50%／30%／20%选择档位，再从该档当前游戏已注册的有效候选组合中等概率选择。这些百分比不是单个Boss的出现率。"
+        }
+      ],
+      "related": [
+        "bighead_rotten_flowerseed",
+        "bb_gaojiaoniao_fr",
+        "mech_seed_ritual"
+      ],
+      "tags": [
+        "祭眼"
+      ],
+      "source": "v5.6",
+      "display_image": "assets/img/displays/bighead_ritual_eye.png",
+      "availability": "特殊获取"
     }
   ],
   "mechanics": [
@@ -3489,7 +3814,7 @@ window.SITE_DATA = {
           "type": "list",
           "title": "怎么兑换",
           "items": [
-            "提前制作[[Q币]]，每枚需要6金块；召出商人的10金块另算。",
+            "提前制作[[Q币]]，每枚需要6金块；召出商人的10金块另算。 也可用60金块制作10枚、240金块制作40枚。",
             "靠近金企鹅，在制作栏的金企鹅兑换页选择当前有库存的商品，按标价消耗Q币。",
             "商人出现后480秒（8分钟）移除。生成时从商品池随机选5种，每种初始库存1份，另可能追加琦玉器或月饼盒子；不会定时自动刷新。"
           ]
@@ -3635,7 +3960,7 @@ window.SITE_DATA = {
             ],
             [
               "[[不染]] + 破裂珍珠（不扣灵气）",
-              "攻击有5%概率追加当前灵气×1000的普通攻击伤害；需要已插入对应配件。"
+              "攻击有1%概率追加当前灵气×1000的普通攻击伤害；需要已插入对应配件。"
             ],
             [
               "[[繁花]] · 施肥10点 / 催熟5点",
@@ -3737,9 +4062,9 @@ window.SITE_DATA = {
     },
     {
       "id": "mech_jieqi",
-      "owner": "pangtouyu",
+      "owner": "common",
       "title": "节气",
-      "summary": "胖头鱼的四季饰品系统：通过琦玉器装配，获得移速、攻击、减伤和冰冻等加成。",
+      "summary": "通过琦玉器装配的四季饰品系统：任何角色都可获得移速、攻击、减伤和冰冻等加成。",
       "image": "assets/img/mechanics/jieqi_tab.png",
       "detail_blocks": [
         {
@@ -3755,7 +4080,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "如何生效",
-          "content": "由胖头鱼装备琦玉器，将物品放入春、夏、秋、冬对应的四个槽位；只放在普通背包里不会生效。每个槽可选该季的小节气或四季主物品，取出或卸下琦玉器会取消对应加成。物品名称不限制使用季节，当前世界不必处于对应季节。"
+          "content": "任意角色装备琦玉器，将物品放入春、夏、秋、冬对应的四个槽位；只放在普通背包里不会生效。每个槽可选该季的小节气或四季主物品，取出或卸下琦玉器会取消对应加成。物品名称不限制使用季节，当前世界不必处于对应季节。"
         },
         {
           "type": "text",
@@ -3776,7 +4101,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "四季齐全与灵气",
-          "content": "四个槽位都有对应季节物品时，攻击会随机选取已装配主物品的一种投射效果；小节气可帮助凑齐四季，但自身没有投射技能。只要激活至少一种四季主物品，[[灵气]]上限就额外增加100（不会按件数叠加），并可消耗四季之灵，每个回复50灵气。"
+          "content": "四个槽位都有对应季节物品时，攻击会随机选取已装配主物品的一种投射效果；小节气可帮助凑齐四季，但自身没有投射技能。胖头鱼只要激活至少一种四季主物品，[[灵气]]上限就额外增加100（不会按件数叠加），并可消耗四季之灵，每个回复50灵气。"
         },
         {
           "type": "list",
@@ -3785,8 +4110,8 @@ window.SITE_DATA = {
             "只有春、夏、秋、冬四种主物品可升级：初始1级，最高10级。",
             "给予对应四季之灵，每个增加200经验；曼德拉草每个增加100经验。",
             "升下一级需要（当前等级+1）×100经验。",
-            "胖头鱼装备琦玉器收获巨大作物时，装在器内的当季主物品另得10经验。",
-            "达到10级后解锁主动使用效果。"
+            "任意角色装备琦玉器收获巨大作物时，装在器内的当季主物品另得10经验。",
+            "达到10级后，胖头鱼可使用对应主动技能；其他角色仍可获得装配后的被动和攻击效果。"
           ]
         }
       ],
@@ -3863,7 +4188,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "1. 寻找寄生灵",
-          "content": "开启“[[四季相关内容]]”后，用[[玄清灵鉴]]搜寻当季寄生灵。春、夏、秋、冬分别对应桃灵、荷灵、桂灵、梅灵；采起地里的寄生灵会使其进入活动状态。"
+          "content": "开启“[[四季相关内容]]”后，用[[玄清灵鉴]]搜寻当季寄生灵。春、夏、秋、冬分别对应桃灵、荷灵、桂灵、梅灵；采起地里的寄生灵会使其进入活动状态。 灵鉴会将生成或迁移落点限制在地表主大陆或月岛的安全陆地。"
         },
         {
           "type": "list",
@@ -3982,6 +4307,10 @@ window.SITE_DATA = {
               "+1"
             ],
             [
+              "高脚鸟在[[芙蓉]]冥火半径16内连续停留60秒",
+              "+1；离开中断计时，重叠冥火不重复累计"
+            ],
+            [
               "五道圆满且存活，每60秒",
               "−2；佩戴古祭神辉时不会降低"
             ]
@@ -4044,7 +4373,9 @@ window.SITE_DATA = {
         "mech_wudao",
         "config_bb_gaojiaoniao_demon_damage",
         "config_bb_gaojiaoniao_shadow_damage",
-        "bb_gaojiaoniao_gjsh"
+        "bb_gaojiaoniao_gjsh",
+        "bb_gaojiaoniao_fr",
+        "bb_gaojiaoniao_my"
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
     },
@@ -4238,25 +4569,139 @@ window.SITE_DATA = {
         "mech_lingqi"
       ],
       "display_image": "assets/img/displays/bighead_fanhua.png"
+    },
+    {
+      "id": "mech_seed_ritual",
+      "owner": "gaojiaoniao",
+      "title": "花种祭眼仪式",
+      "aliases": [
+        "花种仪式"
+      ],
+      "summary": "戴帽打包花种，连续高温培育3天，新月夜在月台旁祭眼换取芙蓉。",
+      "image": "assets/img/items/bighead_flowerseed.png",
+      "display_image": "assets/img/displays/bighead_ritual_eye.png",
+      "source": "v5.6",
+      "detail_blocks": [
+        {
+          "type": "list",
+          "title": "1. 准备并打包",
+          "items": [
+            "由[[高脚鸟]]戴上高级耕作先驱帽，用蘑菇皮×1开启打包，开始时即消耗蘑菇皮。",
+            "四格只放暗影心房×1、格罗姆翅膀×2、腐烂物×10、花瓣×20；数量足够后完成打包取得[[花种]]，多余材料退回。"
+          ]
+        },
+        {
+          "type": "text",
+          "title": "2. 连续高温培育",
+          "content": "使花种自身温度连续保持至少50℃，持续3个游戏天，转成[[腐烂花种]]。低于50℃会清零，重新升温后从头累计；进度可存档。"
+        },
+        {
+          "type": "text",
+          "title": "3. 新月夜前往月台",
+          "content": "新月夜，月台附近会尝试生成[[祭眼]]。给予腐烂花种，获得[[芙蓉]]；祭眼随后改变外观。也可用[[万象玑]]的「新」法术改变月相，但仍须满足夜晚条件。"
+        },
+        {
+          "type": "text",
+          "title": "4. 召唤溟羽",
+          "content": "高脚鸟对芙蓉使用「召唤」叫出[[溟羽]]，用「激怒」「安慰」切换模式，拿起芙蓉对自己的溟羽使用「返回」收回。"
+        },
+        {
+          "type": "text",
+          "title": "另一个用途：召唤Boss",
+          "content": "将告密的心给予祭眼，可随机召唤Boss组合。详见祭眼的档位概率与落点说明。"
+        }
+      ],
+      "related": [
+        "gaojiaoniao",
+        "bighead_flowerseed",
+        "bighead_rotten_flowerseed",
+        "bighead_ritual_eye",
+        "bb_gaojiaoniao_fr",
+        "bb_gaojiaoniao_my",
+        "bighead_wanxiangji"
+      ]
+    },
+    {
+      "id": "mech_mist_forest",
+      "owner": "common",
+      "title": "雾气桦树林",
+      "aliases": [
+        "雾气桦树林区域"
+      ],
+      "summary": "生成时与沼泽出口直接相连的地表桦树林区域，带雾气、猪王与5座猪屋。",
+      "image": "assets/img/inventoryimages1/acorn.png",
+      "source": "v5.6",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "在哪里",
+          "content": "创建采用默认地表任务集的新世界时加入，直接与沼泽出口连接。区域使用桦树林生态，并带雾气环境标签。"
+        },
+        {
+          "type": "text",
+          "title": "区域内容",
+          "content": "包含2个深桦树林主要房间和1个猪王聚落主要房间；聚落设置1个猪王、5座猪屋，周边沿用桦树林生态。"
+        },
+        {
+          "type": "text",
+          "title": "生成条件",
+          "content": "本次加入的是世界生成内容，已有存档不会自动补入这片区域。该区域属于地表，不是[[太极青玄阁]]内的房间。"
+        }
+      ],
+      "related": [
+        "log_5600"
+      ]
     }
   ],
   "terrains": [
     {
       "id": "loc_qingxuan",
       "owner": "common",
-      "building_entry": { "target": "loc_foyer", "label": "进入青玄阁" },
-      "building_exits": [{ "target": "loc_foyer", "label": "进入青玄阁" }],
+      "building_entry": {
+        "target": "loc_foyer",
+        "label": "进入青玄阁"
+      },
+      "building_exits": [
+        {
+          "target": "loc_foyer",
+          "label": "进入青玄阁"
+        }
+      ],
       "title": "太极青玄阁",
       "summary": "位于月岛碎片区域的可进入建筑，内有前室、厅堂与左右两间独立卧房。",
       "building_highlights": [
-        { "title": "躲猎犬", "text": "阻止针对你的普通猎犬波次生成，已生成的不会消失。" },
-        { "title": "防寒暑", "text": "房间中心32范围内，环境温度保持32℃。" },
-        { "title": "避雨", "text": "雨水不再增加潮湿，已有潮湿不会清零。" },
-        { "title": "防蛙雨", "text": "房间中心32范围内，不生成蛙雨青蛙。" },
-        { "title": "防夏季自燃", "text": "跳过室内玩家附近的夏季自燃触发。" },
-        { "title": "防蚁狮塌陷", "text": "房间中心32范围内，不生成蚁狮地陷。" },
-        { "title": "承接天气落雷", "text": "中心可承接普通天气落雷，不代表免疫雷电攻击。" },
-        { "title": "夜间照明", "text": "入夜亮灯，中心光照半径10；白天、黄昏关闭。" }
+        {
+          "title": "躲猎犬",
+          "text": "阻止针对你的普通猎犬波次生成，已生成的不会消失。"
+        },
+        {
+          "title": "防寒暑",
+          "text": "房间中心32范围内，环境温度保持32℃。"
+        },
+        {
+          "title": "避雨",
+          "text": "雨水不再增加潮湿，已有潮湿不会清零。"
+        },
+        {
+          "title": "防蛙雨",
+          "text": "房间中心32范围内，不生成蛙雨青蛙。"
+        },
+        {
+          "title": "防夏季自燃",
+          "text": "跳过室内玩家附近的夏季自燃触发。"
+        },
+        {
+          "title": "防蚁狮塌陷",
+          "text": "房间中心32范围内，不生成蚁狮地陷。"
+        },
+        {
+          "title": "承接天气落雷",
+          "text": "中心可承接普通天气落雷，不代表免疫雷电攻击。"
+        },
+        {
+          "title": "夜间照明",
+          "text": "入夜亮灯，中心光照半径10；白天、黄昏关闭。"
+        }
       ],
       "image": "assets/img/terrains/bighead_fishhouse.png",
       "related": [
@@ -4270,28 +4715,79 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "室内有什么用",
-          "columns": ["功能", "实际效果与范围"],
+          "columns": [
+            "功能",
+            "实际效果与范围"
+          ],
           "rows": [
-            ["躲猎犬", "进入阁内房间后，阻止针对你的普通猎犬波次生成；屋外入口无效，也不会清除已生成的猎犬或取消袭击计时。听到预警可先入内，等本轮结束再出门。"],
-            ["防寒暑", "房间中心32范围内的环境温度设为32℃，降低冬冷夏热的影响；不会锁定角色体温，火源或冰冷物品仍会影响体温。"],
-            ["避雨", "识别为室内时，雨水不再增加角色潮湿；已有潮湿不会立刻清零。"],
-            ["防蛙雨", "房间中心32范围内阻止蛙雨生成青蛙。"],
-            ["防夏季自燃", "玩家在室内时，跳过其附近的夏季自燃触发；不等于所有物品都不会被点燃。"],
-            ["防蚁狮塌陷", "房间中心32范围内阻止蚁狮地陷生成。"],
-            ["承接天气落雷", "房间中心具有引雷标记，可承接附近的普通天气落雷；不能据此认定免疫怪物的雷电攻击。"],
-            ["夜间照明", "入夜自动亮灯、白天和黄昏关闭；光照半径为10，靠近房间中心使用。"]
+            [
+              "躲猎犬",
+              "进入阁内房间后，阻止针对你的普通猎犬波次生成；屋外入口无效，也不会清除已生成的猎犬或取消袭击计时。听到预警可先入内，等本轮结束再出门。"
+            ],
+            [
+              "防寒暑",
+              "房间中心32范围内的环境温度设为32℃，降低冬冷夏热的影响；不会锁定角色体温，火源或冰冷物品仍会影响体温。"
+            ],
+            [
+              "避雨",
+              "识别为室内时，雨水不再增加角色潮湿；已有潮湿不会立刻清零。"
+            ],
+            [
+              "防蛙雨",
+              "房间中心32范围内阻止蛙雨生成青蛙。"
+            ],
+            [
+              "防夏季自燃",
+              "玩家在室内时，跳过其附近的夏季自燃触发；不等于所有物品都不会被点燃。"
+            ],
+            [
+              "防蚁狮塌陷",
+              "房间中心32范围内阻止蚁狮地陷生成。"
+            ],
+            [
+              "承接天气落雷",
+              "房间中心具有引雷标记，可承接附近的普通天气落雷；不能据此认定免疫怪物的雷电攻击。"
+            ],
+            [
+              "夜间照明",
+              "入夜自动亮灯、白天和黄昏关闭；光照半径为10，靠近房间中心使用。"
+            ]
           ]
         },
         {
           "type": "table",
           "title": "怎么进去、怎么回来",
-          "columns": ["所在位置", "下一步", "返回路线"],
+          "columns": [
+            "所在位置",
+            "下一步",
+            "返回路线"
+          ],
           "rows": [
-            ["屋外入口", "对入口使用「进去」 → [[入阁前室]]", "—"],
-            ["[[入阁前室]]", "鎏金太极铃 → [[阁中厅堂]]", "青石楼梯 → 屋外"],
-            ["[[阁中厅堂]]", "两侧引霄灵藤 → 左、右卧房", "青石楼梯 → 前室"],
-            ["[[阁主卧房（左侧）]]", "鎏角青玄门 → 厅堂", "厅堂 → 前室 → 屋外"],
-            ["[[阁主卧房（右侧）]]", "银翘古木门 → 厅堂", "厅堂 → 前室 → 屋外"]
+            [
+              "屋外入口",
+              "对入口使用「进去」 → [[入阁前室]]",
+              "—"
+            ],
+            [
+              "[[入阁前室]]",
+              "鎏金太极铃 → [[阁中厅堂]]",
+              "青石楼梯 → 屋外"
+            ],
+            [
+              "[[阁中厅堂]]",
+              "两侧引霄灵藤 → 左、右卧房",
+              "青石楼梯 → 前室"
+            ],
+            [
+              "[[阁主卧房（左侧）]]",
+              "鎏角青玄门 → 厅堂",
+              "厅堂 → 前室 → 屋外"
+            ],
+            [
+              "[[阁主卧房（右侧）]]",
+              "银翘古木门 → 厅堂",
+              "厅堂 → 前室 → 屋外"
+            ]
           ]
         },
         {
@@ -4314,19 +4810,50 @@ window.SITE_DATA = {
     {
       "id": "loc_foyer",
       "owner": "common",
-      "building_exits": [{ "target": "loc_qingxuan", "label": "青石楼梯 · 回到屋外" }, { "target": "loc_hall", "label": "鎏金太极铃 · 进入厅堂" }],
+      "building_exits": [
+        {
+          "target": "loc_qingxuan",
+          "label": "青石楼梯 · 回到屋外"
+        },
+        {
+          "target": "loc_hall",
+          "label": "鎏金太极铃 · 进入厅堂"
+        }
+      ],
       "title": "入阁前室",
-      "aliases": ["第一间房", "青玄阁前室"],
+      "aliases": [
+        "第一间房",
+        "青玄阁前室"
+      ],
       "illustration": "assets/img/terrains/loc_foyer.png",
       "preview_caption": "前室内景预览",
       "scene_hotspots": [
-        {"label": "鎏金太极铃", "target": "loc_hall", "x": 50.0309, "y": 28.6025, "width": 14.9134, "height": 12.0203, "hint": "进入厅堂"},
-        {"label": "青石楼梯", "target": "loc_qingxuan", "x": 49.5978, "y": 95.2209, "width": 22.9579, "height": 7.2411, "hint": "回到屋外"}
+        {
+          "label": "鎏金太极铃",
+          "target": "loc_hall",
+          "x": 50.0309,
+          "y": 28.6025,
+          "width": 14.9134,
+          "height": 12.0203,
+          "hint": "进入厅堂"
+        },
+        {
+          "label": "青石楼梯",
+          "target": "loc_qingxuan",
+          "x": 49.5978,
+          "y": 95.2209,
+          "width": 22.9579,
+          "height": 7.2411,
+          "hint": "回到屋外"
+        }
       ],
       "scene_hint": "点击图中鎏金太极铃、青石楼梯，前往对应位置。",
       "summary": "进门后首先到达的房间：青石楼梯回屋外，鎏金太极铃通厅堂。入内即享有青玄阁的避难与温控保护。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
-      "related": ["loc_qingxuan", "loc_hall"],
+      "related": [
+        "loc_qingxuan",
+        "loc_hall"
+      ],
       "detail_blocks": [
         {
           "type": "text",
@@ -4336,10 +4863,19 @@ window.SITE_DATA = {
         {
           "type": "table",
           "title": "两个方向怎么走",
-          "columns": ["门或陈设", "通向哪里"],
+          "columns": [
+            "门或陈设",
+            "通向哪里"
+          ],
           "rows": [
-            ["鎏金太极铃", "进入[[阁中厅堂]]，再去左、右卧房"],
-            ["青石楼梯", "离开前室，返回屋外入口"]
+            [
+              "鎏金太极铃",
+              "进入[[阁中厅堂]]，再去左、右卧房"
+            ],
+            [
+              "青石楼梯",
+              "离开前室，返回屋外入口"
+            ]
           ]
         },
         {
@@ -4352,14 +4888,53 @@ window.SITE_DATA = {
     {
       "id": "loc_hall",
       "owner": "common",
-      "building_exits": [{ "target": "loc_foyer", "label": "青石楼梯 · 返回前室" }, { "target": "loc_bedroom", "label": "引霄灵藤 · 左侧卧房" }, { "target": "loc_bedroom_right", "label": "引霄灵藤 · 右侧卧房" }],
+      "building_exits": [
+        {
+          "target": "loc_foyer",
+          "label": "青石楼梯 · 返回前室"
+        },
+        {
+          "target": "loc_bedroom",
+          "label": "引霄灵藤 · 左侧卧房"
+        },
+        {
+          "target": "loc_bedroom_right",
+          "label": "引霄灵藤 · 右侧卧房"
+        }
+      ],
       "title": "阁中厅堂",
       "illustration": "assets/img/terrains/loc_hall.png",
       "preview_caption": "厅堂内景预览",
       "scene_hotspots": [
-        {"label": "引霄灵藤（左侧）", "target": "loc_bedroom", "x": 15.9653, "y": 39.0308, "width": 14.4802, "height": 42.9956, "hint": "进入左侧卧房", "hint_align": "start"},
-        {"label": "引霄灵藤（右侧）", "target": "loc_bedroom_right", "x": 84.0347, "y": 39.0308, "width": 14.4802, "height": 42.9956, "hint": "进入右侧卧房", "hint_align": "end"},
-        {"label": "青石楼梯", "target": "loc_foyer", "x": 49.6287, "y": 94.5374, "width": 21.0396, "height": 8.1057, "hint": "返回前室"}
+        {
+          "label": "引霄灵藤（左侧）",
+          "target": "loc_bedroom",
+          "x": 15.9653,
+          "y": 39.0308,
+          "width": 14.4802,
+          "height": 42.9956,
+          "hint": "进入左侧卧房",
+          "hint_align": "start"
+        },
+        {
+          "label": "引霄灵藤（右侧）",
+          "target": "loc_bedroom_right",
+          "x": 84.0347,
+          "y": 39.0308,
+          "width": 14.4802,
+          "height": 42.9956,
+          "hint": "进入右侧卧房",
+          "hint_align": "end"
+        },
+        {
+          "label": "青石楼梯",
+          "target": "loc_foyer",
+          "x": 49.6287,
+          "y": 94.5374,
+          "width": 21.0396,
+          "height": 8.1057,
+          "hint": "返回前室"
+        }
       ],
       "scene_hint": "点击图中引霄灵藤（左侧）、引霄灵藤（右侧）、青石楼梯，前往对应位置。",
       "summary": "青玄阁内连接两间卧房的厅堂，共用防猎犬生成、恒温、避雨与夜间照明。",
@@ -4395,12 +4970,29 @@ window.SITE_DATA = {
     {
       "id": "loc_bedroom",
       "owner": "common",
-      "building_exits": [{ "target": "loc_hall", "label": "鎏角青玄门 · 返回厅堂" }],
+      "building_exits": [
+        {
+          "target": "loc_hall",
+          "label": "鎏角青玄门 · 返回厅堂"
+        }
+      ],
       "title": "阁主卧房（左侧）",
-      "aliases": ["阁主卧房", "左侧卧房"],
+      "aliases": [
+        "阁主卧房",
+        "左侧卧房"
+      ],
       "illustration": "assets/img/terrains/loc_bedroom.png",
       "scene_hotspots": [
-        {"label": "鎏角青玄门", "target": "loc_hall", "x": 88.552, "y": 80.4878, "width": 19.802, "height": 36.5067, "hint": "返回厅堂", "hint_align": "end"}
+        {
+          "label": "鎏角青玄门",
+          "target": "loc_hall",
+          "x": 88.552,
+          "y": 80.4878,
+          "width": 19.802,
+          "height": 36.5067,
+          "hint": "返回厅堂",
+          "hint_align": "end"
+        }
       ],
       "preview_caption": "左侧卧房内景预览",
       "scene_hint": "点击图中鎏角青玄门，前往对应位置。",
@@ -4436,18 +5028,37 @@ window.SITE_DATA = {
     {
       "id": "loc_bedroom_right",
       "owner": "common",
-      "building_exits": [{ "target": "loc_hall", "label": "银翘古木门 · 返回厅堂" }],
+      "building_exits": [
+        {
+          "target": "loc_hall",
+          "label": "银翘古木门 · 返回厅堂"
+        }
+      ],
       "title": "阁主卧房（右侧）",
-      "aliases": ["右侧卧房"],
+      "aliases": [
+        "右侧卧房"
+      ],
       "illustration": "assets/img/terrains/loc_bedroom_right.png",
       "scene_hotspots": [
-        {"label": "银翘古木门", "target": "loc_hall", "x": 11.3243, "y": 80.4878, "width": 19.802, "height": 36.5067, "hint": "返回厅堂", "hint_align": "start"}
+        {
+          "label": "银翘古木门",
+          "target": "loc_hall",
+          "x": 11.3243,
+          "y": 80.4878,
+          "width": 19.802,
+          "height": 36.5067,
+          "hint": "返回厅堂",
+          "hint_align": "start"
+        }
       ],
       "preview_caption": "右侧卧房内景预览",
       "scene_hint": "点击图中银翘古木门，前往对应位置。",
       "summary": "由厅堂右侧引霄灵藤进入，银翘古木门返回厅堂。与左侧卧房是不同房间，墙景独立，保护效果相同。",
       "image": "assets/img/terrains/bighead_fishhouse.png",
-      "related": ["loc_qingxuan", "loc_hall"],
+      "related": [
+        "loc_qingxuan",
+        "loc_hall"
+      ],
       "detail_blocks": [
         {
           "type": "text",
@@ -4470,7 +5081,7 @@ window.SITE_DATA = {
   "seasons": [
     {
       "id": "jq_lc",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "立春",
       "title_note": "东风解冻 蛰虫始振 鱼陟负冰",
       "image": "assets/img/seasons/jq_lc.png",
@@ -4486,7 +5097,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
@@ -4503,11 +5114,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_ys",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "雨水",
       "title_note": "獺祭鱼 鸿雁来 草木萌动",
       "image": "assets/img/seasons/jq_ys.png",
-      "summary": "装入琦玉器后，胖头鱼移速×1.05（提高5%）。",
+      "summary": "装入琦玉器后，装备者移速×1.05（提高5%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4519,12 +5130,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼移速×1.05（提高5%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者移速×1.05（提高5%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4536,11 +5147,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_jz",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "惊蛰",
       "title_note": "桃始华 仓庚鸣 鹰化为鸠",
       "image": "assets/img/seasons/jq_jz.png",
-      "summary": "装入琦玉器后，胖头鱼移速×1.10（提高10%）。",
+      "summary": "装入琦玉器后，装备者移速×1.10（提高10%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4552,12 +5163,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼移速×1.10（提高10%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者移速×1.10（提高10%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4569,11 +5180,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_cf",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "春分",
       "title_note": "玄鸟至 雷乃发声 始电",
       "image": "assets/img/seasons/jq_cf.png",
-      "summary": "装入琦玉器后，胖头鱼移速×1.15（提高15%）。",
+      "summary": "装入琦玉器后，装备者移速×1.15（提高15%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4585,12 +5196,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼移速×1.15（提高15%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者移速×1.15（提高15%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4602,11 +5213,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_qm",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "清明",
       "title_note": "桐始华 田鼠化为驾 虹始见",
       "image": "assets/img/seasons/jq_qm.png",
-      "summary": "装入琦玉器后，胖头鱼移速×1.20（提高20%）。",
+      "summary": "装入琦玉器后，装备者移速×1.20（提高20%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4618,12 +5229,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼移速×1.20（提高20%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者移速×1.20（提高20%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4635,11 +5246,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_gy",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "谷雨",
       "title_note": "萍始生 鸣鸠拂其羽 戴胜降于桑",
       "image": "assets/img/seasons/jq_gy.png",
-      "summary": "装入琦玉器后，胖头鱼移速×1.25（提高25%）。",
+      "summary": "装入琦玉器后，装备者移速×1.25（提高25%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4651,12 +5262,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入春季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼移速×1.25（提高25%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者移速×1.25（提高25%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4668,7 +5279,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_lx",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "立夏",
       "title_note": "蝼蟈鸣 蚯蚓岀 王瓜生",
       "image": "assets/img/seasons/jq_lx.png",
@@ -4684,7 +5295,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
@@ -4701,11 +5312,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xm",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "小满",
       "title_note": "苦菜秀 靡草死 麦秋生",
       "image": "assets/img/seasons/jq_xm.png",
-      "summary": "装入琦玉器后，胖头鱼普通攻击倍率×1.05（提高5%）。",
+      "summary": "装入琦玉器后，装备者普通攻击倍率×1.05（提高5%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4717,12 +5328,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼普通攻击倍率×1.05（提高5%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者普通攻击倍率×1.05（提高5%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4734,11 +5345,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_mz",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "芒种",
       "title_note": "螳螂生 贍始鸣 反舌无声",
       "image": "assets/img/seasons/jq_mz.png",
-      "summary": "装入琦玉器后，胖头鱼普通攻击倍率×1.10（提高10%）。",
+      "summary": "装入琦玉器后，装备者普通攻击倍率×1.10（提高10%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4750,12 +5361,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼普通攻击倍率×1.10（提高10%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者普通攻击倍率×1.10（提高10%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4767,11 +5378,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xz",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "夏至",
       "title_note": "鹿角解 蝉始鸣 半夏生",
       "image": "assets/img/seasons/jq_xz.png",
-      "summary": "装入琦玉器后，胖头鱼普通攻击倍率×1.15（提高15%）。",
+      "summary": "装入琦玉器后，装备者普通攻击倍率×1.15（提高15%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4783,12 +5394,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼普通攻击倍率×1.15（提高15%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者普通攻击倍率×1.15（提高15%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4800,11 +5411,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xs",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "小暑",
       "title_note": "温风至 蟋蟀居辟 鷹始鸷",
       "image": "assets/img/seasons/jq_xs.png",
-      "summary": "装入琦玉器后，胖头鱼普通攻击倍率×1.20（提高20%）。",
+      "summary": "装入琦玉器后，装备者普通攻击倍率×1.20（提高20%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4816,12 +5427,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼普通攻击倍率×1.20（提高20%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者普通攻击倍率×1.20（提高20%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4833,11 +5444,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_ds",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "大暑",
       "title_note": "腐草为萤 土润溽暑 大雨时行",
       "image": "assets/img/seasons/jq_ds.png",
-      "summary": "装入琦玉器后，胖头鱼普通攻击倍率×1.25（提高25%）。",
+      "summary": "装入琦玉器后，装备者普通攻击倍率×1.25（提高25%）。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4849,12 +5460,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入夏季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼普通攻击倍率×1.25（提高25%）。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者普通攻击倍率×1.25（提高25%）。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4866,7 +5477,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_lq",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "立秋",
       "title_note": "凉风至 白露降 寒蝉鸣",
       "image": "assets/img/seasons/jq_lq.png",
@@ -4882,7 +5493,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
@@ -4899,11 +5510,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_cs",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "处暑",
       "title_note": "鹰乃祭鸟 天地始肃 禾乃登",
       "image": "assets/img/seasons/jq_cs.png",
-      "summary": "装入琦玉器后，为胖头鱼提供5%普通伤害减免，不提供位面防御。",
+      "summary": "装入琦玉器后，为装备者提供5%普通伤害减免，不提供位面防御。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4915,12 +5526,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，为胖头鱼提供5%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，为装备者提供5%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4932,11 +5543,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_bl",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "白露",
       "title_note": "鸿雁来 玄鸟归 群鸟养羞",
       "image": "assets/img/seasons/jq_bl.png",
-      "summary": "装入琦玉器后，为胖头鱼提供10%普通伤害减免，不提供位面防御。",
+      "summary": "装入琦玉器后，为装备者提供10%普通伤害减免，不提供位面防御。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4948,12 +5559,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，为胖头鱼提供10%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，为装备者提供10%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4965,11 +5576,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_qf",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "秋分",
       "title_note": "雷始收声 蛰虫培户 水始涸",
       "image": "assets/img/seasons/jq_qf.png",
-      "summary": "装入琦玉器后，为胖头鱼提供15%普通伤害减免，不提供位面防御。",
+      "summary": "装入琦玉器后，为装备者提供15%普通伤害减免，不提供位面防御。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -4981,12 +5592,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，为胖头鱼提供15%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，为装备者提供15%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -4998,11 +5609,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_hl",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "寒露",
       "title_note": "鸿雁来宾 雀入大水为蛤 菊有黄华",
       "image": "assets/img/seasons/jq_hl.png",
-      "summary": "装入琦玉器后，为胖头鱼提供20%普通伤害减免，不提供位面防御。",
+      "summary": "装入琦玉器后，为装备者提供20%普通伤害减免，不提供位面防御。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5014,12 +5625,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，为胖头鱼提供20%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，为装备者提供20%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5031,11 +5642,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_sj",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "霜降",
       "title_note": "豺乃祭兽 草木黄落 蛰虫咸伏",
       "image": "assets/img/seasons/jq_sj.png",
-      "summary": "装入琦玉器后，为胖头鱼提供25%普通伤害减免，不提供位面防御。",
+      "summary": "装入琦玉器后，为装备者提供25%普通伤害减免，不提供位面防御。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5047,12 +5658,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入秋季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，为胖头鱼提供25%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，为装备者提供25%普通伤害减免，不提供位面防御。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5064,7 +5675,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_ld",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "立冬",
       "title_note": "水始冰 地始冻 雉入大水为蜃",
       "image": "assets/img/seasons/jq_ld.png",
@@ -5080,7 +5691,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
@@ -5097,11 +5708,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xx",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "小雪",
       "title_note": "虹藏不见 天气腾地气降 闭塞成冬",
       "image": "assets/img/seasons/jq_xx.png",
-      "summary": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加1寒冷值；实际冻结所需命中次数取决于目标抗性。",
+      "summary": "装入琦玉器后，装备者每次命中可冻结的目标增加1寒冷值；实际冻结所需命中次数取决于目标抗性。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5113,12 +5724,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加1寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者每次命中可冻结的目标增加1寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5130,11 +5741,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dx",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "大雪",
       "title_note": "鹃鸥不鸣 虎始交 茘挺生",
       "image": "assets/img/seasons/jq_dx.png",
-      "summary": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加2寒冷值；实际冻结所需命中次数取决于目标抗性。",
+      "summary": "装入琦玉器后，装备者每次命中可冻结的目标增加2寒冷值；实际冻结所需命中次数取决于目标抗性。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5146,12 +5757,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加2寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者每次命中可冻结的目标增加2寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5163,11 +5774,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dz",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "冬至",
       "title_note": "蚯蚓结 麇角解 水泉动",
       "image": "assets/img/seasons/jq_dz.png",
-      "summary": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加3寒冷值；实际冻结所需命中次数取决于目标抗性。",
+      "summary": "装入琦玉器后，装备者每次命中可冻结的目标增加3寒冷值；实际冻结所需命中次数取决于目标抗性。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5179,12 +5790,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加3寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者每次命中可冻结的目标增加3寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5196,11 +5807,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_xh",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "小寒",
       "title_note": "雁北乡 鹋始巣 雉始鸲",
       "image": "assets/img/seasons/jq_xh.png",
-      "summary": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加4寒冷值；实际冻结所需命中次数取决于目标抗性。",
+      "summary": "装入琦玉器后，装备者每次命中可冻结的目标增加4寒冷值；实际冻结所需命中次数取决于目标抗性。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5212,12 +5823,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加4寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者每次命中可冻结的目标增加4寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5229,11 +5840,11 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_dh",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "大寒",
       "title_note": "鸡始乳 征鸟厉疾 水泽腹坚",
       "image": "assets/img/seasons/jq_dh.png",
-      "summary": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加5寒冷值；实际冻结所需命中次数取决于目标抗性。",
+      "summary": "装入琦玉器后，装备者每次命中可冻结的目标增加5寒冷值；实际冻结所需命中次数取决于目标抗性。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -5245,12 +5856,12 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
+          "content": "任意角色装备[[琦玉器]]，把本件放入冬季槽位。放入普通背包不会激活效果；取出或卸下琦玉器会取消效果。"
         },
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "装入琦玉器后，胖头鱼每次命中可冻结的目标增加5寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
+          "content": "装入琦玉器后，装备者每次命中可冻结的目标增加5寒冷值；实际冻结所需命中次数取决于目标抗性。无需等待世界进入对应季节。"
         },
         {
           "type": "text",
@@ -5262,7 +5873,7 @@ window.SITE_DATA = {
     },
     {
       "id": "jq_chun",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "春季",
       "title_note": "春风又绿江南岸，明月何时照我还。",
       "image": "assets/img/seasons/jq_chun.png",
@@ -5278,7 +5889,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
+          "content": "任意角色装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。胖头鱼激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
         },
         {
           "type": "text",
@@ -5298,14 +5909,14 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "10级主动效果",
-          "content": "10级后可主动使用，消耗5灵气，促进周围40范围内符合条件的农作物生长；不对所有植物生效。10级主物品激活时，还提供快速制作。"
+          "content": "10级后仅胖头鱼可主动使用，消耗5灵气，促进周围40范围内符合条件的农作物生长；不对所有植物生效。10级主物品激活时，还提供快速制作。"
         }
       ],
       "display_image": "assets/img/displays/bighead_jq_chun.png"
     },
     {
       "id": "jq_xia",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "夏季",
       "title_note": "绿树阴浓夏日长，楼台倒影入池塘。",
       "image": "assets/img/seasons/jq_xia.png",
@@ -5321,7 +5932,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
+          "content": "任意角色装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。胖头鱼激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
         },
         {
           "type": "text",
@@ -5341,14 +5952,14 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "10级主动效果",
-          "content": "10级后可主动使用，为周围40范围内存活的玩家提供180秒战斗增益：普通攻击倍率×1.5，并对支持该效果的角色启用快速攻击。"
+          "content": "10级后仅胖头鱼可主动使用，为周围40范围内存活的玩家提供180秒战斗增益：普通攻击倍率×1.5，并对支持该效果的角色启用快速攻击。"
         }
       ],
       "display_image": "assets/img/displays/bighead_jq_xia.png"
     },
     {
       "id": "jq_qiu",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "秋季",
       "title_note": "停车坐爱枫林晚，霜叶红于二月花。",
       "image": "assets/img/seasons/jq_qiu.png",
@@ -5364,7 +5975,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
+          "content": "任意角色装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。胖头鱼激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
         },
         {
           "type": "text",
@@ -5384,14 +5995,14 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "10级主动效果",
-          "content": "10级后可主动使用，为周围40范围内存活的玩家提供180秒增益：移速×1.3，并阻止困倦累积。"
+          "content": "10级后仅胖头鱼可主动使用，为周围40范围内存活的玩家提供180秒增益：移速×1.3，并阻止困倦累积。"
         }
       ],
       "display_image": "assets/img/displays/bighead_jq_qiu.png"
     },
     {
       "id": "jq_dong",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "冬季",
       "title_note": "晚来天欲雪，能饮一杯无？",
       "image": "assets/img/seasons/jq_dong.png",
@@ -5407,7 +6018,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
+          "content": "任意角色装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。胖头鱼激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
         },
         {
           "type": "text",
@@ -5427,14 +6038,14 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "10级主动效果",
-          "content": "10级后可主动使用，扑灭周围40范围内的火焰与闷烧，并为可保护植物提供20秒防枯萎保护；不扑灭营火。"
+          "content": "10级后仅胖头鱼可主动使用，扑灭周围40范围内的火焰与闷烧，并为可保护植物提供20秒防枯萎保护；不扑灭营火。"
         }
       ],
       "display_image": "assets/img/displays/bighead_jq_dong.png"
     },
     {
       "id": "jq_dong10",
-      "owner": "pangtouyu",
+      "owner": "common",
       "name": "冬季(10级)",
       "title_note": "晚来天欲雪，能饮一杯无？",
       "image": "assets/img/seasons/jq_dong10.png",
@@ -5455,7 +6066,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "由胖头鱼装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
+          "content": "任意角色装备[[琦玉器]]，放入对应季节槽位即可激活；不要求世界处于对应季节。胖头鱼激活至少一种四季主物品时，[[灵气]]上限额外增加100，并可消耗[[四季之灵]]回复灵气。"
         },
         {
           "type": "text",
@@ -5465,13 +6076,48 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "10级主动效果",
-          "content": "10级后可主动使用，扑灭周围40范围内的火焰与闷烧，并为可保护植物提供20秒防枯萎保护；不扑灭营火。"
+          "content": "10级后仅胖头鱼可主动使用，扑灭周围40范围内的火焰与闷烧，并为可保护植物提供20秒防枯萎保护；不扑灭营火。"
         }
       ],
       "display_image": "assets/img/displays/bighead_jq_dong.png"
     }
   ],
   "changelog": [
+    {
+      "id": "log_5600",
+      "title": "v5.6 · 万象玑与花种祭眼",
+      "version": "v5.6",
+      "date": "2026-11-14",
+      "image": "assets/img/items/bighead_wanxiangji.png",
+      "related": [
+        "bighead_wanxiangji",
+        "mech_seed_ritual",
+        "bb_gaojiaoniao_fr",
+        "bb_gaojiaoniao_my",
+        "mech_mist_forest",
+        "bighead_buran",
+        "bighead_qyq",
+        "bighead_sanbao_builder",
+        "bb_gaojiaoniao_cs_skin2",
+        "bighead_spear_skin3",
+        "bb_gaojiaoniao_fh_skin3"
+      ],
+      "changes": [
+        "本条汇总v5.1至v5.6的累计变化，依据2026年11月14日提供的新包核对。",
+        "新增[[万象玑]]：高脚鸟专用七法术饰品，弦上限1000；新生自带20弦，另行制作的初始0弦，可用指定材料充弦。",
+        "新增[[花种]]、[[腐烂花种]]、[[祭眼]]与[[花种祭眼仪式]]。高脚鸟戴高级耕作先驱帽，用蘑菇皮打包指定材料；花种自身温度连续至少50℃满3个游戏天后，交给新月夜月台旁的祭眼换取[[芙蓉]]。祭眼另接受告密的心随机召唤Boss。",
+        "芙蓉停用“给予枯萎格罗姆花暗影心房，有10%概率转换”的旧获取方式，现改为花种祭眼仪式。",
+        "[[溟羽]]改为直线冥焰，白天／黄昏／夜晚伤害300／500／800；自带40位面防御，可喂不知名骨头或邪天翁羽毛将普通伤害吸收升至80%。无战斗目标且与主人链接、在场时每秒回血1；命中后标记目标，目标死亡额外掉纯粹恐惧，石虾另掉绝望石。",
+        "[[芙蓉]]冥火范围内，高脚鸟连续停留每60秒增加1[[噬心]]。桎梏扩大为半径2／4.8／7.4／10的四圈、各6／16／24／32个陷阱；单陷阱作用半径2，有效敌人每秒损失最大生命1%，重叠不加快频率。",
+        "新世界默认地表生成加入[[雾气桦树林]]，直接连到沼泽出口，含猪王与5座猪屋；旧存档不会自动补入。",
+        "新增[[告白 · 除祟]]、[[恋爱 · 避尘]]、[[真爱无敌 · 封魂]]外观；三款及[[爱慕 · 繁花]]按指定账号名单校验。封魂新外观支持独立飞剑与古祭神辉储存显示，凤求凰尾迹跟随当前外观。",
+        "[[不染]]破裂珍珠触发率由5%降至1%；符文和注能暗影心房改用组件直接伤害，保留Boss部件伤害转移。非PVP世界弹体命中其他玩家仅击退，冰圈也不伤害其他玩家。",
+        "[[何三宝]]新增9999生命、99%普通伤害吸收、每秒回血2；死亡会关闭仓库、掉出全部内容并清除待发寻宝奖励。",
+        "[[琦玉器]]装配效果、攻击联动及巨大作物经验适用于其他角色；灵气相关收益仍要求相应能力，四季主物品10级主动使用仍限胖头鱼。",
+        "胖头鱼空手池塘捕鱼至少需要10饥饿，成功后消耗10；移除攻击命中使目标增加潮湿的效果。",
+        "[[Q币]]新增60金块制作10枚、240金块制作40枚的批量配方，兑换比仍为6:1。[[玄清灵鉴]]生成或迁移寄生灵时，只选择地表主大陆或月岛安全陆地，找不到合适点则提示失败。"
+      ]
+    },
     {
       "id": "log_5100",
       "title": "v5.1 · 料理与战斗调整",
@@ -5649,7 +6295,7 @@ window.SITE_DATA = {
       "item_id": "bighead_fanhua",
       "name": "爱慕 · 繁花",
       "image": "assets/img/skins/bighead_fanhua_skin2.png",
-      "summary": "一枝繁花，满心爱慕。繁花的装备外观。",
+      "summary": "一枝繁花，满心爱慕。繁花的装备外观，限获授权账号使用。",
       "related": [
         "bighead_fanhua"
       ],
@@ -5658,6 +6304,11 @@ window.SITE_DATA = {
           "type": "text",
           "title": "对应装备",
           "content": "[[繁花]]的「爱慕」外观，具有独立的手持动画和命中特效。"
+        },
+        {
+          "type": "text",
+          "title": "解锁限制",
+          "content": "此外观按指定账号名单校验，仅获授权的账号可使用。"
         }
       ],
       "display_image": "assets/img/displays/bighead_fanhua_skin2.png"
@@ -6093,6 +6744,79 @@ window.SITE_DATA = {
         }
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh_skin3.png"
+    },
+    {
+      "id": "bb_gaojiaoniao_cs_skin2",
+      "item_id": "bb_gaojiaoniao_cs",
+      "name": "告白 · 除祟",
+      "image": "assets/img/skins/bb_gaojiaoniao_cs_skin2.png",
+      "display_image": "assets/img/displays/bb_gaojiaoniao_cs_skin2.png",
+      "summary": "除祟的「告白」装备外观，限获授权账号使用。",
+      "related": [
+        "bb_gaojiaoniao_cs"
+      ],
+      "source": "v5.6",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "对应装备",
+          "content": "[[除祟]]的「告白」外观，带独立手持表现。"
+        },
+        {
+          "type": "text",
+          "title": "解锁限制",
+          "content": "此外观按指定账号名单校验，仅获授权的账号可使用。"
+        }
+      ]
+    },
+    {
+      "id": "bighead_spear_skin3",
+      "item_id": "bighead_spear",
+      "name": "恋爱 · 避尘",
+      "image": "assets/img/skins/bighead_spear_skin3.png",
+      "display_image": "assets/img/displays/bighead_spear_skin3.png",
+      "summary": "避尘的「恋爱」装备外观，限获授权账号使用。",
+      "related": [
+        "bighead_spear"
+      ],
+      "source": "v5.6",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "对应装备",
+          "content": "[[避尘]]的「恋爱」外观，带独立手持表现。"
+        },
+        {
+          "type": "text",
+          "title": "解锁限制",
+          "content": "此外观按指定账号名单校验，仅获授权的账号可使用。"
+        }
+      ]
+    },
+    {
+      "id": "bb_gaojiaoniao_fh_skin3",
+      "item_id": "bb_gaojiaoniao_fh",
+      "name": "真爱无敌 · 封魂",
+      "image": "assets/img/skins/bb_gaojiaoniao_fh_skin3.png",
+      "display_image": "assets/img/displays/bb_gaojiaoniao_fh_skin3.png",
+      "summary": "封魂的「真爱无敌」装备外观，限获授权账号使用。",
+      "related": [
+        "bb_gaojiaoniao_fh",
+        "bb_gaojiaoniao_gjsh"
+      ],
+      "source": "v5.6",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "对应装备",
+          "content": "[[封魂]]的「真爱无敌」外观，带独立手持表现。 飞剑也使用独立外观，并支持[[古祭神辉]]的封魂储存显示。"
+        },
+        {
+          "type": "text",
+          "title": "解锁限制",
+          "content": "此外观按指定账号名单校验，仅获授权的账号可使用。"
+        }
+      ]
     }
   ],
   "settings": [
