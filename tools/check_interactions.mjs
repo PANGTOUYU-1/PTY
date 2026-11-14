@@ -424,7 +424,7 @@ check('不染详情直接说明三格容量、六种配件与神石给予操作'
   for (const description of ['3格配件容器', '每格只能放1件', '同种配件不能重复放入', '蕴灵神石要用「给予」']) {
     assert.ok(text.includes(description), description);
   }
-  for (const name of ['月冕莲心', '远古星雷符文', '注能暗影心房', '月岩雕像', '珍珠', '破裂珍珠']) {
+  for (const name of ['月冕莲心', '远古星雷符文', '注能暗影心房', '天体宝球', '珍珠', '破裂珍珠']) {
     assert.ok(text.includes(name), name);
   }
   assert.ok(text.includes('配件效果'));
