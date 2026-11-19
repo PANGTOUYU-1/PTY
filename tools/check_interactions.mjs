@@ -811,7 +811,7 @@ check('真实详情模块显示配方、科技与正确的分区链接', () => {
 });
 check('原版材料使用新目录内24px图标，保留配方文字数量且不生成无效链接', () => {
   const icons = sandbox.window.VANILLA_ICONS;
-  assert.equal(Object.keys(icons).length, 80);
+  assert.equal(Object.keys(icons).length, 92);
   for (const [id, icon] of Object.entries(icons)) {
     const png = readFileSync(join(root, icon.image));
     assert.match(icon.image, /^assets\/img\/inventoryimages[1-4]\//);
@@ -1148,7 +1148,7 @@ check('关联按实际制作与技能整理，不混入同类物品或通用食�
     assert.ok(entry.related.includes('mech_gold_penguin'), entry.id);
   }
   assert.equal(state.entries.bighead_wcs.owner, 'gaojiaoniao');
-  App.Modal.open('bb_hhlct');
+  App.Modal.open('bighead_hy');
   assert.ok(!node('modal-root').innerHTML.includes('class="related-row"'), '无直接关联时隐藏空关联栏');
 });
 const labelFixture = JSON.parse(JSON.stringify(sandbox.window.SITE_DATA));

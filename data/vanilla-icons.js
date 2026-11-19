@@ -5,6 +5,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages1/alterguardianhatshard.png",
     "aliases": []
   },
+  "amulet": {
+    "name": "重生护符",
+    "image": "assets/img/inventoryimages1/amulet.png",
+    "aliases": []
+  },
   "armorskeleton": {
     "name": "骨头盔甲",
     "image": "assets/img/inventoryimages1/armorskeleton.png",
@@ -30,6 +35,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages1/bluemooneye.png",
     "aliases": []
   },
+  "bundlewrap": {
+    "name": "捆绑包装",
+    "image": "assets/img/inventoryimages1/bundlewrap.png",
+    "aliases": []
+  },
   "butter": {
     "name": "黄油",
     "image": "assets/img/inventoryimages1/butter.png",
@@ -53,6 +63,11 @@ window.VANILLA_ICONS = {
   "charcoal": {
     "name": "木炭",
     "image": "assets/img/inventoryimages1/charcoal.png",
+    "aliases": []
+  },
+  "chestupgrade_stacksize": {
+    "name": "弹性空间制造器",
+    "image": "assets/img/inventoryimages1/chestupgrade_stacksize.png",
     "aliases": []
   },
   "cookbook": {
@@ -185,6 +200,16 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages2/malbatross_beak.png",
     "aliases": []
   },
+  "malbatross_feather": {
+    "name": "邪天翁羽毛",
+    "image": "assets/img/inventoryimages2/malbatross_feather.png",
+    "aliases": []
+  },
+  "mandrake": {
+    "name": "曼德拉草",
+    "image": "assets/img/inventoryimages2/mandrake.png",
+    "aliases": []
+  },
   "marble": {
     "name": "大理石",
     "image": "assets/img/inventoryimages2/marble.png",
@@ -208,6 +233,11 @@ window.VANILLA_ICONS = {
   "moonglassaxe": {
     "name": "月光玻璃斧",
     "image": "assets/img/inventoryimages2/moonglassaxe.png",
+    "aliases": []
+  },
+  "moonrocknugget": {
+    "name": "月岩",
+    "image": "assets/img/inventoryimages2/moonrocknugget.png",
     "aliases": []
   },
   "mosquitosack": {
@@ -240,6 +270,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages2/oceanfish_small_8_inv.png",
     "aliases": []
   },
+  "onemanband": {
+    "name": "独奏乐器",
+    "image": "assets/img/inventoryimages2/onemanband.png",
+    "aliases": []
+  },
   "opalpreciousgem": {
     "name": "彩虹宝石",
     "image": "assets/img/inventoryimages2/opalpreciousgem.png",
@@ -258,6 +293,11 @@ window.VANILLA_ICONS = {
   "orangestaff": {
     "name": "懒人魔杖",
     "image": "assets/img/inventoryimages2/orangestaff.png",
+    "aliases": []
+  },
+  "panflute": {
+    "name": "排箫",
+    "image": "assets/img/inventoryimages2/panflute.png",
     "aliases": []
   },
   "papyrus": {
@@ -283,6 +323,11 @@ window.VANILLA_ICONS = {
   "pomegranate": {
     "name": "石榴",
     "image": "assets/img/inventoryimages2/pomegranate.png",
+    "aliases": []
+  },
+  "premiumwateringcan": {
+    "name": "空鸟嘴壶",
+    "image": "assets/img/inventoryimages2/premiumwateringcan.png",
     "aliases": []
   },
   "purplegem": {
@@ -355,6 +400,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages3/smallmeat.png",
     "aliases": []
   },
+  "soil_amender": {
+    "name": "催长剂起子",
+    "image": "assets/img/inventoryimages3/soil_amender.png",
+    "aliases": []
+  },
   "spidergland": {
     "name": "蜘蛛腺",
     "image": "assets/img/inventoryimages3/spidergland.png",
@@ -385,9 +435,19 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages3/thurible.png",
     "aliases": []
   },
+  "treegrowthsolution": {
+    "name": "树果酱",
+    "image": "assets/img/inventoryimages3/treegrowthsolution.png",
+    "aliases": []
+  },
   "twigs": {
     "name": "树枝",
     "image": "assets/img/inventoryimages3/twigs.png",
+    "aliases": []
+  },
+  "walrus_tusk": {
+    "name": "海象牙",
+    "image": "assets/img/inventoryimages3/walrus_tusk.png",
     "aliases": []
   },
   "watermelon": {

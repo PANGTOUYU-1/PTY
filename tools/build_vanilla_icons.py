@@ -1,8 +1,8 @@
 """Build the recipe icon registry from local DST Chinese strings and supplied PNGs.
 
 Usage: python tools/build_vanilla_icons.py --strings path/to/chinese_s.po
-The four inventoryimages directories are kept unchanged. Recipe materials and used
-crafting stations and moon-eye inserts with supplied icons are indexed.
+The four inventoryimages directories are kept unchanged. Recipe and upgrade
+materials, used crafting stations and moon-eye inserts with supplied icons are indexed.
 """
 import argparse
 import collections
@@ -19,6 +19,11 @@ ALIASES = {
 MOON_EYES = (
     "redmooneye", "bluemooneye", "orangemooneye",
     "yellowmooneye", "greenmooneye", "purplemooneye",
+)
+UPGRADE_MATERIALS = (
+    "soil_amender", "premiumwateringcan", "onemanband", "treegrowthsolution",
+    "panflute", "bundlewrap", "chestupgrade_stacksize", "amulet",
+    "moonrocknugget", "walrus_tusk", "malbatross_feather", "mandrake",
 )
 
 
@@ -41,8 +46,8 @@ def build(strings):
             by_name[name].append(prefab)
     data = json.loads((ROOT / "data/site-data.js").read_text("utf-8").split("window.SITE_DATA = ", 1)[1].rstrip().removesuffix(";"))
     registry = {}
-    # Equipment inserts shown in the moon-eye effect table.
-    for prefab in MOON_EYES:
+    # Detail tables also name upgrade materials and equipment inserts.
+    for prefab in (*MOON_EYES, *UPGRADE_MATERIALS):
         registry[prefab] = {"name": names[prefab], "image": images[prefab], "aliases": []}
     # Crafting stations are requirements, so they do not appear as name×quantity.
     for prefab in ("researchlab", "researchlab2", "cookpot"):

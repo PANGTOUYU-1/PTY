@@ -178,7 +178,7 @@ python tools\check_textures.py
 展示图来源、帧选择及尺寸记录在 `data/display-assets.json`；重新导出使用
 `tools/export_mod_displays.py`，命令见下方维护说明。
 
-本轮 v5.6 来源映射与核对结果见 [docs/08-v5.6资料同步.md](docs/08-v5.6资料同步.md)。此前不染与溟羽补充见 [docs/07-不染与溟羽核对.md](docs/07-不染与溟羽核对.md)，v5.1 来源映射见 [docs/06-v5.1资料同步.md](docs/06-v5.1资料同步.md)，原始导出流程见 [docs/04-v4.8资料同步.md](docs/04-v4.8资料同步.md)。
+茶台及其他物品的升级材料核对见 [docs/09-升级材料核对.md](docs/09-升级材料核对.md)。v5.6 来源映射与核对结果见 [docs/08-v5.6资料同步.md](docs/08-v5.6资料同步.md)。此前不染与溟羽补充见 [docs/07-不染与溟羽核对.md](docs/07-不染与溟羽核对.md)，v5.1 来源映射见 [docs/06-v5.1资料同步.md](docs/06-v5.1资料同步.md)，原始导出流程见 [docs/04-v4.8资料同步.md](docs/04-v4.8资料同步.md)。
 
 ## 说明
 
