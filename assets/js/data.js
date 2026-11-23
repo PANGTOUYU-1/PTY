@@ -50,7 +50,7 @@
 
   function selectedCategories(cats) {
     const first = (cats || [])[0];
-    return ["food", "structure", "pangtouyu", "gaojiaoniao", "common", "tool", "crop", "material"].includes(first) ? [first] : [];
+    return ["food", "structure", "pangtouyu", "gaojiaoniao", "common", "tool", "crop", "material", "environment"].includes(first) ? [first] : [];
   }
 
   function readHash(hash) {
@@ -313,7 +313,7 @@
       return {
         owner_stamp: { pangtouyu: "鱼", gaojiaoniao: "鸟" }[owner] || "",
         owner_label: App.config.ownerLabels[owner] || "",
-        type_stamp: { weapon: "武", armor: "护", tool: "工", crop: "作", material: "材", pet: "宠", misc: "生" }[type] || "",
+        type_stamp: { weapon: "武", armor: "护", tool: "工", crop: "作", material: "材", pet: "宠", misc: "生", environment: "景" }[type] || "",
         type_label: pet ? "宠物" : App.config.categoryLabels[type] || ""
       };
     },

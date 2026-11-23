@@ -25,6 +25,9 @@ UPGRADE_MATERIALS = (
     "panflute", "bundlewrap", "chestupgrade_stacksize", "amulet",
     "moonrocknugget", "walrus_tusk", "malbatross_feather", "mandrake",
 )
+YUNMENGZE_MATERIALS = (
+    "royal_jelly", "spidergland", "monstermeat", "houndstooth", "shadowheart",
+)
 
 
 def build(strings):
@@ -47,7 +50,7 @@ def build(strings):
     data = json.loads((ROOT / "data/site-data.js").read_text("utf-8").split("window.SITE_DATA = ", 1)[1].rstrip().removesuffix(";"))
     registry = {}
     # Detail tables also name upgrade materials and equipment inserts.
-    for prefab in (*MOON_EYES, *UPGRADE_MATERIALS):
+    for prefab in (*MOON_EYES, *UPGRADE_MATERIALS, *YUNMENGZE_MATERIALS):
         registry[prefab] = {"name": names[prefab], "image": images[prefab], "aliases": []}
     # Crafting stations are requirements, so they do not appear as name×quantity.
     for prefab in ("researchlab", "researchlab2", "cookpot"):
@@ -66,8 +69,8 @@ def build(strings):
             recipe = entry.get("recipe", "")
             for match in re.finditer(r"([^\s：；，+×\[\]]+)(?=×)", recipe):
                 word = match[1].removeprefix("或")
-                # Sanity is a character cost, not a physical material.
-                if word == "理智":
+                # Character costs are displayed as text, without a material icon.
+                if word in ("理智", "生命"):
                     continue
                 candidates = by_name.get(word, [])
                 prefab = ALIASES.get(word) or (candidates[0] if len(candidates) == 1 else None)

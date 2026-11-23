@@ -35,6 +35,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages1/bluemooneye.png",
     "aliases": []
   },
+  "boneshard": {
+    "name": "骨头碎片",
+    "image": "assets/img/inventoryimages1/boneshard.png",
+    "aliases": []
+  },
   "bundlewrap": {
     "name": "捆绑包装",
     "image": "assets/img/inventoryimages1/bundlewrap.png",
@@ -173,6 +178,11 @@ window.VANILLA_ICONS = {
     "image": "assets/img/inventoryimages2/honey.png",
     "aliases": []
   },
+  "houndstooth": {
+    "name": "犬牙",
+    "image": "assets/img/inventoryimages2/houndstooth.png",
+    "aliases": []
+  },
   "ice": {
     "name": "冰",
     "image": "assets/img/inventoryimages2/ice.png",
@@ -223,6 +233,11 @@ window.VANILLA_ICONS = {
   "milkywhites": {
     "name": "乳白物",
     "image": "assets/img/inventoryimages2/milkywhites.png",
+    "aliases": []
+  },
+  "monstermeat": {
+    "name": "怪物肉",
+    "image": "assets/img/inventoryimages2/monstermeat.png",
     "aliases": []
   },
   "moonglass": {
@@ -368,6 +383,11 @@ window.VANILLA_ICONS = {
   "rocks": {
     "name": "石头",
     "image": "assets/img/inventoryimages3/rocks.png",
+    "aliases": []
+  },
+  "royal_jelly": {
+    "name": "蜂王浆",
+    "image": "assets/img/inventoryimages3/royal_jelly.png",
     "aliases": []
   },
   "ruins_bat": {

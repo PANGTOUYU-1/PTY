@@ -9,7 +9,8 @@
     { id: "tool", name: "工具" },
     { id: "crop", name: "作物" },
     { id: "material", name: "材料" },
-    { id: "structure", name: "建筑" }
+    { id: "structure", name: "建筑" },
+    { id: "environment", name: "自然景物" }
   ];
 
   function normalizeText(text) {

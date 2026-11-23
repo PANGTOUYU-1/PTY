@@ -1,6 +1,6 @@
 {
   "generator": "DST Mod Tool 1.1.13 official Lua API",
-  "mod_version": "5.6",
+  "mod_version": "5.8",
   "processing": "Native scale 1; alpha crop and 8px transparent padding; no resizing or vertical flip.",
   "assets": [
     {
@@ -2960,6 +2960,209 @@
         574
       ],
       "path": "assets/img/displays/bb_gaojiaoniao_fh_skin3.png"
+    },
+    {
+      "source": "bb_ymz_jade_rock",
+      "bank": "bb_ymz_jade_rock",
+      "build": "bb_ymz_jade_rock",
+      "animation": "full_1",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 333,
+      "height": 650,
+      "alpha_bounds": [
+        2,
+        0,
+        333,
+        650
+      ],
+      "display_size": [
+        347,
+        666
+      ],
+      "path": "assets/img/displays/bb_ymz_jade_rock.png",
+      "thumbnail_path": "assets/img/mechanics/bb_ymz_jade_rock.png",
+      "thumbnail_max_size": [
+        96,
+        96
+      ],
+      "thumbnail_size": [
+        50,
+        96
+      ]
+    },
+    {
+      "source": "bb_ymz_jade",
+      "bank": "bb_ymz_jade",
+      "build": "bb_ymz_jade",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 235,
+      "height": 165,
+      "alpha_bounds": [
+        3,
+        14,
+        235,
+        153
+      ],
+      "display_size": [
+        248,
+        155
+      ],
+      "path": "assets/img/displays/bb_ymz_jade.png"
+    },
+    {
+      "source": "bb_ymz_bloodmud",
+      "bank": "bb_ymz_bloodmud",
+      "build": "bb_ymz_bloodmud",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 279,
+      "height": 156,
+      "alpha_bounds": [
+        4,
+        4,
+        275,
+        152
+      ],
+      "display_size": [
+        287,
+        164
+      ],
+      "path": "assets/img/displays/bb_ymz_bloodmud.png"
+    },
+    {
+      "source": "bb_ymz_compostbin",
+      "bank": "bb_ymz_compostbin",
+      "build": "bb_ymz_compostbin",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 519,
+      "height": 420,
+      "alpha_bounds": [
+        2,
+        1,
+        518,
+        420
+      ],
+      "display_size": [
+        532,
+        435
+      ],
+      "path": "assets/img/displays/bb_ymz_compostbin.png"
+    },
+    {
+      "source": "bb_ymz_waterfall",
+      "bank": "bb_ymz_pool",
+      "build": "bb_ymz_waterfall",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 1589,
+      "height": 1530,
+      "alpha_bounds": [
+        30,
+        0,
+        1589,
+        1517
+      ],
+      "display_size": [
+        1575,
+        1533
+      ],
+      "path": "assets/img/displays/bb_ymz_waterfall.png",
+      "thumbnail_path": "assets/img/mechanics/bb_ymz_pool.png",
+      "thumbnail_max_size": [
+        96,
+        96
+      ],
+      "thumbnail_size": [
+        96,
+        93
+      ]
+    },
+    {
+      "source": "bb_ymz_bloodpool",
+      "bank": "bb_ymz_bloodpool",
+      "build": "bb_ymz_bloodpool",
+      "animation": "idle_lava",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 937,
+      "height": 937,
+      "alpha_bounds": [
+        68,
+        80,
+        845,
+        798
+      ],
+      "display_size": [
+        793,
+        734
+      ],
+      "path": "assets/img/displays/bb_ymz_bloodpool.png"
+    },
+    {
+      "source": "bb_ymz_plasma",
+      "bank": "bb_ymz_plasma",
+      "build": "bb_ymz_plasma",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 135,
+      "height": 148,
+      "alpha_bounds": [
+        0,
+        4,
+        133,
+        143
+      ],
+      "display_size": [
+        149,
+        155
+      ],
+      "path": "assets/img/displays/bb_ymz_plasma.png"
+    },
+    {
+      "source": "bb_immortal_tree",
+      "bank": "bb_immortal_tree",
+      "build": "bb_immortal_tree",
+      "animation": "idle",
+      "frame": 1,
+      "scale": 1,
+      "dependencies": [],
+      "width": 2464,
+      "height": 2676,
+      "alpha_bounds": [
+        1,
+        1,
+        2463,
+        2675
+      ],
+      "display_size": [
+        2478,
+        2690
+      ],
+      "path": "assets/img/displays/bb_immortal_tree.png",
+      "thumbnail_path": "assets/img/mechanics/bb_watertree_pillar.png",
+      "thumbnail_max_size": [
+        96,
+        96
+      ],
+      "thumbnail_size": [
+        88,
+        96
+      ]
     }
   ],
   "bindings": [
@@ -3659,6 +3862,46 @@
     {
       "id": "mech_seed_ritual",
       "source": "bighead_ritual_eye"
+    },
+    {
+      "id": "bb_ymz_jade_rock",
+      "source": "bb_ymz_jade_rock"
+    },
+    {
+      "id": "bb_ymz_jade",
+      "source": "bb_ymz_jade"
+    },
+    {
+      "id": "bb_ymz_bloodmud",
+      "source": "bb_ymz_bloodmud"
+    },
+    {
+      "id": "bb_ymz_compostbin",
+      "source": "bb_ymz_compostbin"
+    },
+    {
+      "id": "bb_ymz_pool",
+      "source": "bb_ymz_waterfall"
+    },
+    {
+      "id": "bb_ymz_bloodpool",
+      "source": "bb_ymz_bloodpool"
+    },
+    {
+      "id": "bb_ymz_plasma",
+      "source": "bb_ymz_plasma"
+    },
+    {
+      "id": "bb_watertree_pillar",
+      "source": "bb_immortal_tree"
+    },
+    {
+      "id": "mech_mist_forest",
+      "source": "bb_ymz_jade_rock"
+    },
+    {
+      "id": "mech_paddy",
+      "source": "bb_ymz_bloodmud"
     }
   ]
 }

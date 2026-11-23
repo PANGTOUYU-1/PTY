@@ -198,11 +198,11 @@ check('人物页使用独立分栏模板，属性、特点和全部专属物品�
     }
   }
 });
-check('人物皮肤使用9款已启用外观的原生待机动画，默认形象保留且每人仅选中一项', () => {
+check('人物皮肤使用10款已启用外观的原生待机动画，默认形象保留且每人仅选中一项', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/character-models.json'), 'utf8'));
-  assert.equal(manifest.skins.length, 9);
+  assert.equal(manifest.skins.length, 10);
   assert.ok(!manifest.skins.some(skin => /_skin1$/.test(skin.id)), '注释停用的皮肤不展示');
-  const expected = { pangtouyu: 6, gaojiaoniao: 5 };
+  const expected = { pangtouyu: 7, gaojiaoniao: 5 };
   for (const character of state.characters) {
     assert.equal(character.appearances.length, expected[character.id]);
     assert.equal(new Set(character.appearances.map(skin => skin.id)).size, expected[character.id]);
@@ -243,7 +243,7 @@ check('建筑归入物品，食物独立展示，所有物品只收录一次', (
   App.Render.renderItems();
   assert.equal((node('items-root').innerHTML.match(/data-open-entry=/g) || []).length, standaloneItems.length);
   assert.ok(!node('items-root').innerHTML.includes('data-owner='));
-  assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.value), ['all', 'pangtouyu', 'gaojiaoniao', 'common', 'tool', 'crop', 'material', 'structure']);
+  assert.deepEqual(Array.from(App.Filter.categoryOptions(), option => option.value), ['all', 'pangtouyu', 'gaojiaoniao', 'common', 'tool', 'crop', 'material', 'structure', 'environment']);
   const cards = allItemCards();
   for (const item of state.items) assert.equal(cards.split(`data-entry-target="${item.id}"`).length - 1, 1, item.id);
   const previous = { ...App.ui };
@@ -285,7 +285,7 @@ check('物品支持归属与工具、作物、材料、建筑单选筛选，停�
     assert.ok(node('items-root').innerHTML.includes(`共 ${expected.length} 项 · ${label}`));
     assert.equal(App.route.read(App.route.build(App.ui)).cats[0], owner);
   }
-  for (const [category, label] of [['tool', '工具'], ['crop', '作物'], ['material', '材料'], ['structure', '建筑']]) {
+  for (const [category, label] of [['tool', '工具'], ['crop', '作物'], ['material', '材料'], ['structure', '建筑'], ['environment', '自然景物']]) {
     App.route.sync({ section: 'items', cats: [category, 'pangtouyu'], q: '' });
     assert.deepEqual(Array.from(App.ui.cats), [category]);
     const options = App.Filter.categoryOptions();
@@ -385,10 +385,10 @@ check('食物使用独立的单选分类，清空和详情返回不会混入物�
     assert.ok(App.Filter.getFilteredItems().every(item => item.owner === 'pangtouyu'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
-check('133张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
+check('141张原生展示PNG与清单尺寸相符，物品、节气和外观全部有对应展示图', () => {
   const manifest = JSON.parse(readFileSync(join(root, 'data/display-assets.json'), 'utf8'));
   const assets = new Map(manifest.assets.map(asset => [asset.source, asset]));
-  assert.equal(assets.size, 133);
+  assert.equal(assets.size, 141);
   for (const asset of assets.values()) {
     const png = readFileSync(join(root, asset.path));
     assert.equal(png.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', asset.source);
@@ -811,7 +811,7 @@ check('真实详情模块显示配方、科技与正确的分区链接', () => {
 });
 check('原版材料使用新目录内24px图标，保留配方文字数量且不生成无效链接', () => {
   const icons = sandbox.window.VANILLA_ICONS;
-  assert.equal(Object.keys(icons).length, 92);
+  assert.equal(Object.keys(icons).length, 96);
   for (const [id, icon] of Object.entries(icons)) {
     const png = readFileSync(join(root, icon.image));
     assert.match(icon.image, /^assets\/img\/inventoryimages[1-4]\//);
@@ -830,7 +830,7 @@ check('原版材料使用新目录内24px图标，保留配方文字数量且不
     assert.equal((rendered.match(/data-open-entry=/g) || []).length, [...entry.recipe.matchAll(/\[[^\[\]]+\]/g)].length, entry.id);
   }
   for (const name of ['金色羽毛', '草', '活木', '伏特羊奶', '鱼肉']) assert.ok(App.Recipe.toHtml(`${name}×1`).includes('recipe-token--vanilla'), name);
-  assert.ok(!App.Recipe.toHtml('理智×50；水果度≥2；不能加入蜂蜜').includes('<img'));
+  assert.ok(!App.Recipe.toHtml('理智×50；生命×100；水果度≥2；不能加入蜂蜜').includes('<img'));
   assert.ok(!App.Recipe.toHtml('冰鲷鱼鳞×1').includes('<img'), 'partial names must not match');
   assert.equal(App.Recipe.toHtml('<script>×1'), '&lt;script&gt;×1');
 });
@@ -926,12 +926,17 @@ check('31款外观全部在对应物品中横向展示，支持查看、返回�
   assert.ok(App.Filter.getFilteredItems().some(item => item.id === 'bighead_buran'));
   App.ui.q = '';
 });
-check('每件物品详情均能显示使用步骤与效果，且概要不重复为正文', () => {
+check('每件物品详情均能显示获取或使用步骤与效果，未实装内容说明状态，概要不重复为正文', () => {
   for (const item of state.items) {
     App.Modal.open(item.id);
     const output = node('modal-root').innerHTML;
-    assert.ok(/<h3>(?:怎么使用|用途)<\/h3>/.test(output), item.id);
-    assert.ok(/<h3>(?:效果与限制|基础效果|击杀掉落)<\/h3>/.test(output), item.id);
+    if (item.availability === '未实装') {
+      assert.ok(output.includes('<h3>实装状态</h3>'), item.id);
+      assert.ok(/<h3>(?:已实现的效果|已实现的用途|配方与使用)<\/h3>/.test(output), item.id);
+    } else {
+      assert.ok(/<h3>(?:怎么使用|用途|怎么获取)<\/h3>/.test(output), item.id);
+      assert.ok(/<h3>(?:效果与限制|基础效果|击杀掉落|刷新规则|泡澡效果)<\/h3>/.test(output), item.id);
+    }
     assert.equal(output.split(item.summary).length - 1, 1, item.id);
   }
 });
@@ -1230,8 +1235,8 @@ check('v5.1停用料理只在更新中说明，新料理可搜索、筛选并打
     assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bighead_fanhua_skin2"'));
   } finally { App.ui = previous; sandbox.window.location.hash = hash; }
 });
-check('v5.6 基础属性与数据版本一致', () => {
-  assert.equal(state.meta.version, 'v5.6');
+check('v5.8 基础属性与数据版本一致', () => {
+  assert.equal(state.meta.version, 'v5.8');
   assert.deepEqual(JSON.parse(JSON.stringify(state.characters[0].stats)), { hp: 150, san: 150, hunger: 150 });
   assert.deepEqual(JSON.parse(JSON.stringify(state.characters[1].stats)), { hp: 150, san: 100, hunger: 200 });
 });
@@ -1290,7 +1295,82 @@ check('通用节气装配与角色主动限制分别说明，新区域可搜索�
     App.ui.q = '雾气桦树林';
     assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'mech_mist_forest'));
     App.Modal.open('mech_mist_forest');
-    assert.ok(node('modal-root').innerHTML.includes('已有存档不会自动补入'));
+    assert.ok(node('modal-root').innerHTML.includes('已有存档不会自动补入完整云梦泽'));
   } finally { App.ui.q = previous; }
+});
+check('v5.8 获取链缺口在卡片、详情和搜索中标为未实装，配方材料仍可点击', () => {
+  const previous = { ...App.ui };
+  try {
+    App.route.sync({ section: 'items', cats: [], q: '' });
+    App.Render.renderItems();
+    const cards = node('items-root').innerHTML;
+    for (const id of ['bb_watertree_pillar', 'bb_ymz_plasma', 'bb_ymz_bloodpool']) {
+      const entry = state.entries[id];
+      assert.equal(entry.availability, '未实装', id);
+      const card = cards.match(new RegExp(`<article[^>]*data-entry-target="${id}"[\\s\\S]*?<\\/article>`))?.[0];
+      assert.ok(card?.includes('未实装'), id);
+      App.Modal.open(id);
+      assert.ok(node('modal-root').innerHTML.includes('未实装'), id);
+      App.ui.q = entry.name;
+      assert.ok(App.Filter.getSearchResults().some(result => result.id === id && result.excerpt_html.includes('未实装')), id);
+    }
+    App.ui.q = '未实装';
+    for (const id of ['bb_watertree_pillar', 'bb_ymz_plasma', 'bb_ymz_bloodpool']) {
+      assert.ok(App.Filter.getSearchResults().some(result => result.id === id), id);
+    }
+    App.Modal.open('bb_ymz_bloodpool');
+    assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bb_ymz_plasma"'));
+    App.Modal.open('bb_ymz_plasma');
+    assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bb_watertree_pillar"'));
+    App.Modal.open('bb_watertree_pillar');
+    assert.ok(node('modal-root').innerHTML.replace(/<[^>]*>/g, '').includes('原版大树，不能用来兑换血浆'));
+    for (const id of ['bb_ymz_jade', 'bb_ymz_bloodmud', 'bb_ymz_compostbin', 'bb_ymz_pool']) {
+      assert.notEqual(state.entries[id].availability, '未实装', id);
+    }
+  } finally { App.ui = previous; }
+});
+check('v5.8 新配方与施法门槛保留数量、角色生命成本和独立技能费用', () => {
+  App.Modal.open('bighead_ruyi');
+  let output = node('modal-root').innerHTML;
+  assert.ok(output.includes('data-open-entry="bb_ymz_jade"'));
+  assert.ok(output.replace(/<[^>]*>/g, '').includes('地玉×10'));
+  assert.ok(!state.entries.bighead_ruyi.recipe.includes('月亮碎片'));
+  App.Modal.open('bb_ymz_compostbin');
+  output = node('modal-root').innerHTML;
+  for (const text of ['活木头×5', '蚊子血囊×2', '生命×100']) assert.ok(output.replace(/<[^>]*>/g, '').includes(text), text);
+  assert.ok(!sandbox.window.VANILLA_ICONS.health && !state.entries.health);
+  App.Modal.open('bighead_spear');
+  output = node('modal-root').innerHTML;
+  assert.ok(output.includes('data-open-entry="config_bighead_bichen_min_lingqi"'));
+  for (const text of ['默认门槛100点', '实际仍只消耗2点', '冷却2秒']) assert.ok(output.replace(/<[^>]*>/g, '').includes(text), text);
+  App.Modal.open('jq_chun');
+  output = node('modal-root').innerHTML.replace(/<[^>]*>/g, '');
+  for (const text of ['胖头鱼50%', '其他角色30%', '不要求达到10级', '建筑摆放和锅中烹饪']) assert.ok(output.includes(text), text);
+  assert.ok(!JSON.stringify(state.entries.jq_chun).includes('移速×1.3'));
+});
+check('云梦泽旧链接继续可用，景物分类保留路由且正常建筑不混入天然景物', () => {
+  const previous = { ...App.ui };
+  try {
+    assert.equal(state.entries.mech_mist_forest.title, '云梦泽');
+    for (const query of ['云梦泽', '雾气桦树林']) {
+      App.ui.q = query;
+      assert.ok(App.Filter.getSearchResults().some(entry => entry.id === 'mech_mist_forest'));
+    }
+    App.route.sync({ section: 'items', cats: ['environment'], q: '' });
+    assert.equal(App.route.read(App.route.build(App.ui)).cats[0], 'environment');
+    assert.deepEqual(Array.from(App.Filter.getFilteredItems(), item => item.id), ['bb_ymz_jade_rock', 'bb_watertree_pillar', 'bb_ymz_pool']);
+    assert.ok(App.Filter.getFilteredItems().every(item => item.category !== 'structure'));
+    App.Modal.open('loc_qingxuan');
+    const output = node('modal-root').innerHTML;
+    assert.ok(output.includes('data-open-entry="mech_mist_forest"'));
+    assert.ok(!state.entries.loc_qingxuan.summary.includes('月岛碎片'));
+    App.Modal.open('mech_paddy');
+    assert.ok(node('modal-root').innerHTML.includes('data-open-entry="bb_ymz_bloodmud"'));
+    App.Modal.open('bb_ymz_bloodmud');
+    assert.ok(node('modal-root').innerHTML.includes('不能长成巨型作物'));
+    const historical = state.changelog.find(log => log.id === 'log_5600');
+    assert.ok(historical.changes.some(change => change.includes('猪王与5座猪屋')));
+    assert.equal(state.changelog[0].id, 'log_5800');
+  } finally { App.ui = previous; }
 });
 console.log(`\n交互模块检查：${passed} 通过。`);

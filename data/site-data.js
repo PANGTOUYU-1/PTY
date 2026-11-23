@@ -1,6 +1,6 @@
 /**
- * 我们饥佬是这样的 Wiki · v5.6
- * 内容依据 bighead11-14.zip 内 modinfo.lua、scripts/main/recipes.lua、strings.lua、
+ * 我们饥佬是这样的 Wiki · v5.8
+ * 内容依据 bighead.zip 内 modinfo.lua、scripts/main/recipes.lua、strings.lua、
  * bighead_food.lua、角色/装备 prefab 与机制组件整理；基础值与成长效果分开说明。
  * 小图标由模组 KTEX 转换并校正上下方向；展示图由 DST Mod Tool 原生渲染。
  * 修改内容后执行 node tools/check_data.mjs --strict 与 node tools/check_render.mjs。
@@ -10,7 +10,7 @@ window.SITE_DATA = {
     "site_title": "我们饥佬是这样的",
     "subtitle_latin": "",
     "author": "胖头鱼",
-    "version": "v5.6",
+    "version": "v5.8",
     "workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3627920230",
     "qq_group_url": "https://qm.qq.com/q/119CtJwiP8",
     "manifesto": "超级超级喜欢玩饥荒，搞了这个mod，哈哈哈哈，怎么方便怎么变态怎么来！",
@@ -21,11 +21,11 @@ window.SITE_DATA = {
       }
     ],
     "copyright": "© 2026 我们饥佬是这样的",
-    "source_version": "5.6",
+    "source_version": "5.8",
     "source": {
-      "archive": "bighead11-14.zip",
-      "version": "5.6",
-      "updated": "2026-11-14"
+      "archive": "bighead.zip",
+      "version": "5.8",
+      "updated": "2026-11-23"
     }
   },
   "categories": [
@@ -60,6 +60,10 @@ window.SITE_DATA = {
     {
       "id": "misc",
       "name": "生物"
+    },
+    {
+      "id": "environment",
+      "name": "自然景物"
     }
   ],
   "characters": [
@@ -125,6 +129,15 @@ window.SITE_DATA = {
           "poster": "assets/img/characters/bighead_skin6_idle.png",
           "width": 312,
           "height": 350
+        },
+        {
+          "id": "bighead_skin7",
+          "name": "狐狸可是祥瑞",
+          "label": "狐狸可是祥瑞",
+          "image": "assets/img/characters/bighead_skin7_idle.webp",
+          "poster": "assets/img/characters/bighead_skin7_idle.png",
+          "width": 453,
+          "height": 435
         }
       ],
       "featured_items": [
@@ -148,10 +161,10 @@ window.SITE_DATA = {
         "饮食：只吃料理，荤素都可以。普通锅料理、调味料理、[[芙蓉石蟠螭耳盖炉]]制作的七道料理及月饼均可食用。",
         "浆果、胡萝卜、生肉等原料不能直接吃，只用火烤熟也不能吃。最爱培根煎蛋，新鲜且未调味的一份回复90饥饿（通常为75）。",
         "当前[[灵气]]达到100时，还可食用灵魂，每次回复1点灵气；低于100时失去这项能力。",
-        "默认移速为普通角色的2倍，可在模组设置中改为1.5倍；基础攻击倍率为1.5，灵气耗尽时降为0.5。",
+        "默认移速为普通角色的2倍，可在模组设置中改为1.2倍或1.5倍；基础攻击倍率为1.5，灵气耗尽时降为0.5。",
         "初始携带[[避尘]]与一份[[果味加浓]]。",
         "使用[[繁花]]照料植物，也能进入[[太极青玄阁]]。",
-        "空手对池塘使用捕鱼动作时，至少需要10饥饿；成功捕到鱼后消耗10饥饿。"
+        "空手对普通池塘使用捕鱼动作时，至少需要10饥饿；成功捕到后消耗10饥饿。[[碧波泉]]改为至少5饥饿、成功消耗5，也可泡澡恢复[[灵气]]。"
       ],
       "core_mechanics": [
         {
@@ -160,14 +173,14 @@ window.SITE_DATA = {
         },
         {
           "id": "mech_jieqi",
-          "summary": "通过琦玉器装配四季物品，获得移速、攻击、减伤和冰冻等加成。四季主物品最高可升至10级。"
+          "summary": "通过琦玉器装配四季物品，获得制作双倍、攻击、减伤和冰冻等加成。四季主物品最高可升至10级。"
         }
       ],
       "exclusive_intro": [
         "她的物件分成几路：武器是[[避尘]]（制作栏动作名「惊鸿」），护具有[[灵墨]]与[[两仪]]，工具里有[[玉如意]]、[[蕴灵如意]]、[[琦玉器]]、[[玄清灵鉴]]，住处则是[[太极青玄阁]]。",
         "对四季之灵的检查台词是「无比纯粹的能量，我要好好想想！」，对[[玄清灵鉴]]只有一句「用着不错。」",
         "包内还有以她命名的[[胖头鱼月饼]]，检查台词为「鱼哥联名款！」。",
-        "人物外观：小七、库洛米、2026情人节-胖头鱼、贫穷游侠、奶龙。"
+        "人物外观：小七、库洛米、2026情人节-胖头鱼、贫穷游侠、奶龙、狐狸可是祥瑞。其中「狐狸可是祥瑞」为指定账号解锁。"
       ],
       "quote": "三宝，不要乱跑！",
       "tagline": "打架什么的，都是洒洒水啦~"
@@ -243,9 +256,10 @@ window.SITE_DATA = {
       },
       "setting": [
         "上古魔龙。基础属性：生命150、理智100、饥饿200。",
-        "默认移速为普通角色的2倍，可在模组设置中改为1.5倍。",
+        "默认移速为普通角色的2倍，可在模组设置中改为1.2倍或1.5倍。",
         "初始携带[[除祟]]、一份[[果味加浓]]与20弦的[[万象玑]]；新生时自动装备万象玑。",
-        "获得[[芙蓉]]后可召唤专属伙伴[[溟羽]]，并切换激怒或安慰模式。"
+        "获得[[芙蓉]]后可召唤专属伙伴[[溟羽]]，并切换激怒或安慰模式。",
+        "可在物品栏献祭暗影心房：每次消耗1个，增加10点[[噬心]]并获得普通攻击伤害×2；持续期间不能重复献祭。"
       ],
       "core_mechanics": [
         {
@@ -280,7 +294,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "怎么使用",
-          "content": "胖头鱼装备在手部后普攻；冷却完成且至少有2点[[灵气]]时，右键选择落点施放“惊鸿”，最远16距离。"
+          "content": "胖头鱼装备在手部后普攻；冷却完成且当前[[灵气]]达到[[避尘施法灵气门槛]]时，右键选择落点施放“惊鸿”，最远16距离。默认门槛100点，可在设置中选50／60／70／80／90／100点；每次实际仍只消耗2点。"
         },
         {
           "type": "text",
@@ -303,14 +317,15 @@ window.SITE_DATA = {
         "mech_lingqi",
         "bighead_spear_skin1",
         "bighead_spear_skin2",
-        "bighead_spear_skin3"
+        "bighead_spear_skin3",
+        "config_bighead_bichen_min_lingqi"
       ],
       "tags": [
         "武器",
         "剑"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_spear.png"
     },
     {
@@ -346,7 +361,7 @@ window.SITE_DATA = {
         "繁花"
       ],
       "tech": "炼金引擎；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_fanhua.png"
     },
     {
@@ -413,7 +428,7 @@ window.SITE_DATA = {
         "万箭"
       ],
       "tech": "蓝图或指定制作站；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fqh.png"
     },
     {
@@ -484,7 +499,7 @@ window.SITE_DATA = {
         "剑"
       ],
       "tech": "远古伪科学站；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fh.png"
     },
     {
@@ -523,7 +538,7 @@ window.SITE_DATA = {
         "护甲"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_armor.png"
     },
     {
@@ -557,7 +572,7 @@ window.SITE_DATA = {
         "背部"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_back.png"
     },
     {
@@ -631,7 +646,7 @@ window.SITE_DATA = {
         "强化"
       ],
       "tech": "科学机器；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_cs.png"
     },
     {
@@ -641,8 +656,13 @@ window.SITE_DATA = {
       "owner": "common",
       "image": "assets/img/items/bighead_ruyi.png",
       "summary": "多功能工具：砍树、挖矿、铲挖、锤拆、捕虫、耕地、钓鱼和拾取附近物品。",
-      "recipe": "无需科技；胖头鱼制作：月亮碎片×10 + 金块×10",
+      "recipe": "无需科技；胖头鱼制作：[bb_ymz_jade]×10",
       "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么获取",
+          "content": "在[[云梦泽]]开采[[地玉笋]]获得[[地玉]]，由胖头鱼花费地玉×10制作，无需科技。"
+        },
         {
           "type": "text",
           "title": "怎么使用",
@@ -662,14 +682,17 @@ window.SITE_DATA = {
       "related": [
         "pangtouyu",
         "bighead_ylry",
-        "bighead_ylss"
+        "bighead_ylss",
+        "bb_ymz_jade",
+        "bb_ymz_jade_rock",
+        "mech_mist_forest"
       ],
       "tags": [
         "工具",
         "如意"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ruyi.png"
     },
     {
@@ -716,7 +739,7 @@ window.SITE_DATA = {
         "捕鱼",
         "旋风"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ylry.png"
     },
     {
@@ -752,7 +775,7 @@ window.SITE_DATA = {
         "雨具"
       ],
       "tech": "炼金引擎；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_umbrella.png"
     },
     {
@@ -793,7 +816,7 @@ window.SITE_DATA = {
         "缚灵网"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_flw.png"
     },
     {
@@ -834,7 +857,7 @@ window.SITE_DATA = {
         "缚灵网"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_czflw.png"
     },
     {
@@ -880,7 +903,7 @@ window.SITE_DATA = {
         "琦玉器"
       ],
       "tech": "辉煌铁匠铺 / 金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_qyq.png"
     },
     {
@@ -917,7 +940,7 @@ window.SITE_DATA = {
         "卷轴"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_scrolls.png"
     },
     {
@@ -946,7 +969,7 @@ window.SITE_DATA = {
         "照明"
       ],
       "tech": "无需科技",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_hy.png"
     },
     {
@@ -1001,7 +1024,7 @@ window.SITE_DATA = {
         "容器"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_llxz.png"
     },
     {
@@ -1034,7 +1057,7 @@ window.SITE_DATA = {
         "亭台"
       ],
       "tech": "炼金引擎",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_cct.png"
     },
     {
@@ -1089,7 +1112,7 @@ window.SITE_DATA = {
         "食物"
       ],
       "tech": "炼金引擎",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_hhlct.png"
     },
     {
@@ -1147,7 +1170,7 @@ window.SITE_DATA = {
       ],
       "summary": "五格原料自动批量烹饪、十五格收纳成品的便携红锅，默认每轮出2份。",
       "tech": "无需科技",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_sucookpot.png"
     },
     {
@@ -1224,7 +1247,7 @@ window.SITE_DATA = {
         "月饼"
       ],
       "tech": "炼金引擎；高脚鸟制作 / 金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ybhz.png"
     },
     {
@@ -1262,7 +1285,7 @@ window.SITE_DATA = {
         "器物"
       ],
       "tech": "天体祭坛",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_xqlj.png"
     },
     {
@@ -1303,7 +1326,7 @@ window.SITE_DATA = {
         "草莓",
         "水果"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "summary": "草莓丛产出的水果，可直接吃，也可在红锅制作莓酱果子、糖渍果等料理。",
       "display_image": "assets/img/displays/bb_cm.png"
     },
@@ -1374,7 +1397,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_cjs.png"
     },
     {
@@ -1445,7 +1468,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_mjgz.png"
     },
     {
@@ -1511,7 +1534,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_tzg.png"
     },
     {
@@ -1584,7 +1607,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_gwjn.png"
     },
     {
@@ -1649,7 +1672,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_yyxsl.png"
     },
     {
@@ -1721,7 +1744,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_xdlm.png"
     },
     {
@@ -1792,7 +1815,7 @@ window.SITE_DATA = {
         "料理",
         "红锅"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_tmfb.png"
     },
     {
@@ -1839,7 +1862,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ywyb.png"
     },
     {
@@ -1886,7 +1909,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_jlyb.png"
     },
     {
@@ -1933,7 +1956,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_gwyb.png"
     },
     {
@@ -1980,7 +2003,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_xgyb.png"
     },
     {
@@ -2027,7 +2050,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_fgyb.png"
     },
     {
@@ -2074,7 +2097,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ymyb.png"
     },
     {
@@ -2121,7 +2144,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_xjyb.png"
     },
     {
@@ -2168,7 +2191,7 @@ window.SITE_DATA = {
         "月饼",
         "中秋"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_cmyb.png"
     },
     {
@@ -2216,7 +2239,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ptyyb.png"
     },
     {
@@ -2264,7 +2287,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_gjnyb.png"
     },
     {
@@ -2312,7 +2335,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_lblyb.png"
     },
     {
@@ -2360,7 +2383,7 @@ window.SITE_DATA = {
         "中秋",
         "联名"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_mdxyb.png"
     },
     {
@@ -2392,7 +2415,7 @@ window.SITE_DATA = {
         "草莓"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "summary": "胖头鱼专属制作的草莓作物，其他角色也能种植、采摘；每次成熟产3颗。",
       "display_image": "assets/img/displays/bb_cmbush.png"
     },
@@ -2425,7 +2448,7 @@ window.SITE_DATA = {
         "七彩石"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_wcs.png"
     },
     {
@@ -2474,7 +2497,7 @@ window.SITE_DATA = {
         "材料",
         "灵石"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "summary": "装备强化与制作材料。",
       "display_image": "assets/img/displays/bighead_ylss.png"
     },
@@ -2512,7 +2535,7 @@ window.SITE_DATA = {
         "材料",
         "莲子"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ymlx.png"
     },
     {
@@ -2564,7 +2587,7 @@ window.SITE_DATA = {
         "材料",
         "符文"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ygxlfw.png"
     },
     {
@@ -2594,7 +2617,7 @@ window.SITE_DATA = {
         "材料",
         "魂魄"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "summary": "胖头鱼收集的魂魄：可用于季节鱼制作，也能释放在地上治疗附近玩家。",
       "display_image": "assets/img/displays/bighead_soul_ball.png"
     },
@@ -2624,7 +2647,7 @@ window.SITE_DATA = {
         "材料",
         "玉佩"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "summary": "随身打开连理木箱共享库存的钥匙，无需回到箱子旁。",
       "display_image": "assets/img/displays/bighead_llxz_xz.png"
     },
@@ -2703,7 +2726,7 @@ window.SITE_DATA = {
         "企鹅"
       ],
       "tech": "无需科技",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_qbi.png"
     },
     {
@@ -2746,7 +2769,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_spring_spirit.png"
     },
     {
@@ -2789,7 +2812,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_summer_spirit.png"
     },
     {
@@ -2832,7 +2855,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_autumn_spirit.png"
     },
     {
@@ -2875,7 +2898,7 @@ window.SITE_DATA = {
         "四季之灵"
       ],
       "tech": "金企鹅兑换",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_winter_spirit.png"
     },
     {
@@ -2909,7 +2932,7 @@ window.SITE_DATA = {
         "蛋"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fhd.png"
     },
     {
@@ -2990,7 +3013,7 @@ window.SITE_DATA = {
         "遗骨"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_cmyh.png"
     },
     {
@@ -3021,7 +3044,7 @@ window.SITE_DATA = {
         "遗骨"
       ],
       "summary": "制作重明遗骨的素材，攒够8个交由高脚鸟制作。",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_bzmgt.png"
     },
     {
@@ -3111,7 +3134,7 @@ window.SITE_DATA = {
         "月台"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_buran.png"
     },
     {
@@ -3150,7 +3173,7 @@ window.SITE_DATA = {
         "莲"
       ],
       "tech": "无需科技；高脚鸟召唤",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_px.png",
       "aliases": [
         "莲令",
@@ -3193,6 +3216,11 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
+          "title": "攻击与换角色",
+          "content": "玩家攻击三宝时，会被直接扣尽生命，死因为「天道」。胖头鱼换角色时，三宝会关闭仓库、掉出全部储物并消失。"
+        },
+        {
+          "type": "text",
           "title": "寻宝与限制",
           "content": "奖励包括鹿角、克劳斯赃物袋、当季[[寄生灵]]、沉底宝箱、[[凤凰蛋]]等。非这两个角色不能正常开仓或喂养；已达到宠物数量限制时不能重复召唤。召唤图标本身是制作动作。"
         }
@@ -3210,7 +3238,7 @@ window.SITE_DATA = {
         "三宝"
       ],
       "tech": "无需科技；胖头鱼制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_sanbao.png",
       "aliases": [
         "三宝"
@@ -3249,7 +3277,7 @@ window.SITE_DATA = {
         "蝴蝶",
         "春望"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_cwd.png"
     },
     {
@@ -3348,7 +3376,7 @@ window.SITE_DATA = {
         "召唤",
         "溟羽"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_fr.png"
     },
     {
@@ -3479,7 +3507,7 @@ window.SITE_DATA = {
         "召唤",
         "羁绊"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_my.png"
     },
     {
@@ -3545,7 +3573,7 @@ window.SITE_DATA = {
         "轮回"
       ],
       "tech": "炼金引擎；高脚鸟制作",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_lh.png"
     },
     {
@@ -3590,7 +3618,7 @@ window.SITE_DATA = {
         "五灵",
         "祭祀"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
     },
     {
@@ -3620,7 +3648,7 @@ window.SITE_DATA = {
         "bb_gaojiaoniao_px_builder"
       ],
       "recipe": "胖头鱼专属制作，任选一组：[bighead_nr]×2 + 铥矿×1 + 肉×2 + 高脚鸟蛋×1；或[bighead_yr]×1 + 鱼肉×3 + 铥矿×1 + 高脚鸟蛋×1；或鸟腿×5 + 铥矿×1 + 小肉×5 + 鸟蛋×3；或鱼肉×3 + 无花果×2 + 铥矿×1 + 藤壶×3",
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_mwgt.png"
     },
     {
@@ -3647,7 +3675,7 @@ window.SITE_DATA = {
         "bighead_mwgt",
         "bb_gaojiaoniao_px_builder"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_nr.png"
     },
     {
@@ -3674,7 +3702,7 @@ window.SITE_DATA = {
         "bighead_mwgt",
         "bb_gaojiaoniao_px_builder"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_yr.png"
     },
     {
@@ -3780,7 +3808,7 @@ window.SITE_DATA = {
       "tags": [
         "万象玑"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_wanxiangji.png",
       "tech": "无需科技；高脚鸟施法"
     },
@@ -3822,7 +3850,7 @@ window.SITE_DATA = {
       "tags": [
         "花种"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_flowerseed.png",
       "availability": "特殊获取"
     },
@@ -3855,7 +3883,7 @@ window.SITE_DATA = {
       "tags": [
         "腐烂花种"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_rotten_flowerseed.png",
       "availability": "特殊获取"
     },
@@ -3914,9 +3942,333 @@ window.SITE_DATA = {
       "tags": [
         "祭眼"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "display_image": "assets/img/displays/bighead_ritual_eye.png",
       "availability": "特殊获取"
+    },
+    {
+      "id": "bb_ymz_jade_rock",
+      "name": "地玉笋",
+      "category": "environment",
+      "owner": "common",
+      "image": "assets/img/mechanics/bb_ymz_jade_rock.png",
+      "summary": "云梦泽中的玉矿，挖完掉落3～5个地玉；区域会定期补充。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么获取",
+          "content": "创建新世界后，到沼泽相连的[[云梦泽]]寻找。森林初始尝试生成3～6处，中心另有2处。"
+        },
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "使用镐或能挖矿的工具开采。普通挖矿需9次工作，挖完掉落3～5个[[地玉]]，矿体消失。"
+        },
+        {
+          "type": "text",
+          "title": "刷新规则",
+          "content": "每10个游戏天，区域尝试将现存地玉笋总数补到随机5～8处，受可用空位限制；不是每轮额外增加5～8处。"
+        }
+      ],
+      "related": [
+        "mech_mist_forest",
+        "bb_ymz_jade",
+        "bighead_ruyi"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_jade_rock.png"
+    },
+    {
+      "id": "bb_ymz_jade",
+      "name": "地玉",
+      "category": "material",
+      "owner": "common",
+      "image": "assets/img/items/bb_ymz_jade.png",
+      "summary": "开采地玉笋获得，用于制作玉如意。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么获取",
+          "content": "在[[云梦泽]]开采[[地玉笋]]，每处挖完掉落3～5个。"
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "[[胖头鱼]]可用地玉×10制作[[玉如意]]，无需科技。"
+        }
+      ],
+      "related": [
+        "bb_ymz_jade_rock",
+        "bighead_ruyi",
+        "mech_mist_forest"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_jade.png"
+    },
+    {
+      "id": "bb_ymz_compostbin",
+      "name": "古骸培土机",
+      "category": "structure",
+      "owner": "common",
+      "image": "assets/img/items/bb_ymz_compostbin.png",
+      "summary": "把指定干湿材料转成血泥：容量6份，每消耗2份产出1份。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "任意角色均可制作，无需科技；建造消耗活木头×5、蚊子血囊×2和自身100生命。投入下表材料，等生产完成后采集[[血泥]]。"
+        },
+        {
+          "type": "table",
+          "title": "接受的材料",
+          "columns": [
+            "类别",
+            "可投入材料"
+          ],
+          "rows": [
+            [
+              "湿料",
+              "蚊子血囊、蜘蛛腺、怪物肉"
+            ],
+            [
+              "干料",
+              "犬牙、骨头碎片"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "每个材料计1份，最多存6份；每轮消耗2份，产出1份血泥。投入数量和干湿平衡影响生产时间。只接受表中五种材料；建筑防火、防雷。"
+        }
+      ],
+      "related": [
+        "bb_ymz_bloodmud",
+        "mech_paddy"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_compostbin.png",
+      "recipe": "无需科技：活木头×5 + 蚊子血囊×2 + 生命×100",
+      "tech": "无需科技；任意角色制作"
+    },
+    {
+      "id": "bb_ymz_bloodmud",
+      "name": "血泥",
+      "category": "material",
+      "owner": "common",
+      "image": "assets/img/items/bb_ymz_bloodmud.png",
+      "summary": "三种农田养分各补99；可催长一阶段，但被催长的作物不能成为巨型。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么获取",
+          "content": "制作[[古骸培土机]]，投入其接受的干湿材料。每轮2份材料产出1份血泥，完成后从机器采集。"
+        },
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "可当肥料使用，为农田补充三种养分各99。对未成熟农作物使用，可推进1个生长阶段；施用到地面时，还会推进同一地格内的未成熟农作物。"
+        },
+        {
+          "type": "text",
+          "title": "效果与限制",
+          "content": "被血泥催长的作物不能长成巨型作物。想收获巨型作物时，避免对作物或所在格使用血泥催长。[[水田]]本身的生长加速不附带这项限制。",
+          "tone": "note"
+        }
+      ],
+      "related": [
+        "bb_ymz_compostbin",
+        "mech_paddy"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_bloodmud.png"
+    },
+    {
+      "id": "bb_ymz_pool",
+      "name": "碧波泉",
+      "category": "environment",
+      "owner": "pangtouyu",
+      "image": "assets/img/mechanics/bb_ymz_pool.png",
+      "summary": "云梦泽天然泉池：胖头鱼泡澡每60秒恢复1灵气，空手捕鱼消耗5饥饿。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "怎么获取",
+          "content": "在新世界的[[云梦泽]]中央、[[太极青玄阁]]附近寻找天然泉池，无制作配方。"
+        },
+        {
+          "type": "text",
+          "title": "怎么使用",
+          "content": "仅[[胖头鱼]]可右键进入泡澡，不能骑乘入池。空手左键可捕鱼，至少需要5饥饿，成功捕到后消耗5饥饿；普通池塘仍是10饥饿。"
+        },
+        {
+          "type": "text",
+          "title": "泡澡效果",
+          "content": "连续泡澡每60秒额外恢复1点[[灵气]]，泡澡期间自然饥饿消耗变为80%；没有额外的生命或理智恢复。"
+        },
+        {
+          "type": "text",
+          "title": "鱼与水源",
+          "content": "可捕到池塘鱼、鳗鱼和原版海鱼，受池内鱼量与补充时间限制。泉池也能作为水源。"
+        }
+      ],
+      "related": [
+        "pangtouyu",
+        "mech_lingqi",
+        "mech_mist_forest",
+        "loc_qingxuan"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_waterfall.png"
+    },
+    {
+      "id": "bb_watertree_pillar",
+      "name": "不死树",
+      "category": "environment",
+      "owner": "common",
+      "image": "assets/img/mechanics/bb_watertree_pillar.png",
+      "summary": "未实装：暂无正常获取入口；已放置的不死树可用蜂王浆1∶1兑换血浆。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "实装状态",
+          "content": "未实装。当前版本没有自然生成或制作入口。[[云梦泽]]海边生成的是原版大树，不能用来兑换血浆。",
+          "tone": "note"
+        },
+        {
+          "type": "text",
+          "title": "已实现的效果",
+          "content": "若世界中已有放置的不死树，可将蜂王浆给予它，按投入数量1∶1换得[[血浆]]。这项兑换已写入效果，但不死树的正常获取链尚未接通。"
+        }
+      ],
+      "related": [
+        "bb_ymz_plasma",
+        "bb_ymz_bloodpool",
+        "mech_mist_forest"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_immortal_tree.png",
+      "availability": "未实装"
+    },
+    {
+      "id": "bb_ymz_plasma",
+      "name": "血浆",
+      "category": "material",
+      "owner": "common",
+      "image": "assets/img/items/bb_ymz_plasma.png",
+      "summary": "未实装：依赖尚无获取入口的不死树兑换，是亡骸浸池的配方材料。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "实装状态",
+          "content": "未实装。当前唯一产出方式是把蜂王浆给予[[不死树]]，按数量1∶1兑换；不死树尚无自然生成或制作入口，因此正常流程暂时无法取得血浆。",
+          "tone": "note"
+        },
+        {
+          "type": "text",
+          "title": "已实现的用途",
+          "content": "[[亡骸浸池]]配方需要血浆×99；该配方因原料获取链未接通，暂不能在正常流程完成。"
+        }
+      ],
+      "related": [
+        "bb_watertree_pillar",
+        "bb_ymz_bloodpool"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_plasma.png",
+      "availability": "未实装"
+    },
+    {
+      "id": "bb_ymz_bloodpool",
+      "name": "亡骸浸池",
+      "category": "structure",
+      "owner": "gaojiaoniao",
+      "image": "assets/img/items/bb_ymz_bloodpool.png",
+      "summary": "未实装：缺少血浆获取链；已实现高脚鸟泡澡增噬心、活物献祭和骷髅生成。",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "实装状态",
+          "content": "未实装。虽有制作配方，但所需[[血浆]]依赖尚无正常获取入口的[[不死树]]，材料获取链未接通。",
+          "tone": "note"
+        },
+        {
+          "type": "text",
+          "title": "配方与使用",
+          "content": "仅[[高脚鸟]]可制作和进入泡澡，无需科技。配方为血浆×99、骨头碎片×50、蚊子血囊×99；不能骑乘入池。"
+        },
+        {
+          "type": "table",
+          "title": "已实现的泡澡效果",
+          "columns": [
+            "五道状态",
+            "池子提供的效果"
+          ],
+          "rows": [
+            [
+              "未圆满",
+              "每秒生命、饥饿、理智各−5，噬心+1。"
+            ],
+            [
+              "已圆满",
+              "每60秒噬心+1，池子不再每秒扣除三维。"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "title": "噬心结算",
+          "content": "泡澡加噬心与角色原本的自然变化分别结算。[[五道]]圆满后的每60秒噬心−2仍会发生，佩戴[[古祭神辉]]可阻止该下降；不能把池子的+1直接当作净增长。"
+        },
+        {
+          "type": "text",
+          "title": "已实现的献祭",
+          "content": "可交付活兔子、鼹鼠、蜘蛛、乌鸦、红雀、雪雀、金丝雀或海鹦。每次随机产生一项结果：50%骨头碎片、30%骷髅、20%[[血泥]]。"
+        },
+        {
+          "type": "text",
+          "title": "周边变化",
+          "content": "池子会周期性尝试在附近生成骷髅，受周围数量、间距与空位限制。"
+        }
+      ],
+      "related": [
+        "gaojiaoniao",
+        "bb_ymz_plasma",
+        "bb_watertree_pillar",
+        "bb_ymz_bloodmud",
+        "mech_shixin",
+        "mech_wudao",
+        "bb_gaojiaoniao_gjsh"
+      ],
+      "tags": [
+        "云梦泽"
+      ],
+      "source": "v5.8",
+      "display_image": "assets/img/displays/bb_ymz_bloodpool.png",
+      "recipe": "无需科技；高脚鸟制作：[bb_ymz_plasma]×99 + 骨头碎片×50 + 蚊子血囊×99",
+      "tech": "无需科技；高脚鸟制作",
+      "availability": "未实装"
     }
   ],
   "mechanics": [
@@ -4080,7 +4432,7 @@ window.SITE_DATA = {
           "rows": [
             [
               "[[避尘]] · 惊鸿（每次2点）",
-              "右键选落点施放。落点范围伤害为扣费后当前灵气×15；剑影命中伤害为命中时当前灵气×25，同一目标每次施法最多中一次剑影。灵气越多，这两段伤害越高。"
+              "右键选落点施放，当前灵气须达到设置门槛（默认100，可选50～100）。每次仍扣2点；落点范围伤害为扣费后当前灵气×15，剑影为命中时当前灵气×25，同一目标每次最多中一次剑影。"
             ],
             [
               "[[不染]] · 冰圈（不扣灵气）",
@@ -4150,6 +4502,10 @@ window.SITE_DATA = {
             [
               "手部装备[[不染]]，且其容器内有[[月冕莲心]]",
               "额外 +2"
+            ],
+            [
+              "在[[碧波泉]]连续泡澡",
+              "额外 +1"
             ]
           ]
         },
@@ -4188,7 +4544,9 @@ window.SITE_DATA = {
         "bighead_qyq",
         "mech_spirits",
         "bighead_ymlx",
-        "config_bighead_lingqi_upgrade_days"
+        "config_bighead_lingqi_upgrade_days",
+        "bb_ymz_pool",
+        "config_bighead_bichen_min_lingqi"
       ],
       "display_image": "assets/img/displays/status_bighead_lingqi.png"
     },
@@ -4196,7 +4554,7 @@ window.SITE_DATA = {
       "id": "mech_jieqi",
       "owner": "common",
       "title": "节气",
-      "summary": "通过琦玉器装配的四季饰品系统：任何角色都可获得移速、攻击、减伤和冰冻等加成。",
+      "summary": "通过琦玉器装配的四季饰品系统：任何角色都可获得制作双倍、攻击、减伤和冰冻等加成。",
       "image": "assets/img/mechanics/jieqi_tab.png",
       "detail_blocks": [
         {
@@ -4223,7 +4581,7 @@ window.SITE_DATA = {
           "type": "list",
           "title": "四季主物品有什么用",
           "items": [
-            "[[春季]]：移速×1.3、带电攻击、防潮。",
+            "[[春季]]：制作物品概率双倍（胖头鱼50%、其他角色30%）、带电攻击、防潮。",
             "[[夏季]]：普通攻击倍率×1.5、快速攻击、防过热、沙漠护目镜视野。",
             "[[秋季]]：普通减伤50%，已有位面防御×1.3。",
             "[[冬季]]：命中增加6寒冷值，防过冷、防冰冻、冰面防滑。",
@@ -4499,6 +4857,10 @@ window.SITE_DATA = {
               "+1；离开中断计时，重叠冥火不重复累计"
             ],
             [
+              "成功献祭1个暗影心房",
+              "+10；增益持续期间不能重复献祭"
+            ],
+            [
               "五道圆满且存活，每60秒",
               "−2；佩戴古祭神辉时不会降低"
             ]
@@ -4508,6 +4870,11 @@ window.SITE_DATA = {
           "type": "text",
           "title": "怎么食用纯粹恐惧",
           "content": "由高脚鸟将纯粹恐惧放在自己的物品栏中，使用「食用」动作，每次消耗1个并增加1点噬心，不超过100。"
+        },
+        {
+          "type": "text",
+          "title": "暗影心房献祭",
+          "content": "高脚鸟在自己的物品栏中，对暗影心房使用「献祭」动作，消耗1个暗影心房、增加10点噬心，获得普通攻击伤害×2。基础持续480秒；已领悟地狱道时持续2400秒。增益期间不能再次献祭，读档不会重新补满持续时间。"
         },
         {
           "type": "table",
@@ -4552,6 +4919,11 @@ window.SITE_DATA = {
         },
         {
           "type": "text",
+          "title": "亡骸浸池",
+          "content": "[[亡骸浸池]]已实现泡澡加噬心，但所需血浆没有完整获取链，当前标为「未实装」，暂不能作为正常流程的噬心来源。"
+        },
+        {
+          "type": "text",
           "title": "状态栏操作",
           "content": "噬心图标与五道圆环可分别右键拖动，位置会保存；按住Alt右键单击可恢复默认位置。"
         }
@@ -4563,7 +4935,8 @@ window.SITE_DATA = {
         "config_bb_gaojiaoniao_shadow_damage",
         "bb_gaojiaoniao_gjsh",
         "bb_gaojiaoniao_fr",
-        "bb_gaojiaoniao_my"
+        "bb_gaojiaoniao_my",
+        "bb_ymz_bloodpool"
       ],
       "display_image": "assets/img/displays/bb_gaojiaoniao_gjsh.png"
     },
@@ -4657,7 +5030,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "圆满后有什么变化",
-          "content": "解除[[噬心]]的持续损血、食物治疗限制与移速惩罚；免疫冻结、受击硬直和击退，仍会正常受到伤害。触发友方心魔时召出1～3个，并为主人吸血。噬心每60秒降低2，佩戴[[古祭神辉]]时不下降。",
+          "content": "解除[[噬心]]的持续损血、食物治疗限制与移速惩罚；免疫冻结、受击硬直和击退，仍会正常受到伤害。触发友方心魔时召出1～3个，并为主人吸血。噬心每60秒降低2，佩戴[[古祭神辉]]时不下降。被吞噬、悬吊等受控状态仍保留对应脱离流程。",
           "tone": "note"
         },
         {
@@ -4768,7 +5141,7 @@ window.SITE_DATA = {
       "summary": "戴帽打包花种，连续高温培育3天，新月夜在月台旁祭眼换取芙蓉。",
       "image": "assets/img/items/bighead_flowerseed.png",
       "display_image": "assets/img/displays/bighead_ritual_eye.png",
-      "source": "v5.6",
+      "source": "v5.8",
       "detail_blocks": [
         {
           "type": "list",
@@ -4812,32 +5185,90 @@ window.SITE_DATA = {
     {
       "id": "mech_mist_forest",
       "owner": "common",
-      "title": "雾气桦树林",
+      "title": "云梦泽",
       "aliases": [
-        "雾气桦树林区域"
+        "雾气桦树林",
+        "雾气桦树林区域",
+        "云梦泽区域"
       ],
-      "summary": "生成时与沼泽出口直接相连的地表桦树林区域，带雾气、猪王与5座猪屋。",
-      "image": "assets/img/inventoryimages1/acorn.png",
-      "source": "v5.6",
+      "summary": "与沼泽相连的地表区域，太极青玄阁位于中央，分布地玉笋、碧波泉和水田。",
+      "image": "assets/img/mechanics/bb_ymz_jade_rock.png",
+      "source": "v5.8",
       "detail_blocks": [
         {
           "type": "text",
           "title": "在哪里",
-          "content": "创建采用默认地表任务集的新世界时加入，直接与沼泽出口连接。区域使用桦树林生态，并带雾气环境标签。"
+          "content": "创建采用默认地表任务集的新世界时生成，直接连接沼泽出口。[[太极青玄阁]]改在区域中央生成，旁边有[[碧波泉]]。"
         },
         {
           "type": "text",
           "title": "区域内容",
-          "content": "包含2个深桦树林主要房间和1个猪王聚落主要房间；聚落设置1个猪王、5座猪屋，周边沿用桦树林生态。"
+          "content": "地皮包括蓝弥、青璇、[[水田]]，初次布局尝试散布4格水田。可找到[[地玉笋]]、神秘植物、荧光花、玻璃绿洲，以及云藤、地光、喷泉和瀑布。"
+        },
+        {
+          "type": "text",
+          "title": "花园与海边",
+          "content": "初次布置尝试放置1个蜂箱、50～56朵花；近海尝试生成2～3棵原版大树与海藤，实际数量受可用地形与空间限制。花园和海边大树不随地玉笋定期补充，读档也不会补刷。"
+        },
+        {
+          "type": "text",
+          "title": "资源补充",
+          "content": "森林初始尝试生成3～6处地玉笋，中心另有2处。每10个游戏天检查，将区域现存总数尝试补到随机5～8处。开采后获得[[地玉]]，可制作[[玉如意]]。"
         },
         {
           "type": "text",
           "title": "生成条件",
-          "content": "本次加入的是世界生成内容，已有存档不会自动补入这片区域。该区域属于地表，不是[[太极青玄阁]]内的房间。"
+          "content": "已有存档不会自动补入完整云梦泽，旧太极青玄阁也不会自动搬迁。这片区域属于地表，不是阁内房间。"
         }
       ],
       "related": [
-        "log_5600"
+        "loc_qingxuan",
+        "bb_ymz_jade_rock",
+        "bb_ymz_jade",
+        "bb_ymz_pool",
+        "mech_paddy",
+        "log_5800"
+      ],
+      "display_image": "assets/img/displays/bb_ymz_jade_rock.png"
+    },
+    {
+      "id": "mech_paddy",
+      "title": "水田",
+      "owner": "common",
+      "aliases": [
+        "水田耕作"
+      ],
+      "summary": "云梦泽可耕种地皮，保持湿润和三类养分，作物生长阶段耗时为通常的三分之一。",
+      "image": "assets/img/items/bb_ymz_bloodmud.png",
+      "display_image": "assets/img/displays/bb_ymz_bloodmud.png",
+      "source": "v5.8",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "在哪里与怎么开垦",
+          "content": "[[云梦泽]]初次布局尝试生成4格水田。在该区域使用耕地机，也会把目标地皮开成水田；已有水田不能重复部署耕地机。"
+        },
+        {
+          "type": "text",
+          "title": "怎么种植",
+          "content": "可照常锄地、播种、浇水和收获。水田始终视为湿润，三种养分均为99，作物生长不会扣除这三种养分。"
+        },
+        {
+          "type": "text",
+          "title": "生长与限制",
+          "content": "作物各生长阶段耗时为通常的三分之一，成熟停留和腐烂阶段不加速。其他种植条件仍需满足，水田不会保证所有作物都长成巨型。"
+        },
+        {
+          "type": "text",
+          "title": "与血泥搭配",
+          "content": "[[血泥]]可额外催长1个阶段，但被血泥催长的作物不能成为巨型。准备种巨型作物时，使用水田自身加速即可。",
+          "tone": "note"
+        }
+      ],
+      "related": [
+        "mech_mist_forest",
+        "bb_ymz_bloodmud",
+        "bb_ymz_compostbin"
       ]
     }
   ],
@@ -4856,7 +5287,7 @@ window.SITE_DATA = {
         }
       ],
       "title": "太极青玄阁",
-      "summary": "位于月岛碎片区域的可进入建筑，内有前室、厅堂与左右两间独立卧房。",
+      "summary": "新世界中位于云梦泽中央的可进入建筑，内有前室、厅堂与左右两间独立卧房。",
       "building_highlights": [
         {
           "title": "躲猎犬",
@@ -4897,9 +5328,16 @@ window.SITE_DATA = {
         "loc_foyer",
         "loc_hall",
         "loc_bedroom",
-        "loc_bedroom_right"
+        "loc_bedroom_right",
+        "mech_mist_forest",
+        "bb_ymz_pool"
       ],
       "detail_blocks": [
+        {
+          "type": "text",
+          "title": "在哪里",
+          "content": "新世界在[[云梦泽]]中央寻找入口。旧存档中的房屋保留原位置，不会自动搬迁。"
+        },
         {
           "type": "table",
           "title": "室内有什么用",
@@ -6065,7 +6503,7 @@ window.SITE_DATA = {
       "name": "春季",
       "title_note": "春风又绿江南岸，明月何时照我还。",
       "image": "assets/img/seasons/jq_chun.png",
-      "summary": "移速×1.3、带电攻击和防潮；10级解锁范围促生长与快速制作。",
+      "summary": "制作物品概率双倍：胖头鱼50%、其他角色30%；带电攻击、防潮，10级解锁范围促生长与快速制作。",
       "related": [
         "bighead_qyq",
         "mech_jieqi",
@@ -6082,7 +6520,7 @@ window.SITE_DATA = {
         {
           "type": "text",
           "title": "效果与限制",
-          "content": "移速×1.3，攻击附带电属性，并提供防潮效果。取出本件或卸下琦玉器会取消。"
+          "content": "装入[[琦玉器]]并激活后，制作背包物品时有概率获得双倍产量：胖头鱼50%、其他角色30%。按该配方本次完整产量翻倍，不要求达到10级；普通建筑摆放和锅中烹饪不享受此效果。同时攻击附带电属性，并提供防潮效果。取出本件或卸下琦玉器会取消。"
         },
         {
           "type": "text",
@@ -6271,6 +6709,44 @@ window.SITE_DATA = {
     }
   ],
   "changelog": [
+    {
+      "id": "log_5800",
+      "title": "v5.8 · 云梦泽与农耕",
+      "version": "v5.8",
+      "date": "2026-11-23",
+      "image": "assets/img/items/bb_ymz_jade.png",
+      "changes": [
+        "本条汇总v5.6至v5.8的累计变化，依据2026年11月23日提供的压缩包核对。",
+        "原雾气桦树林改为[[云梦泽]]，仍与沼泽相连。新世界的[[太极青玄阁]]改在区域中央生成；旧存档不自动补入完整区域，房屋不会自动搬迁。",
+        "新世界该区域不再额外生成猪王与5座猪屋，原版猪王不受影响；旧存档已有对象不会自动清除。",
+        "新增蓝弥、青璇、[[水田]]地皮、[[地玉笋]]、[[地玉]]、云藤、地光、喷泉、瀑布及花园、海边大树。地玉笋每10个游戏天尝试补到现存5～8处。",
+        "新增[[古骸培土机]]与[[血泥]]：指定干湿材料每2份产1血泥。水田保持湿润和三类养分，生长阶段耗时为通常的三分之一；血泥另可催长一阶段，但被催长作物不能成为巨型。",
+        "新增[[碧波泉]]：胖头鱼专用泡澡，每60秒额外恢复1灵气，泡澡时自然饥饿消耗降20%；空手捕鱼成功消耗5饥饿。",
+        "[[不死树]]、[[血浆]]、[[亡骸浸池]]标为「未实装」：不死树缺少正常生成或制作入口，血浆兑换与浸池配方的获取链尚未接通。",
+        "[[玉如意]]配方改为地玉×10。[[避尘]]施法默认需当前灵气100，可在设置中选50～100；实际消耗仍2点、冷却仍2秒。",
+        "[[春季]]主物品取消移速×1.3，改为制作背包物品概率双倍：胖头鱼50%、其他角色30%，不要求10级；建筑摆放与锅中烹饪不生效。带电攻击、防潮及10级效果保留。",
+        "胖头鱼和高脚鸟的移速设置新增提速20%档，默认仍提速100%。高脚鸟献祭暗影心房新增10噬心，增益期间禁止重复献祭，读档不再重新补满时间。",
+        "玩家攻击[[何三宝]]会被直接扣尽生命，死因为「天道」；胖头鱼换角色时，三宝关闭仓库、掉出储物后消失。",
+        "新增胖头鱼人物外观「狐狸可是祥瑞」。修正冬季防滑初始化、五道圆满时受控状态的脱离流程，以及空手捕鱼的鱼量判断和鱼的显示、存档状态。"
+      ],
+      "related": [
+        "mech_mist_forest",
+        "mech_paddy",
+        "bb_ymz_compostbin",
+        "bb_ymz_bloodmud",
+        "bb_ymz_jade_rock",
+        "bb_ymz_pool",
+        "bb_watertree_pillar",
+        "bb_ymz_plasma",
+        "bb_ymz_bloodpool",
+        "bighead_ruyi",
+        "bighead_spear",
+        "jq_chun",
+        "mech_shixin",
+        "bighead_sanbao_builder",
+        "pangtouyu"
+      ]
+    },
     {
       "id": "log_5600",
       "title": "v5.6 · 万象玑与花种祭眼",
@@ -6943,7 +7419,7 @@ window.SITE_DATA = {
       "related": [
         "bb_gaojiaoniao_cs"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "detail_blocks": [
         {
           "type": "text",
@@ -6967,7 +7443,7 @@ window.SITE_DATA = {
       "related": [
         "bighead_spear"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "detail_blocks": [
         {
           "type": "text",
@@ -6992,7 +7468,7 @@ window.SITE_DATA = {
         "bb_gaojiaoniao_fh",
         "bb_gaojiaoniao_gjsh"
       ],
-      "source": "v5.6",
+      "source": "v5.8",
       "detail_blocks": [
         {
           "type": "text",
@@ -7117,11 +7593,11 @@ window.SITE_DATA = {
       "detail_blocks": [
         {
           "type": "text",
-          "content": "提速50%为普通移速的1.5倍，提速100%为2倍。"
+          "content": "提速20%为普通移速的1.2倍，提速50%为1.5倍，提速100%为2倍。"
         },
         {
           "type": "text",
-          "content": "可选：提速50% / 提速100%（原版）"
+          "content": "可选：提速20% / 提速50% / 提速100%（原版）"
         },
         {
           "type": "text",
@@ -7140,11 +7616,11 @@ window.SITE_DATA = {
       "detail_blocks": [
         {
           "type": "text",
-          "content": "提速50%为普通移速的1.5倍，提速100%为2倍。"
+          "content": "提速20%为普通移速的1.2倍，提速50%为1.5倍，提速100%为2倍。"
         },
         {
           "type": "text",
-          "content": "可选：提速50% / 提速100%（原版）"
+          "content": "可选：提速20% / 提速50% / 提速100%（原版）"
         },
         {
           "type": "text",
@@ -7334,6 +7810,28 @@ window.SITE_DATA = {
       ],
       "related": [
         "pangtouyu",
+        "mech_lingqi"
+      ]
+    },
+    {
+      "id": "config_bighead_bichen_min_lingqi",
+      "title": "避尘施法灵气门槛",
+      "summary": "默认：100点；可选50／60／70／80／90／100点。",
+      "image": "assets/img/items/bighead_spear.png",
+      "detail_blocks": [
+        {
+          "type": "text",
+          "title": "作用",
+          "content": "当前[[灵气]]达到门槛，才可使用[[避尘]]的惊鸿。门槛只决定能否施法，每次实际消耗仍为2点，冷却仍为2秒。"
+        },
+        {
+          "type": "text",
+          "title": "可选值",
+          "content": "50／60／70／80／90／100点，默认100点。"
+        }
+      ],
+      "related": [
+        "bighead_spear",
         "mech_lingqi"
       ]
     }
